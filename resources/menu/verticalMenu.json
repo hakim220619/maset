@@ -1,0 +1,23 @@
+{
+  "menu": [
+    {
+      "url": "/dashboard/admin",
+      "name": "Home",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "pages-home"
+    },
+    {
+      "url": "page-2",
+      "icon": "menu-icon tf-icons ti ti-settings",
+      "name": "Setting",
+      "slug": "setting",
+      "submenu": [
+        {
+          "url": "/setting/aplikasi",
+          "name": "Aplikasi",
+          "slug": "aplikasi"
+        }
+      ]
+    }
+  ]
+}
