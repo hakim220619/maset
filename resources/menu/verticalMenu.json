@@ -7,6 +7,19 @@
       "slug": "pages-home"
     },
     {
+      "url": "masterdata",
+      "icon": "menu-icon tf-icons ti ti-folder",
+      "name": "Master data",
+      "slug": "Master Data",
+      "submenu": [
+        {
+          "url": "/users",
+          "name": "Users",
+          "slug": "users"
+        }
+      ]
+    },
+    {
       "url": "page-2",
       "icon": "menu-icon tf-icons ti ti-settings",
       "name": "Setting",

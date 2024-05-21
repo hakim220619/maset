@@ -5,53 +5,53 @@
 @extends('layouts/layoutMaster')
 
 @section('title', 'Home')
-
+@include('sweetalert::alert')
 @section('content')
 
     <div class="row">
         <div class="col-xl">
             <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0" style="font-size: 40px">{{ $title }}</h5>
+                <div class="card-header">
+                    <h5 class="card-tile mb-0"><b>{{ $title }}</b></h5>
                 </div>
                 <div class="card-body">
-                    <form action="/aplikasi/editProses" method="POST" enctype="multipart/form-data">
+                    <form action="/setting/aplikasi/editProses" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="text" name="id" value="{{ $aplikasi->id }}" hidden>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label" for="pemilik">Pemilik</label>
-                                    <input type="text" class="form-control" id="nama_owner" name="nama_owner"
+                                    <input type="text" class="form-control" id="pemilik" name="pemilik"
                                         value="{{ $aplikasi->pemilik }}" placeholder="Masukan Pemilik" required />
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label" for="tlp">Telephone</label>
-                                    <input type="text" class="form-control" id="tlp" name="tlp"
+                                    <label class="form-label" for="no">Telephone</label>
+                                    <input type="text" class="form-control" id="no" name="no"
                                         value="{{ $aplikasi->no }}" placeholder="Masukan Telephone" required />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label" for="title">Title</label>
-                                    <input type="text" class="form-control" id="title" name="title"
-                                        value="{{ $aplikasi->judul }}" placeholder="Masukan Title" required />
+                                    <label class="form-label" for="judul">Judul</label>
+                                    <input type="text" class="form-control" id="judul" name="judul"
+                                        value="{{ $aplikasi->judul }}" placeholder="Masukan judul" required />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label" for="nama_aplikasi">Nama Aplikasi</label>
-                                    <input type="text" class="form-control" id="nama_aplikasi" name="nama_aplikasi"
+                                    <label class="form-label" for="nama">Nama Aplikasi</label>
+                                    <input type="text" class="form-control" id="nama" name="nama"
                                         value="{{ $aplikasi->nama }}" placeholder="Masukan Nama Aplikasi" required />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label" for="logo">Logo</label>
-                                    <input type="file" class="form-control" id="image" name="image"
+                                    <input type="file" class="form-control" id="logo" name="logo"
                                         value="{{ $aplikasi->logo }}" placeholder="Masukan Logo" />
                                 </div>
                             </div>
@@ -86,9 +86,8 @@
                             </div>
 
                             <div class="col-md-12">
-                                <br>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
-                                <a href="/tahun" type="button" class="btn btn-success">Kembali</a>
+                                {{-- <a href="/tahun" type="button" class="btn btn-success">Kembali</a> --}}
                             </div>
                         </div>
                     </form>
@@ -96,4 +95,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection

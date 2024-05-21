@@ -104,8 +104,7 @@
                     <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                    <a class="dropdown-item"
-                        href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
+                    <a class="dropdown-item" href="/profile">
                         <i class="ti ti-user-check me-2 ti-sm"></i>
                         <span class="align-middle">My Profile</span>
                     </a>
@@ -203,5 +202,6 @@
 @if (!isset($navbarDetached))
     </div>
 @endif
+
 </nav>
 <!-- / Navbar -->

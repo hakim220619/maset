@@ -22,6 +22,10 @@
     @vite(['resources/assets/js/pages-auth.js'])
 @endsection
 
+@php
+    $aplikasi = Helper::aplikasi();
+@endphp
+
 @section('content')
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
@@ -38,8 +42,8 @@
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-1 pt-2">Welcome to {{ config('variables.templateName') }}! 👋</h4>
-                        <p class="mb-4">Please sign-in to your account and start the adventure</p>
+                        <h4 class="mb-1 pt-2">Welcome to {{ $aplikasi->judul }}! 👋</h4>
+                        <p class="mb-4">Please sign-in to your account</p>
 
                         <form id="formAuthentication" class="mb-3" action="{{ url('/login_action') }}" method="POST">
                             @csrf
@@ -100,17 +104,13 @@
                         </div>
 
                         <div class="d-flex justify-content-center">
-                            <a href="javascript:;" class="btn btn-icon btn-label-facebook me-3">
-                                <i class="tf-icons fa-brands fa-facebook-f fs-5"></i>
-                            </a>
+
 
                             <a href="javascript:;" class="btn btn-icon btn-label-google-plus me-3">
                                 <i class="tf-icons fa-brands fa-google fs-5"></i>
                             </a>
 
-                            <a href="javascript:;" class="btn btn-icon btn-label-twitter">
-                                <i class="tf-icons fa-brands fa-twitter fs-5"></i>
-                            </a>
+
                         </div>
                     </div>
                 </div>

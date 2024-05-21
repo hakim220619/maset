@@ -38,118 +38,126 @@ $(function () {
 
   // Users datatable
   if (dt_user_table.length) {
+    var i = 1;
     var dt_user = dt_user_table.DataTable({
-      ajax: assetsPath + 'json/user-list.json', // JSON file to add data
+      ajax: 'users/list',
       columns: [
         // columns according to JSON
-        { data: '' },
-        { data: 'full_name' },
-        { data: 'role' },
-        { data: 'current_plan' },
-        { data: 'billing' },
+
+        {
+          render: function (data, type, full, meta) {
+            return i++;
+          }
+        },
+        { data: 'nama' },
+        { data: 'email' },
+        { data: 'rs_nama' },
+        { data: 'ra_nama' },
+        { data: 'role_nama' },
         { data: 'status' },
         { data: 'action' }
       ],
       columnDefs: [
-        {
-          // For Responsive
-          className: 'control',
-          searchable: false,
-          orderable: false,
-          responsivePriority: 2,
-          targets: 0,
-          render: function (data, type, full, meta) {
-            return '';
-          }
-        },
-        {
-          // User full name and email
-          targets: 1,
-          responsivePriority: 4,
-          render: function (data, type, full, meta) {
-            var $name = full['full_name'],
-              $email = full['email'],
-              $image = full['avatar'];
-            if ($image) {
-              // For Avatar image
-              var $output =
-                '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
-            } else {
-              // For Avatar badge
-              var stateNum = Math.floor(Math.random() * 6);
-              var states = ['success', 'danger', 'warning', 'info', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $name = full['full_name'],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
-            }
-            // Creates full output for row
-            var $row_output =
-              '<div class="d-flex justify-content-start align-items-center user-name">' +
-              '<div class="avatar-wrapper">' +
-              '<div class="avatar me-3">' +
-              $output +
-              '</div>' +
-              '</div>' +
-              '<div class="d-flex flex-column">' +
-              '<a href="' +
-              userView +
-              '" class="text-body text-truncate"><span class="fw-medium">' +
-              $name +
-              '</span></a>' +
-              '<small class="text-muted">' +
-              $email +
-              '</small>' +
-              '</div>' +
-              '</div>';
-            return $row_output;
-          }
-        },
-        {
-          // User Role
-          targets: 2,
-          render: function (data, type, full, meta) {
-            var $role = full['role'];
-            var roleBadgeObj = {
-              Subscriber:
-                '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="ti ti-user ti-sm"></i></span>',
-              Author:
-                '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2"><i class="ti ti-circle-check ti-sm"></i></span>',
-              Maintainer:
-                '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2"><i class="ti ti-chart-pie-2 ti-sm"></i></span>',
-              Editor:
-                '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2"><i class="ti ti-edit ti-sm"></i></span>',
-              Admin:
-                '<span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="ti ti-device-laptop ti-sm"></i></span>'
-            };
-            return "<span class='text-truncate d-flex align-items-center'>" + roleBadgeObj[$role] + $role + '</span>';
-          }
-        },
-        {
-          // Plans
-          targets: 3,
-          render: function (data, type, full, meta) {
-            var $plan = full['current_plan'];
+        // {
+        //   // For Responsive
+        //   // className: 'no',
+        //   // searchable: false,
+        //   // orderable: false,
+        //   // sortable: false,
+        //   // responsivePriority: 0,
+        //   targets: 0,
+        //   render: function (data, type, full, meta) {
+        //     return i++;
+        //   }
+        // },
+        // {
+        //   // User full name and email
+        //   targets: 1,
+        //   responsivePriority: 4,
+        //   render: function (data, type, full, meta) {
+        //     var $nama = full['nama'],
+        //       $email = full['email'];
+        //     // $image = full['avatar'];
+        //     // if ($image) {
+        //     //   // For Avatar image
+        //     //   var $output =
+        //     //     '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
+        //     // } else {
+        //     //   // For Avatar badge
+        //     //   var stateNum = Math.floor(Math.random() * 6);
+        //     //   var states = ['success', 'danger', 'warning', 'info', 'primary', 'secondary'];
+        //     //   var $state = states[stateNum],
+        //     //     $name = full['full_name'],
+        //     //     $initials = $name.match(/\b\w/g) || [];
+        //     //   $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
+        //     //   $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
+        //     // }
+        //     // Creates full output for row
+        //     var $row_output =
+        //       '<div class="d-flex justify-content-start align-items-center user-name">' +
+        //       '<div class="avatar-wrapper">' +
+        //       '<div class="avatar me-3">' +
+        //       $output +
+        //       '</div>' +
+        //       '</div>' +
+        //       '<div class="d-flex flex-column">' +
+        //       '<a href="' +
+        //       userView +
+        //       '" class="text-body text-truncate"><span class="fw-medium">' +
+        //       $nama +
+        //       '</span></a>' +
+        //       '<small class="text-muted">' +
+        //       $email +
+        //       '</small>' +
+        //       '</div>' +
+        //       '</div>';
+        //     return $row_output;
+        //   }
+        // },
+        // {
+        //   // User Role
+        //   targets: 3,
+        //   render: function (data, type, full, meta) {
+        //     var $role = full['role'];
+        //     var roleBadgeObj = {
+        //       Subscriber:
+        //         '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="ti ti-user ti-sm"></i></span>',
+        //       Author:
+        //         '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2"><i class="ti ti-circle-check ti-sm"></i></span>',
+        //       Maintainer:
+        //         '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2"><i class="ti ti-chart-pie-2 ti-sm"></i></span>',
+        //       Editor:
+        //         '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2"><i class="ti ti-edit ti-sm"></i></span>',
+        //       Admin:
+        //         '<span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="ti ti-device-laptop ti-sm"></i></span>'
+        //     };
+        //     return "<span class='text-truncate d-flex align-items-center'>" + roleBadgeObj[$role] + $role + '</span>';
+        //   }
+        // },
+        // {
+        //   // Plans
+        //   targets: 3,
+        //   render: function (data, type, full, meta) {
+        //     var $plan = full['current_plan'];
 
-            return '<span class="fw-medium">' + $plan + '</span>';
-          }
-        },
-        {
-          // User Status
-          targets: 5,
-          render: function (data, type, full, meta) {
-            var $status = full['status'];
+        //     return '<span class="fw-medium">' + $plan + '</span>';
+        //   }
+        // },
+        // {
+        //   // User Status
+        //   targets: 5,
+        //   render: function (data, type, full, meta) {
+        //     var $status = full['status'];
 
-            return (
-              '<span class="badge ' +
-              statusObj[$status].class +
-              '" text-capitalized>' +
-              statusObj[$status].title +
-              '</span>'
-            );
-          }
-        },
+        //     return (
+        //       '<span class="badge ' +
+        //       statusObj[$status].class +
+        //       '" text-capitalized>' +
+        //       statusObj[$status].title +
+        //       '</span>'
+        //     );
+        //   }
+        // },
         {
           // Actions
           targets: -1,
@@ -173,7 +181,7 @@ $(function () {
           }
         }
       ],
-      order: [[1, 'desc']],
+      order: [[1, 'asc']],
       dom:
         '<"row me-2"' +
         '<"col-md-2"<"me-3"l>>' +
@@ -375,11 +383,11 @@ $(function () {
       initComplete: function () {
         // Adding role filter once table initialized
         this.api()
-          .columns(2)
+          .columns(1)
           .every(function () {
             var column = this;
             var select = $(
-              '<select id="UserRole" class="form-select text-capitalize"><option value=""> Select Role </option></select>'
+              '<select id="UserRole" class="form-select text-capitalize"><option value=""> Select Nama </option></select>'
             )
               .appendTo('.user_role')
               .on('change', function () {
@@ -401,7 +409,7 @@ $(function () {
           .every(function () {
             var column = this;
             var select = $(
-              '<select id="UserPlan" class="form-select text-capitalize"><option value=""> Select Plan </option></select>'
+              '<select id="UserPlan" class="form-select text-capitalize"><option value=""> Select Role Structure </option></select>'
             )
               .appendTo('.user_plan')
               .on('change', function () {
@@ -419,7 +427,7 @@ $(function () {
           });
         // Adding status filter once table initialized
         this.api()
-          .columns(5)
+          .columns(6)
           .every(function () {
             var column = this;
             var select = $(
@@ -436,13 +444,7 @@ $(function () {
               .unique()
               .sort()
               .each(function (d, j) {
-                select.append(
-                  '<option value="' +
-                    statusObj[d].title +
-                    '" class="text-capitalize">' +
-                    statusObj[d].title +
-                    '</option>'
-                );
+                select.append('<option value="' + d + '">' + d + '</option>');
               });
           });
       }

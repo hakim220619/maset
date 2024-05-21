@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Aplikasi\AplikasiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\language\LanguageController;
 use App\Http\Controllers\pages\HomePage;
@@ -9,6 +10,8 @@ use App\Http\Controllers\authentications\LoginController;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\General\GeneralController;
+use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Users\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +41,17 @@ Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/admin', [HomePage::class, 'index'])->name('admin.dashboard');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/setting/aplikasi', [GeneralController::class, 'aplikasi'])->name('aplikasi');
+    Route::get('/setting/aplikasi', [AplikasiController::class, 'aplikasi'])->name('aplikasi');
+
+    Route::post('/setting/aplikasi/editProses', [AplikasiController::class, 'updateAplikasi'])->name('aplikasi.update');
+
+    //Profile
+    //tanggal 5-21-2024
+    Route::get('/users', [UsersController::class, 'users'])->name('users');
+    Route::get('/users/list', [UsersController::class, 'userList'])->name('users.userList');
+
+
+    //Profile
+    //tanggal 5-21-2024
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
 });

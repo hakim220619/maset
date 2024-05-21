@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -18,8 +19,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nama',
         'email',
+        'role_access',
+        'role_structure',
+        'role',
         'password',
     ];
 
@@ -42,4 +46,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public static function GetListuser()
+    {
+        $data = DB::select('select u.*, rs.rs_nama , ra.ra_nama ,r.role_nama  from users u, role_structure rs, role_access ra, role r 
+        where u.role_structure=rs.rs_id 
+        and u.role_access=ra.ra_id 
+        and u.role=r.role_id ');
+        return $data;
+    }
 }
