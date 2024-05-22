@@ -51,6 +51,7 @@
     <!-- Include Scripts for customizer, helper, analytics, config -->
     <!-- $isFront is used to append the front layout scriptsIncludes only on the front layout otherwise the variable will be blank -->
     @include('layouts/sections/scriptsIncludes' . $isFront)
+    {{-- @include('sweetalert::alert') --}}
 </head>
 
 <body>

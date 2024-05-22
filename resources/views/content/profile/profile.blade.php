@@ -19,9 +19,9 @@
 @endsection
 
 @section('content')
-    <h4 class="py-3 mb-4">
+    {{-- <h4 class="py-3 mb-4">
         <span class="text-muted fw-light">User / View /</span> Account
-    </h4>
+    </h4> --}}
     <div class="row">
         <!-- User Sidebar -->
         <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
@@ -30,11 +30,12 @@
                 <div class="card-body">
                     <div class="user-avatar-section">
                         <div class=" d-flex align-items-center flex-column">
-                            <img class="img-fluid rounded mb-3 pt-1 mt-4" src="{{ asset('assets/img/avatars/15.png') }}"
-                                height="100" width="100" alt="User avatar" />
+                            <img class="img-fluid rounded mb-3 pt-1 mt-4"
+                                src="{{ asset('') }}storage/images/users/{{ $profile->image }}" height="100"
+                                width="100" alt="User avatar" />
                             <div class="user-info text-center">
-                                <h4 class="mb-2">Violet Mendoza</h4>
-                                <span class="badge bg-label-secondary mt-1">Author</span>
+                                <h4 class="mb-2">{{ $profile->nama }}</h4>
+                                <span class="badge bg-label-secondary mt-1">{{ $profile->rs_nama }}</span>
                             </div>
                         </div>
                     </div>
@@ -58,36 +59,43 @@
                     <div class="info-container">
                         <ul class="list-unstyled">
                             <li class="mb-2">
-                                <span class="fw-medium me-1">Username:</span>
-                                <span>violet.dev</span>
+                                <span class="fw-medium me-1">Nik:</span>
+                                <span>{{ $profile->nik }}</span>
                             </li>
                             <li class="mb-2 pt-1">
                                 <span class="fw-medium me-1">Email:</span>
-                                <span>vafgot@vultukir.org</span>
+                                <span>{{ $profile->email }}</span>
                             </li>
                             <li class="mb-2 pt-1">
                                 <span class="fw-medium me-1">Status:</span>
-                                <span class="badge bg-label-success">Active</span>
+                                @if ($profile->status == 'ACTIVE')
+                                    <span class="badge bg-label-success">{{ $profile->status }}</span>
+                                @elseif ($profile->status == 'INACTIVE')
+                                    <span class="badge bg-label-warning">{{ $profile->status }}</span>
+                                @else
+                                    <span class="badge bg-label-danger">{{ $profile->status }}</span>
+                                @endif
+
+                            </li>
+                            <li class="mb-2 pt-1">
+                                <span class="fw-medium me-1">Role Structure:</span>
+                                <span>{{ $profile->rs_nama }}</span>
+                            </li>
+                            <li class="mb-2 pt-1">
+                                <span class="fw-medium me-1">Role Access:</span>
+                                <span>{{ $profile->ra_nama }}</span>
                             </li>
                             <li class="mb-2 pt-1">
                                 <span class="fw-medium me-1">Role:</span>
-                                <span>Author</span>
+                                <span>{{ $profile->role_nama }}</span>
                             </li>
                             <li class="mb-2 pt-1">
-                                <span class="fw-medium me-1">Tax id:</span>
-                                <span>Tax-8965</span>
+                                <span class="fw-medium me-1">No:</span>
+                                <span>{{ $profile->no_tlp }}</span>
                             </li>
                             <li class="mb-2 pt-1">
-                                <span class="fw-medium me-1">Contact:</span>
-                                <span>(123) 456-7890</span>
-                            </li>
-                            <li class="mb-2 pt-1">
-                                <span class="fw-medium me-1">Languages:</span>
-                                <span>French</span>
-                            </li>
-                            <li class="pt-1">
-                                <span class="fw-medium me-1">Country:</span>
-                                <span>England</span>
+                                <span class="fw-medium me-1">Alamat:</span>
+                                <span>{{ $profile->alamat }}</span>
                             </li>
                         </ul>
                         <div class="d-flex justify-content-center">
@@ -99,7 +107,7 @@
                 </div>
             </div>
             <!-- /User Card -->
-            <!-- Plan Card -->
+            {{-- <!-- Plan Card -->
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start">
@@ -130,7 +138,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /Plan Card -->
+            <!-- /Plan Card --> --}}
         </div>
         <!--/ User Sidebar -->
 
@@ -139,16 +147,16 @@
         <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
             <!-- User Pills -->
             <ul class="nav nav-pills flex-column flex-md-row mb-4">
-                <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i
+                <li class="nav-item"><a class="nav-link active" href="{{ url('profile') }}"><i
                             class="ti ti-user-check ti-xs me-1"></i>Account</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('app/user/view/security') }}"><i
+                <li class="nav-item"><a class="nav-link" href="{{ url('profile/security') }}"><i
                             class="ti ti-lock ti-xs me-1"></i>Security</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('app/user/view/billing') }}"><i
+                {{-- <li class="nav-item"><a class="nav-link" href="{{ url('app/user/view/billing') }}"><i
                             class="ti ti-currency-dollar ti-xs me-1"></i>Billing & Plans</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('app/user/view/notifications') }}"><i
                             class="ti ti-bell ti-xs me-1"></i>Notifications</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('app/user/view/connections') }}"><i
-                            class="ti ti-link ti-xs me-1"></i>Connections</a></li>
+                            class="ti ti-link ti-xs me-1"></i>Connections</a></li> --}}
             </ul>
             <!--/ User Pills -->
 
@@ -172,101 +180,102 @@
             <!-- /Project table -->
 
             <!-- Activity Timeline -->
-            <div class="card mb-4">
-                <h5 class="card-header">User Activity Timeline</h5>
-                <div class="card-body pb-0">
-                    <ul class="timeline mb-0">
-                        <li class="timeline-item timeline-item-transparent">
-                            <span class="timeline-point timeline-point-primary"></span>
-                            <div class="timeline-event">
-                                <div class="timeline-header mb-1">
-                                    <h6 class="mb-0">12 Invoices have been paid</h6>
-                                    <small class="text-muted">12 min ago</small>
-                                </div>
-                                <p class="mb-2">Invoices have been paid to the company</p>
-                                <div class="d-flex">
-                                    <a href="javascript:void(0)" class="me-3">
-                                        <img src="{{ asset('assets/img/icons/misc/pdf.png') }}" alt="PDF image"
-                                            width="15" class="me-2">
-                                        <span class="fw-medium text-heading">invoices.pdf</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item timeline-item-transparent">
-                            <span class="timeline-point timeline-point-warning"></span>
-                            <div class="timeline-event">
-                                <div class="timeline-header mb-1">
-                                    <h6 class="mb-0">Client Meeting</h6>
-                                    <small class="text-muted">45 min ago</small>
-                                </div>
-                                <p class="mb-2">Project meeting with john @10:15am</p>
-                                <div class="d-flex flex-wrap">
-                                    <div class="avatar me-3">
-                                        <img src="{{ asset('assets/img/avatars/3.png') }}" alt="Avatar"
-                                            class="rounded-circle" />
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-0">Lester McCarthy (Client)</h6>
-                                        <small>CEO of {{ config('variables.creatorName') }}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item timeline-item-transparent">
-                            <span class="timeline-point timeline-point-info"></span>
-                            <div class="timeline-event">
-                                <div class="timeline-header mb-1">
-                                    <h6 class="mb-0">Create a new project for client</h6>
-                                    <small class="text-muted">2 Day Ago</small>
-                                </div>
-                                <p class="mb-2">5 team members in a project</p>
-                                <div class="d-flex align-items-center avatar-group">
-                                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                        data-bs-placement="top" title="Vinnie Mostowy">
-                                        <img src="{{ asset('assets/img/avatars/5.png') }}" alt="Avatar"
-                                            class="rounded-circle">
-                                    </div>
-                                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                        data-bs-placement="top" title="Marrie Patty">
-                                        <img src="{{ asset('assets/img/avatars/12.png') }}" alt="Avatar"
-                                            class="rounded-circle">
-                                    </div>
-                                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                        data-bs-placement="top" title="Jimmy Jackson">
-                                        <img src="{{ asset('assets/img/avatars/9.png') }}" alt="Avatar"
-                                            class="rounded-circle">
-                                    </div>
-                                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                        data-bs-placement="top" title="Kristine Gill">
-                                        <img src="{{ asset('assets/img/avatars/6.png') }}" alt="Avatar"
-                                            class="rounded-circle">
-                                    </div>
-                                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                        data-bs-placement="top" title="Nelson Wilson">
-                                        <img src="{{ asset('assets/img/avatars/4.png') }}" alt="Avatar"
-                                            class="rounded-circle">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item timeline-item-transparent border-transparent">
-                            <span class="timeline-point timeline-point-success"></span>
-                            <div class="timeline-event">
-                                <div class="timeline-header mb-1">
-                                    <h6 class="mb-0">Design Review</h6>
-                                    <small class="text-muted">5 days Ago</small>
-                                </div>
-                                <p class="mb-0">Weekly review of freshly prepared design for our new app.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
             <!-- /Activity Timeline -->
             <!-- /Invoice table -->
         </div>
+
         <!--/ User Content -->
+    </div>
+    <div class="card mb-12">
+        <h5 class="card-header">User Activity Timeline</h5>
+        <div class="card-body pb-0">
+            <ul class="timeline mb-0">
+                <li class="timeline-item timeline-item-transparent">
+                    <span class="timeline-point timeline-point-primary"></span>
+                    <div class="timeline-event">
+                        <div class="timeline-header mb-1">
+                            <h6 class="mb-0">12 Invoices have been paid</h6>
+                            <small class="text-muted">12 min ago</small>
+                        </div>
+                        <p class="mb-2">Invoices have been paid to the company</p>
+                        <div class="d-flex">
+                            <a href="javascript:void(0)" class="me-3">
+                                <img src="{{ asset('assets/img/icons/misc/pdf.png') }}" alt="PDF image" width="15"
+                                    class="me-2">
+                                <span class="fw-medium text-heading">invoices.pdf</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-item timeline-item-transparent">
+                    <span class="timeline-point timeline-point-warning"></span>
+                    <div class="timeline-event">
+                        <div class="timeline-header mb-1">
+                            <h6 class="mb-0">Client Meeting</h6>
+                            <small class="text-muted">45 min ago</small>
+                        </div>
+                        <p class="mb-2">Project meeting with john @10:15am</p>
+                        <div class="d-flex flex-wrap">
+                            <div class="avatar me-3">
+                                <img src="{{ asset('assets/img/avatars/3.png') }}" alt="Avatar" class="rounded-circle" />
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Lester McCarthy (Client)</h6>
+                                <small>CEO of {{ config('variables.creatorName') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-item timeline-item-transparent">
+                    <span class="timeline-point timeline-point-info"></span>
+                    <div class="timeline-event">
+                        <div class="timeline-header mb-1">
+                            <h6 class="mb-0">Create a new project for client</h6>
+                            <small class="text-muted">2 Day Ago</small>
+                        </div>
+                        <p class="mb-2">5 team members in a project</p>
+                        <div class="d-flex align-items-center avatar-group">
+                            <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                data-bs-placement="top" title="Vinnie Mostowy">
+                                <img src="{{ asset('assets/img/avatars/5.png') }}" alt="Avatar"
+                                    class="rounded-circle">
+                            </div>
+                            <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                data-bs-placement="top" title="Marrie Patty">
+                                <img src="{{ asset('assets/img/avatars/12.png') }}" alt="Avatar"
+                                    class="rounded-circle">
+                            </div>
+                            <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                data-bs-placement="top" title="Jimmy Jackson">
+                                <img src="{{ asset('assets/img/avatars/9.png') }}" alt="Avatar"
+                                    class="rounded-circle">
+                            </div>
+                            <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                data-bs-placement="top" title="Kristine Gill">
+                                <img src="{{ asset('assets/img/avatars/6.png') }}" alt="Avatar"
+                                    class="rounded-circle">
+                            </div>
+                            <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                data-bs-placement="top" title="Nelson Wilson">
+                                <img src="{{ asset('assets/img/avatars/4.png') }}" alt="Avatar"
+                                    class="rounded-circle">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-item timeline-item-transparent border-transparent">
+                    <span class="timeline-point timeline-point-success"></span>
+                    <div class="timeline-event">
+                        <div class="timeline-header mb-1">
+                            <h6 class="mb-0">Design Review</h6>
+                            <small class="text-muted">5 days Ago</small>
+                        </div>
+                        <p class="mb-0">Weekly review of freshly prepared design for our new app.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <!-- Modal -->

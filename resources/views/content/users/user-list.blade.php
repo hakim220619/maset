@@ -1,19 +1,24 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'User List - Pages')
+@section('title', 'User View - Pages')
 
 @section('vendor-style')
-    @vite(['resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.scss', 'resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.scss', 'resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.scss', 'resources/assets/vendor/libs/select2/select2.scss', 'resources/assets/vendor/libs/@form-validation/form-validation.scss'])
+    @vite(['resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.scss', 'resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.scss', 'resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.scss', 'resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss', 'resources/assets/vendor/libs/select2/select2.scss', 'resources/assets/vendor/libs/@form-validation/form-validation.scss'])
+@endsection
+
+@section('page-style')
+    @vite(['resources/assets/vendor/scss/pages/page-user-view.scss'])
 @endsection
 
 @section('vendor-script')
-    @vite(['resources/assets/vendor/libs/moment/moment.js', 'resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js', 'resources/assets/vendor/libs/select2/select2.js', 'resources/assets/vendor/libs/@form-validation/popular.js', 'resources/assets/vendor/libs/@form-validation/bootstrap5.js', 'resources/assets/vendor/libs/@form-validation/auto-focus.js', 'resources/assets/vendor/libs/cleavejs/cleave.js', 'resources/assets/vendor/libs/cleavejs/cleave-phone.js'])
+    @vite(['resources/assets/vendor/libs/moment/moment.js', 'resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.js', 'resources/assets/vendor/libs/cleavejs/cleave.js', 'resources/assets/vendor/libs/cleavejs/cleave-phone.js', 'resources/assets/vendor/libs/select2/select2.js', 'resources/assets/vendor/libs/@form-validation/popular.js', 'resources/assets/vendor/libs/@form-validation/bootstrap5.js', 'resources/assets/vendor/libs/@form-validation/auto-focus.js'])
 @endsection
+
+
 
 @section('page-script')
     @vite('resources/assets/js/app-user-list.js')
 @endsection
-
 @section('content')
 
     <div class="row g-4 mb-4">
@@ -24,8 +29,8 @@
                         <div class="content-left">
                             <span>Role Structure</span>
                             <div class="d-flex align-items-center my-2">
-                                <h3 class="mb-0 me-2">21,459</h3>
-                                <p class="text-success mb-0">(+29%)</p>
+                                <h3 class="mb-0 me-2">{{ $total_rs }}</h3>
+                                {{-- <p class="text-success mb-0">(+29%)</p> --}}
                             </div>
                             <p class="mb-0">Total Users</p>
                         </div>
@@ -45,10 +50,10 @@
                         <div class="content-left">
                             <span>Role Access</span>
                             <div class="d-flex align-items-center my-2">
-                                <h3 class="mb-0 me-2">4,567</h3>
-                                <p class="text-success mb-0">(+18%)</p>
+                                <h3 class="mb-0 me-2">{{ $total_ra }}</h3>
+                                {{-- <p class="text-success mb-0">(+18%)</p> --}}
                             </div>
-                            <p class="mb-0">Last week analytics </p>
+                            <p class="mb-0">Total Users</p>
                         </div>
                         <div class="avatar">
                             <span class="avatar-initial rounded bg-label-danger">
@@ -66,10 +71,10 @@
                         <div class="content-left">
                             <span>Role Users</span>
                             <div class="d-flex align-items-center my-2">
-                                <h3 class="mb-0 me-2">19,860</h3>
-                                <p class="text-danger mb-0">(-14%)</p>
+                                <h3 class="mb-0 me-2">{{ $total_r }}</h3>
+                                {{-- <p class="text-danger mb-0">(-14%)</p> --}}
                             </div>
-                            <p class="mb-0">Last week analytics</p>
+                            <p class="mb-0">Total Users</p>
                         </div>
                         <div class="avatar">
                             <span class="avatar-initial rounded bg-label-success">
@@ -85,12 +90,12 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="content-left">
-                            <span>Status</span>
+                            <span>Status On</span>
                             <div class="d-flex align-items-center my-2">
-                                <h3 class="mb-0 me-2">237</h3>
-                                <p class="text-success mb-0">(+42%)</p>
+                                <h3 class="mb-0 me-2">{{ $status_on }}</h3>
+                                {{-- <p class="text-success mb-0">(+42%)</p> --}}
                             </div>
-                            <p class="mb-0">Last week analytics</p>
+                            <p class="mb-0">Total Users</p>
                         </div>
                         <div class="avatar">
                             <span class="avatar-initial rounded bg-label-warning">
@@ -122,6 +127,7 @@
                         <th>Role Structure</th>
                         <th>Role Access</th>
                         <th>Role Users</th>
+                        <th>Contact</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -135,81 +141,145 @@
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
-                <form class="add-new-user pt-0" id="addNewUserForm" onsubmit="return false">
+                <form class="add-new-user pt-0" id="addNewUserForm">
                     <div class="mb-3">
-                        <label class="form-label" for="add-user-fullname">Full Name</label>
-                        <input type="text" class="form-control" id="add-user-fullname" placeholder="John Doe"
+                        <label class="form-label" for="nik">Nik</label>
+                        <input type="text" class="form-control" id="nik" name="nik" placeholder="330206**"
+                            name="userFullname" aria-label="330206**" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="John Doe"
                             name="userFullname" aria-label="John Doe" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="add-user-email">Email</label>
-                        <input type="text" id="add-user-email" class="form-control" placeholder="john.doe@example.com"
-                            aria-label="john.doe@example.com" name="userEmail" />
+                        <label class="form-label" for="email">Email</label>
+                        <input type="text" id="email" class="form-control" placeholder="john.doe@example.com"
+                            aria-label="john.doe@example.com" name="email" />
+                    </div>
+                    <div class="mb-3 form-password-toggle">
+                        <label class="form-label" for="newPassword">Password</label>
+                        <div class="input-group input-group-merge">
+                            <input class="form-control" type="password" id="password" name="password"
+                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                            <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="add-user-contact">Contact</label>
-                        <input type="text" id="add-user-contact" class="form-control phone-mask"
-                            placeholder="+1 (609) 988-44-11" aria-label="john.doe@example.com" name="userContact" />
+                        <label class="form-label" for="no">Contact</label>
+                        <input type="text" id="no" name="no" class="form-control phone-mask"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
+                            placeholder="+62 8579" aria-label="john.doe@example.com" name="no" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="add-user-company">Company</label>
-                        <input type="text" id="add-user-company" class="form-control" placeholder="Web Developer"
-                            aria-label="jdoe1" name="companyName" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="country">Country</label>
-                        <select id="country" class="select2 form-select">
-                            <option value="">Select</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Bangladesh">Bangladesh</option>
-                            <option value="Belarus">Belarus</option>
-                            <option value="Brazil">Brazil</option>
-                            <option value="Canada">Canada</option>
-                            <option value="China">China</option>
-                            <option value="France">France</option>
-                            <option value="Germany">Germany</option>
-                            <option value="India">India</option>
-                            <option value="Indonesia">Indonesia</option>
-                            <option value="Israel">Israel</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Japan">Japan</option>
-                            <option value="Korea">Korea, Republic of</option>
-                            <option value="Mexico">Mexico</option>
-                            <option value="Philippines">Philippines</option>
-                            <option value="Russia">Russian Federation</option>
-                            <option value="South Africa">South Africa</option>
-                            <option value="Thailand">Thailand</option>
-                            <option value="Turkey">Turkey</option>
-                            <option value="Ukraine">Ukraine</option>
-                            <option value="United Arab Emirates">United Arab Emirates</option>
-                            <option value="United Kingdom">United Kingdom</option>
-                            <option value="United States">United States</option>
+                        <label class="form-label" for="status">Status</label>
+                        <select id="status" name="status" class="select2 form-select">
+                            <option value="" selected>-- Pilih --</option>
+                            @foreach (Helper::getStatus() as $r)
+                                <option value="{{ $r->status_nama }}">
+                                    {{ $r->status_nama }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="user-role">User Role</label>
-                        <select id="user-role" class="form-select">
-                            <option value="subscriber">Subscriber</option>
-                            <option value="editor">Editor</option>
-                            <option value="maintainer">Maintainer</option>
-                            <option value="author">Author</option>
-                            <option value="admin">Admin</option>
+                        <label class="form-label" for="role_structure">Role Structure</label>
+                        <select id="role_structure" name="role_structure" class="select3 form-select"
+                            aria-label="Default select example">
+                            <option value="" selected>-- Pilih --</option>
+                            @foreach (Helper::getRoleStructure() as $r)
+                                <option value="{{ $r->rs_id }}">
+                                    {{ $r->rs_nama }}</option>
+                            @endforeach
                         </select>
                     </div>
-                    <div class="mb-4">
-                        <label class="form-label" for="user-plan">Select Plan</label>
-                        <select id="user-plan" class="form-select">
-                            <option value="basic">Basic</option>
-                            <option value="enterprise">Enterprise</option>
-                            <option value="company">Company</option>
-                            <option value="team">Team</option>
+                    <div class="mb-3">
+                        <label class="form-label" for="role_access">Role Access</label>
+                        <select id="role_access" name="role_access" class="select4 form-select"
+                            aria-label="Default select example">
+                            <option value="" selected>-- Pilih --</option>
+                            @foreach (Helper::getRoleaccess() as $r)
+                                <option value="{{ $r->ra_id }}">
+                                    {{ $r->ra_nama }}</option>
+                            @endforeach
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
+                    <div class="mb-3">
+                        <label class="form-label" for="role">Role</label>
+                        <select id="role" name="role" class="select5 form-select"
+                            aria-label="Default select example">
+                            <option value="" selected>-- Pilih --</option>
+                            @foreach (Helper::getRole() as $r)
+                                <option value="{{ $r->role_id }}">
+                                    {{ $r->role_nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="image">Image</label>
+                        <input type="file" class="form-control" id="image" placeholder="Jl hr**" name="image"
+                            aria-label="Jl hr**" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="alamat">Alamat</label>
+                        <input type="text" class="form-control" id="alamat" placeholder="Jl hr**" name="alamat"
+                            aria-label="Jl hr**" />
+                    </div>
+                    <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit" id="submitUsers"
+                        onclick="SaveUsers()">Submit</button>
                     <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Cancel</button>
                 </form>
             </div>
         </div>
     </div>
 
+    <script>
+        function SaveUsers() {
+            var fd = new FormData();
+
+            // var file_data = object.get(0).files[i];
+            var other_data = $('form').serialize();
+            fd.append('nik', $('#nik').val());
+            fd.append('nama', $('#nama').val());
+            fd.append('email', $('#email').val());
+            fd.append('password', $('#password').val());
+            fd.append('no', $('#no').val());
+            fd.append('status', $('#status').val());
+            fd.append('role_structure', $('#role_structure').val());
+            fd.append('role_access', $('#role_access').val());
+            fd.append('role', $('#role').val());
+            fd.append('alamat', $('#alamat').val());
+            fd.append('image', $('input[type=file]')[0].files[0]);
+            console.log(fd);
+            $.ajax({
+                url: '/users/addProses',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: fd,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                type: 'POST',
+                success: function(data) {
+                    console.log(data);
+                    if (data.success == true) {
+                        $('.offcanvas').offcanvas('hide');
+                        Swal.fire({
+                            position: 'bottom-right',
+                            toast: true,
+                            icon: 'success',
+                            title: 'Success',
+                            text: `${data.message}`,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            backgroundColor: '#28a745',
+                            titleColor: '#fff',
+                        });
+                        $('.datatables-users').DataTable().ajax.reload();
+                    }
+                }
+            });
+        }
+    </script>
 @endsection

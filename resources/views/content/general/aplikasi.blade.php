@@ -5,7 +5,7 @@
 @extends('layouts/layoutMaster')
 
 @section('title', 'Home')
-@include('sweetalert::alert')
+
 @section('content')
 
     <div class="row">

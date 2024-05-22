@@ -22,12 +22,20 @@
         buttonsStyling: false
       }).then(function (result) {
         if (result.value) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Suspended!',
-            text: 'User has been suspended.',
-            customClass: {
-              confirmButton: 'btn btn-success waves-effect waves-light'
+          $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/profile/suspended',
+            success: function (response) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Suspended!',
+                text: 'User has been suspended.',
+                customClass: {
+                  confirmButton: 'btn btn-success waves-effect waves-light'
+                }
+              });
+              location.reload();
             }
           });
         } else if (result.dismiss === Swal.DismissReason.cancel) {

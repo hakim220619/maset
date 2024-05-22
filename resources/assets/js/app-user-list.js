@@ -21,6 +21,9 @@ $(function () {
   // Variable declaration for table
   var dt_user_table = $('.datatables-users'),
     select2 = $('.select2'),
+    select3 = $('.select3'),
+    select4 = $('.select4'),
+    select5 = $('.select5'),
     userView = baseUrl + 'app/user/view/account',
     statusObj = {
       1: { title: 'Pending', class: 'bg-label-warning' },
@@ -31,7 +34,28 @@ $(function () {
   if (select2.length) {
     var $this = select2;
     $this.wrap('<div class="position-relative"></div>').select2({
-      placeholder: 'Select Country',
+      placeholder: 'Select Status',
+      dropdownParent: $this.parent()
+    });
+  }
+  if (select3.length) {
+    var $this = select3;
+    $this.wrap('<div class="position-relative"></div>').select2({
+      placeholder: 'Select Role Structure',
+      dropdownParent: $this.parent()
+    });
+  }
+  if (select4.length) {
+    var $this = select4;
+    $this.wrap('<div class="position-relative"></div>').select2({
+      placeholder: 'Select Role Access',
+      dropdownParent: $this.parent()
+    });
+  }
+  if (select5.length) {
+    var $this = select5;
+    $this.wrap('<div class="position-relative"></div>').select2({
+      placeholder: 'Select Role',
       dropdownParent: $this.parent()
     });
   }
@@ -44,16 +68,13 @@ $(function () {
       columns: [
         // columns according to JSON
 
-        {
-          render: function (data, type, full, meta) {
-            return i++;
-          }
-        },
+        { data: 'no' },
         { data: 'nama' },
         { data: 'email' },
         { data: 'rs_nama' },
         { data: 'ra_nama' },
         { data: 'role_nama' },
+        { data: 'no_tlp' },
         { data: 'status' },
         { data: 'action' }
       ],
@@ -116,9 +137,9 @@ $(function () {
         // },
         // {
         //   // User Role
-        //   targets: 3,
+        //   targets: 7,
         //   render: function (data, type, full, meta) {
-        //     var $role = full['role'];
+        //     var $role = full['status'];
         //     var roleBadgeObj = {
         //       Subscriber:
         //         '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="ti ti-user ti-sm"></i></span>',
@@ -160,7 +181,7 @@ $(function () {
         // },
         {
           // Actions
-          targets: -1,
+          targets: 8,
           title: 'Actions',
           searchable: false,
           orderable: false,
@@ -168,7 +189,9 @@ $(function () {
             return (
               '<div class="d-flex align-items-center">' +
               '<a href="javascript:;" class="text-body"><i class="ti ti-edit ti-sm me-2"></i></a>' +
-              '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
+              '<a href="javascript:;" class="text-body delete-record" data-id="' +
+              full.id +
+              '"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
               '<a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical ti-sm mx-1"></i></a>' +
               '<div class="dropdown-menu dropdown-menu-end m-0">' +
               '<a href="' +
@@ -181,7 +204,7 @@ $(function () {
           }
         }
       ],
-      order: [[1, 'asc']],
+      // order: [[1, 'asc']],
       dom:
         '<"row me-2"' +
         '<"col-md-2"<"me-3"l>>' +
@@ -348,38 +371,38 @@ $(function () {
         }
       ],
       // For responsive popup
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
-              var data = row.data();
-              return 'Details of ' + data['full_name'];
-            }
-          }),
-          type: 'column',
-          renderer: function (api, rowIdx, columns) {
-            var data = $.map(columns, function (col, i) {
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
-                : '';
-            }).join('');
+      // responsive: {
+      //   details: {
+      //     display: $.fn.dataTable.Responsive.display.modal({
+      //       header: function (row) {
+      //         var data = row.data();
+      //         return 'Details of ' + data['nama'];
+      //       }
+      //     }),
+      //     type: 'column',
+      //     renderer: function (api, rowIdx, columns) {
+      //       var data = $.map(columns, function (col, i) {
+      //         return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+      //           ? '<tr data-dt-row="' +
+      //               col.rowIndex +
+      //               '" data-dt-column="' +
+      //               col.columnIndex +
+      //               '">' +
+      //               '<td>' +
+      //               col.title +
+      //               ':' +
+      //               '</td> ' +
+      //               '<td>' +
+      //               col.data +
+      //               '</td>' +
+      //               '</tr>'
+      //           : '';
+      //       }).join('');
 
-            return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      },
+      //       return data ? $('<table class="table"/><tbody />').append(data) : false;
+      //     }
+      //   }
+      // },
       initComplete: function () {
         // Adding role filter once table initialized
         this.api()
@@ -453,7 +476,55 @@ $(function () {
 
   // Delete Record
   $('.datatables-users tbody').on('click', '.delete-record', function () {
-    dt_user.row($(this).parents('tr')).remove().draw();
+    var id = $(this).data('id');
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert user!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Suspend user!',
+      customClass: {
+        confirmButton: 'btn btn-primary me-2 waves-effect waves-light',
+        cancelButton: 'btn btn-label-secondary waves-effect waves-light'
+      },
+      buttonsStyling: false
+    }).then(function (result) {
+      if (result.value) {
+        $.ajax({
+          type: 'GET',
+          dataType: 'json',
+          url: '/users/deleteProses/' + id,
+          success: function (response) {
+            if (response.success == true) {
+              dt_user.row($(this).parents('tr')).remove().draw();
+              Swal.fire({
+                position: 'bottom-right',
+                toast: true,
+                icon: 'success',
+                title: 'Success',
+                text: `${response.message}`,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                backgroundColor: '#28a745',
+                titleColor: '#fff'
+              });
+              $('.datatables-users').DataTable().ajax.reload();
+              // location.reload();
+            }
+          }
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: 'Cancelled',
+          text: 'Cancelled Suspension :)',
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-success waves-effect waves-light'
+          }
+        });
+      }
+    });
   });
 
   // Filter form control to default size
@@ -466,35 +537,100 @@ $(function () {
 
 // Validation & Phone mask
 (function () {
-  const phoneMaskList = document.querySelectorAll('.phone-mask'),
-    addNewUserForm = document.getElementById('addNewUserForm');
+  // const phoneMaskList = document.querySelectorAll('.phone-mask'),
+  addNewUserForm = document.getElementById('addNewUserForm');
 
   // Phone Number
-  if (phoneMaskList) {
-    phoneMaskList.forEach(function (phoneMask) {
-      new Cleave(phoneMask, {
-        phone: true,
-        phoneRegionCode: 'US'
-      });
-    });
-  }
+  // if (phoneMaskList) {
+  //   phoneMaskList.forEach(function (phoneMask) {
+  //     new Cleave(phoneMask, {
+  //       phone: true,
+  //       phoneRegionCode: 'US'
+  //     });
+  //   });
+  // }
   // Add New User Form Validation
   const fv = FormValidation.formValidation(addNewUserForm, {
     fields: {
-      userFullname: {
+      nama: {
         validators: {
           notEmpty: {
-            message: 'Please enter fullname '
+            message: 'Please enter fullname'
           }
         }
       },
-      userEmail: {
+      nik: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter nik'
+          }
+        }
+      },
+      status: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter status'
+          }
+        }
+      },
+
+      alamat: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter Alamat'
+          }
+        }
+      },
+      password: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter password'
+          },
+          stringLength: {
+            min: 4,
+            message: 'Password must be more than 4 characters'
+          }
+        }
+      },
+      no: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter Contact'
+          },
+          stringLength: {
+            min: 11,
+            message: 'Contact must be more than 11 characters'
+          }
+        }
+      },
+      email: {
         validators: {
           notEmpty: {
             message: 'Please enter your email'
           },
           emailAddress: {
             message: 'The value is not a valid email address'
+          }
+        }
+      },
+      role_structure: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter Role Structure'
+          }
+        }
+      },
+      role_access: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter Role Access'
+          }
+        }
+      },
+      role: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter Role'
           }
         }
       }

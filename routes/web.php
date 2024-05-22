@@ -49,9 +49,15 @@ Route::middleware(['auth'])->group(function () {
     //tanggal 5-21-2024
     Route::get('/users', [UsersController::class, 'users'])->name('users');
     Route::get('/users/list', [UsersController::class, 'userList'])->name('users.userList');
+    Route::post('/users/addProses', [UsersController::class, 'addProses'])->name('users.addProses');
+    Route::post('/users/editProses', [UsersController::class, 'editProses'])->name('users.editProses');
+    Route::get('/users/deleteProses/{id}', [UsersController::class, 'deleteProses'])->name('users.deleteProses');
 
 
     //Profile
     //tanggal 5-21-2024
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
+    Route::get('/profile/security', [ProfileController::class, 'viewSecurity'])->name('profile.security');
+    Route::get('/profile/suspended', [ProfileController::class, 'suspended'])->name('profile.suspended');
+    Route::post('/profile/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 });

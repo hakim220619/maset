@@ -199,4 +199,24 @@ class Helpers
     $aplikasi = DB::table('aplikasi')->first();
     return $aplikasi;
   }
+  public static function getStatus()
+  {
+    $aplikasi = DB::table('status')->get();
+    return $aplikasi;
+  }
+  public static function getRoleStructure()
+  {
+    $aplikasi = DB::table('role_structure')->get();
+    return $aplikasi;
+  }
+  public static function getRoleaccess()
+  {
+    $aplikasi = DB::table('role_access')->get();
+    return $aplikasi;
+  }
+  public static function getRole()
+  {
+    $aplikasi = DB::table('role')->get();
+    return $aplikasi;
+  }
 }
