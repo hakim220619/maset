@@ -206,7 +206,7 @@ class Helpers
   }
   public static function getRoleStructure()
   {
-    $aplikasi = DB::table('role_structure')->get();
+    $aplikasi = DB::table('role_structure')->where('rs_status', 'ACTIVE')->get();
     return $aplikasi;
   }
   public static function getRoleaccess()

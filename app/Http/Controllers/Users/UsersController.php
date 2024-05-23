@@ -10,10 +10,10 @@ class UsersController extends Controller
 {
     public function users()
     {
-        $data['total_rs'] = User::where('role_structure', '!=', '0')->count();
-        $data['total_ra'] = User::where('role_access', '!=', '0')->count();
-        $data['total_r'] = User::where('role', '!=', '0')->count();
-        $data['status_on'] = User::where('status', 'ON')->count();
+        $data['total_users'] = User::all()->count();
+        $data['status_active'] = User::where('status', 'ACTIVE')->count();
+        $data['status_inactive'] = User::where('status', 'INACTIVE')->count();
+        $data['status_suspended'] = User::where('status', 'SUSPENDED')->count();
         return view('content.users.user-list', $data);
     }
     function userList()
@@ -21,7 +21,7 @@ class UsersController extends Controller
         $data = User::GetListuser();
         return response()->json([
             'success' => true,
-            'message' => 'Data Class',
+            'message' => 'Data',
             'data' => $data,
         ]);
     }
@@ -33,7 +33,7 @@ class UsersController extends Controller
         // toast('', 'success');
         return response()->json([
             'success' => true,
-            'message' => 'Data Add Userss Successs',
+            'message' => 'Add Userss Successs',
         ]);
     }
     function deleteProses($id)
@@ -43,7 +43,7 @@ class UsersController extends Controller
         // toast('', 'success');
         return response()->json([
             'success' => true,
-            'message' => 'Data Add Userss Successs',
+            'message' => 'Delete Userss Successs',
         ]);
     }
     function editProses(Request $request)
@@ -51,5 +51,13 @@ class UsersController extends Controller
         User::ProsesEditUsers($request);
         toast('', 'success');
         return redirect()->route('profile')->with('success', 'Users Successs Updateed!');
+    }
+    function updateProses(Request $request)
+    {
+        User::ProsesUpdateUsers($request);
+        return response()->json([
+            'success' => true,
+            'message' => 'Update Users Successs',
+        ]);
     }
 }

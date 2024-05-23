@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Mockery\Undefined;
 
 class User extends Authenticatable
 {
@@ -117,6 +118,47 @@ class User extends Authenticatable
             File::delete($file_path);
             $image = $request->file('image');
             // dd($getImage->image);
+            $filename = $image->getClientOriginalName();
+            $image->move(public_path('storage/images/users'), $filename);
+            $data = [
+                'nik' => $request->nik,
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'role_structure' => $request->role_structure,
+                'role_access' => $request->role_access,
+                'role' => $request->role,
+                'status' => $request->status,
+                'no_tlp' => $request->no_tlp,
+                'alamat' => $request->alamat,
+                'image' => $request->file('image')->getClientOriginalName(),
+                'updated_at' => now()
+            ];
+        } else {
+            $data = [
+                'nik' => $request->nik,
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'role_structure' => $request->role_structure,
+                'role_access' => $request->role_access,
+                'role' => $request->role,
+                'status' => $request->status,
+                'no_tlp' => $request->no_tlp,
+                'alamat' => $request->alamat,
+                'updated_at' => now()
+            ];
+        }
+
+        // dd($data);
+        DB::table('users')->where('id', $request->id)->update($data);
+    }
+    public static function ProsesUpdateUsers($request)
+    {
+        // dd($request->all());
+        if ($request->image != 'undefined') {
+            $getImage = DB::table('users')->where('id', $request->id)->first();
+            $file_path = public_path() . '/storage/images/users/' . $getImage->image;
+            File::delete($file_path);
+            $image = $request->file('image');
             $filename = $image->getClientOriginalName();
             $image->move(public_path('storage/images/users'), $filename);
             $data = [

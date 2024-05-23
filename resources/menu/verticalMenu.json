@@ -29,6 +29,11 @@
           "url": "/setting/aplikasi",
           "name": "Aplikasi",
           "slug": "aplikasi"
+        },
+        {
+          "url": "/setting/roleStructure",
+          "name": "Role Structure",
+          "slug": "roleStructure"
         }
       ]
     }

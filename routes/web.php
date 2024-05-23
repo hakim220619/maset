@@ -44,6 +44,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/setting/aplikasi', [AplikasiController::class, 'aplikasi'])->name('aplikasi');
 
     Route::post('/setting/aplikasi/editProses', [AplikasiController::class, 'updateAplikasi'])->name('aplikasi.update');
+    Route::get('/setting/roleStructure', [GeneralController::class, 'roleStructureView'])->name('role.roleStructureView');
+    Route::get('/setting/roleStructureList', [GeneralController::class, 'roleStructureList'])->name('role.roleStructureList');
+    Route::post('/setting/addRoleStructureProses', [GeneralController::class, 'addRoleStructureProses'])->name('role.addRoleStructureProses');
+    Route::post('/setting/updateRoleStructureProses', [GeneralController::class, 'updateRoleStructureProses'])->name('role.updateRoleStructureProses');
+    Route::get('/setting/deleteRoleStructureProses/{id}', [GeneralController::class, 'deleteRoleStructureProses'])->name('role.deleteRoleStructureProses');
 
     //Profile
     //tanggal 5-21-2024
@@ -51,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/list', [UsersController::class, 'userList'])->name('users.userList');
     Route::post('/users/addProses', [UsersController::class, 'addProses'])->name('users.addProses');
     Route::post('/users/editProses', [UsersController::class, 'editProses'])->name('users.editProses');
+    Route::post('/users/updateProses', [UsersController::class, 'updateProses'])->name('users.updateProses');
     Route::get('/users/deleteProses/{id}', [UsersController::class, 'deleteProses'])->name('users.deleteProses');
 
 
