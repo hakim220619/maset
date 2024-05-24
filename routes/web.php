@@ -44,11 +44,31 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/setting/aplikasi', [AplikasiController::class, 'aplikasi'])->name('aplikasi');
 
     Route::post('/setting/aplikasi/editProses', [AplikasiController::class, 'updateAplikasi'])->name('aplikasi.update');
+
+    //Role Structure
     Route::get('/setting/roleStructure', [GeneralController::class, 'roleStructureView'])->name('role.roleStructureView');
     Route::get('/setting/roleStructureList', [GeneralController::class, 'roleStructureList'])->name('role.roleStructureList');
     Route::post('/setting/addRoleStructureProses', [GeneralController::class, 'addRoleStructureProses'])->name('role.addRoleStructureProses');
     Route::post('/setting/updateRoleStructureProses', [GeneralController::class, 'updateRoleStructureProses'])->name('role.updateRoleStructureProses');
     Route::get('/setting/deleteRoleStructureProses/{id}', [GeneralController::class, 'deleteRoleStructureProses'])->name('role.deleteRoleStructureProses');
+
+    Route::get('/setting/roleAccess', [GeneralController::class, 'roleAccessView'])->name('role.roleAccessView');
+    Route::get('/setting/roleAccessList', [GeneralController::class, 'roleAccessList'])->name('role.roleAccessList');
+    Route::post('/setting/addRoleAccessProses', [GeneralController::class, 'addRoleAccessProses'])->name('role.addRoleAccessProses');
+    Route::post('/setting/updateRoleAceessProses', [GeneralController::class, 'updateRoleAceessProses'])->name('role.updateRoleAceessProses');
+    Route::get('/setting/deleteRoleAccessProses/{id}', [GeneralController::class, 'deleteRoleAccessProses'])->name('role.deleteRoleAccessProses');
+
+    //Role
+    Route::get('/setting/role', [GeneralController::class, 'roleView'])->name('role.roleView');
+    Route::get('/setting/roleList', [GeneralController::class, 'roleList'])->name('role.roleList');
+    Route::post('/setting/addRoleProses', [GeneralController::class, 'addRoleProses'])->name('role.addRoleProses');
+    Route::post('/setting/updateRoleProses', [GeneralController::class, 'updateRoleProses'])->name('role.updateRoleProses');
+    Route::get('/setting/deleteRoleProses/{id}', [GeneralController::class, 'deleteRoleProses'])->name('role.deleteRoleProses');
+
+
+
+
+
 
     //Profile
     //tanggal 5-21-2024

@@ -34,6 +34,16 @@
           "url": "/setting/roleStructure",
           "name": "Role Structure",
           "slug": "roleStructure"
+        },
+        {
+          "url": "/setting/roleAccess",
+          "name": "Role Access",
+          "slug": "roleAccess"
+        },
+        {
+          "url": "/setting/role",
+          "name": "Role",
+          "slug": "role"
         }
       ]
     }

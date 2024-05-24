@@ -16,6 +16,7 @@ class GeneralController extends Controller
         return view('content.general.role-Structure-View');
     }
 
+
     function roleStructureList()
     {
         $data = GeneralModel::GetListRoleStructure();
@@ -25,6 +26,7 @@ class GeneralController extends Controller
             'data' => $data,
         ]);
     }
+
     function addRoleStructureProses(Request $request)
     {
         // dd($request->all());
@@ -35,6 +37,8 @@ class GeneralController extends Controller
             'message' => 'Add Role Structure Successs',
         ]);
     }
+
+
     function updateRoleStructureProses(Request $request)
     {
         // dd($request->all());
@@ -46,6 +50,7 @@ class GeneralController extends Controller
         ]);
     }
 
+
     function deleteRoleStructureProses($id)
     {
         // dd($id);
@@ -54,6 +59,93 @@ class GeneralController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Delete Role Structure Successs',
+        ]);
+    }
+
+
+    function roleAccessView()
+    {
+        return view('content.general.role-Access-View');
+    }
+    function roleAccessList()
+    {
+        $data = GeneralModel::GetListRoleAccess();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data',
+            'data' => $data,
+        ]);
+    }
+    function addRoleAccessProses(Request $request)
+    {
+        GeneralModel::ProsesAddRoleAccess($request);
+        return response()->json([
+            'success' => true,
+            'message' => 'Add Role Access Successs',
+        ]);
+    }
+    function updateRoleAceessProses(Request $request)
+    {
+        // dd($request->all());
+        GeneralModel::ProsesUpdateRoleAccess($request);
+        // toast('', 'success');
+        return response()->json([
+            'success' => true,
+            'message' => 'Update Role Access Successs',
+        ]);
+    }
+
+    function deleteRoleAccessProses($id)
+    {
+        // dd($id);
+        GeneralModel::ProsesDeletRoleAccess($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Delete Role Access Successs',
+        ]);
+    }
+
+
+    function roleView()
+    {
+        return view('content.general.role-View');
+    }
+    function roleList()
+    {
+        $data = GeneralModel::GetListRole();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data',
+            'data' => $data,
+        ]);
+    }
+    function addRoleProses(Request $request)
+    {
+        // dd($request->all());
+        GeneralModel::ProsesAddRole($request);
+        // toast('', 'success');
+        return response()->json([
+            'success' => true,
+            'message' => 'Add Role Successs',
+        ]);
+    }
+    function updateRoleProses(Request $request)
+    {
+        // dd($request->all());
+        GeneralModel::ProsesUpdateRole($request);
+        // toast('', 'success');
+        return response()->json([
+            'success' => true,
+            'message' => 'Update Role Successs',
+        ]);
+    }
+    function deleteRoleProses($id)
+    {
+        // dd($id);
+        GeneralModel::ProsesDeletRole($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Delete Role Successs',
         ]);
     }
 }
