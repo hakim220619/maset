@@ -77,35 +77,6 @@
           "slug": "role"
         }
       ]
-    },
-    {
-      "url": "setting",
-      "icon": "menu-icon tf-icons ti ti-settings",
-      "name": "Setting",
-      "slug": "setting",
-      "role": "Admin",
-      "submenu": [
-        {
-          "url": "/setting/aplikasi",
-          "name": "Aplikasi",
-          "slug": "aplikasi"
-        },
-        {
-          "url": "/setting/roleStructure",
-          "name": "Role Structure",
-          "slug": "roleStructure"
-        },
-        {
-          "url": "/setting/roleAccess",
-          "name": "Role Access",
-          "slug": "roleAccess"
-        },
-        {
-          "url": "/setting/role",
-          "name": "Role",
-          "slug": "role"
-        }
-      ]
     }
   ]
 }

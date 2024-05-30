@@ -231,7 +231,7 @@ class Helpers
 
   public static function getRoleaccess()
   {
-    if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
+    if (Auth::user()->role_access == Helpers::getRoleStructureJson()[2]) {
       $data = DB::table('role_access')->where('ra_status', 'ACTIVE')->get();
     } else {
       $data = DB::table('role_access')->whereNot('ra_id', Helpers::getRoleStructureJson()[2])->where('ra_status', 'ACTIVE')->get();
@@ -240,7 +240,7 @@ class Helpers
   }
   public static function getRole()
   {
-    if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
+    if (Auth::user()->role == Helpers::getRoleStructureJson()[3]) {
       $data = DB::table('role')->where('role_status', 'ACTIVE')->get();
     } else {
       $data = DB::table('role')->whereNot('role_id', Helpers::getRoleStructureJson()[3])->where('role_status', 'ACTIVE')->get();
