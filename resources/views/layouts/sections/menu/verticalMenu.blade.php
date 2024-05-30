@@ -7,7 +7,7 @@
     <!-- ! Hide app brand if navbar-full -->
     @if (!isset($navbarFull))
         <div class="app-brand demo">
-            <a href="{{ url('/') }}" class="app-brand-link">
+            <a href="#" class="app-brand-link">
                 <span class="app-brand-logo demo">
                     @include('_partials.macros', ['height' => 20])
                 </span>

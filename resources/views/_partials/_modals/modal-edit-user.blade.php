@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="form-label" for="status">Status</label>
-                        <select id="status" name="status" class="select2 form-select"
+                        <select id="status" name="status" class="select2 form-select" disabled
                             aria-label="Default select example">
                             <option value="" disabled>-- Pilih --</option>
                             @foreach (Helper::getStatus() as $r)
@@ -45,8 +45,8 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="form-label" for="role_structure">Role Structure</label>
-                        <select id="role_structure" name="role_structure" class="select2 form-select"
-                            aria-label="Default select example">
+                        <select id="role_structure" name="role_structure" class="select2 form-select" disabled
+                            onchange="changeRoleEdit()" aria-label="Default select example">
                             <option value="" disabled>-- Pilih --</option>
                             @foreach (Helper::getRoleStructure() as $r)
                                 <option value="{{ $r->rs_id }}"
@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="form-label" for="role_access">Role Access</label>
-                        <select id="role_access" name="role_access" class="select2 form-select"
+                        <select id="role_access" name="role_access" class="select2 form-select" disabled
                             aria-label="Default select example">
                             <option value="" disabled>-- Pilih --</option>
                             @foreach (Helper::getRoleaccess() as $r)
@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="form-label" for="role">Role</label>
-                        <select id="role" name="role" class="select2 form-select"
+                        <select id="role" name="role" class="select2 form-select" disabled
                             aria-label="Default select example">
                             <option value="" disabled>-- Pilih --</option>
                             @foreach (Helper::getRole() as $r)
@@ -99,4 +99,34 @@
         </div>
     </div>
 </div>
+
+<script>
+    function changeRoleEdit() {
+        let role_structure = $('#role_structure').val();
+        $.ajax({
+            type: 'GET',
+            url: '{{ route('role.roleList') }}',
+            async: true,
+            dataType: 'json',
+            success: function(data) {
+                var html = '';
+                var i;
+                var no = 1;
+                for (i = 0; i < data.data.length; i++) {
+                    if (role_structure != 1 && role_structure != 4) {
+                        if (data.data[i].role_nama == 'Reviewer') {
+                            html += '<option value="' + data.data[i].role_id + '">' + data.data[i]
+                                .role_nama +
+                                '</option>';
+                        }
+                    } else {
+                        html += '<option value="' + data.data[i].role_id + '">' + data.data[i].role_nama +
+                            '</option>';
+                    }
+                }
+                $('#role').html(html);
+            }
+        });
+    }
+</script>
 <!--/ Edit User Modal -->

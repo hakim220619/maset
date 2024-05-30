@@ -83,7 +83,7 @@
                         href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
-                                <div class="avatar-online">
+                                <div class=" avatar-online">
                                     <img width="30px" height="30px"
                                         src="{{ asset('') }}storage/images/users/{{ request()->user()->image }}"
                                         alt class="h-auto rounded-circle">

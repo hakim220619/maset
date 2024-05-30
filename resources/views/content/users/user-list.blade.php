@@ -295,9 +295,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                {{-- @php
-                                    dd(Helper::getRoleStructureJson()[0]);
-                                @endphp --}}
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="role_access">Role Access</label>
                                     <select id="role_accessEdit" name="role_access" class="form-select"
@@ -403,7 +400,6 @@
                         $('#roleEdit').html(html);
                     }
                 });
-
             }
 
             function OpenModalEditUsers(id, nik, nama, email, no_tlp, role_structure, role_access, role, status, alamat) {

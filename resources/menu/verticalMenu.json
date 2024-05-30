@@ -12,7 +12,7 @@
       "name": "Home",
       "icon": "menu-icon tf-icons ti ti-smart-home",
       "slug": "pages-home",
-      "role": "user"
+      "role": "User"
     },
     {
       "url": "/dashboard/user",

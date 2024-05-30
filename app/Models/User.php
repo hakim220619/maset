@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Helpers\Helpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -52,11 +54,20 @@ class User extends Authenticatable
     ];
     public static function GetListuser()
     {
-        $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_nama , ra.ra_nama ,r.role_nama  from users u, role_structure rs, role_access ra, role r 
+        if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_nama , ra.ra_nama ,r.role_nama  from users u, role_structure rs, role_access ra, role r 
         where u.role_structure=rs.rs_id 
         and u.role_access=ra.ra_id 
         and u.role=r.role_id 
         ORDER BY ROW_NUMBER() OVER () asc');
+        } else {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_nama , ra.ra_nama ,r.role_nama  from users u, role_structure rs, role_access ra, role r 
+            where u.role_structure=rs.rs_id 
+            and u.role_access=ra.ra_id 
+            and u.role=r.role_id 
+            and rs.rs_nama != "Super Admin" 
+            ORDER BY ROW_NUMBER() OVER () asc');
+        }
         return $data;
     }
     public static function getProfileById()
