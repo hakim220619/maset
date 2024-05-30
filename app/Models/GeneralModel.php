@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Helpers\Helpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GeneralModel extends Model
@@ -12,8 +14,14 @@ class GeneralModel extends Model
 
     public static function GetListRoleStructure()
     {
-        $data = DB::select('select ROW_NUMBER() OVER () AS no, rs.* from role_structure rs where 1=1
+        if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, rs.* from role_structure rs where 1=1
+            ORDER BY ROW_NUMBER() OVER () asc');
+        } else {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, rs.* from role_structure rs where rs.rs_nama != "Super Admin"
         ORDER BY ROW_NUMBER() OVER () asc');
+        }
+
         return $data;
     }
 

@@ -188,7 +188,7 @@
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label" for="role_structure">Role Structure</label>
                                     <select id="role_structure" name="role_structure" class="select3 form-select"
-                                        aria-label="Default select example">
+                                        aria-label="Default select example" onchange="changeRole()">
                                         <option value="" selected>-- Pilih --</option>
                                         @foreach (Helper::getRoleStructure() as $r)
                                             <option value="{{ $r->rs_id }}">
@@ -199,7 +199,7 @@
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label" for="role_access">Role Access</label>
                                     <select id="role_access" name="role_access" class="select4 form-select"
-                                        aria-label="Default select example">
+                                        onchange="changeRole()" aria-label="Default select example">
                                         <option value="" selected>-- Pilih --</option>
                                         @foreach (Helper::getRoleaccess() as $r)
                                             <option value="{{ $r->ra_id }}">
@@ -287,7 +287,7 @@
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="role_structure">Role Structure</label>
                                     <select id="role_structureEdit" name="role_structure" class="form-select"
-                                        aria-label="Default select example">
+                                        onchange="changeRoleEdit()" aria-label="Default select example">
                                         <option value="" disabled>-- Pilih --</option>
                                         @foreach (Helper::getRoleStructure() as $r)
                                             <option value="{{ $r->rs_id }}">
@@ -295,6 +295,9 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                {{-- @php
+                                    dd(Helper::getRoleStructureJson()[0]);
+                                @endphp --}}
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="role_access">Role Access</label>
                                     <select id="role_accessEdit" name="role_access" class="form-select"
@@ -345,6 +348,64 @@
            
         </script> --}}
         <script>
+            function changeRole() {
+                let role_structure = $('#role_structure').val();
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route('role.roleList') }}',
+                    async: true,
+                    dataType: 'json',
+                    success: function(data) {
+                        var html = '';
+                        var i;
+                        var no = 1;
+                        for (i = 0; i < data.data.length; i++) {
+                            if (role_structure != 1 && role_structure != 4) {
+                                if (data.data[i].role_nama == 'Reviewer') {
+                                    html += '<option value="' + data.data[i].role_id + '">' + data.data[i]
+                                        .role_nama +
+                                        '</option>';
+                                }
+                            } else {
+                                html += '<option value="' + data.data[i].role_id + '">' + data.data[i].role_nama +
+                                    '</option>';
+                            }
+                        }
+
+                        $('#role').html(html);
+                    }
+                });
+            }
+
+            function changeRoleEdit() {
+                let role_structureEdit = $('#role_structureEdit').val();
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route('role.roleList') }}',
+                    async: true,
+                    dataType: 'json',
+                    success: function(data) {
+                        var html = '';
+                        var i;
+                        var no = 1;
+                        for (i = 0; i < data.data.length; i++) {
+                            if (role_structureEdit != 1 && role_structureEdit != 4) {
+                                if (data.data[i].role_nama == 'Reviewer') {
+                                    html += '<option value="' + data.data[i].role_id + '">' + data.data[i]
+                                        .role_nama +
+                                        '</option>';
+                                }
+                            } else {
+                                html += '<option value="' + data.data[i].role_id + '">' + data.data[i].role_nama +
+                                    '</option>';
+                            }
+                        }
+                        $('#roleEdit').html(html);
+                    }
+                });
+
+            }
+
             function OpenModalEditUsers(id, nik, nama, email, no_tlp, role_structure, role_access, role, status, alamat) {
                 $('#editUser').modal('show');
                 $('#idEdit').val(id);

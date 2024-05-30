@@ -13,6 +13,7 @@ class GeneralController extends Controller
 {
     function roleStructureView()
     {
+
         return view('content.general.role-Structure-View');
     }
 
