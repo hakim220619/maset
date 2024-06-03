@@ -41,6 +41,7 @@ Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/admin', [HomePage::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard/user', [HomePage::class, 'index'])->name('admin.user');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/setting/aplikasi', [AplikasiController::class, 'aplikasi'])->name('aplikasi');
 

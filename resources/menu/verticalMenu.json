@@ -4,7 +4,36 @@
       "url": "/dashboard/admin",
       "name": "Home",
       "icon": "menu-icon tf-icons ti ti-smart-home",
-      "slug": "pages-home"
+      "slug": "pages-home",
+      "role": "Admin"
+    },
+    {
+      "url": "/dashboard/user",
+      "name": "Home",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "pages-home",
+      "role": "User"
+    },
+    {
+      "url": "/dashboard/user",
+      "name": "Home",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "pages-home",
+      "role": "Super Admin"
+    },
+    {
+      "url": "masterdata",
+      "icon": "menu-icon tf-icons ti ti-folder",
+      "name": "Master data",
+      "slug": "Master Data",
+      "role": "Super Admin",
+      "submenu": [
+        {
+          "url": "/users",
+          "name": "Users",
+          "slug": "users"
+        }
+      ]
     },
     {
       "url": "object/bangunan",
@@ -17,6 +46,7 @@
       "icon": "menu-icon tf-icons ti ti-folder",
       "name": "Master data",
       "slug": "Master Data",
+      "role": "Admin",
       "submenu": [
         {
           "url": "/users",
@@ -26,10 +56,11 @@
       ]
     },
     {
-      "url": "page-2",
+      "url": "setting",
       "icon": "menu-icon tf-icons ti ti-settings",
       "name": "Setting",
       "slug": "setting",
+      "role": "Super Admin",
       "submenu": [
         {
           "url": "/setting/aplikasi",

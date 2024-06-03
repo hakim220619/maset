@@ -71,9 +71,10 @@
         <!-- User -->
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                <div class="avatar avatar-online">
-                    <img src="{{ Auth::user() ? Auth::user()->profile_photo_url : asset('assets/img/avatars/1.png') }}"
-                        alt class="h-auto rounded-circle">
+                <div class="avatar-online">
+                    <img width="30px" height="10px"
+                        src="{{ asset('') }}storage/images/users/{{ request()->user()->image }}" alt
+                        class="h-auto rounded-circle">
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -82,20 +83,19 @@
                         href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
-                                <div class="avatar avatar-online">
-                                    <img src="{{ Auth::user() ? Auth::user()->profile_photo_url : asset('assets/img/avatars/1.png') }}"
+                                <div class=" avatar-online">
+                                    <img width="30px" height="30px"
+                                        src="{{ asset('') }}storage/images/users/{{ request()->user()->image }}"
                                         alt class="h-auto rounded-circle">
                                 </div>
                             </div>
                             <div class="flex-grow-1">
                                 <span class="fw-medium d-block">
                                     @if (Auth::check())
-                                        {{ Auth::user()->name }}
-                                    @else
-                                        John Doe
+                                        {{ Auth::user()->nama }}
                                     @endif
                                 </span>
-                                <small class="text-muted">Admin</small>
+                                <small class="text-muted">{{ Helper::getProfileById()->ra_nama }}</small>
                             </div>
                         </div>
                     </a>
@@ -117,7 +117,7 @@
                     </a>
                 </li> --}}
                 {{-- @endif --}}
-                <li>
+                {{-- <li>
                     <a class="dropdown-item" href="javascript:void(0);">
                         <span class="d-flex align-items-center align-middle">
                             <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
@@ -126,9 +126,9 @@
                                 class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20">2</span>
                         </span>
                     </a>
-                </li>
+                </li> --}}
                 {{-- @if (Auth::User() && Laravel\Jetstream\Jetstream::hasTeamFeatures()) --}}
-                <li>
+                {{-- <li>
                     <div class="dropdown-divider"></div>
                 </li>
                 <li>
@@ -136,24 +136,24 @@
                 </li>
                 <li>
                     <div class="dropdown-divider"></div>
-                </li>
-                <li>
-                    {{-- <a class="dropdown-item"
+                </li> --}}
+                {{-- <li> --}}
+                {{-- <a class="dropdown-item"
                         href="{{ Auth::user() ? route('teams.show', Auth::user()->currentTeam->id) : 'javascript:void(0)' }}">
                         <i class='ti ti-settings me-2'></i>
                         <span class="align-middle">Team Settings</span>
                     </a> --}}
-                </li>
+                {{-- </li> --}}
                 {{-- @can('create', Laravel\Jetstream\Jetstream::newTeamModel()) --}}
-                <li>
-                    {{-- <a class="dropdown-item" href="{{ route('teams.create') }}">
+                {{-- <li> --}}
+                {{-- <a class="dropdown-item" href="{{ route('teams.create') }}">
                         <i class='ti ti-user me-2'></i>
                         <span class="align-middle">Create New Team</span>
                     </a> --}}
-                </li>
+                {{-- </li> --}}
                 {{-- @endcan --}}
                 {{-- @if (Auth::user()->allTeams()->count() > 1) --}}
-                <li>
+                {{-- <li>
                     <div class="dropdown-divider"></div>
                 </li>
                 <li>
@@ -161,7 +161,7 @@
                 </li>
                 <li>
                     <div class="dropdown-divider"></div>
-                </li>
+                </li> --}}
                 {{-- @endif --}}
                 @if (Auth::user())
                     {{-- @foreach (Auth::user()->allTeams() as $team) --}}

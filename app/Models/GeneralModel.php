@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Helpers\Helpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GeneralModel extends Model
@@ -12,8 +14,14 @@ class GeneralModel extends Model
 
     public static function GetListRoleStructure()
     {
-        $data = DB::select('select ROW_NUMBER() OVER () AS no, rs.* from role_structure rs where 1=1
+        if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, rs.* from role_structure rs where 1=1
+            ORDER BY ROW_NUMBER() OVER () asc');
+        } else {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, rs.* from role_structure rs where rs.rs_id != ' . Helpers::getRoleStructureJson()[3] . '
         ORDER BY ROW_NUMBER() OVER () asc');
+        }
+
         return $data;
     }
 
@@ -49,8 +57,13 @@ class GeneralModel extends Model
 
     public static function GetListRoleAccess()
     {
-        $data = DB::select('select ROW_NUMBER() OVER () AS no, ra.* from role_access ra where 1=1
+        if (Auth::user()->role_access == Helpers::getRoleStructureJson()[2]) {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, ra.* from role_access ra where 1=1
         ORDER BY ROW_NUMBER() OVER () asc');
+        } else {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, ra.* from role_access ra where ra.ra_id != ' . Helpers::getRoleStructureJson()[2] . '
+            ORDER BY ROW_NUMBER() OVER () asc');
+        }
         return $data;
     }
     public static function ProsesAddRoleAccess($request)
@@ -81,8 +94,13 @@ class GeneralModel extends Model
     }
     public static function GetListRole()
     {
-        $data = DB::select('select ROW_NUMBER() OVER () AS no, r.* from role r where 1=1
+        if (Auth::user()->role == Helpers::getRoleStructureJson()[3]) {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, r.* from role r where 1=1
         ORDER BY ROW_NUMBER() OVER () asc');
+        } else {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, r.* from role r where role_id != ' . Helpers::getRoleStructureJson()[3] . '
+        ORDER BY ROW_NUMBER() OVER () asc');
+        }
         return $data;
     }
     public static function ProsesAddRole($request)

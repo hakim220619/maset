@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Config;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -194,6 +195,15 @@ class Helpers
       }
     }
   }
+  public static function getProfileById()
+  {
+    $data = DB::select('select u.*, rs.rs_nama , ra.ra_nama ,r.role_nama  from users u, role_structure rs, role_access ra, role r 
+        where u.role_structure=rs.rs_id 
+        and u.role_access=ra.ra_id 
+        and u.role=r.role_id 
+        and id = ' . Auth::user()->id . '');
+    return $data[0];
+  }
   public static function aplikasi()
   {
     $aplikasi = DB::table('aplikasi')->first();
@@ -201,22 +211,40 @@ class Helpers
   }
   public static function getStatus()
   {
-    $aplikasi = DB::table('status')->get();
-    return $aplikasi;
+    $data = DB::table('status')->get();
+    return $data;
   }
   public static function getRoleStructure()
   {
-    $aplikasi = DB::table('role_structure')->where('rs_status', 'ACTIVE')->get();
-    return $aplikasi;
+    if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
+      $data = DB::table('role_structure')->where('rs_status', 'ACTIVE')->get();
+    } else {
+      $data = DB::table('role_structure')->whereNot('rs_id', Helpers::getRoleStructureJson()[3])->where('rs_status', 'ACTIVE')->get();
+    }
+    return $data;
   }
+  public static function getRoleStructureJson()
+  {
+    $data = ['1', '2', '3', '4'];
+    return $data;
+  }
+
   public static function getRoleaccess()
   {
-    $aplikasi = DB::table('role_access')->get();
-    return $aplikasi;
+    if (Auth::user()->role_access == Helpers::getRoleStructureJson()[2]) {
+      $data = DB::table('role_access')->where('ra_status', 'ACTIVE')->get();
+    } else {
+      $data = DB::table('role_access')->whereNot('ra_id', Helpers::getRoleStructureJson()[2])->where('ra_status', 'ACTIVE')->get();
+    }
+    return $data;
   }
   public static function getRole()
   {
-    $aplikasi = DB::table('role')->get();
-    return $aplikasi;
+    if (Auth::user()->role == Helpers::getRoleStructureJson()[3]) {
+      $data = DB::table('role')->where('role_status', 'ACTIVE')->get();
+    } else {
+      $data = DB::table('role')->whereNot('role_id', Helpers::getRoleStructureJson()[3])->where('role_status', 'ACTIVE')->get();
+    }
+    return $data;
   }
 }
