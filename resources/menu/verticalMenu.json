@@ -39,8 +39,9 @@
       "url": "object/bangunan",
       "name": "Object",
       "icon": "menu-icon tf-icons ti ti-package",
-      "slug": "object"
-    },    
+      "slug": "object",
+      "role": "Admin"
+    },
     {
       "url": "masterdata",
       "icon": "menu-icon tf-icons ti ti-folder",

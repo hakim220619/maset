@@ -11,14 +11,67 @@ document.addEventListener('DOMContentLoaded', function (e) {
     if (formAuthentication) {
       const fv = FormValidation.formValidation(formAuthentication, {
         fields: {
-          username: {
+          nik: {
             validators: {
               notEmpty: {
-                message: 'Please enter username'
+                message: 'Please enter nik'
               },
               stringLength: {
-                min: 6,
-                message: 'Username must be more than 6 characters'
+                min: 16,
+                message: 'nik must be more than 16 characters'
+              }
+            }
+          },
+          name: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter name'
+              },
+              stringLength: {
+                min: 3,
+                message: 'name must be more than 6 characters'
+              }
+            }
+          },
+          role_structure: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter Role Structure'
+              },
+              stringLength: {
+                message: 'Role Structure must be more than 6 characters'
+              }
+            }
+          },
+          image: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter image'
+              },
+              stringLength: {
+                message: 'image must be more than 6 characters'
+              }
+            }
+          },
+          kontak: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter kontak'
+              },
+              stringLength: {
+                min: 10,
+                message: 'kontak must be more than 6 characters'
+              }
+            }
+          },
+          alamat: {
+            validators: {
+              notEmpty: {
+                message: 'Please enter alamat'
+              },
+              stringLength: {
+                min: 5,
+                message: 'alamat must be more than 6 characters'
               }
             }
           },

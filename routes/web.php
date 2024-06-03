@@ -38,6 +38,8 @@ Route::get('/pages/misc-error', [MiscError::class, 'index'])->name('pages-misc-e
 // authentication
 // Route::get('/auth/login-basic', [LoginController::class, 'index'])->name('auth-login-basic');
 Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
+Route::post('/auth/register', [RegisterBasic::class, 'addRegister'])->name('addRegister');
+Route::post('/chekEmail', [GeneralController::class, 'chekEmail'])->name('chekEmail');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/admin', [HomePage::class, 'index'])->name('admin.dashboard');
@@ -91,5 +93,4 @@ Route::middleware(['auth'])->group(function () {
 
     //Bangunan
     Route::get('/object/bangunan', [BangunanController::class, 'bangunan'])->name('bangunan');
-
 });

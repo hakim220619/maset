@@ -5,7 +5,7 @@
 @use '../_bootstrap-extended/include-dark' as dark;
 @import '../_custom-variables/pages';
 
-$authentication-1-inner-max-width: 700px !default;
+$authentication-1-inner-max-width: 400px !default;
 
 .authentication-wrapper {
   display: flex;

@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nama',
+        'name',
         'email',
         'role_access',
         'role_structure',
@@ -54,25 +54,25 @@ class User extends Authenticatable
     ];
     public static function GetListuser()
     {
-        if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
-            $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_nama , ra.ra_nama ,r.role_nama  from users u, role_structure rs, role_access ra, role r 
+        if (Auth::user()->role_structure != Helpers::getRoleStructureJson()[3]) {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name , ra.ra_name ,r.role_name  from users u, role_structure rs, role_access ra, role r 
         where u.role_structure=rs.rs_id 
         and u.role_access=ra.ra_id 
         and u.role=r.role_id 
+        and u.role_structure= ' . Auth::user()->role_structure . '
         ORDER BY ROW_NUMBER() OVER () asc');
         } else {
-            $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_nama , ra.ra_nama ,r.role_nama  from users u, role_structure rs, role_access ra, role r 
+            $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name , ra.ra_name ,r.role_name  from users u, role_structure rs, role_access ra, role r 
             where u.role_structure=rs.rs_id 
             and u.role_access=ra.ra_id 
             and u.role=r.role_id 
-            and rs.rs_nama != "Super Admin" 
             ORDER BY ROW_NUMBER() OVER () asc');
         }
         return $data;
     }
     public static function getProfileById()
     {
-        $data = DB::select('select u.*, rs.rs_nama , ra.ra_nama ,r.role_nama  from users u, role_structure rs, role_access ra, role r 
+        $data = DB::select('select u.*, rs.rs_name , ra.ra_name ,r.role_name  from users u, role_structure rs, role_access ra, role r 
         where u.role_structure=rs.rs_id 
         and u.role_access=ra.ra_id 
         and u.role=r.role_id 
@@ -89,14 +89,14 @@ class User extends Authenticatable
             $image->move(public_path('storage/images/users'), $filename);
             $data = [
                 'nik' => $request->nik,
-                'nama' => $request->nama,
+                'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role_structure' => $request->role_structure,
                 'role_access' => $request->role_access,
                 'role' => $request->role,
                 'status' => $request->status,
-                'no_tlp' => $request->no,
+                'kontak' => $request->no,
                 'alamat' => $request->alamat,
                 'image' => $request->file('image')->getClientOriginalName(),
                 'created_at' => now()
@@ -104,14 +104,51 @@ class User extends Authenticatable
         } else {
             $data = [
                 'nik' => $request->nik,
-                'nama' => $request->nama,
+                'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role_structure' => $request->role_structure,
                 'role_access' => $request->role_access,
                 'role' => $request->role,
                 'status' => $request->status,
-                'no_tlp' => $request->no,
+                'kontak' => $request->no,
+                'alamat' => $request->alamat,
+                'created_at' => now()
+            ];
+        }
+
+        // dd($data);
+        DB::table('users')->insert($data);
+    }
+    public static function ProsesAddUsersRegister($request)
+    {
+        // dd($request);
+        if ($request['image'] != null) {
+            $image = $request->file('image');
+            // dd($getImage->image);
+            $filename = $image->getClientOriginalName();
+            $image->move(public_path('storage/images/users'), $filename);
+            $data = [
+                'nik' => $request->nik,
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role_structure' => $request->role_structure,
+                'status' => 'INACTIVE',
+                'kontak' => $request->kontak,
+                'alamat' => $request->alamat,
+                'image' => $request->file('image')->getClientOriginalName(),
+                'created_at' => now()
+            ];
+        } else {
+            $data = [
+                'nik' => $request->nik,
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role_structure' => $request->role_structure,
+                'status' => 'INACTIVE',
+                'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'created_at' => now()
             ];
@@ -133,13 +170,13 @@ class User extends Authenticatable
             $image->move(public_path('storage/images/users'), $filename);
             $data = [
                 'nik' => $request->nik,
-                'nama' => $request->nama,
+                'name' => $request->name,
                 'email' => $request->email,
                 'role_structure' => $request->role_structure,
                 'role_access' => $request->role_access,
                 'role' => $request->role,
                 'status' => $request->status,
-                'no_tlp' => $request->no_tlp,
+                'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'image' => $request->file('image')->getClientOriginalName(),
                 'updated_at' => now()
@@ -147,13 +184,13 @@ class User extends Authenticatable
         } else {
             $data = [
                 'nik' => $request->nik,
-                'nama' => $request->nama,
+                'name' => $request->name,
                 'email' => $request->email,
                 'role_structure' => $request->role_structure,
                 'role_access' => $request->role_access,
                 'role' => $request->role,
                 'status' => $request->status,
-                'no_tlp' => $request->no_tlp,
+                'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'updated_at' => now()
             ];
@@ -174,13 +211,13 @@ class User extends Authenticatable
             $image->move(public_path('storage/images/users'), $filename);
             $data = [
                 'nik' => $request->nik,
-                'nama' => $request->nama,
+                'name' => $request->name,
                 'email' => $request->email,
                 'role_structure' => $request->role_structure,
                 'role_access' => $request->role_access,
                 'role' => $request->role,
                 'status' => $request->status,
-                'no_tlp' => $request->no_tlp,
+                'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'image' => $request->file('image')->getClientOriginalName(),
                 'updated_at' => now()
@@ -188,13 +225,13 @@ class User extends Authenticatable
         } else {
             $data = [
                 'nik' => $request->nik,
-                'nama' => $request->nama,
+                'name' => $request->name,
                 'email' => $request->email,
                 'role_structure' => $request->role_structure,
                 'role_access' => $request->role_access,
                 'role' => $request->role,
                 'status' => $request->status,
-                'no_tlp' => $request->no_tlp,
+                'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'updated_at' => now()
             ];

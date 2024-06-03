@@ -11,7 +11,7 @@
 @endsection
 
 @section('page-style')
-    @vite(['resources/assets/vendor/scss/pages/page-auth.scss'])
+    @vite(['resources/assets/vendor/scss/pages/page-auth-login.scss'])
 @endsection
 
 @section('vendor-script')

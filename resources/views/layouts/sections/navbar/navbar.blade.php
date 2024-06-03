@@ -95,7 +95,7 @@
                                         {{ Auth::user()->nama }}
                                     @endif
                                 </span>
-                                <small class="text-muted">{{ Helper::getProfileById()->ra_nama }}</small>
+                                <small class="text-muted">{{ Helper::getProfileById()->ra_name }}</small>
                             </div>
                         </div>
                     </a>

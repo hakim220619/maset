@@ -8,10 +8,10 @@
 
 @section('content')
     <h4>Home Page</h4>
-    @if (Helper::getProfileById()->rs_nama == 'Super Admin')
-        <p>{{ Helper::getProfileById()->rs_nama }}</p>
+    @if (Helper::getProfileById()->rs_name == 'Super Admin')
+        <p>{{ Helper::getProfileById()->rs_name }}</p>
     @else
-        <p>{{ Helper::getProfileById()->rs_nama }}/{{ Helper::getProfileById()->ra_nama }}/{{ Helper::getProfileById()->role_nama }}
+        <p>{{ Helper::getProfileById()->rs_name }}/{{ Helper::getProfileById()->ra_name }}/{{ Helper::getProfileById()->role_name }}
         </p>
     @endif
 

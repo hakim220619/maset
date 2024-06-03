@@ -69,12 +69,12 @@ $(function () {
         // columns according to JSON
         { data: 'no' },
         { data: 'nik' },
-        { data: 'nama' },
+        { data: 'name' },
         { data: 'email' },
-        { data: 'rs_nama' },
-        { data: 'ra_nama' },
-        { data: 'role_nama' },
-        { data: 'no_tlp' },
+        { data: 'rs_name' },
+        { data: 'ra_name' },
+        { data: 'role_name' },
+        { data: 'kontak' },
         { data: 'status' },
         { data: 'action' }
       ],
@@ -112,11 +112,11 @@ $(function () {
               "', '" +
               full.nik +
               "', '" +
-              full.nama +
+              full.name +
               "', '" +
               full.email +
               "', '" +
-              full.no_tlp +
+              full.kontak +
               "', '" +
               full.role_structure +
               "', '" +
@@ -493,7 +493,7 @@ $(function () {
   // Add New User Form Validation
   const fv = FormValidation.formValidation(addNewUserForm, {
     fields: {
-      nama: {
+      name: {
         validators: {
           notEmpty: {
             message: 'Please enter fullname'

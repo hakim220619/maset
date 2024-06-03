@@ -21,7 +21,12 @@ class GeneralModel extends Model
             $data = DB::select('select ROW_NUMBER() OVER () AS no, rs.* from role_structure rs where rs.rs_id != ' . Helpers::getRoleStructureJson()[3] . '
         ORDER BY ROW_NUMBER() OVER () asc');
         }
+        return $data;
+    }
+    public static function chekEmail($request)
+    {
 
+        $data = DB::table('users')->where('email', $request->email)->first();
         return $data;
     }
 

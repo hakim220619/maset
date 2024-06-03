@@ -36,16 +36,6 @@ class UsersController extends Controller
             'message' => 'Add Userss Successs',
         ]);
     }
-    function deleteProses($id)
-    {
-        // dd($id);
-        User::ProsesDeletusers($id);
-        // toast('', 'success');
-        return response()->json([
-            'success' => true,
-            'message' => 'Delete Userss Successs',
-        ]);
-    }
     function editProses(Request $request)
     {
         User::ProsesEditUsers($request);
@@ -58,6 +48,16 @@ class UsersController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Update Users Successs',
+        ]);
+    }
+    function deleteProses($id)
+    {
+        // dd($id);
+        User::ProsesDeletusers($id);
+        // toast('', 'success');
+        return response()->json([
+            'success' => true,
+            'message' => 'Delete Userss Successs',
         ]);
     }
 }

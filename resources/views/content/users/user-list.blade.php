@@ -151,8 +151,8 @@
                                         placeholder="330206**" name="userFullname" aria-label="330206**" />
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
-                                    <label class="form-label" for="nama">Nama</label>
-                                    <input type="text" class="form-control" id="nama" name="nama"
+                                    <label class="form-label" for="name">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name"
                                         placeholder="John Doe" name="userFullname" aria-label="John Doe" />
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
@@ -170,7 +170,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
-                                    <label class="form-label" for="no">Contact</label>
+                                    <label class="form-label" for="no">Kontak</label>
                                     <input type="text" id="no" name="no" class="form-control phone-mask"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
                                         placeholder="+62 8579" aria-label="john.doe@example.com" name="no" />
@@ -192,7 +192,7 @@
                                         <option value="" selected>-- Pilih --</option>
                                         @foreach (Helper::getRoleStructure() as $r)
                                             <option value="{{ $r->rs_id }}">
-                                                {{ $r->rs_nama }}</option>
+                                                {{ $r->rs_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -203,7 +203,7 @@
                                         <option value="" selected>-- Pilih --</option>
                                         @foreach (Helper::getRoleaccess() as $r)
                                             <option value="{{ $r->ra_id }}">
-                                                {{ $r->ra_nama }}</option>
+                                                {{ $r->ra_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -214,7 +214,7 @@
                                         <option value="" selected>-- Pilih --</option>
                                         @foreach (Helper::getRole() as $r)
                                             <option value="{{ $r->role_id }}">
-                                                {{ $r->role_nama }}</option>
+                                                {{ $r->role_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -259,8 +259,8 @@
                                         placeholder="330206****" />
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <label class="form-label" for="nama">Nama</label>
-                                    <input type="text" id="namaEdit" name="nama" class="form-control"
+                                    <label class="form-label" for="name">Name</label>
+                                    <input type="text" id="nameEdit" name="name" class="form-control"
                                         placeholder="Doe" />
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -291,7 +291,7 @@
                                         <option value="" disabled>-- Pilih --</option>
                                         @foreach (Helper::getRoleStructure() as $r)
                                             <option value="{{ $r->rs_id }}">
-                                                {{ $r->rs_nama }}</option>
+                                                {{ $r->rs_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -302,7 +302,7 @@
                                         <option value="" disabled>-- Pilih --</option>
                                         @foreach (Helper::getRoleaccess() as $r)
                                             <option value="{{ $r->ra_id }}">
-                                                {{ $r->ra_nama }}</option>
+                                                {{ $r->ra_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -313,7 +313,7 @@
                                         <option value="" disabled>-- Pilih --</option>
                                         @foreach (Helper::getRole() as $r)
                                             <option value="{{ $r->role_id }}">
-                                                {{ $r->role_nama }}</option>
+                                                {{ $r->role_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -358,13 +358,13 @@
                         var no = 1;
                         for (i = 0; i < data.data.length; i++) {
                             if (role_structure != 1 && role_structure != 4) {
-                                if (data.data[i].role_nama == 'Reviewer') {
+                                if (data.data[i].role_name == 'Reviewer') {
                                     html += '<option value="' + data.data[i].role_id + '">' + data.data[i]
-                                        .role_nama +
+                                        .role_name +
                                         '</option>';
                                 }
                             } else {
-                                html += '<option value="' + data.data[i].role_id + '">' + data.data[i].role_nama +
+                                html += '<option value="' + data.data[i].role_id + '">' + data.data[i].role_name +
                                     '</option>';
                             }
                         }
@@ -387,13 +387,13 @@
                         var no = 1;
                         for (i = 0; i < data.data.length; i++) {
                             if (role_structureEdit != 1 && role_structureEdit != 4) {
-                                if (data.data[i].role_nama == 'Reviewer') {
+                                if (data.data[i].role_name == 'Reviewer') {
                                     html += '<option value="' + data.data[i].role_id + '">' + data.data[i]
-                                        .role_nama +
+                                        .role_name +
                                         '</option>';
                                 }
                             } else {
-                                html += '<option value="' + data.data[i].role_id + '">' + data.data[i].role_nama +
+                                html += '<option value="' + data.data[i].role_id + '">' + data.data[i].role_name +
                                     '</option>';
                             }
                         }
@@ -419,7 +419,7 @@
         <script>
             function SaveUsers() {
                 let nik = $('#nik').val();
-                let nama = $('#nama').val();
+                let name = $('#name').val();
                 let email = $('#email').val();
                 let password = $('#password').val();
                 let no = $('#no').val();
@@ -433,7 +433,7 @@
                 // var file_data = object.get(0).files[i];
                 var other_data = $('form').serialize();
                 fd.append('nik', nik);
-                fd.append('nama', nama);
+                fd.append('name', name);
                 fd.append('email', email);
                 fd.append('password', password);
                 fd.append('no', no);
@@ -444,7 +444,7 @@
                 fd.append('alamat', alamat);
                 fd.append('image', $('input[type=file]')[0].files[0]);
 
-                if (nik === '' || nama === '' || email === '' || password === '' || no === '' || status === '' ||
+                if (nik === '' || name === '' || email === '' || password === '' || no === '' || status === '' ||
                     role_structure === '' || role_access === '' || role === '' || alamat === '') {
                     console.log('error');
                 } else {
@@ -459,7 +459,7 @@
                         dataType: 'json',
                         type: 'POST',
                         success: function(data) {
-                            console.log(data);
+                            // console.log(data);
                             if (data.success == true) {
                                 $('#openModalAddUsers').modal('hide');
                                 Swal.fire({
@@ -486,7 +486,7 @@
             function EditUsers() {
                 let id = $('#idEdit').val();
                 let nik = $('#nikEdit').val();
-                let nama = $('#namaEdit').val();
+                let name = $('#nameEdit').val();
                 let email = $('#emailEdit').val();
                 let no = $('#noEdit').val();
                 let status = $('#statusEdit').val();
@@ -500,7 +500,7 @@
                 var other_data = $('form').serialize();
                 fd.append('id', id);
                 fd.append('nik', nik);
-                fd.append('nama', nama);
+                fd.append('name', name);
                 fd.append('email', email);
                 fd.append('no_tlp', no);
                 fd.append('status', status);
@@ -510,7 +510,7 @@
                 fd.append('alamat', alamat);
                 fd.append('image', $('#imageEdit')[0].files[0]);
                 // console.log(fd);
-                if (nik === '' || nama === '' || email === '' || no === '' || status === '' ||
+                if (nik === '' || name === '' || email === '' || no === '' || status === '' ||
                     role_structure === '' || role_access === '' || role === '' || alamat === '') {
                     console.log('error');
                 } else {
@@ -525,7 +525,7 @@
                         dataType: 'json',
                         type: 'POST',
                         success: function(data) {
-                            console.log(data);
+                            // console.log(data);
                             if (data.success == true) {
                                 $('#editUser').modal('hide');
                                 Swal.fire({

@@ -59,7 +59,7 @@
                     }
                 @endphp
                 {{-- main menu --}}
-                @if ($menu->role == Helper::getProfileById()->ra_nama)
+                @if ($menu->role == Helper::getProfileById()->ra_name)
                     <li class="menu-item {{ $activeClass }}">
                         <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0);' }}"
                             class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}"

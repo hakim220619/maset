@@ -13,7 +13,6 @@ class GeneralController extends Controller
 {
     function roleStructureView()
     {
-
         return view('content.general.role-Structure-View');
     }
 
@@ -26,6 +25,23 @@ class GeneralController extends Controller
             'message' => 'Data',
             'data' => $data,
         ]);
+    }
+    function chekEmail(Request $request)
+    {
+        dd($request->email);
+        $data = GeneralModel::chekEmail($request);
+        if (isset($data)) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Data',
+                'data' => $data,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Kosong',
+            ]);
+        }
     }
 
     function addRoleStructureProses(Request $request)
