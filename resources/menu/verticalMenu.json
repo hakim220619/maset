@@ -7,6 +7,12 @@
       "slug": "pages-home"
     },
     {
+      "url": "object/bangunan",
+      "name": "Object",
+      "icon": "menu-icon tf-icons ti ti-package",
+      "slug": "object"
+    },    
+    {
       "url": "masterdata",
       "icon": "menu-icon tf-icons ti ti-folder",
       "name": "Master data",

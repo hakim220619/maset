@@ -8,6 +8,7 @@ use App\Http\Controllers\pages\Page2;
 use App\Http\Controllers\pages\MiscError;
 use App\Http\Controllers\authentications\LoginController;
 use App\Http\Controllers\authentications\RegisterBasic;
+use App\Http\Controllers\Bangunan\BangunanController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\Profile\ProfileController;
@@ -86,4 +87,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/security', [ProfileController::class, 'viewSecurity'])->name('profile.security');
     Route::get('/profile/suspended', [ProfileController::class, 'suspended'])->name('profile.suspended');
     Route::post('/profile/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+
+    //Bangunan
+    Route::get('/object/bangunan', [BangunanController::class, 'bangunan'])->name('bangunan');
+
 });
