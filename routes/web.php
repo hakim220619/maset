@@ -8,6 +8,7 @@ use App\Http\Controllers\pages\Page2;
 use App\Http\Controllers\pages\MiscError;
 use App\Http\Controllers\authentications\LoginController;
 use App\Http\Controllers\authentications\RegisterBasic;
+use App\Http\Controllers\authentications\RegisterController;
 use App\Http\Controllers\Bangunan\BangunanController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\General\GeneralController;
@@ -37,9 +38,10 @@ Route::get('/pages/misc-error', [MiscError::class, 'index'])->name('pages-misc-e
 
 // authentication
 // Route::get('/auth/login-basic', [LoginController::class, 'index'])->name('auth-login-basic');
-Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
-Route::post('/auth/register', [RegisterBasic::class, 'addRegister'])->name('addRegister');
-Route::post('/chekEmail', [GeneralController::class, 'chekEmail'])->name('chekEmail');
+Route::get('/auth/register-view', [RegisterController::class, 'index'])->name('auth-register-view');
+Route::post('/auth/register', [RegisterController::class, 'addRegister'])->name('addRegister');
+Route::post('/checkEmail', [GeneralController::class, 'checkEmail'])->name('checkEmail');
+Route::post('/checkNik', [GeneralController::class, 'checkNik'])->name('checkNik');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/admin', [HomePage::class, 'index'])->name('admin.dashboard');

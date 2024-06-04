@@ -23,11 +23,21 @@ class GeneralModel extends Model
         }
         return $data;
     }
-    public static function chekEmail($request)
+    public static function checkEmail($request)
     {
 
         $data = DB::table('users')->where('email', $request->email)->first();
-        return $data;
+        if (isset($data->email)) {
+            return $data->email;
+        }
+    }
+    public static function checkNik($request)
+    {
+
+        $data = DB::table('users')->where('nik', $request->nik)->first();
+        if (isset($data->nik)) {
+            return $data->nik;
+        }
     }
 
     public static function ProsesAddRoleStructure($request)

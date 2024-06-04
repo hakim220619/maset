@@ -25,6 +25,13 @@ class LoginController extends Controller
     ]);
     if (Auth::attempt(['email' => $request->email_username, 'password' => $request->password])) {
       $session = User::where('email', $request->email_username)->first();
+      // dd($session->status);
+      if ($session->status != 'ACTIVE') {
+        return back()->withInput()->withErrors([
+          'status' => 'Email sedang tidak aktif!!',
+          // 'password' => 'Wrong password',
+        ]);
+      }
       // dd($session);
       Session::put('full_name', $session->full_name);
 

@@ -42,8 +42,13 @@
                             </a>
                         </div>
                         <!-- /Logo -->
-                        <h4 class="mb-1 pt-2">Welcome to {{ $aplikasi->judul }}! 👋</h4>
+                        <h4 class="mb-1 pt-2">Welcome to {{ $aplikasi->title }}! 👋</h4>
                         <p class="mb-4">Please sign-in to your account</p>
+                        @if ($errors->has('status'))
+                            <span class="" style="color: red">
+                                <strong>{{ $errors->first('status') }}</strong>
+                            </span>
+                        @endif
 
                         <form id="formAuthentication" class="mb-3" action="{{ url('/login_action') }}" method="POST">
                             @csrf
@@ -94,7 +99,7 @@
 
                         <p class="text-center">
                             <span>New on our platform?</span>
-                            <a href="{{ url('auth/register-basic') }}">
+                            <a href="{{ url('auth/register-view') }}">
                                 <span>Create an account</span>
                             </a>
                         </p>

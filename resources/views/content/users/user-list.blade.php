@@ -269,8 +269,8 @@
                                         placeholder="example@domain.com" />
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <label class="form-label" for="no_tlp">Contact</label>
-                                    <input type="text" id="noEdit" name="no_tlp" class="form-control"
+                                    <label class="form-label" for="kontak">Contact</label>
+                                    <input type="text" id="kontakEdit" name="kontak" class="form-control"
                                         placeholder="Doe" />
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -402,13 +402,13 @@
                 });
             }
 
-            function OpenModalEditUsers(id, nik, nama, email, no_tlp, role_structure, role_access, role, status, alamat) {
+            function OpenModalEditUsers(id, nik, name, email, kontak, role_structure, role_access, role, status, alamat) {
                 $('#editUser').modal('show');
                 $('#idEdit').val(id);
                 $('#nikEdit').val(nik);
-                $('#namaEdit').val(nama);
+                $('#nameEdit').val(name);
                 $('#emailEdit').val(email);
-                $('#noEdit').val(no_tlp);
+                $('#kontakEdit').val(kontak);
                 $('#statusEdit').val(status);
                 $('#role_structureEdit').val(role_structure);
                 $('#role_accessEdit').val(role_access);
@@ -488,7 +488,7 @@
                 let nik = $('#nikEdit').val();
                 let name = $('#nameEdit').val();
                 let email = $('#emailEdit').val();
-                let no = $('#noEdit').val();
+                let kontak = $('#kontakEdit').val();
                 let status = $('#statusEdit').val();
                 let role_structure = $('#role_structureEdit').val();
                 let role_access = $('#role_accessEdit').val();
@@ -502,7 +502,7 @@
                 fd.append('nik', nik);
                 fd.append('name', name);
                 fd.append('email', email);
-                fd.append('no_tlp', no);
+                fd.append('kontak', kontak);
                 fd.append('status', status);
                 fd.append('role_structure', role_structure);
                 fd.append('role_access', role_access);
@@ -510,7 +510,7 @@
                 fd.append('alamat', alamat);
                 fd.append('image', $('#imageEdit')[0].files[0]);
                 // console.log(fd);
-                if (nik === '' || name === '' || email === '' || no === '' || status === '' ||
+                if (nik === '' || name === '' || email === '' || kontak === '' || status === '' ||
                     role_structure === '' || role_access === '' || role === '' || alamat === '') {
                     console.log('error');
                 } else {

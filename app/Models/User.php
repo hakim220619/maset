@@ -55,12 +55,13 @@ class User extends Authenticatable
     public static function GetListuser()
     {
         if (Auth::user()->role_structure != Helpers::getRoleStructureJson()[3]) {
-            $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name , ra.ra_name ,r.role_name  from users u, role_structure rs, role_access ra, role r 
-        where u.role_structure=rs.rs_id 
-        and u.role_access=ra.ra_id 
-        and u.role=r.role_id 
-        and u.role_structure= ' . Auth::user()->role_structure . '
-        ORDER BY ROW_NUMBER() OVER () asc');
+            $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name,
+            IF(u.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=u.role_access) ) as ra_name, 
+            IF(u.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=u.role) ) as role_name 
+            from users u, role_structure rs
+            where u.role_structure=rs.rs_id 
+            and u.role_structure= ' . Auth::user()->role_structure . '
+            ORDER BY ROW_NUMBER() OVER () asc');
         } else {
             $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name , ra.ra_name ,r.role_name  from users u, role_structure rs, role_access ra, role r 
             where u.role_structure=rs.rs_id 

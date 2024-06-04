@@ -26,10 +26,27 @@ class GeneralController extends Controller
             'data' => $data,
         ]);
     }
-    function chekEmail(Request $request)
+    function checkEmail(Request $request)
     {
-        dd($request->email);
-        $data = GeneralModel::chekEmail($request);
+        // dd($request->email);
+        $data = GeneralModel::checkEmail($request);
+        if (isset($data)) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Data',
+                'data' => $data,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Kosong',
+            ]);
+        }
+    }
+    function checkNik(Request $request)
+    {
+        // dd($request->email);
+        $data = GeneralModel::checkNik($request);
         if (isset($data)) {
             return response()->json([
                 'success' => true,

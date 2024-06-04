@@ -31,21 +31,21 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="no">Telephone</label>
                                     <input type="text" class="form-control" id="no" name="no"
-                                        value="{{ $aplikasi->no }}" placeholder="Masukan Telephone" required />
+                                        value="{{ $aplikasi->kontak }}" placeholder="Masukan Telephone" required />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label" for="judul">Judul</label>
-                                    <input type="text" class="form-control" id="judul" name="judul"
-                                        value="{{ $aplikasi->judul }}" placeholder="Masukan judul" required />
+                                    <label class="form-label" for="title">Title</label>
+                                    <input type="text" class="form-control" id="title" name="title"
+                                        value="{{ $aplikasi->title }}" placeholder="Masukan Title" required />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label" for="nama">Nama Aplikasi</label>
-                                    <input type="text" class="form-control" id="nama" name="nama"
-                                        value="{{ $aplikasi->nama }}" placeholder="Masukan Nama Aplikasi" required />
+                                    <label class="form-label" for="name">Nama Aplikasi</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        value="{{ $aplikasi->name }}" placeholder="Masukan Name Aplikasi" required />
                                 </div>
                             </div>
                             <div class="col-md-4">

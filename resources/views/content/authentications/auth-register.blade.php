@@ -49,22 +49,26 @@
                                 <div class="mb-3 col-12 col-md-6">
                                     <label for="nik" class="form-label">Nik</label>
                                     <input type="text" class="form-control" id="nik" name="nik" maxlength="16"
-                                        placeholder="Enter your Nik" autofocus>
+                                        onchange="chekNikAktif(this.value)" placeholder="Enter your Nik" autofocus
+                                        value="{{ old('nik') }}">
+                                    <span class="invalid-feedback" id="notifNik"></span>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
                                     <label for="name" class="form-label">Full Name</label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        placeholder="Enter your name" autofocus>
+                                        value="{{ old('name') }}" placeholder="Enter your name" autofocus>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="text" class="form-control" id="email" name="email"
                                         onchange="chekEmailAktif(this.value)" placeholder="Enter your email">
+                                    <span class="invalid-feedback" id="notifEmail"></span>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6 form-password-toggle">
                                     <label class="form-label" for="password">Password</label>
                                     <div class="input-group input-group-merge">
                                         <input type="password" id="password" class="form-control" name="password"
+                                            value="{{ old('password') }}"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                             aria-describedby="password" />
                                         <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
@@ -91,12 +95,13 @@
                                     <input type="text" id="kontak" name="kontak" class="form-control phone-mask"
                                         maxlength="15"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
-                                        placeholder="+62 8579" aria-label="john.doe@example.com" />
+                                        placeholder="+62 8579" aria-label="john.doe@example.com"
+                                        value="{{ old('kontak') }}" />
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label" for="alamat">Alamat</label>
                                     <input type="text" class="form-control" id="alamat" placeholder="Jl hr**"
-                                        name="alamat" aria-label="Jl hr**" />
+                                        value="{{ old('alamat') }}" name="alamat" aria-label="Jl hr**" />
                                 </div>
 
                                 <div class="mb-3 col-12 col-md-6">
@@ -116,7 +121,7 @@
 
                             <p class="text-center">
                                 <span>Already have an account?</span>
-                                <a href="{{ url('auth/login-basic') }}">
+                                <a href="{{ url('/') }}">
                                     <span>Sign in instead</span>
                                 </a>
                             </p>
@@ -149,36 +154,45 @@
         function chekEmailAktif(email) {
             console.log(email);
             $.ajax({
-                url: '/chekEmail',
+                url: '/checkEmail',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {
                     email: email
                 },
-                contentType: false,
-                processData: false,
                 dataType: 'json',
                 type: 'POST',
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
                     if (data.success == true) {
-                        // $('#openModalAddUsers').modal('hide');
-                        // Swal.fire({
-                        //     width: 400,
-                        //     padding: 7,
-                        //     position: 'bottom-right',
-                        //     toast: true,
-                        //     icon: 'success',
-                        //     title: 'Success',
-                        //     text: `${data.message}`,
-                        //     showConfirmButton: false,
-                        //     timer: 3000,
-                        //     timerProgressBar: true,
-                        //     backgroundColor: '#28a745',
-                        //     titleColor: '#fff',
-                        // });
-                        // $('.datatables-users').DataTable().ajax.reload();
+                        $('#notifEmail').html('<strong>email is already to use </strong>')
+                    } else {
+                        $('#notifEmail').html('')
+                    }
+                }
+            });
+
+        }
+
+        function chekNikAktif(nik) {
+            // console.log(nik);
+            $.ajax({
+                url: '/checkNik',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    nik: nik
+                },
+                dataType: 'json',
+                type: 'POST',
+                success: function(data) {
+                    // console.log(data);
+                    if (data.success == true) {
+                        $('#notifNik').html('<strong>Nik is already to use </strong>')
+                    } else {
+                        $('#notifNik').html('')
                     }
                 }
             });

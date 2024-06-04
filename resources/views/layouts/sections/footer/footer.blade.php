@@ -17,7 +17,7 @@
                 </script>, made with ❤️ by {{ $aplikasi->pemilik }}
             </div>
             <div class="d-none d-lg-inline-block">
-                <a href="#" class="footer-link me-4">Whatsapp: {{ $aplikasi->no }}</a>
+                <a href="#" class="footer-link me-4">Access: {{ Helper::getProfileById()->rs_name }}</a>
                 <a href="#" class="footer-link me-4">Versi: {{ $aplikasi->versi }}</a>
 
             </div>
