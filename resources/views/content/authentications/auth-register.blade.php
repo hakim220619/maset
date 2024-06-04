@@ -95,8 +95,10 @@
                                     <input type="text" id="kontak" name="kontak" class="form-control phone-mask"
                                         maxlength="15"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
-                                        placeholder="+62 8579" aria-label="john.doe@example.com"
-                                        value="{{ old('kontak') }}" />
+                                        placeholder="+62 8579" aria-label="john.doe@example.com" value="{{ old('kontak') }}"
+                                        onchange="chekKontakAktif(this.value)" />
+
+                                    <span class="invalid-feedback" id="notifKontak"></span>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label" for="alamat">Alamat</label>
@@ -114,9 +116,29 @@
                                         </label>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary d-grid w-100" type="submit">
+                                <div class="demo-inline-spacing">
+                                    <div class="hideButtonSend">
+                                        <button type="submit" class="btn btn-primary" id="signup" disabled>
+                                            </span><i class="fa-regular fa-paper-plane me-1"></i>
+                                            Sign up</button>
+                                        <button type="button" class="btn btn-danger" onclick="refreshAll()"><span
+                                                class="fa-solid fa-arrows-rotate me-1"></span>Refresh</button>
+                                    </div>
+
+                                    <div class="showButtonSend" hidden><button class="btn btn-primary" type="button"
+                                            disabled>
+                                            <span class="spinner-border me-1" role="status" aria-hidden="true"></span>
+                                            Loading...
+                                        </button>
+                                        &nbsp;<button type="button" class="btn btn-danger" onclick="refreshAll()"><span
+                                                class="fa-solid fa-arrows-rotate me-1"></span>Refresh</button></div>
+
+
+
+                                </div>
+                                {{-- <button class="btn btn-primary d-grid w-100" type="submit" disabled>
                                     Sign up
-                                </button>
+                                </button> --}}
                             </form>
 
                             <p class="text-center">
@@ -126,7 +148,7 @@
                                 </a>
                             </p>
 
-                            <div class="divider my-4">
+                            {{-- <div class="divider my-4">
                                 <div class="divider-text">or</div>
                             </div>
 
@@ -142,7 +164,7 @@
                                 <a href="javascript:;" class="btn btn-icon btn-label-twitter">
                                     <i class="tf-icons fa-brands fa-twitter fs-5"></i>
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <!-- Register Card -->
@@ -151,6 +173,18 @@
         </div>
     </div>
     <script>
+        function refreshAll() {
+            $('#nik').val('');
+            $('#name').val('');
+            $('#email').val('');
+            $('#kontak').val('');
+            $('#password').val('');
+            $('#role_structure').val('');
+            $('#image').val('');
+            $('#alamat').val('');
+            $('#signup').attr('disabled', true)
+        }
+
         function chekEmailAktif(email) {
             console.log(email);
             $.ajax({
@@ -167,8 +201,13 @@
                     // console.log(data);
                     if (data.success == true) {
                         $('#notifEmail').html('<strong>email is already to use </strong>')
+                        $('#signup').attr('disabled', true)
                     } else {
                         $('#notifEmail').html('')
+                        if ($('#nik').val() !== '') {
+                            $('#signup').attr('disabled', false)
+                        }
+
                     }
                 }
             });
@@ -191,8 +230,42 @@
                     // console.log(data);
                     if (data.success == true) {
                         $('#notifNik').html('<strong>Nik is already to use </strong>')
+                        $('#signup').attr('disabled', true)
                     } else {
                         $('#notifNik').html('')
+                        if ($('#email').val() !== '') {
+                            $('#signup').attr('disabled', false)
+                        }
+
+                    }
+                }
+            });
+
+        }
+
+        function chekKontakAktif(kontak) {
+            // console.log(nik);
+            $.ajax({
+                url: '/checkKontak',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    kontak: kontak
+                },
+                dataType: 'json',
+                type: 'POST',
+                success: function(data) {
+                    // console.log(data);
+                    if (data.success == true) {
+                        $('#notifKontak').html('<strong>Kontak is already to use </strong>')
+                        $('#signup').attr('disabled', true)
+                    } else {
+                        $('#notifKontak').html('')
+                        if ($('#email').val() !== '' && $('#nik').val() !== '') {
+                            $('#signup').attr('disabled', false)
+                        }
+
                     }
                 }
             });

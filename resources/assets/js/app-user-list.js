@@ -301,13 +301,17 @@ $(function () {
           ]
         },
         {
-          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add New User</span>',
+          text: '<i class="ti ti-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Add New User</span>',
           className: 'add-new btn btn-primary waves-effect waves-light',
           attr: {
             'data-bs-toggle': 'modal',
             'data-bs-target': '#openModalAddUsers'
           }
         }
+        // {
+        //   text: '<i class="fa-solid fa-arrows-rotate me-1"></i><span class="d-none d-sm-inline-block">Refresh</span>',
+        //   className: 'add-new btn btn-danger waves-effect waves-light'
+        // }
       ],
       // For responsive popup
       // responsive: {

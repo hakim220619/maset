@@ -10,6 +10,7 @@ use App\Http\Controllers\authentications\LoginController;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\authentications\RegisterController;
 use App\Http\Controllers\Bangunan\BangunanController;
+use App\Http\Controllers\Broadcast\BroadcastController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\Profile\ProfileController;
@@ -42,6 +43,7 @@ Route::get('/auth/register-view', [RegisterController::class, 'index'])->name('a
 Route::post('/auth/register', [RegisterController::class, 'addRegister'])->name('addRegister');
 Route::post('/checkEmail', [GeneralController::class, 'checkEmail'])->name('checkEmail');
 Route::post('/checkNik', [GeneralController::class, 'checkNik'])->name('checkNik');
+Route::post('/checkKontak', [GeneralController::class, 'checkKontak'])->name('checkKontak');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/admin', [HomePage::class, 'index'])->name('admin.dashboard');
@@ -57,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/setting/addRoleStructureProses', [GeneralController::class, 'addRoleStructureProses'])->name('role.addRoleStructureProses');
     Route::post('/setting/updateRoleStructureProses', [GeneralController::class, 'updateRoleStructureProses'])->name('role.updateRoleStructureProses');
     Route::get('/setting/deleteRoleStructureProses/{id}', [GeneralController::class, 'deleteRoleStructureProses'])->name('role.deleteRoleStructureProses');
-
+    //Role Access
     Route::get('/setting/roleAccess', [GeneralController::class, 'roleAccessView'])->name('role.roleAccessView');
     Route::get('/setting/roleAccessList', [GeneralController::class, 'roleAccessList'])->name('role.roleAccessList');
     Route::post('/setting/addRoleAccessProses', [GeneralController::class, 'addRoleAccessProses'])->name('role.addRoleAccessProses');
@@ -76,7 +78,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    //Profile
+    //Users
     //tanggal 5-21-2024
     Route::get('/users', [UsersController::class, 'users'])->name('users');
     Route::get('/users/list', [UsersController::class, 'userList'])->name('users.userList');
@@ -95,4 +97,9 @@ Route::middleware(['auth'])->group(function () {
 
     //Bangunan
     Route::get('/object/bangunan', [BangunanController::class, 'bangunan'])->name('bangunan');
+
+
+    //Broadcast
+    Route::get('/broadcast', [BroadcastController::class, 'broadcast'])->name('broadcast');
+    Route::get('/sendMessage', [BroadcastController::class, 'sendMessage'])->name('broadcast.sendMessage');
 });

@@ -60,6 +60,23 @@ class GeneralController extends Controller
             ]);
         }
     }
+    function checkKontak(Request $request)
+    {
+        // dd($request->email);
+        $data = GeneralModel::checkKontak($request);
+        if (isset($data)) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Data',
+                'data' => $data,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Kosong',
+            ]);
+        }
+    }
 
     function addRoleStructureProses(Request $request)
     {

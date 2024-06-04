@@ -22,6 +22,20 @@
       "role": "Super Admin"
     },
     {
+      "url": "/broadcast",
+      "name": "Broadcast",
+      "icon": "menu-icon tf-icons fab fa-whatsapp",
+      "slug": "broadcast",
+      "role": "Admin"
+    },
+    {
+      "url": "/broadcast",
+      "name": "Broadcast",
+      "icon": "menu-icon tf-icons fab fa-whatsapp",
+      "slug": "broadcast",
+      "role": "Super Admin"
+    },
+    {
       "url": "masterdata",
       "icon": "menu-icon tf-icons ti ti-folder",
       "name": "Master data",

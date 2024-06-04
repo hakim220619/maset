@@ -39,6 +39,14 @@ class GeneralModel extends Model
             return $data->nik;
         }
     }
+    public static function checkKontak($request)
+    {
+
+        $data = DB::table('users')->where('kontak', $request->kontak)->first();
+        if (isset($data->kontak)) {
+            return $data->kontak;
+        }
+    }
 
     public static function ProsesAddRoleStructure($request)
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\authentications;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,31 +19,36 @@ class RegisterController extends Controller
   }
   function addRegister(Request $request)
   {
-    // $validator = $this->validate($request, [
-    //   'email' => 'required|email|max:255|unique:users'
-    // ]);
-    $u = User::where('email', $request->email)->first();
-    // dd($u);
+
     $input = $request->all();
     $rules = [
       'name' => 'required|max:64',
       'email' => 'required|email|max:255|unique:users,email, ' . $request->email,
       'nik' => 'required|unique:users,nik,' . $request->nik
     ];
-    // $messages = [
-    //   'email.required' => 'El Email es obligatorio',
-    //   'email.max' => 'El Email no debe exceder los 128 caracteres',
-    //   'email.unique' => 'Ya existe un usuario con este Email',
-    //   'name.required' => 'El nombre es obligatorio',
-    //   'name.max' => 'El Email no debe exceder los 64 caracteres',
-    //   'role.required' => 'El Rol es obligatorio',
-    // ];
+
     $validator = Validator::make($input, $rules);
     if ($validator->fails()) {
       return redirect('/auth/register-view')->withErrors($validator)->withInput();
     } else {
-      User::ProsesAddUsersRegister($request);
-      // toast('', 'success');
+      $request['message'] = "*Aktivasi Akun Pengguna*
+Halo " . $request->name . ",
+
+Kami senang memberitahu Anda bahwa akun Anda telah berhasil dibuat di platform kami. Untuk melanjutkan, Anda perlu mengaktifkan akun Anda dengan langkah-langkah berikut:
+
+1. Klik Tautan Aktivasi: [Tambahkan tautan aktivasi di sini]
+
+2. Verifikasi Informasi Anda: Setelah mengklik tautan di atas, Anda akan diarahkan untuk memverifikasi informasi pribadi Anda.
+
+3. Mulai Menggunakan Akun Anda: Setelah verifikasi selesai, Anda dapat masuk dan mulai menikmati layanan kami.
+
+Jika Anda mengalami kesulitan atau memiliki pertanyaan lebih lanjut, jangan ragu untuk menghubungi tim dukungan kami melalui email di [alamat email dukungan] atau melalui [nomor telepon dukungan].
+
+Terima kasih telah bergabung dengan kami!
+
+Salam,
+[Tim Dukungan]";
+      Helpers::sendMessageAll($request);
       toast('', 'success');
       return redirect('/')->with('success', 'Users Successs Added!');
     }
