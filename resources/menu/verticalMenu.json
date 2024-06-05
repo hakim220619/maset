@@ -50,12 +50,20 @@
       ]
     },
     {
-      "url": "object/bangunan",
-      "name": "Object",
+      "url": "object",
       "icon": "menu-icon tf-icons ti ti-package",
-      "slug": "object",
-      "role": "Admin"
+      "name": "Object",
+      "slug": "Object",
+      "role": "Admin",
+      "submenu": [
+        {
+          "url": "object/bangunan",
+          "name": "Tanah dan Bangunan",
+          "slug": "bangunan"
+        }
+      ]
     },
+   
     {
       "url": "masterdata",
       "icon": "menu-icon tf-icons ti ti-folder",

@@ -43,7 +43,7 @@ $configData = Helper::appClasses();
                   <use xlink:href="{{asset('assets/svg/icons/form-wizard-account.svg#wizardAccount')}}"></use>
                 </svg>
               </span>
-              <span class="bs-stepper-label">Account Details</span>
+              <span class="bs-stepper-label">Step 1</span>
             </button>
           </div>
           <div class="line">
@@ -56,7 +56,7 @@ $configData = Helper::appClasses();
                   <use xlink:href="{{asset('assets/svg/icons/form-wizard-personal.svg#wizardPersonal')}}"></use>
                 </svg>
               </span>
-              <span class="bs-stepper-label">Personal Info</span>
+              <span class="bs-stepper-label">Step 2</span>
             </button>
           </div>
           <div class="line">
@@ -69,7 +69,7 @@ $configData = Helper::appClasses();
                   <use xlink:href="{{asset('assets/svg/icons/form-wizard-address.svg#wizardAddress')}}"></use>
                 </svg>
               </span>
-              <span class="bs-stepper-label">Address</span>
+              <span class="bs-stepper-label">Step 3</span>
             </button>
           </div>
           <div class="line">
@@ -82,7 +82,7 @@ $configData = Helper::appClasses();
                   <use xlink:href="{{asset('assets/svg/icons/form-wizard-social-link.svg#wizardSocialLink')}}"></use>
                 </svg>
               </span>
-              <span class="bs-stepper-label">Social Links</span>
+              <span class="bs-stepper-label">Step 4</span>
             </button>
           </div>
           <div class="line">
@@ -104,8 +104,8 @@ $configData = Helper::appClasses();
             <!-- Account Details -->
             <div id="account-details" class="content">
               <div class="content-header mb-3">
-                <h6 class="mb-0">Account Details</h6>
-                <small>Enter Your Account Details.</small>
+                <h6 class="mb-0">Step 1</h6>
+                <small>Enter Step 1.</small>
               </div>
               <div class="row g-3">
                 <div class="col-sm-6">
@@ -284,8 +284,8 @@ $configData = Helper::appClasses();
             <!-- Personal Info -->
             <div id="personal-info" class="content">
               <div class="content-header mb-3">
-                <h6 class="mb-0">Personal Info</h6>
-                <small>Enter Your Personal Info.</small>
+                <h6 class="mb-0">Step 2</h6>
+                <small>Enter Step 2.</small>
               </div>
               <div class="row g-3">
                 <hr>
@@ -580,8 +580,8 @@ $configData = Helper::appClasses();
             <!-- Address -->
             <div id="address" class="content">
               <div class="content-header mb-3">
-                <h6 class="mb-0">Address</h6>
-                <small>Enter Your Address.</small>
+                <h6 class="mb-0">Step 3</h6>
+                <small>Enter Step 3.</small>
               </div>
               <div class="row g-3">
                 <div class="col-sm-6">
@@ -651,8 +651,271 @@ $configData = Helper::appClasses();
                         <span class="switch-off"></span>
                     </span>
                     </label>
+                </div>   
+                <hr>    
+                <div>
+                    <h5>Tambah Plafon Eksisting</h5>
+                </div>  
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tampe_tipe_material">Tipe Material</label>
+                    </div>
+                    <label class="switch" for="tampe_tipe_material">
+                    <input type="checkbox" id="tampe_tipe_material" name="tampe_tipe_material" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <label class="form-label" for="tampe_bobot">Bobot(%)</label>
+                    <input type="number" id="tampe_bobot" name="tampe_bobot" class="form-control" placeholder="73" />
+                </div>   
+                <hr>    
+                <div>
+                    <h5>Tipe Dinding Existing</h5>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tde_batako">Batako</label>
+                    </div>
+                    <label class="switch" for="tde_batako">
+                    <input type="checkbox" id="tde_batako" name="tde_batako" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div>   
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tde_bata_merah">Bata Merah</label>
+                    </div>
+                    <label class="switch" for="tde_bata_merah">
+                    <input type="checkbox" id="tde_bata_merah" name="tde_bata_merah" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div>   
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tde_bata_ringan">Bata Ringan</label>
+                    </div>
+                    <label class="switch" for="tde_bata_ringan">
+                    <input type="checkbox" id="tde_bata_ringan" name="tde_bata_ringan" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div>   
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tde_gypsumboard">Partisi Gypsumboard 2 Muka</label>
+                    </div>
+                    <label class="switch" for="tde_gypsumboard">
+                    <input type="checkbox" id="tde_gypsumboard" name="tde_gypsumboard" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div>   
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tde_roaster_bata">Rooster Bata</label>
+                    </div>
+                    <label class="switch" for="tde_roaster_bata">
+                    <input type="checkbox" id="tde_roaster_bata" name="tde_roaster_bata" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div>   
+                <div class="col-sm-6">
+                  <label class="form-label" for="tampe_bobot">Bobot Dinding(%)</label>
+                  <input type="number" id="tampe_bobot" name="tampe_bobot" class="form-control" placeholder="73" />
+                </div>  
+                <hr>    
+                <div>
+                    <h5>Tambah Tipe Dinding Existing</h5>
+                </div>  
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="ttde_tipe_material">Tipe Material</label>
+                    </div>
+                    <label class="switch" for="ttde_tipe_material">
+                    <input type="checkbox" id="ttde_tipe_material" name="ttde_tipe_material" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <label class="form-label" for="ttde_bobot">Bobot(%)</label>
+                    <input type="number" id="ttde_bobot" name="ttde_bobot" class="form-control" placeholder="73" />
+                </div> 
+                <hr>    
+                <div>
+                    <h5>Tipe Pelapis Dinding Eksisting</h5>
+                </div>  
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tpde_dilapisi_cat">Dilapis Cat (Diplester dan Diaci)</label>
+                    </div>
+                    <label class="switch" for="tpde_dilapisi_cat">
+                    <input type="checkbox" id="tpde_dilapisi_cat" name="tpde_dilapisi_cat" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tpde_dilapisi_keramik">Dilapis Keramik</label>
+                    </div>
+                    <label class="switch" for="tpde_dilapisi_keramik">
+                    <input type="checkbox" id="tpde_dilapisi_keramik" name="tpde_dilapisi_keramik" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tpde_dilapisi_walpaper">Dilapis Wallpaper</label>
+                    </div>
+                    <label class="switch" for="tpde_dilapisi_walpaper">
+                    <input type="checkbox" id="tpde_dilapisi_walpaper" name="tpde_dilapisi_walpaper" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tpde_dilapisi_mozaik">Dilapis Mozaik</label>
+                    </div>
+                    <label class="switch" for="tpde_dilapisi_mozaik">
+                    <input type="checkbox" id="tpde_dilapisi_mozaik" name="tpde_dilapisi_mozaik" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tpde_dilapisi_batu_alam">Dilapis Batu Alam</label>
+                    </div>
+                    <label class="switch" for="tpde_dilapisi_batu_alam">
+                    <input type="checkbox" id="tpde_dilapisi_batu_alam" name="tpde_dilapisi_batu_alam" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <label class="form-label" for="ttde_bobot_pdc">Bobot Pelapis Dinding Cat (Diplester dan Diaci)</label>
+                    <input type="number" id="ttde_bobot_pdc" name="ttde_bobot_pdc" class="form-control" placeholder="73" />
+                </div>   
+                <hr>    
+                <div>
+                    <h5>Tambah Tipe Pelapis Dinding Existing</h5>
+                </div>  
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="ttpde_tipe_material">Tipe Material</label>
+                    </div>
+                    <label class="switch" for="ttpde_tipe_material">
+                    <input type="checkbox" id="ttpde_tipe_material" name="ttpde_tipe_material" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <label class="form-label" for="ttpde_bobot">Bobot(%)</label>
+                    <input type="number" id="ttpde_bobot" name="ttpde_bobot" class="form-control" placeholder="73" />
                 </div>               
-                               
+                <hr>    
+                <div>
+                    <h5>Tipe Pintu & Jendela Eksisting</h5>
+                </div>  
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tpdje_pintu_kayu_panil">Pintu Kayu Panil</label>
+                    </div>
+                    <label class="switch" for="tpdje_pintu_kayu_panil">
+                    <input type="checkbox" id="tpdje_pintu_kayu_panil" name="tpdje_pintu_kayu_panil" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tpdje_pintu_kayu_dobel_triplek">Pintu Kayu Dobel Triplek/ HPL</label>
+                    </div>
+                    <label class="switch" for="tpdje_pintu_kayu_dobel_triplek">
+                    <input type="checkbox" id="tpdje_pintu_kayu_dobel_triplek" name="tpdje_pintu_kayu_dobel_triplek" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tpdje_pintu_kaca_rk">Pintu Kaca Rk Aluminium</label>
+                    </div>
+                    <label class="switch" for="tpdje_pintu_kaca_rk">
+                    <input type="checkbox" id="tpdje_pintu_kaca_rk" name="tpdje_pintu_kaca_rk" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tpdje_jendela_kaca_kayu">Jendela Kaca Rk Kayu</label>
+                    </div>
+                    <label class="switch" for="tpdje_jendela_kaca_kayu">
+                    <input type="checkbox" id="tpdje_jendela_kaca_kayu" name="tpdje_jendela_kaca_kayu" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tpdje_pintu_km">Pintu KM UPVC/PVC</label>
+                    </div>
+                    <label class="switch" for="tpdje_pintu_km">
+                    <input type="checkbox" id="tpdje_pintu_km" name="tpdje_pintu_km" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <label class="form-label" for="ttpde_bobot">Bobot(%)</label>
+                    <input type="number" id="ttpde_bobot" name="ttpde_bobot" class="form-control" placeholder="73" />
+                </div>               
                                
                 <div class="col-12 d-flex justify-content-between">
                   <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left me-sm-1"></i>
@@ -665,26 +928,237 @@ $configData = Helper::appClasses();
             <!-- Social Links -->
             <div id="social-links" class="content">
               <div class="content-header mb-3">
-                <h6 class="mb-0">Social Links</h6>
-                <small>Enter Your Social Links.</small>
+                <h6 class="mb-0">Step 4</h6>
+                <small>Enter Step 4.</small>
               </div>
               <div class="row g-3">
+                <hr>    
+                <div>
+                    <h5>Tambah Tipe Pintu & Jendela Existing</h5>
+                </div>  
                 <div class="col-sm-6">
-                  <label class="form-label" for="twitter">Twitter</label>
-                  <input type="text" id="twitter" class="form-control" placeholder="https://twitter.com/abc" />
-                </div>
+                    <div>
+                        <label class="form-label" for="ttpdje_tipe_material">Tipe Material</label>
+                    </div>
+                    <label class="switch" for="ttpdje_tipe_material">
+                    <input type="checkbox" id="ttpdje_tipe_material" name="ttpdje_tipe_material" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
                 <div class="col-sm-6">
-                  <label class="form-label" for="facebook">Facebook</label>
-                  <input type="text" id="facebook" class="form-control" placeholder="https://facebook.com/abc" />
-                </div>
+                    <label class="form-label" for="ttpdje_bobot">Bobot(%)</label>
+                    <input type="number" id="ttpdje_bobot" name="ttpdje_bobot" class="form-control" placeholder="73" />
+                </div> 
+                <hr>    
+                <div>
+                    <h5>Tipe Lantai Eksisting </h5>
+                </div>  
                 <div class="col-sm-6">
-                  <label class="form-label" for="google">Google+</label>
-                  <input type="text" id="google" class="form-control" placeholder="https://plus.google.com/abc" />
-                </div>
+                    <div>
+                        <label class="form-label" for="tle_granit">Granit/Homogenous Tile</label>
+                    </div>
+                    <label class="switch" for="tle_granit">
+                    <input type="checkbox" id="tle_granit" name="tle_granit" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
                 <div class="col-sm-6">
-                  <label class="form-label" for="linkedin">Linkedin</label>
-                  <input type="text" id="linkedin" class="form-control" placeholder="https://linkedin.com/abc" />
-                </div>
+                    <div>
+                        <label class="form-label" for="tle_karpet">Karpet</label>
+                    </div>
+                    <label class="switch" for="tle_karpet">
+                    <input type="checkbox" id="tle_karpet" name="tle_karpet" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tle_keramik">Keramik</label>
+                    </div>
+                    <label class="switch" for="tle_keramik">
+                    <input type="checkbox" id="tle_keramik" name="tle_keramik" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tle_rabat_beton">Rabat Beton (Semen Ekspose)</label>
+                    </div>
+                    <label class="switch" for="tle_rabat_beton">
+                    <input type="checkbox" id="tle_rabat_beton" name="tle_rabat_beton" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tle_teraso">Teraso</label>
+                    </div>
+                    <label class="switch" for="tle_teraso">
+                    <input type="checkbox" id="tle_teraso" name="tle_teraso" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tle_vynil">Vynil</label>
+                    </div>
+                    <label class="switch" for="tle_vynil">
+                    <input type="checkbox" id="tle_vynil" name="tle_vynil" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="tle_papan_kayu">Papan Kayu</label>
+                    </div>
+                    <label class="switch" for="tle_papan_kayu">
+                    <input type="checkbox" id="tle_papan_kayu" name="tle_papan_kayu" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <label class="form-label" for="tle_bobot_lantai">Bobot Lantai(%)</label>
+                    <input type="number" id="tle_bobot_lantai" name="tle_bobot_lantai" class="form-control" placeholder="73" />
+                </div> 
+                <hr>    
+                <div>
+                    <h5>Tambah Tipe Lantai Existing</h5>
+                </div>  
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="ttle_tipe_material">Tipe Material</label>
+                    </div>
+                    <label class="switch" for="ttle_tipe_material">
+                    <input type="checkbox" id="ttle_tipe_material" name="ttle_tipe_material" class="switch-input"/>
+                    <span class="switch-toggle-slider">
+                        <span class="switch-on"></span>
+                        <span class="switch-off"></span>
+                    </span>
+                    </label>
+                </div> 
+                <div class="col-sm-6">
+                    <label class="form-label" for="ttle_bobot">Bobot(%)</label>
+                    <input type="number" id="ttle_bobot" name="ttle_bobot" class="form-control" placeholder="73" />
+                </div> 
+                <div class="col-sm-6">
+                    <label class="form-label" for="penggunaan_bangunan_saat_ini">Penggunaan Bangunan Saat Ini</label>
+                    <input type="text" id="penggunaan_bangunan_saat_ini" name="penggunaan_bangunan_saat_ini" class="form-control" placeholder="Disewakan" />
+                </div> 
+                <div>
+                  <h5>Perlengkapan Bangunan</h5>
+              </div>  
+              <div class="col-sm-6">
+                  <div>
+                      <label class="form-label" for="pb_listrik">Listrik</label>
+                  </div>
+                  <label class="switch" for="pb_listrik">
+                  <input type="checkbox" id="pb_listrik" name="pb_listrik" class="switch-input"/>
+                  <span class="switch-toggle-slider">
+                      <span class="switch-on"></span>
+                      <span class="switch-off"></span>
+                  </span>
+                  </label>
+              </div> 
+              <div class="col-sm-6">
+                  <div>
+                      <label class="form-label" for="pb_telepon">Telepon</label>
+                  </div>
+                  <label class="switch" for="pb_telepon">
+                  <input type="checkbox" id="pb_telepon" name="pb_telepon" class="switch-input"/>
+                  <span class="switch-toggle-slider">
+                      <span class="switch-on"></span>
+                      <span class="switch-off"></span>
+                  </span>
+                  </label>
+              </div> 
+              <div class="col-sm-6">
+                  <div>
+                      <label class="form-label" for="pb_pdam">PDAM</label>
+                  </div>
+                  <label class="switch" for="pb_pdam">
+                  <input type="checkbox" id="pb_pdam" name="pb_pdam" class="switch-input"/>
+                  <span class="switch-toggle-slider">
+                      <span class="switch-on"></span>
+                      <span class="switch-off"></span>
+                  </span>
+                  </label>
+              </div> 
+              <div class="col-sm-6">
+                  <div>
+                      <label class="form-label" for="pb_gas">Gas</label>
+                  </div>
+                  <label class="switch" for="pb_gas">
+                  <input type="checkbox" id="pb_gas" name="pb_gas" class="switch-input"/>
+                  <span class="switch-toggle-slider">
+                      <span class="switch-on"></span>
+                      <span class="switch-off"></span>
+                  </span>
+                  </label>
+              </div> 
+              <div class="col-sm-6">
+                  <div>
+                      <label class="form-label" for="pb_ac">AC</label>
+                  </div>
+                  <label class="switch" for="pb_ac">
+                  <input type="checkbox" id="pb_ac" name="pb_ac" class="switch-input"/>
+                  <span class="switch-toggle-slider">
+                      <span class="switch-on"></span>
+                      <span class="switch-off"></span>
+                  </span>
+                  </label>
+              </div> 
+              <div class="col-sm-6">
+                  <div>
+                      <label class="form-label" for="pb_sumur_gali">Sumur Gali/Pompa</label>
+                  </div>
+                  <label class="switch" for="pb_sumur_gali">
+                  <input type="checkbox" id="pb_sumur_gali" name="pb_sumur_gali" class="switch-input"/>
+                  <span class="switch-toggle-slider">
+                      <span class="switch-on"></span>
+                      <span class="switch-off"></span>
+                  </span>
+                  </label>
+              </div> 
+              <div class="col-sm-6">
+                <label class="form-label" for="penggunaan_bangunan">Penggunaan Bangunan</label>
+                <input type="text" id="penggunaan_bangunan" name="penggunaan_bangunan" class="form-control" placeholder="Rumah Tinggal" />
+              </div> 
+              <div class="col-sm-6">
+                  <label class="form-label" for="progress_pembangunan">Progres Pembangunan jika aset dalam proses (dalam persen)</label>
+                  <input type="number" id="progress_pembangunan" name="progress_pembangunan" class="form-control" placeholder="73" />
+              </div> 
+              <div class="col-sm-6">
+                  <label class="form-label" for="status_data_obyek">Status Data Obyek</label>
+                  <select name="status_data_obyek" id="status_data_obyek" class="form-control">
+                    <option value="">Pilih Status</option>
+                    <option value="draft">Draft</option>
+                    <option value="publish">Publish</option>
+                  </select>
+              </div>             
                 <div class="col-12 d-flex justify-content-between">
                   <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left me-sm-1"></i>
                     <span class="align-middle d-sm-inline-block d-none">Previous</span>
@@ -696,13 +1170,13 @@ $configData = Helper::appClasses();
             <!-- Review -->
             <div id="review-submit" class="content">
   
-              <p class="fw-medium mb-2">Account</p>
+              <p class="fw-medium mb-2">Step 1</p>
               <ul class="list-unstyled">
                 <li>Username</li>
                 <li>exampl@email.com</li>
               </ul>
               <hr>
-              <p class="fw-medium mb-2">Personal Info</p>
+              <p class="fw-medium mb-2">Step 2</p>
               <ul class="list-unstyled">
                 <li>First Name</li>
                 <li>Last Name</li>
@@ -710,7 +1184,7 @@ $configData = Helper::appClasses();
                 <li>Language</li>
               </ul>
               <hr>
-              <p class="fw-medium mb-2">Address</p>
+              <p class="fw-medium mb-2">Step 3</p>
               <ul class="list-unstyled">
                 <li>Address</li>
                 <li>Landmark</li>
@@ -718,7 +1192,7 @@ $configData = Helper::appClasses();
                 <li>City</li>
               </ul>
               <hr>
-              <p class="fw-medium mb-2">Social Links</p>
+              <p class="fw-medium mb-2">Step 4</p>
               <ul class="list-unstyled">
                 <li>https://twitter.com/abc</li>
                 <li>https://facebook.com/abc</li>
