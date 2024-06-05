@@ -49,8 +49,8 @@
                             </div>
                             <form class="row add-new-user pt-0" id="addNewRoleStForm">
                                 <div class="mb-3 col-12 col-md-12">
-                                    <label class="form-label" for="role_nama">Role Name</label>
-                                    <input type="text" class="form-control" id="role_nama" name="role_nama"
+                                    <label class="form-label" for="role_name">Role Name</label>
+                                    <input type="text" class="form-control" id="role_name" name="role_name"
                                         placeholder="Role**" aria-label="Role**" />
                                 </div>
                                 <div class="col-12 text-center">
@@ -79,7 +79,7 @@
                                 <input type="hidden" name="id" id="idEdit">
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="nama">Role Name</label>
-                                    <input type="text" id="role_namaEdit" name="nama" class="form-control"
+                                    <input type="text" id="role_nameEdit" name="nama" class="form-control"
                                         placeholder="Doe" />
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -114,20 +114,20 @@
            
         </script> --}}
     <script>
-        function OpenModalEditRole(id, role_nama, role_status) {
+        function OpenModalEditRole(id, role_name, role_status) {
             $('#openModalUpdateRole').modal('show');
             $('#idEdit').val(id);
-            $('#role_namaEdit').val(role_nama);
+            $('#role_nameEdit').val(role_name);
             $('#role_statusEdit').val(role_status);
         }
     </script>
     <script>
         function SaveRole() {
-            let role_nama = $('#role_nama').val();
+            let role_name = $('#role_name').val();
             var fd = new FormData();
-            fd.append('role_nama', role_nama);
+            fd.append('role_name', role_name);
 
-            if (role_nama === '') {
+            if (role_name === '') {
                 console.log('error');
             } else {
                 $.ajax({
@@ -143,7 +143,7 @@
                     success: function(data) {
                         // console.log(data);
                         if (data.success == true) {
-                            $('#role_nama').val('');
+                            $('#role_name').val('');
                             $('#openModalAddRole').modal('hide');
                             Swal.fire({
                                 width: 420,
@@ -168,13 +168,13 @@
 
         function EditRole() {
             let id = $('#idEdit').val();
-            let role_nama = $('#role_namaEdit').val();
+            let role_name = $('#role_nameEdit').val();
             let role_status = $('#role_statusEdit').val();
             var fd = new FormData();
             fd.append('role_id', id);
-            fd.append('role_nama', role_nama);
+            fd.append('role_name', role_name);
             fd.append('role_status', role_status);
-            if (role_nama === '') {
+            if (role_name === '') {
                 console.log('error');
             } else {
                 $.ajax({

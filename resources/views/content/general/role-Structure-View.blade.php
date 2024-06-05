@@ -50,8 +50,8 @@
                             </div>
                             <form class="row add-new-user pt-0" id="addNewRoleStForm">
                                 <div class="mb-3 col-12 col-md-12">
-                                    <label class="form-label" for="rs_nama">Role Name</label>
-                                    <input type="text" class="form-control" id="rs_nama" name="rs_nama"
+                                    <label class="form-label" for="rs_name">Role Name</label>
+                                    <input type="text" class="form-control" id="rs_name" name="rs_name"
                                         placeholder="Role**" aria-label="Role**" />
                                 </div>
                                 <div class="col-12 text-center">
@@ -80,7 +80,7 @@
                                 <input type="hidden" name="id" id="idEdit">
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="nama">Role Name</label>
-                                    <input type="text" id="rs_namaEdit" name="nama" class="form-control"
+                                    <input type="text" id="rs_nameEdit" name="nama" class="form-control"
                                         placeholder="Doe" />
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -115,20 +115,20 @@
            
         </script> --}}
     <script>
-        function OpenModalEditRoleStructure(id, rs_nama, rs_status) {
+        function OpenModalEditRoleStructure(id, rs_name, rs_status) {
             $('#openModalUpdateRoleStructure').modal('show');
             $('#idEdit').val(id);
-            $('#rs_namaEdit').val(rs_nama);
+            $('#rs_nameEdit').val(rs_name);
             $('#rs_statusEdit').val(rs_status);
         }
     </script>
     <script>
         function SaveRoleSt() {
-            let rs_nama = $('#rs_nama').val();
+            let rs_name = $('#rs_name').val();
             var fd = new FormData();
-            fd.append('rs_nama', rs_nama);
+            fd.append('rs_name', rs_name);
 
-            if (rs_nama === '') {
+            if (rs_name === '') {
                 console.log('error');
             } else {
                 $.ajax({
@@ -168,14 +168,13 @@
 
         function EditRoleSt() {
             let id = $('#idEdit').val();
-            let rs_nama = $('#rs_namaEdit').val();
+            let rs_name = $('#rs_nameEdit').val();
             let rs_status = $('#rs_statusEdit').val();
             var fd = new FormData();
             fd.append('rs_id', id);
-            fd.append('rs_nama', rs_nama);
+            fd.append('rs_name', rs_name);
             fd.append('rs_status', rs_status);
-            console.log(fd);
-            if (rs_nama === '') {
+            if (rs_name === '') {
                 console.log('error');
             } else {
                 $.ajax({

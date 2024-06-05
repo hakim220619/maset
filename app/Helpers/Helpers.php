@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Config;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -251,7 +252,6 @@ class Helpers
   {
 
     foreach ($request->kontak as $key => $kontak) {
-
       $body = array(
         "api_key" => self::aplikasi()->token_whatsapp,
         "receiver" => $kontak,
@@ -276,6 +276,10 @@ class Helpers
 
       $response = curl_exec($curl);
       $err = curl_error($curl);
+      $mmLogsData['activity'] = '' . $response . ' ' . $kontak . '';
+      $mmLogsData['detail'] = $response;
+      $mmLogsData['action'] = 'Send Whatsapp';
+      Helpers::mmLogs($mmLogsData);
       return $response;
     }
   }
@@ -305,6 +309,22 @@ class Helpers
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
+    $mmLogsData['activity'] = 'Send Whatsapp berhasil terkirim ke kontak  ' . $request->kontak . '';
+    $mmLogsData['detail'] = $response;
+    $mmLogsData['action'] = 'Send Whatsapp';
+    Helpers::mmLogs($mmLogsData);
     return $response;
+  }
+  public static function mmLogs($request)
+  {
+    $data = [
+      'user_id' => request()->user()->id,
+      'activity' => $request['activity'],
+      'detail' => base64_encode(serialize($request['detail'])),
+      'action' => $request['action'],
+      'ip' => $_SERVER['REMOTE_ADDR'],
+      'created_at' => now()
+    ];
+    DB::table('mm_logs')->insert($data);
   }
 }

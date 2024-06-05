@@ -117,9 +117,11 @@ class User extends Authenticatable
                 'created_at' => now()
             ];
         }
-
-        // dd($data);
         DB::table('users')->insert($data);
+        $mmLogsData['activity'] = 'ProsesAddUsers berhasil';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Insert';
+        Helpers::mmLogs($mmLogsData);
     }
     public static function ProsesAddUsersRegister($request)
     {
@@ -154,9 +156,11 @@ class User extends Authenticatable
                 'created_at' => now()
             ];
         }
-
-        // dd($data);
         DB::table('users')->insert($data);
+        $mmLogsData['activity'] = 'ProsesAddUsersRegister berhasil';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Insert';
+        Helpers::mmLogs($mmLogsData);
     }
     public static function ProsesEditUsers($request)
     {
@@ -187,18 +191,20 @@ class User extends Authenticatable
                 'nik' => $request->nik,
                 'name' => $request->name,
                 'email' => $request->email,
-                'role_structure' => $request->role_structure,
-                'role_access' => $request->role_access,
-                'role' => $request->role,
-                'status' => $request->status,
+
                 'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'updated_at' => now()
             ];
         }
-
         // dd($data);
         DB::table('users')->where('id', $request->id)->update($data);
+
+        $mmLogsData['activity'] = 'ProsesEditUsers berhasil dengan id ' . $request->id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
+        // dd($mmLogsData);
+        Helpers::mmLogs($mmLogsData);
     }
     public static function ProsesUpdateUsers($request)
     {
@@ -237,9 +243,11 @@ class User extends Authenticatable
                 'updated_at' => now()
             ];
         }
-
-        // dd($data);
         DB::table('users')->where('id', $request->id)->update($data);
+        $mmLogsData['activity'] = 'ProsesUpdateUsers berhasil dengan id ' . $request->id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
+        Helpers::mmLogs($mmLogsData);
     }
     public static function changePassword($request)
     {
@@ -248,6 +256,10 @@ class User extends Authenticatable
             'updated_at' => now()
         ];
         DB::table('users')->where('id', $request->id)->update($data);
+        $mmLogsData['activity'] = 'changePassword berhasil dengan id ' . $request->id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
+        Helpers::mmLogs($mmLogsData);
     }
     public static function suspended($request)
     {
@@ -256,9 +268,17 @@ class User extends Authenticatable
             'updated_at' => now()
         ];
         DB::table('users')->where('id', Auth::user()->id)->update($data);
+        $mmLogsData['activity'] = 'suspended berhasil dengan id ' . $request->id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
+        Helpers::mmLogs($mmLogsData);
     }
     public static function ProsesDeletusers($id)
     {
-        DB::table('users')->where('id', $id)->delete();
+        $data = DB::table('users')->where('id', $id)->delete();
+        $mmLogsData['activity'] = 'ProsesDeletusers berhasil dengan id ' . $id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Delete';
+        Helpers::mmLogs($mmLogsData);
     }
 }

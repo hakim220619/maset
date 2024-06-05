@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Aplikasi;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
@@ -27,9 +28,9 @@ class AplikasiController extends Controller
                 $image->move(public_path('storage/images/logo'), $filename);
                 $data = [
                     'pemilik' => $request->pemilik,
-                    'no' => $request->no,
-                    'judul' => $request->judul,
-                    'nama' => $request->nama,
+                    'kontak' => $request->kontak,
+                    'title' => $request->title,
+                    'name' => $request->name,
                     'copy_right' => $request->copy_right,
                     'versi' => $request->versi,
                     'token_whatsapp' => $request->token_whatsapp,
@@ -39,9 +40,9 @@ class AplikasiController extends Controller
             } else {
                 $data = [
                     'pemilik' => $request->pemilik,
-                    'no' => $request->no,
-                    'judul' => $request->judul,
-                    'nama' => $request->nama,
+                    'kontak' => $request->kontak,
+                    'title' => $request->title,
+                    'name' => $request->name,
                     'copy_right' => $request->copy_right,
                     'versi' => $request->versi,
                     'token_whatsapp' => $request->token_whatsapp,
@@ -49,7 +50,10 @@ class AplikasiController extends Controller
 
                 ];
             }
-            // dd($data);
+            $mmLogsData['activity'] = 'Update Aplikasi berhasil oleh  ' . request()->user()->name . '';
+            $mmLogsData['detail'] = now();
+            $mmLogsData['action'] = 'Update';
+            Helpers::mmLogs($mmLogsData);
             DB::table('aplikasi')->where('id', $request->id)->update($data);
             toast('', 'success');
             return redirect()->route('aplikasi')->with('success', 'Aplikasi Successs Updateed!');

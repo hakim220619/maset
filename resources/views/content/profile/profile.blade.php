@@ -34,8 +34,8 @@
                                 src="{{ asset('') }}storage/images/users/{{ $profile->image }}" height="100"
                                 width="100" alt="User avatar" />
                             <div class="user-info text-center">
-                                <h4 class="mb-2">{{ $profile->nama }}</h4>
-                                <span class="badge bg-label-secondary mt-1">{{ $profile->rs_nama }}</span>
+                                <h4 class="mb-2">{{ $profile->name }}</h4>
+                                <span class="badge bg-label-secondary mt-1">{{ $profile->rs_name }}</span>
                             </div>
                         </div>
                     </div>
@@ -79,19 +79,19 @@
                             </li>
                             <li class="mb-2 pt-1">
                                 <span class="fw-medium me-1">Role Structure:</span>
-                                <span>{{ $profile->rs_nama }}</span>
+                                <span>{{ $profile->rs_name }}</span>
                             </li>
                             <li class="mb-2 pt-1">
                                 <span class="fw-medium me-1">Role Access:</span>
-                                <span>{{ $profile->ra_nama }}</span>
+                                <span>{{ $profile->ra_name }}</span>
                             </li>
                             <li class="mb-2 pt-1">
                                 <span class="fw-medium me-1">Role:</span>
-                                <span>{{ $profile->role_nama }}</span>
+                                <span>{{ $profile->role_name }}</span>
                             </li>
                             <li class="mb-2 pt-1">
                                 <span class="fw-medium me-1">No:</span>
-                                <span>{{ $profile->no_tlp }}</span>
+                                <span>{{ $profile->kontak }}</span>
                             </li>
                             <li class="mb-2 pt-1">
                                 <span class="fw-medium me-1">Alamat:</span>
@@ -101,7 +101,7 @@
                         <div class="d-flex justify-content-center">
                             <a href="javascript:;" class="btn btn-primary me-3" data-bs-target="#editUser"
                                 data-bs-toggle="modal">Edit</a>
-                            <a href="javascript:;" class="btn btn-label-danger suspend-user">Suspended</a>
+                            {{-- <a href="javascript:;" class="btn btn-label-danger suspend-user">Suspended</a> --}}
                         </div>
                     </div>
                 </div>

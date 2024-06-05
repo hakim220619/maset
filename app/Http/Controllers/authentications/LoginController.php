@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\authentications;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,9 +34,14 @@ class LoginController extends Controller
         ]);
       }
       // dd($session);
-      Session::put('full_name', $session->full_name);
+      Session::put('name', $session->name);
+      DB::table('users')->where('id', $session->id)->update(['active' => 'ON']);
 
       $request->session()->regenerate();
+      $mmLogsData['activity'] = 'Login berhasil dengan nama ' . $session->name . '';
+      $mmLogsData['detail'] = $session;
+      $mmLogsData['action'] = 'Login';
+      Helpers::mmLogs($mmLogsData);
       return redirect()->intended('/dashboard/admin');
     } else {
       $chekckLogin = DB::table('users')->where('email', $request->email_username)->first();
@@ -55,6 +61,11 @@ class LoginController extends Controller
   }
   public function logout(Request $request)
   {
+    $mmLogsData['activity'] = 'Logout berhasil dengan nama ' . request()->user()->name . '';
+    $mmLogsData['detail'] = now();
+    $mmLogsData['action'] = 'Login';
+    Helpers::mmLogs($mmLogsData);
+    DB::table('users')->where('id', request()->user()->id)->update(['active' => 'OFF']);
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
