@@ -15,7 +15,7 @@
 @endsection
 
 @section('page-script')
-    @vite(['resources/assets/js/modal-edit-user.js', 'resources/assets/js/app-user-view.js', 'resources/assets/js/app-user-view-account.js'])
+    @vite(['resources/assets/js/modal-edit-user.js', 'resources/assets/js/app-user-view.js', 'resources/assets/js/app-users-logs.js'])
 @endsection
 
 @section('content')
@@ -162,16 +162,17 @@
 
             <!-- Project table -->
             <div class="card mb-4">
-                <h5 class="card-header">Approval List</h5>
+                <h5 class="card-header">User Activity</h5>
                 <div class="table-responsive mb-3">
-                    <table class="table datatable-project border-top">
+                    <table class="table datatable-users-activity border-top">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>Project</th>
-                                <th class="text-nowrap">Total Task</th>
-                                <th>Progress</th>
-                                <th>Hours</th>
+                                <th>No</th>
+                                <th>name</th>
+                                <th>Activity</th>
+                                <th>Action</th>
+                                <th>Ip</th>
+                                <th>Crated</th>
                             </tr>
                         </thead>
                     </table>

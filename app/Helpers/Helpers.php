@@ -287,8 +287,8 @@ class Helpers
   {
     $body = array(
       "api_key" => self::aplikasi()->token_whatsapp,
-      "receiver" => $request->kontak,
-      "data" => array("message" => $request->message)
+      "receiver" => !empty($request['kontak']) == true ? $request['kontak'] : $request->kontak,
+      "data" => array("message" => !empty($request['message']) == true ? $request['message'] : $request->message)
     );
 
     $curl = curl_init();
@@ -309,7 +309,8 @@ class Helpers
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
-    $mmLogsData['activity'] = 'Send Whatsapp berhasil terkirim ke kontak  ' . $request->kontak . '';
+    // dd($response);
+    $mmLogsData['activity'] = 'Send Whatsapp berhasil terkirim ke kontak  ' . !empty($request['kontak']) == true ? $request['kontak'] : $request->kontak . '';
     $mmLogsData['detail'] = $response;
     $mmLogsData['action'] = 'Send Whatsapp';
     Helpers::mmLogs($mmLogsData);
@@ -318,7 +319,7 @@ class Helpers
   public static function mmLogs($request)
   {
     $data = [
-      'user_id' => request()->user()->id,
+      'user_id' => isset(request()->user()->id) == null ? 0 : request()->user()->id,
       'activity' => $request['activity'],
       'detail' => base64_encode(serialize($request['detail'])),
       'action' => $request['action'],

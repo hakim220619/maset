@@ -145,6 +145,7 @@
                         // console.log(data);
                         if (data.success == true) {
                             $('#openModalAddRoleStructure').modal('hide');
+                            $('#rs_name').val('');
                             Swal.fire({
                                 width: 420,
                                 padding: 7,

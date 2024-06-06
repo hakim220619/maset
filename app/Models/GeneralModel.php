@@ -23,6 +23,17 @@ class GeneralModel extends Model
         }
         return $data;
     }
+    public static function listUsersLogs()
+    {
+        if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, ml.*, u.name from mm_logs ml, users u where ml.user_id=u.id
+            ORDER BY ml.created_at desc');
+        } else {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, ml.*, u.name from mm_logs ml, users u where ml.user_id=u.id and ml.user_id = ' . request()->user()->id . '
+        ORDER BY ml.created_at desc');
+        }
+        return $data;
+    }
     public static function checkEmail($request)
     {
 

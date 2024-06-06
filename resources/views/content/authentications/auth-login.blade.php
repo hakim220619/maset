@@ -53,20 +53,20 @@
                         <form id="formAuthentication" class="mb-3" action="{{ url('/login_action') }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email or Username</label>
-                                <input type="text" class="form-control @error('email_username') is-invalid @enderror"
-                                    id="email" name="email_username" value="{{ old('email_username') }}"
+                                <label for="email" class="form-label">Email or Nik</label>
+                                <input type="text" class="form-control @error('email_nik') is-invalid @enderror"
+                                    id="email" name="email_nik" value="{{ old('email_nik') }}"
                                     placeholder="Enter your email or username" autofocus>
-                                @if ($errors->has('email_username'))
+                                @if ($errors->has('email_nik'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email_username') }}</strong>
+                                        <strong>{{ $errors->first('email_nik') }}</strong>
                                     </span>
                                 @endif
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
                                     <label class="form-label" for="password">Password</label>
-                                    <a href="javascript:void(0);">
+                                    <a href="/forget-password">
                                         <small>Forgot Password?</small>
                                     </a>
                                 </div>

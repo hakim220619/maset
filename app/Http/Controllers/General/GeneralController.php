@@ -199,4 +199,13 @@ class GeneralController extends Controller
             'message' => 'Delete Role Successs',
         ]);
     }
+    function listUsersLogs()
+    {
+        $data = GeneralModel::listUsersLogs();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data',
+            'data' => $data,
+        ]);
+    }
 }

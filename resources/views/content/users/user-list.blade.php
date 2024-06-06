@@ -357,15 +357,16 @@
                         var i;
                         var no = 1;
                         for (i = 0; i < data.data.length; i++) {
-                            if (role_structure != 1 && role_structure != 4) {
+                            if (role_structure != 2 && role_structure != 3) {
+                                html += '<option value="' + data.data[i].role_id + '">' + data.data[i].role_name +
+                                    '</option>';
+                            } else {
+
                                 if (data.data[i].role_name == 'Reviewer') {
                                     html += '<option value="' + data.data[i].role_id + '">' + data.data[i]
                                         .role_name +
                                         '</option>';
                                 }
-                            } else {
-                                html += '<option value="' + data.data[i].role_id + '">' + data.data[i].role_name +
-                                    '</option>';
                             }
                         }
 
