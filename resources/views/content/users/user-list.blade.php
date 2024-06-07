@@ -139,7 +139,8 @@
                 <div class="modal-dialog modal-lg modal-simple modal-edit-user">
                     <div class="modal-content p-3 p-md-5">
                         <div class="modal-body">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                onclick="refreshAll()"></button>
                             <div class="text-center mb-4">
                                 <h3 class="mb-2">Add User</h3>
                                 <p class="text-muted">Add user will receive a privacy audit.</p>
@@ -147,8 +148,11 @@
                             <form class="row add-new-user pt-0" id="addNewUserForm">
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label" for="nik">Nik</label>
-                                    <input type="text" class="form-control" id="nik" name="nik"
-                                        placeholder="330206**" name="userFullname" aria-label="330206**" />
+                                    <input type="text" class="form-control" id="nik" name="nik" maxlength="16"
+                                        onchange="chekNikAktif(this.value)" placeholder="330206**" name="userFullname"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
+                                        aria-label="330206**" />
+                                    <span class="invalid-feedback" id="notifNik"></span>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label" for="name">Name</label>
@@ -158,8 +162,9 @@
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label" for="email">Email</label>
                                     <input type="text" id="email" class="form-control"
-                                        placeholder="john.doe@example.com" aria-label="john.doe@example.com"
-                                        name="email" />
+                                        onchange="chekEmailAktif(this.value)" placeholder="john.doe@example.com"
+                                        aria-label="john.doe@example.com" name="email" />
+                                    <span class="invalid-feedback" id="notifEmail"></span>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6 form-password-toggle">
                                     <label class="form-label" for="newPassword">Password</label>
@@ -170,14 +175,17 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
-                                    <label class="form-label" for="no">Kontak</label>
-                                    <input type="text" id="no" name="no" class="form-control phone-mask"
+                                    <label class="form-label" for="kontak">Kontak</label>
+                                    <input type="text" id="kontak" name="kontak" class="form-control phone-mask"
+                                        maxlength="15" onchange="chekKontakAktif(this.value)"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
-                                        placeholder="+62 8579" aria-label="john.doe@example.com" name="no" />
+                                        placeholder="+62 8579" aria-label="john.doe@example.com" />
+                                    <span class="invalid-feedback" id="notifKontak"></span>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label" for="status">Status</label>
-                                    <select id="status" name="status" class="select2 form-select">
+                                    <select id="status" name="status" class="select2 form-select"
+                                        aria-label="Default select example">
                                         <option value="" selected>-- Pilih --</option>
                                         @foreach (Helper::getStatus() as $r)
                                             <option value="{{ $r->status_nama }}">
@@ -230,9 +238,9 @@
                                 </div>
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit"
-                                        id="submitUsers" onclick="SaveUsers()">Submit</button>
+                                        id="submitUsers" onclick="SaveUsers()" disabled>Submit</button>
                                     <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
-                                        aria-label="Close">Cancel</button>
+                                        aria-label="Close" onclick="refreshAll()">Cancel</button>
                                 </div>
                             </form>
                         </div>
@@ -256,7 +264,10 @@
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="modalEditUserFirstName">Nik</label>
                                     <input type="text" id="nikEdit" name="nik" class="form-control"
+                                        maxlength="16"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
                                         placeholder="330206****" />
+                                    <span class="invalid-feedback" id="notifNik"></span>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="name">Name</label>
@@ -269,8 +280,10 @@
                                         placeholder="example@domain.com" />
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <label class="form-label" for="kontak">Contact</label>
+                                    <label class="form-label" for="kontak">Kontak</label>
                                     <input type="text" id="kontakEdit" name="kontak" class="form-control"
+                                        maxlength="15"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
                                         placeholder="Doe" />
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -419,11 +432,12 @@
         </script>
         <script>
             function SaveUsers() {
+                $('#submitUsers').attr('disabled', true);
                 let nik = $('#nik').val();
                 let name = $('#name').val();
                 let email = $('#email').val();
                 let password = $('#password').val();
-                let no = $('#no').val();
+                let kontak = $('#kontak').val();
                 let status = $('#status').val();
                 let role_structure = $('#role_structure').val();
                 let role_access = $('#role_access').val();
@@ -437,7 +451,7 @@
                 fd.append('name', name);
                 fd.append('email', email);
                 fd.append('password', password);
-                fd.append('no', no);
+                fd.append('kontak', kontak);
                 fd.append('status', status);
                 fd.append('role_structure', role_structure);
                 fd.append('role_access', role_access);
@@ -445,9 +459,9 @@
                 fd.append('alamat', alamat);
                 fd.append('image', $('input[type=file]')[0].files[0]);
 
-                if (nik === '' || name === '' || email === '' || password === '' || no === '' || status === '' ||
+                if (nik === '' || name === '' || email === '' || password === '' || kontak === '' || status === '' ||
                     role_structure === '' || role_access === '' || role === '' || alamat === '') {
-                    console.log('error');
+                    $('#submitUsers').attr('disabled', false);
                 } else {
                     $.ajax({
                         url: '/users/addProses',
@@ -463,6 +477,7 @@
                             // console.log(data);
                             if (data.success == true) {
                                 $('#openModalAddUsers').modal('hide');
+                                refreshAll();
                                 Swal.fire({
                                     width: 400,
                                     padding: 7,
@@ -548,6 +563,111 @@
                         }
                     });
                 }
+            }
+
+            function refreshAll() {
+                $('#nik').val('');
+                $('#name').val('');
+                $('#email').val('');
+                $('#kontak').val('');
+                $('#password').val('');
+                $('#status').val('').trigger('change');
+                $('#role_structure').val('').trigger('change');
+                $('#role_access').val('').trigger('change');
+                $('#role').val('').trigger('change');
+                $('#image').val('');
+                $('#alamat').val('');
+                $('#submitUsers').attr('disabled', true);
+                $('#notifKontak').html('');
+                $('#notifEmail').html('');
+                $('#notifNik').html('');
+            }
+
+            function chekEmailAktif(email) {
+                // console.log(email);
+                $.ajax({
+                    url: '/checkEmail',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        email: email
+                    },
+                    dataType: 'json',
+                    type: 'POST',
+                    success: function(data) {
+                        // console.log(data);
+                        if (data.success == true) {
+                            $('#notifEmail').html('<strong>email is already to use </strong>')
+                            $('#submitUsers').attr('disabled', true)
+                        } else {
+                            $('#notifEmail').html('')
+                            if ($('#nik').val() !== '') {
+                                $('#submitUsers').attr('disabled', false)
+                            }
+
+                        }
+                    }
+                });
+
+            }
+
+            function chekNikAktif(nik) {
+                // console.log(nik);
+                $.ajax({
+                    url: '/checkNik',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        nik: nik
+                    },
+                    dataType: 'json',
+                    type: 'POST',
+                    success: function(data) {
+                        // console.log(data);
+                        if (data.success == true) {
+                            $('#notifNik').html('<strong>Nik is already to use </strong>')
+                            $('#submitUsers').attr('disabled', true)
+                        } else {
+                            $('#notifNik').html('')
+                            if ($('#email').val() !== '') {
+                                $('#submitUsers').attr('disabled', false)
+                            }
+
+                        }
+                    }
+                });
+
+            }
+
+            function chekKontakAktif(kontak) {
+                // console.log(kontak);
+                $.ajax({
+                    url: '/checkKontak',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        kontak: kontak
+                    },
+                    dataType: 'json',
+                    type: 'POST',
+                    success: function(data) {
+                        // console.log(data);
+                        if (data.success == true) {
+                            $('#notifKontak').html('<strong>Kontak is already to use </strong>')
+                            $('#submitUsers').attr('disabled', true)
+                        } else {
+                            $('#notifKontak').html('')
+                            if ($('#email').val() !== '' && $('#nik').val() !== '') {
+                                $('#submitUsers').attr('disabled', false)
+                            }
+
+                        }
+                    }
+                });
+
             }
         </script>
 

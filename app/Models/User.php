@@ -97,7 +97,7 @@ class User extends Authenticatable
                 'role_access' => $request->role_access,
                 'role' => $request->role,
                 'status' => $request->status,
-                'kontak' => $request->no,
+                'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'image' => $request->file('image')->getClientOriginalName(),
                 'created_at' => now()
@@ -112,7 +112,7 @@ class User extends Authenticatable
                 'role_access' => $request->role_access,
                 'role' => $request->role,
                 'status' => $request->status,
-                'kontak' => $request->no,
+                'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'created_at' => now()
             ];
@@ -277,6 +277,14 @@ class User extends Authenticatable
     {
         $data = DB::table('users')->where('id', $id)->delete();
         $mmLogsData['activity'] = 'ProsesDeletusers berhasil dengan id ' . $id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Delete';
+        Helpers::mmLogs($mmLogsData);
+    }
+    public static function prosesResetPassword($id)
+    {
+        $data = DB::table('users')->where('id', $id)->update(['password' => Hash::make(12345678)]);
+        $mmLogsData['activity'] = 'prosesResetPassword berhasil dengan id ' . $id . '';
         $mmLogsData['detail'] = $data;
         $mmLogsData['action'] = 'Delete';
         Helpers::mmLogs($mmLogsData);

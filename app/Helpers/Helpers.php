@@ -220,7 +220,7 @@ class Helpers
     if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
       $data = DB::table('role_structure')->where('rs_status', 'ACTIVE')->get();
     } else {
-      $data = DB::table('role_structure')->whereNot('rs_id', Helpers::getRoleStructureJson()[3])->where('rs_status', 'ACTIVE')->get();
+      $data = DB::table('role_structure')->where('rs_id', Auth::user()->role_structure)->where('rs_status', 'ACTIVE')->get();
     }
     return $data;
   }

@@ -5,15 +5,16 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
     public function users()
     {
-        $data['total_users'] = User::all()->count();
-        $data['status_active'] = User::where('status', 'ACTIVE')->count();
-        $data['status_inactive'] = User::where('status', 'INACTIVE')->count();
-        $data['status_suspended'] = User::where('status', 'SUSPENDED')->count();
+        $data['total_users'] = Auth::user()->role_structure != 4 ? User::where('role_structure', Auth::user()->role_structure)->count() : User::all()->count();
+        $data['status_active'] = Auth::user()->role_structure != 4 ? User::where('status', 'ACTIVE')->where('role_structure', Auth::user()->role_structure)->count() : User::where('status', 'ACTIVE')->count();
+        $data['status_inactive'] = Auth::user()->role_structure != 4 ? User::where('status', 'INACTIVE')->where('role_structure', Auth::user()->role_structure)->count() : User::where('status', 'INACTIVE')->count();
+        $data['status_suspended'] = Auth::user()->role_structure != 4 ? User::where('status', 'SUSPENDED')->where('role_structure', Auth::user()->role_structure)->count() : User::where('status', 'SUSPENDED')->count();
         return view('content.users.user-list', $data);
     }
     function userList()
@@ -58,6 +59,16 @@ class UsersController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Delete Userss Successs',
+        ]);
+    }
+    function resetPassword($id)
+    {
+        // dd($id);
+        User::prosesResetPassword($id);
+        // toast('', 'success');
+        return response()->json([
+            'success' => true,
+            'message' => 'Reset Password Successs',
         ]);
     }
 }

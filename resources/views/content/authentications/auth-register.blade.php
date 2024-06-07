@@ -184,7 +184,7 @@
         }
 
         function chekEmailAktif(email) {
-            console.log(email);
+            // console.log(email);
             $.ajax({
                 url: '/checkEmail',
                 headers: {

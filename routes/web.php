@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/users/editProses', [UsersController::class, 'editProses'])->name('users.editProses');
     Route::post('/users/updateProses', [UsersController::class, 'updateProses'])->name('users.updateProses');
     Route::get('/users/deleteProses/{id}', [UsersController::class, 'deleteProses'])->name('users.deleteProses');
+    Route::get('/users/resetPassword/{id}', [UsersController::class, 'resetPassword'])->name('users.resetPassword');
 
 
     //Profile
