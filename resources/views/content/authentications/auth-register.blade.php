@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-    <div class="container-xxl" style="max-width: 770">
+    <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y ">
             <div class="authentication-inner py-4 ">
                 <!-- Register Card -->
