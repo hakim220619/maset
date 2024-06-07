@@ -42,12 +42,12 @@ class LoginController extends Controller
       'email_nik' => 'required',
       'password' => 'required',
     ]);
-    $checkEmail = Validator::make(['email' => $request->email_kontak], [
+    $checkEmail = Validator::make(['email_nik' => $request->email_nik], [
       'email_nik' => 'required|email'
     ]);
-    // dd($checkEmail);
-    if (Auth::attempt($checkEmail->passes() == true ? ['email' => $request->email_nik, 'password' => $request->password] :  ['nik' => $request->email_nik, 'password' => $request->password])) {
-      $session = User::where($checkEmail->passes() == true ? 'email' : 'nik', $request->email_nik)->first();
+    // dd($checkEmail->passes());
+    if (Auth::attempt($checkEmail == true ? ['email' => $request->email_nik, 'password' => $request->password] :  ['nik' => $request->email_nik, 'password' => $request->password])) {
+      $session = User::where($checkEmail == true ? 'email' : 'nik', $request->email_nik)->first();
       // dd($session->status);
       if ($session->status != 'ACTIVE') {
         return back()->withInput()->withErrors([
@@ -66,7 +66,7 @@ class LoginController extends Controller
       Helpers::mmLogs($mmLogsData);
       return redirect()->intended('/dashboard/admin');
     } else {
-      $chekckLogin = DB::table('users')->where($checkEmail->passes() == true ? 'email' : 'nik', $request->email_nik)->first();
+      $chekckLogin = DB::table('users')->where($checkEmail == true ? 'email' : 'nik', $request->email_nik)->first();
       // dd($chekckLogin);
       if ($chekckLogin == null) {
         return back()->withInput()->withErrors([
