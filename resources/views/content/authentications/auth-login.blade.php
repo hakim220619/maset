@@ -27,7 +27,7 @@
 @endphp
 
 @section('content')
-    <div class="container-xxl">
+    <div class="container-xxl" style="max-width: 440px">
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner py-4">
                 <!-- Login -->
