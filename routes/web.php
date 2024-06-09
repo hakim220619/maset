@@ -14,6 +14,8 @@ use App\Http\Controllers\Broadcast\BroadcastController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Retail\ReatailController;
+use App\Http\Controllers\Tanah_kosong\TanahkosongController;
 use App\Http\Controllers\Users\UsersController;
 
 /*
@@ -97,6 +99,13 @@ Route::middleware(['auth'])->group(function () {
 
     //Bangunan
     Route::get('/object/bangunan', [BangunanController::class, 'bangunan'])->name('bangunan');
+    Route::post('/object/add_bangunan', [BangunanController::class, 'add_bangunan'])->name('add_bangunan');
+    //Tanah Kosong
+    Route::get('/object/tanah_kosong', [TanahkosongController::class, 'tanah_kosong'])->name('tanah_kosong');
+    Route::post('/object/add_tanah_kosong', [TanahkosongController::class, 'add_tanah_kosong'])->name('add_tanah_kosong');
+    //Retail
+    Route::get('/object/retail', [ReatailController::class,'retail'])->name('retail');
+    Route::post('/object/add_retail', [ReatailController::class, 'add_retail'])->name('add_retail');
 
 
     //Broadcast

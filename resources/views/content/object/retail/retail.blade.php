@@ -100,7 +100,7 @@ $configData = Helper::appClasses();
           </div>
         </div>
         <div class="bs-stepper-content">
-          <form method="POST" action="{{ route('add_bangunan') }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ route('add_retail') }}" enctype="multipart/form-data">
             <!-- Account Details -->
             @csrf
             <div id="account-details" class="content">
@@ -1861,10 +1861,6 @@ $configData = Helper::appClasses();
     document.getElementById('review-penggunaan_bangunan').innerHTML = document.getElementById('penggunaan_bangunan').value
     document.getElementById('review-progress_pembangunan').innerHTML = document.getElementById('progress_pembangunan').value
     document.getElementById('review-status_data_obyek').innerHTML = document.getElementById('status_data_obyek').value
-
-
-
-
       
   });
 </script>
