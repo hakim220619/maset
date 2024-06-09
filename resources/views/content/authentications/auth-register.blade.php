@@ -33,10 +33,8 @@
                             <!-- Logo -->
                             <div class="app-brand justify-content-center mb-4 mt-2">
                                 <a href="{{ url('/') }}" class="app-brand-link gap-2">
-                                    <span class="app-brand-logo demo">@include('_partials.macros', [
-                                        'height' => 20,
-                                        'withbg' => 'fill: #fff;',
-                                    ])</span>
+                                    <img src="{{ asset('') }}storage/images/logo/{{ Helper::aplikasi()->logo }}"
+                                        alt="" width="72" height="52">
                                 </a>
                             </div>
                             <!-- /Logo -->
@@ -186,7 +184,7 @@
         }
 
         function chekEmailAktif(email) {
-            console.log(email);
+            // console.log(email);
             $.ajax({
                 url: '/checkEmail',
                 headers: {

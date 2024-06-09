@@ -17,8 +17,8 @@
                             value="{{ $profile->nik }}" placeholder="330206****" />
                     </div>
                     <div class="col-12 col-md-6">
-                        <label class="form-label" for="nama">Nama</label>
-                        <input type="text" id="nama" name="nama" value="{{ $profile->nama }}"
+                        <label class="form-label" for="name">Name</label>
+                        <input type="text" id="name" name="name" value="{{ $profile->name }}"
                             class="form-control" placeholder="Doe" />
                     </div>
                     <div class="col-12 col-md-6">
@@ -27,11 +27,11 @@
                             value="{{ $profile->email }}" placeholder="example@domain.com" />
                     </div>
                     <div class="col-12 col-md-6">
-                        <label class="form-label" for="no_tlp">No</label>
-                        <input type="text" id="no_tlp" name="no_tlp" value="{{ $profile->no_tlp }}"
+                        <label class="form-label" for="kontak">Kontak</label>
+                        <input type="text" id="kontak" name="kontak" value="{{ $profile->kontak }}"
                             class="form-control" placeholder="Doe" />
                     </div>
-                    <div class="col-12 col-md-6">
+                    {{-- <div class="col-12 col-md-6">
                         <label class="form-label" for="status">Status</label>
                         <select id="status" name="status" class="select2 form-select" disabled
                             aria-label="Default select example">
@@ -50,8 +50,8 @@
                             <option value="" disabled>-- Pilih --</option>
                             @foreach (Helper::getRoleStructure() as $r)
                                 <option value="{{ $r->rs_id }}"
-                                    {{ $r->rs_nama == $profile->role_structure ? 'selected' : '' }}>
-                                    {{ $r->rs_nama }}</option>
+                                    {{ $r->rs_name == $profile->role_structure ? 'selected' : '' }}>
+                                    {{ $r->rs_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -62,8 +62,8 @@
                             <option value="" disabled>-- Pilih --</option>
                             @foreach (Helper::getRoleaccess() as $r)
                                 <option value="{{ $r->ra_id }}"
-                                    {{ $r->ra_nama == $profile->role_access ? 'selected' : '' }}>
-                                    {{ $r->ra_nama }}</option>
+                                    {{ $r->ra_name == $profile->role_access ? 'selected' : '' }}>
+                                    {{ $r->ra_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -74,11 +74,11 @@
                             <option value="" disabled>-- Pilih --</option>
                             @foreach (Helper::getRole() as $r)
                                 <option value="{{ $r->role_id }}"
-                                    {{ $r->role_nama == $profile->role ? 'selected' : '' }}>
-                                    {{ $r->role_nama }}</option>
+                                    {{ $r->role_name == $profile->role ? 'selected' : '' }}>
+                                    {{ $r->role_name }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="col-12 col-md-12">
                         <label class="form-label" for="image">Image</label>
                         <input type="file" id="image" name="image" value="{{ $profile->alamat }}"
@@ -113,7 +113,7 @@
                 var i;
                 var no = 1;
                 for (i = 0; i < data.data.length; i++) {
-                    if (role_structure != 1 && role_structure != 4) {
+                    if (role_structure != 1 && role_structure == [2, 3]) {
                         if (data.data[i].role_nama == 'Reviewer') {
                             html += '<option value="' + data.data[i].role_id + '">' + data.data[i]
                                 .role_nama +

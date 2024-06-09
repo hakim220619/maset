@@ -31,8 +31,7 @@
                                     multiple data-actions-box="true" data-live-search="true" name="kontak"
                                     onchange="disabledButton()">
                                     @foreach ($users as $s)
-                                        <option value="{{ $s->kontak }}">{{ $s->name }} - {{ $s->rs_name }} -
-                                            {{ $s->ra_name }}
+                                        <option value="{{ $s->kontak }}">{{ $s->name }} - {{ $s->kontak }}
                                         </option>
                                     @endforeach
                                 </select>

@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Config;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -219,7 +220,7 @@ class Helpers
     if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
       $data = DB::table('role_structure')->where('rs_status', 'ACTIVE')->get();
     } else {
-      $data = DB::table('role_structure')->whereNot('rs_id', Helpers::getRoleStructureJson()[3])->where('rs_status', 'ACTIVE')->get();
+      $data = DB::table('role_structure')->where('rs_id', Auth::user()->role_structure)->where('rs_status', 'ACTIVE')->get();
     }
     return $data;
   }
@@ -251,7 +252,6 @@ class Helpers
   {
 
     foreach ($request->kontak as $key => $kontak) {
-
       $body = array(
         "api_key" => self::aplikasi()->token_whatsapp,
         "receiver" => $kontak,
@@ -276,6 +276,10 @@ class Helpers
 
       $response = curl_exec($curl);
       $err = curl_error($curl);
+      $mmLogsData['activity'] = '' . $response . ' ' . $kontak . '';
+      $mmLogsData['detail'] = $response;
+      $mmLogsData['action'] = 'Send Whatsapp';
+      Helpers::mmLogs($mmLogsData);
       return $response;
     }
   }
@@ -283,8 +287,8 @@ class Helpers
   {
     $body = array(
       "api_key" => self::aplikasi()->token_whatsapp,
-      "receiver" => $request->kontak,
-      "data" => array("message" => $request->message)
+      "receiver" => !empty($request['kontak']) == true ? $request['kontak'] : $request->kontak,
+      "data" => array("message" => !empty($request['message']) == true ? $request['message'] : $request->message)
     );
 
     $curl = curl_init();
@@ -305,6 +309,23 @@ class Helpers
 
     $response = curl_exec($curl);
     $err = curl_error($curl);
+    // dd($response);
+    $mmLogsData['activity'] = 'Send Whatsapp berhasil terkirim ke kontak  ' . !empty($request['kontak']) == true ? $request['kontak'] : $request->kontak . '';
+    $mmLogsData['detail'] = $response;
+    $mmLogsData['action'] = 'Send Whatsapp';
+    Helpers::mmLogs($mmLogsData);
     return $response;
+  }
+  public static function mmLogs($request)
+  {
+    $data = [
+      'user_id' => isset(request()->user()->id) == null ? 0 : request()->user()->id,
+      'activity' => $request['activity'],
+      'detail' => base64_encode(serialize($request['detail'])),
+      'action' => $request['action'],
+      'ip' => $_SERVER['REMOTE_ADDR'],
+      'created_at' => now()
+    ];
+    DB::table('mm_logs')->insert($data);
   }
 }

@@ -23,6 +23,17 @@ class GeneralModel extends Model
         }
         return $data;
     }
+    public static function listUsersLogs()
+    {
+        if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, ml.*, u.name from mm_logs ml, users u where ml.user_id=u.id
+            ORDER BY ml.created_at desc');
+        } else {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no, ml.*, u.name from mm_logs ml, users u where ml.user_id=u.id and ml.user_id = ' . request()->user()->id . '
+        ORDER BY ml.created_at desc');
+        }
+        return $data;
+    }
     public static function checkEmail($request)
     {
 
@@ -52,11 +63,15 @@ class GeneralModel extends Model
     {
 
         $data = [
-            'rs_nama' => $request->rs_nama,
+            'rs_name' => $request->rs_name,
             'rs_status' => 'ACTIVE',
             'rs_created_at' => now()
         ];
         DB::table('role_structure')->insert($data);
+        $mmLogsData['activity'] = 'ProsesAddRoleStructure berhasil';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Insert';
+        Helpers::mmLogs($mmLogsData);
     }
 
 
@@ -64,18 +79,25 @@ class GeneralModel extends Model
     {
 
         $data = [
-            'rs_nama' => $request->rs_nama,
+            'rs_name' => $request->rs_name,
             'rs_status' => $request->rs_status,
             'rs_created_at' => now()
         ];
-        // dd($data);
         DB::table('role_structure')->where('rs_id', $request->rs_id)->update($data);
+        $mmLogsData['activity'] = 'ProsesUpdateRoleStructure berhasil dengan id ' . $request->rs_id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
+        Helpers::mmLogs($mmLogsData);
     }
 
 
     public static function ProsesDeletRoleStructure($id)
     {
-        DB::table('role_structure')->where('rs_id', $id)->delete();
+        $data = DB::table('role_structure')->where('rs_id', $id)->delete();
+        $mmLogsData['activity'] = 'ProsesDeletRoleStructure berhasil dengan id ' . $id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Delete';
+        Helpers::mmLogs($mmLogsData);
     }
 
     public static function GetListRoleAccess()
@@ -93,27 +115,38 @@ class GeneralModel extends Model
     {
 
         $data = [
-            'ra_nama' => $request->ra_nama,
+            'ra_name' => $request->ra_name,
             'ra_status' => 'ACTIVE',
             'ra_created_at' => now()
         ];
         DB::table('role_access')->insert($data);
+        $mmLogsData['activity'] = 'ProsesAddRoleAccess berhasil';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Insert';
+        Helpers::mmLogs($mmLogsData);
     }
 
     public static function ProsesUpdateRoleAccess($request)
     {
 
         $data = [
-            'ra_nama' => $request->ra_nama,
+            'ra_name' => $request->ra_name,
             'ra_status' => $request->ra_status,
             'ra_created_at' => now()
         ];
-        // dd($data);
         DB::table('role_access')->where('ra_id', $request->ra_id)->update($data);
+        $mmLogsData['activity'] = 'ProsesUpdateRoleAccess berhasil dengan id ' . $request->ra_id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
+        Helpers::mmLogs($mmLogsData);
     }
     public static function ProsesDeletRoleAccess($id)
     {
-        DB::table('role_access')->where('ra_id', $id)->delete();
+        $data = DB::table('role_access')->where('ra_id', $id)->delete();
+        $mmLogsData['activity'] = 'ProsesDeletRoleAccess berhasil dengan id ' . $id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Delete';
+        Helpers::mmLogs($mmLogsData);
     }
     public static function GetListRole()
     {
@@ -130,25 +163,36 @@ class GeneralModel extends Model
     {
 
         $data = [
-            'role_nama' => $request->role_nama,
+            'role_name' => $request->role_name,
             'role_status' => 'ACTIVE',
             'role_created_at' => now()
         ];
         DB::table('role')->insert($data);
+        $mmLogsData['activity'] = 'ProsesAddRole berhasil';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Insert';
+        Helpers::mmLogs($mmLogsData);
     }
     public static function ProsesUpdateRole($request)
     {
 
         $data = [
-            'role_nama' => $request->role_nama,
+            'role_name' => $request->role_name,
             'role_status' => $request->role_status,
             'role_created_at' => now()
         ];
-        // dd($data);
         DB::table('role')->where('role_id', $request->role_id)->update($data);
+        $mmLogsData['activity'] = 'ProsesUpdateRole berhasil dengan id ' . $request->role_id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
+        Helpers::mmLogs($mmLogsData);
     }
     public static function ProsesDeletRole($id)
     {
-        DB::table('role')->where('role_id', $id)->delete();
+        $data = DB::table('role')->where('role_id', $id)->delete();
+        $mmLogsData['activity'] = 'ProsesDeletRole berhasil dengan id ' . $id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Delete';
+        Helpers::mmLogs($mmLogsData);
     }
 }

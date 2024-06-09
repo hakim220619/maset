@@ -31,6 +31,7 @@ class RegisterController extends Controller
     if ($validator->fails()) {
       return redirect('/auth/register-view')->withErrors($validator)->withInput();
     } else {
+      User::ProsesAddUsersRegister($request);
       $request['message'] = "*Aktivasi Akun Pengguna*
 Halo " . $request->name . ",
 
@@ -49,7 +50,6 @@ Terima kasih telah bergabung dengan kami!
 Salam,
 [Tim Dukungan]";
       Helpers::sendMessageAll($request);
-      toast('', 'success');
       return redirect('/')->with('success', 'Users Successs Added!');
     }
   }

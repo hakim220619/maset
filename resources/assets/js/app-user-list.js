@@ -136,7 +136,9 @@ $(function () {
               '<a href="' +
               userView +
               '" class="dropdown-item">View</a>' +
-              '<a href="javascript:;" class="dropdown-item">Reset Password</a>' +
+              '<a href="javascript:;" class="dropdown-item resetPassword" data-id="' +
+              full.id +
+              '">Reset Password</a>' +
               '</div>' +
               '</div>'
             );
@@ -463,6 +465,59 @@ $(function () {
         Swal.fire({
           title: 'Cancelled',
           text: 'Cancelled Deleted :)',
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-success waves-effect waves-light'
+          }
+        });
+      }
+    });
+  });
+  $('.datatables-users tbody').on('click', '.resetPassword', function () {
+    var id = $(this).data('id');
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to reset password! Default Password 12345678",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Reset Password!',
+      customClass: {
+        confirmButton: 'btn btn-primary me-2 waves-effect waves-light',
+        cancelButton: 'btn btn-label-secondary waves-effect waves-light'
+      },
+      buttonsStyling: false
+    }).then(function (result) {
+      if (result.value) {
+        $.ajax({
+          type: 'GET',
+          dataType: 'json',
+          url: '/users/resetPassword/' + id,
+          success: function (response) {
+            if (response.success == true) {
+              dt_user.row($(this).parents('tr')).remove().draw();
+              Swal.fire({
+                width: 400,
+                padding: 7,
+                position: 'bottom-right',
+                toast: true,
+                icon: 'success',
+                title: 'Success',
+                text: `${response.message}`,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                backgroundColor: '#28a745',
+                titleColor: '#fff'
+              });
+              $('.datatables-users').DataTable().ajax.reload();
+              // location.reload();
+            }
+          }
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: 'Cancelled',
+          text: 'Cancelled Reset Password :)',
           icon: 'error',
           customClass: {
             confirmButton: 'btn btn-success waves-effect waves-light'

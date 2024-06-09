@@ -28,7 +28,7 @@ $(function () {
       columns: [
         // columns according to JSON
         { data: 'no' },
-        { data: 'ra_nama' },
+        { data: 'ra_name' },
         { data: 'ra_status' },
         { data: 'ra_created_at' },
         { data: 'action' }
@@ -62,7 +62,7 @@ $(function () {
               '<a href="javascript:;" class="text-body" onclick="OpenModalEditRoleAccess(\'' +
               full.ra_id +
               "', '" +
-              full.ra_nama +
+              full.ra_name +
               "', '" +
               full.ra_status +
               '\')"><i class="ti ti-edit ti-sm me-2"></i></a>' +

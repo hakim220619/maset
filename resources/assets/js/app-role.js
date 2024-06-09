@@ -28,7 +28,7 @@ $(function () {
       columns: [
         // columns according to JSON
         { data: 'no' },
-        { data: 'role_nama' },
+        { data: 'role_name' },
         { data: 'role_status' },
         { data: 'role_created_at' },
         { data: 'action' }
@@ -62,7 +62,7 @@ $(function () {
               '<a href="javascript:;" class="text-body" onclick="OpenModalEditRole(\'' +
               full.role_id +
               "', '" +
-              full.role_nama +
+              full.role_name +
               "', '" +
               full.role_status +
               '\')"><i class="ti ti-edit ti-sm me-2"></i></a>' +
@@ -356,7 +356,7 @@ $(function () {
   // Add New User Form Validation
   const fv = FormValidation.formValidation(addNewRoleStForm, {
     fields: {
-      role_nama: {
+      role_name: {
         validators: {
           notEmpty: {
             message: 'Please enter Role Name'
