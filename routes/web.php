@@ -33,6 +33,9 @@ use App\Http\Controllers\Users\UsersController;
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login_action', [LoginController::class, 'login_action'])->name('login.action');
 
+Route::get('/login/google',  [LoginController::class, 'redirectToGoogle'])->name('login.redirectToGoogle');
+Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('login.handleGoogleCallback');
+
 Route::get('/forget-password', [LoginController::class, 'forgetPassword'])->name('forgetPassword');
 Route::post('/forget-password-proses', [LoginController::class, 'forgetPasswordProses'])->name('forgetPasswordProses');
 Route::get('/auth/reset-password-proses/{token}', [LoginController::class, 'resetPasswordProses'])->name('resetPasswordProses');
