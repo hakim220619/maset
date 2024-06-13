@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
     //Role
     Route::get('/setting/role', [GeneralController::class, 'roleView'])->name('role.roleView');
     Route::get('/setting/roleList', [GeneralController::class, 'roleList'])->name('role.roleList');
+    Route::post('/setting/getUserByRoleAccess', [GeneralController::class, 'getUserByRoleAccess'])->name('role.getUserByRoleAccess');
     Route::post('/setting/addRoleProses', [GeneralController::class, 'addRoleProses'])->name('role.addRoleProses');
     Route::post('/setting/updateRoleProses', [GeneralController::class, 'updateRoleProses'])->name('role.updateRoleProses');
     Route::get('/setting/deleteRoleProses/{id}', [GeneralController::class, 'deleteRoleProses'])->name('role.deleteRoleProses');
@@ -110,11 +111,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/object/tanah_kosong', [TanahkosongController::class, 'tanah_kosong'])->name('tanah_kosong');
     Route::post('/object/add_tanah_kosong', [TanahkosongController::class, 'add_tanah_kosong'])->name('add_tanah_kosong');
     //Retail
-    Route::get('/object/retail', [ReatailController::class,'retail'])->name('retail');
+    Route::get('/object/retail', [ReatailController::class, 'retail'])->name('retail');
     Route::post('/object/add_retail', [ReatailController::class, 'add_retail'])->name('add_retail');
 
 
     //Broadcast
     Route::get('/broadcast', [BroadcastController::class, 'broadcast'])->name('broadcast');
     Route::get('/sendMessage', [BroadcastController::class, 'sendMessage'])->name('broadcast.sendMessage');
+    //Broadcast by Aplikasi
+    Route::get('/broadcast/aplikasiRead/{id}', [BroadcastController::class, 'broadcastByAplikasiRead'])->name('broadcast.broadcastByAplikasiRead');
+    Route::get('/broadcast/aplikasiView', [BroadcastController::class, 'broadcastByAplikasiView'])->name('broadcast.broadcastByAplikasiView');
+    Route::get('/broadcast/Listaplikasi', [BroadcastController::class, 'broadcastByListaplikasi'])->name('broadcast.broadcastByListaplikasi');
+    Route::get('/broadcast/aplikasiAdd', [BroadcastController::class, 'broadcastByAplikasiAdd'])->name('broadcast.broadcastByAplikasiAdd');
+    Route::get('/broadcast/aplikasiUpdate/{id}', [BroadcastController::class, 'broadcastByAplikasiUpdate'])->name('broadcast.broadcastByAplikasiUpdate');
+    Route::get('/broadcast/aplikasiDelete/{id}', [BroadcastController::class, 'broadcastByAplikasiDelete'])->name('broadcast.broadcastByAplikasiDelete');
+    Route::post('/broadcast/uploadFile', [BroadcastController::class, 'uploadFile'])->name('broadcast.uploadFile');
+    Route::post('/broadcast/aplikasiProsess', [BroadcastController::class, 'aplikasiProsess'])->name('broadcast.aplikasiProsess');
+    Route::post('/broadcast/aplikasiProsessUpdate', [BroadcastController::class, 'aplikasiProsessUpdate'])->name('broadcast.aplikasiProsessUpdate');
 });

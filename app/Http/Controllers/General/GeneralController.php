@@ -170,6 +170,16 @@ class GeneralController extends Controller
             'data' => $data,
         ]);
     }
+    function getUserByRoleAccess(Request $request)
+    {
+        // dd($request->all());
+        $data = GeneralModel::getUserByRoleAccess($request);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data',
+            'data' => $data,
+        ]);
+    }
     function addRoleProses(Request $request)
     {
         // dd($request->all());

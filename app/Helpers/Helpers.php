@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\User;
 use Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -220,8 +221,13 @@ class Helpers
     if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
       $data = DB::table('role_structure')->where('rs_status', 'ACTIVE')->get();
     } else {
-      $data = DB::table('role_structure')->where('rs_id', Auth::user()->role_structure)->where('rs_status', 'ACTIVE')->get();
+      if (Auth::user()->role_structure == 32 || Auth::user()->role_structure == 33 || Auth::user()->role_structure == 34) {
+        $data = DB::select("select * from role_structure where rs_name like '%" . User::getProfileById()->rs_name . "%'");
+      } else {
+        $data = DB::table('role_structure')->where('rs_id', Auth::user()->role_structure)->where('rs_status', 'ACTIVE')->get();
+      }
     }
+    // dd($data);
     return $data;
   }
   public static function getRoleStructureJson()
@@ -327,5 +333,15 @@ class Helpers
       'created_at' => now()
     ];
     DB::table('mm_logs')->insert($data);
+  }
+  public static function notifications()
+  {
+    $data = DB::select('select ba.*, u.name, u.image from broadcast_aplikasi ba, users u where ba.user_id=u.id and ba.status = "ON"');
+    return $data;
+  }
+  public static function getCountNotifi()
+  {
+    $data = DB::table('broadcast_aplikasi')->where('status', 'ON')->count();
+    return $data;
   }
 }

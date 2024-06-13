@@ -2,24 +2,46 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
     public function users()
     {
-        $data['total_users'] = Auth::user()->role_structure != 4 ? User::where('role_structure', Auth::user()->role_structure)->count() : User::all()->count();
-        $data['status_active'] = Auth::user()->role_structure != 4 ? User::where('status', 'ACTIVE')->where('role_structure', Auth::user()->role_structure)->count() : User::where('status', 'ACTIVE')->count();
-        $data['status_inactive'] = Auth::user()->role_structure != 4 ? User::where('status', 'INACTIVE')->where('role_structure', Auth::user()->role_structure)->count() : User::where('status', 'INACTIVE')->count();
-        $data['status_suspended'] = Auth::user()->role_structure != 4 ? User::where('status', 'SUSPENDED')->where('role_structure', Auth::user()->role_structure)->count() : User::where('status', 'SUSPENDED')->count();
+
+        if (Auth::user()->role_structure != Helpers::getRoleStructureJson()[3]) {
+            if (Auth::user()->role_structure == 32 || Auth::user()->role_structure == 33 || Auth::user()->role_structure == 34) {
+                $data['total_users'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and rs.rs_name like  '%" . User::getProfileById()->rs_name . "%' ")[0];
+                $data['status_active'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.status = 'ACTIVE' and rs.rs_name like  '%" . User::getProfileById()->rs_name . "%' ")[0];
+                $data['status_inactive'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.status = 'INACTIVE' and rs.rs_name like  '%" . User::getProfileById()->rs_name . "%' ")[0];
+                $data['status_suspended'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.status = 'SUSPENDED' and rs.rs_name like  '%" . User::getProfileById()->rs_name . "%' ")[0];
+                $data['active'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.active = 'ON' and rs.rs_name like  '%" . User::getProfileById()->rs_name . "%' ")[0];
+            } else {
+                $data['total_users'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and rs.rs_name = '" . User::getProfileById()->rs_name . "' ")[0];
+                $data['status_active'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.status = 'ACTIVE' and rs.rs_name = '" . User::getProfileById()->rs_name . "' ")[0];
+                $data['status_inactive'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.status = 'INACTIVE' and rs.rs_name = '" . User::getProfileById()->rs_name . "' ")[0];
+                $data['status_suspended'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.status = 'SUSPENDED' and rs.rs_name = '" . User::getProfileById()->rs_name . "' ")[0];
+                $data['active'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.active = 'ON' and rs.rs_name = '" . User::getProfileById()->rs_name . "' ")[0];
+            }
+        } else {
+            $data['total_users'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and rs.rs_name != '" . User::getProfileById()->rs_name . "' ")[0];
+            $data['status_active'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.status = 'ACTIVE' and rs.rs_name != '" . User::getProfileById()->rs_name . "' ")[0];
+            $data['status_inactive'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.status = 'INACTIVE' and rs.rs_name != '" . User::getProfileById()->rs_name . "' ")[0];
+            $data['status_suspended'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.status = 'SUSPENDED' and rs.rs_name != '" . User::getProfileById()->rs_name . "' ")[0];
+            $data['active'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.active = 'ON' and rs.rs_name != '" . User::getProfileById()->rs_name . "' ")[0];
+        }
+
         return view('content.users.user-list', $data);
     }
     function userList()
     {
         $data = User::GetListuser();
+        // dd($data);
         return response()->json([
             'success' => true,
             'message' => 'Data',

@@ -29,7 +29,7 @@
                         <div class="content-left">
                             <span>Users</span>
                             <div class="d-flex align-items-center my-2">
-                                <h3 class="mb-0 me-2">{{ $total_users }}</h3>
+                                <h3 class="mb-0 me-2">{{ $total_users->total }}</h3>
                                 {{-- <p class="text-success mb-0">(+29%)</p> --}}
                             </div>
                             <p class="mb-0">Total Users</p>
@@ -50,7 +50,7 @@
                         <div class="content-left">
                             <span>Status Active</span>
                             <div class="d-flex align-items-center my-2">
-                                <h3 class="mb-0 me-2">{{ $status_active }}</h3>
+                                <h3 class="mb-0 me-2">{{ $status_active->total }}</h3>
                                 {{-- <p class="text-success mb-0">(+42%)</p> --}}
                             </div>
                             <p class="mb-0">Total Users</p>
@@ -71,7 +71,7 @@
                         <div class="content-left">
                             <span>Status Inactive</span>
                             <div class="d-flex align-items-center my-2">
-                                <h3 class="mb-0 me-2">{{ $status_inactive }}</h3>
+                                <h3 class="mb-0 me-2">{{ $status_inactive->total }}</h3>
                                 {{-- <p class="text-success mb-0">(+18%)</p> --}}
                             </div>
                             <p class="mb-0">Total Users</p>
@@ -85,14 +85,35 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-xl-3">
+        {{-- <div class="col-sm-6 col-xl-3">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="content-left">
                             <span>Status Suspended</span>
                             <div class="d-flex align-items-center my-2">
-                                <h3 class="mb-0 me-2">{{ $status_suspended }}</h3>
+                                <h3 class="mb-0 me-2">{{ $status_suspended->total }}</h3>
+                                <p class="text-danger mb-0">(-14%)</p>
+                            </div>
+                            <p class="mb-0">Total Users</p>
+                        </div>
+                        <div class="avatar">
+                            <span class="avatar-initial rounded bg-label-success">
+                                <i class="ti ti-user-check ti-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+        <div class="col-sm-6 col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span>Active Login</span>
+                            <div class="d-flex align-items-center my-2">
+                                <h3 class="mb-0 me-2">{{ $active->total }}</h3>
                                 {{-- <p class="text-danger mb-0">(-14%)</p> --}}
                             </div>
                             <p class="mb-0">Total Users</p>
@@ -111,9 +132,12 @@
             <div class="card-header border-bottom">
                 <h5 class="card-title mb-3">Search Filter</h5>
                 <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
-                    <div class="col-md-4 user_role"></div>
-                    <div class="col-md-4 user_plan"></div>
-                    <div class="col-md-4 user_status"></div>
+                    <div class="col-md-3 user_role"></div>
+                    <div class="col-md-3 user_plan"></div>
+                    <div class="col-md-3 user_status"></div>
+                    <div class="col-md-2 user_active"></div>
+                    <div class="col-md-1"><button type="button" class="btn btn-danger me-sm-3 me-1 data-submit"
+                            id="resetAll">Reset</button></div>
                 </div>
             </div>
             <div class="card-datatable table-responsive">
@@ -129,6 +153,7 @@
                             <th>Role Users</th>
                             <th>Contact</th>
                             <th>Status</th>
+                            <th>Active</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -148,9 +173,8 @@
                             <form class="row add-new-user pt-0" id="addNewUserForm">
                                 <div class="mb-3 col-12 col-md-6">
                                     <label class="form-label" for="nik">Nik</label>
-                                    <input type="text" class="form-control" id="nik" name="nik" maxlength="16"
+                                    <input type="text" class="form-control" id="nik" name="nik"
                                         onchange="chekNikAktif(this.value)" placeholder="330206**" name="userFullname"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
                                         aria-label="330206**" />
                                     <span class="invalid-feedback" id="notifNik"></span>
                                 </div>
@@ -179,7 +203,7 @@
                                     <input type="text" id="kontak" name="kontak" class="form-control phone-mask"
                                         maxlength="15" onchange="chekKontakAktif(this.value)"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
-                                        placeholder="+62 8579" aria-label="john.doe@example.com" />
+                                        placeholder="62 8579" aria-label="john.doe@example.com" />
                                     <span class="invalid-feedback" id="notifKontak"></span>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
@@ -264,8 +288,6 @@
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="modalEditUserFirstName">Nik</label>
                                     <input type="text" id="nikEdit" name="nik" class="form-control"
-                                        maxlength="16"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
                                         placeholder="330206****" />
                                     <span class="invalid-feedback" id="notifNik"></span>
                                 </div>
@@ -282,9 +304,7 @@
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="kontak">Kontak</label>
                                     <input type="text" id="kontakEdit" name="kontak" class="form-control"
-                                        maxlength="15"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"
-                                        placeholder="Doe" />
+                                        maxlength="15" placeholder="Doe" />
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="status">Status</label>
@@ -357,7 +377,23 @@
         {{-- <script>
            
         </script> --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
+            integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
+            $(document).ready(function() {
+                $('#resetAll').click(function() {
+                    $('[type="search"]').val('').trigger('keyup');
+                    $('#UserRole').val('').trigger('change');
+                    $('#UserPlan').val('').trigger('change');
+                    $('#FilterTransaction').val('').trigger('change');
+                    $('#FilterActive').val('').trigger('change');
+                });
+            })
+
+
+
+
             function changeRole() {
                 let role_structure = $('#role_structure').val();
                 $.ajax({

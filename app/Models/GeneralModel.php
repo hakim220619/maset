@@ -34,6 +34,18 @@ class GeneralModel extends Model
         }
         return $data;
     }
+    public static function getBroadcastByAplikasi($id)
+    {
+
+        $data = DB::table('broadcast_aplikasi')->where('id', $id)->first();
+        return $data;
+    }
+    public static function broadcastByAplikasiDelete($id)
+    {
+
+        $data = DB::table('broadcast_aplikasi')->where('id', $id)->delete();
+        return $data;
+    }
     public static function checkEmail($request)
     {
 
@@ -159,6 +171,53 @@ class GeneralModel extends Model
         }
         return $data;
     }
+    public static function broadcastByListaplikasi()
+    {
+
+        $data = DB::select('select ROW_NUMBER() OVER () AS no, ba.* from broadcast_aplikasi ba ORDER BY ROW_NUMBER() OVER () asc');
+
+        return $data;
+    }
+    public static function broadcastByAplikasiRead($id)
+    {
+
+        $data = DB::select('select ROW_NUMBER() OVER () AS no, ba.* from broadcast_aplikasi ba where ba.id = "' . $id . '" ORDER BY ROW_NUMBER() OVER () asc');
+
+        return $data[0];
+    }
+    public static function getUserByRoleAccess($request)
+    {
+        // dd($request->role_access);
+        if (Auth::user()->role_structure != Helpers::getRoleStructureJson()[3]) {
+            if (Auth::user()->role_structure == 32 || Auth::user()->role_structure == 33 || Auth::user()->role_structure == 34) {
+                $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name,
+                IF(u.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=u.role_access) ) as ra_name, 
+                IF(u.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=u.role) ) as role_name 
+                from users u, role_structure rs
+                where u.role_structure=rs.rs_id 
+                and rs.rs_name like  "%' . Helpers::getProfileById()->rs_name . '%"
+                and u.role_access = ' . $request->role_access . '
+                ORDER BY ROW_NUMBER() OVER () asc');
+            } else {
+                $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name,
+                IF(u.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=u.role_access) ) as ra_name, 
+                IF(u.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=u.role) ) as role_name 
+                from users u, role_structure rs
+                where u.role_structure=rs.rs_id 
+                and rs.rs_id =  "' . Helpers::getProfileById()->role_structure . '"
+                and u.role_access = ' . $request->role_access . '
+                ORDER BY ROW_NUMBER() OVER () asc');
+            }
+        } else {
+            $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name , ra.ra_name ,r.role_name  from users u, role_structure rs, role_access ra, role r 
+                where u.role_structure=rs.rs_id 
+                and u.role_access=ra.ra_id 
+                and u.role=r.role_id 
+                and u.role_access = ' . $request->role_access . '
+                ORDER BY ROW_NUMBER() OVER () asc');
+        }
+        return $data;
+    }
     public static function ProsesAddRole($request)
     {
 
@@ -173,6 +232,7 @@ class GeneralModel extends Model
         $mmLogsData['action'] = 'Insert';
         Helpers::mmLogs($mmLogsData);
     }
+
     public static function ProsesUpdateRole($request)
     {
 
@@ -193,6 +253,36 @@ class GeneralModel extends Model
         $mmLogsData['activity'] = 'ProsesDeletRole berhasil dengan id ' . $id . '';
         $mmLogsData['detail'] = $data;
         $mmLogsData['action'] = 'Delete';
+        Helpers::mmLogs($mmLogsData);
+    }
+    public static function aplikasiProsess($request)
+    {
+        $data = [
+            'title' => $request->title,
+            'keterangan' => $request->keterangan,
+            'user_id' => Auth::user()->id,
+            'body' => $request->body,
+            'status' => 'ON',
+            'created_at' => now()
+        ];
+        DB::table('broadcast_aplikasi')->insert($data);
+        $mmLogsData['activity'] = 'aplikasiProsess berhasil';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Insert';
+        Helpers::mmLogs($mmLogsData);
+    }
+    public static function aplikasiProsessUpdate($request)
+    {
+        $data = [
+            'title' => $request->title,
+            'body' => $request->body,
+            'status' => $request->status,
+            'updated_at' => now()
+        ];
+        DB::table('broadcast_aplikasi')->where('id', $request->id)->update($data);
+        $mmLogsData['activity'] = 'aplikasiProsessUpdate berhasil';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
         Helpers::mmLogs($mmLogsData);
     }
 }

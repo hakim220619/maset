@@ -22,18 +22,46 @@
       "role": "Super Admin"
     },
     {
-      "url": "/broadcast",
+      "url": "broadcast",
+      "icon": "menu-icon tf-icons far fa-comment-alt",
       "name": "Broadcast",
-      "icon": "menu-icon tf-icons fab fa-whatsapp",
-      "slug": "broadcast",
-      "role": "Admin"
+      "slug": "Broadcast",
+      "role": "Super Admin",
+      "submenu": [
+        {
+          "url": "/broadcast",
+          "name": "Whatsapp",
+          "icon": "menu-icon tf-icons fab fa-whatsapp",
+          "slug": "broadcast"
+        },
+        {
+          "url": "/broadcast/aplikasiView",
+          "name": "Announcement",
+          "icon": "menu-icon tf-icons fab fa-whatsapp",
+          "slug": "ByAplikasi"
+        }
+      ]
     },
     {
-      "url": "/broadcast",
+      "url": "broadcast",
+      "icon": "menu-icon tf-icons far fa-comment-alt",
       "name": "Broadcast",
-      "icon": "menu-icon tf-icons fab fa-whatsapp",
-      "slug": "broadcast",
-      "role": "Super Admin"
+      "slug": "Broadcast",
+      "role": "Admin",
+      "submenu": [
+        {
+          "url": "/broadcast",
+          "name": "Whatsapp",
+          "icon": "menu-icon tf-icons fab fa-whatsapp",
+          "slug": "broadcast"
+        },
+        {
+          "url": "/broadcast/aplikasi",
+          "name": "Aplikasi",
+          "icon": "menu-icon tf-icons fab fa-whatsapp",
+          "slug": "ByAplikasi"
+        }
+      ]
     },
     {
       "url": "masterdata",
