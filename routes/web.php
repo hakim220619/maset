@@ -13,6 +13,7 @@ use App\Http\Controllers\Bangunan\BangunanController;
 use App\Http\Controllers\Broadcast\BroadcastController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\General\GeneralController;
+use App\Http\Controllers\Object\ObjectController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Retail\ReatailController;
 use App\Http\Controllers\Tanah_kosong\TanahkosongController;
@@ -118,6 +119,9 @@ Route::middleware(['auth'])->group(function () {
     //Retail
     Route::get('/object/retail', [ReatailController::class, 'retail'])->name('retail');
     Route::post('/object/add_retail', [ReatailController::class, 'add_retail'])->name('add_retail');
+
+    //Object
+    Route::get('/object/lihat_object', [ObjectController::class, 'lihat_object'])->name('lihat_object');
 
 
     //Broadcast

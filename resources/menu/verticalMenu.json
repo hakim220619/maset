@@ -109,9 +109,31 @@
       "role": "User",
       "submenu": [
         {
-          "url": "object/bangunan",
-          "name": "Tanah dan Bangunan",
-          "slug": "bangunan"
+          "url": "object/lihat_object",
+          "name": "Lihat Object",
+          "slug": "lihat_object"
+        },
+        {
+          "url": "object/tambah_object",
+          "name": "Tambah Object",
+          "slug": "tambah_object",
+          "submenu": [
+            {
+              "url": "object/bangunan",
+              "name": "Tanah dan Bangunan",
+              "slug": "bangunan"
+            },
+            {
+              "url": "object/tanah_kosong",
+              "name": "Tanah Kosong",
+              "slug": "tanah_kosong"
+            },
+            {
+              "url": "object/retail",
+              "name": "Office/Retai/Aset",
+              "slug": "retail"
+            }
+          ]
         }
       ]
     },
