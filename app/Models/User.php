@@ -216,6 +216,29 @@ class User extends Authenticatable
         // dd($mmLogsData);
         Helpers::mmLogs($mmLogsData);
     }
+    public static function ProsesUpdateUsersBeforeLogin($request)
+    {
+        // dd($request);
+        $data = [
+            'nik' => $request->nik,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_structure' => $request->role_structure,
+            'kontak' => $request->kontak,
+            'alamat' => $request->alamat,
+            'active' => 'OFF',
+            'updated_at' => now()
+        ];
+
+        // dd($data);
+        DB::table('users')->where('id', $request->id)->update($data);
+        $mmLogsData['activity'] = 'ProsesUpdateUsersBeforeLogin berhasil dengan id ' . $request->id . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
+        // dd($mmLogsData);
+        Helpers::mmLogs($mmLogsData);
+    }
     public static function ProsesUpdateUsers($request)
     {
         // dd($request->all());

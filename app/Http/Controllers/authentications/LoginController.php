@@ -21,6 +21,8 @@ class LoginController extends Controller
     $pageConfigs = ['myLayout' => 'blank'];
     return view('content.authentications.auth-login', ['pageConfigs' => $pageConfigs]);
   }
+
+
   public function forgetPassword()
   {
     $pageConfigs = ['myLayout' => 'blank'];
@@ -150,10 +152,44 @@ Tim Dukungan Contoh";
   public function handleGoogleCallback()
   {
     $user = Socialite::driver('google')->user();
-    dd($user);
-    // Use $user to authenticate or register the user in your application
-
-    Auth::login($user);
+    $cekEmail = User::where('email', $user->email)->first();
+    if ($cekEmail == null) {
+      User::insert([
+        'google_id' => $user->id,
+        'name' => $user->name,
+        'email' => $user->email,
+        'image' => $user->avatar,
+        'remember_token' => $user->token,
+        'status' => 'INACTIVE',
+        'active' => 'ON',
+        'created_at' => now(),
+      ]);
+      return redirect('/auth/loginVerif/' . $user->id . '');
+    } else {
+      if ($cekEmail->nik != null && $cekEmail->name != null && $cekEmail->email != null && $cekEmail->remember_token != null && $cekEmail->role_structure != null && $cekEmail->kontak != null && $cekEmail->alamat != null) {
+        Auth::login($cekEmail);
+        return redirect('/dashboard/admin');
+      } else {
+        if ($cekEmail->status == 'INACTIVE') {
+          // return redirect('/')->withInput()->withErrors([
+        //   'status' => 'Email sedang tidak aktif!!',
+        //   // 'password' => 'Wrong password',
+        // ]);
+        }
+        return redirect('/auth/loginVerif/' . $user->id . '');
+        
+      }
+    }
+  }
+  public function loginVerif($reqData)
+  {
+    $data['pageConfigs'] = ['myLayout' => 'blank'];
+    $cekToken = DB::table('users')->where('google_id', $reqData)->first();
+    if ($cekToken) {
+      $data['data'] = $cekToken;
+      $data['role_structure'] = DB::table('role_structure')->whereNot('rs_id', 4)->where('rs_status', 'ACTIVE')->get();
+      return view('content.authentications.auth-login-verif', $data);
+    }
   }
   public function logout(Request $request)
   {

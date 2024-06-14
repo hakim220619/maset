@@ -32,6 +32,7 @@ use App\Http\Controllers\Users\UsersController;
 // Main Page Route
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login_action', [LoginController::class, 'login_action'])->name('login.action');
+Route::get('/auth/loginVerif/{google_id}', [LoginController::class, 'loginVerif'])->name('login.loginVerif');
 
 Route::get('/login/google',  [LoginController::class, 'redirectToGoogle'])->name('login.redirectToGoogle');
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('login.handleGoogleCallback');
@@ -50,6 +51,7 @@ Route::get('/pages/misc-error', [MiscError::class, 'index'])->name('pages-misc-e
 // Route::get('/auth/login-basic', [LoginController::class, 'index'])->name('auth-login-basic');
 Route::get('/auth/register-view', [RegisterController::class, 'index'])->name('auth-register-view');
 Route::post('/auth/register', [RegisterController::class, 'addRegister'])->name('addRegister');
+Route::post('/auth/updateUserBeforeLogin', [RegisterController::class, 'updateUserBeforeLogin'])->name('updateUserBeforeLogin');
 Route::post('/checkEmail', [GeneralController::class, 'checkEmail'])->name('checkEmail');
 Route::post('/checkNik', [GeneralController::class, 'checkNik'])->name('checkNik');
 Route::post('/checkKontak', [GeneralController::class, 'checkKontak'])->name('checkKontak');
