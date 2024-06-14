@@ -23,7 +23,7 @@
     },
     {
       "url": "broadcast",
-      "icon": "menu-icon tf-icons far fa-comment-alt",
+      "icon": "menu-icon tf-icons ti fa-file",
       "name": "Broadcast",
       "slug": "Broadcast",
       "role": "Super Admin",
@@ -44,7 +44,7 @@
     },
     {
       "url": "broadcast",
-      "icon": "menu-icon tf-icons far fa-comment-alt",
+      "icon": "menu-icon tf-icons ti fa-file",
       "name": "Broadcast",
       "slug": "Broadcast",
       "role": "Admin",
