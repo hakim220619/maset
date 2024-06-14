@@ -100,7 +100,7 @@ $configData = Helper::appClasses();
           </div>
         </div>
         <div class="bs-stepper-content">
-          <form method="POST" action="{{ route('add_retail') }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ route('add_bangunan') }}" enctype="multipart/form-data">
             <!-- Account Details -->
             @csrf
             <div id="account-details" class="content">
@@ -109,6 +109,14 @@ $configData = Helper::appClasses();
                 <small>Enter Step 1.</small>
               </div>
               <div class="row g-3">
+                <div class="col-sm-6">
+                  <label class="form-label" for="nia">Nomor Induk Asset</label>
+                  <input type="text" id="nia" name="nia" class="form-control" placeholder="A-2022-001" />
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="nib">Nomor Induk Bangunan</label>
+                  <input type="text" id="nib" name="nib" class="form-control" placeholder="B-2022-001" />
+                </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="nama_bangunan">Nama Bangunan</label>
                   <input type="text" id="nama_bangunan" name="nama_bangunan" class="form-control" placeholder="Bangunan Rumah Tinggal –  PT LPP Agro Nusantara i – Jalan Cendrawasih" />
@@ -181,51 +189,18 @@ $configData = Helper::appClasses();
                     <label class="form-label" for="tahun_renovasi">Tahun Renovasi</label>
                     <input type="number" id="tahun_renovasi" name="tahun_renovasi" class="form-control" placeholder="2023" />
                   </div>
-                  <hr>
-                  <div>
-                      <h5>Sumber Informasi Tahun Dibangun</h5>
-                  </div>
                   <div class="col-sm-6">
                     <div>
-                      <label class="form-label" for="kpl_pemilik">Keterangan pendamping lokasi / pemilik</label>
+                      <label class="form-label" for="sumber_info_thn_dibangun">Sumber Informasi Tahun Dibangun</label>
                     </div>
-                      <select class="form-select" name="kpl_pemilik" id="kpl_pemilik" aria-label="Default select example">
+                      <select class="form-select" name="sumber_info_thn_dibangun" id="sumber_info_thn_dibangun" aria-label="Default select example">
                         <option selected disabled>Pilih...</option>
-                        <option value="True">True</option>
-                        <option value="False">False</option>
+                        <option value="Keterangan pendamping lokasi / pemilik">Keterangan pendamping lokasi / pemilik</option>
+                        <option value="IMB">IMB</option>
+                        <option value="Pengamatan visual">Pengamatan visual</option>
+                        <option value="Keterangan lingkungan">Keterangan lingkungan</option>
                       </select>
-                  </div>
-                  <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="kpl_imb">IMB</label>
-                    </div>
-                      <select class="form-select" name="kpl_imb" id="kpl_imb" aria-label="Default select example">
-                        <option selected disabled>Pilih...</option>
-                        <option value="True">True</option>
-                        <option value="False">False</option>
-                      </select>
-                  </div>
-                  <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="kpl_pengamatan_visual">Pengamatan visual</label>
-                    </div>
-                    <select class="form-select" name="kpl_pengamatan_visual" id="kpl_pengamatan_visual" aria-label="Default select example">
-                      <option selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>                   
-                  </div>
-                  <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="kpl_keterangan_lingkungan">Keterangan lingkungan</label>
-                    </div>
-                    <select class="form-select" name="kpl_keterangan_lingkungan" id="kpl_keterangan_lingkungan" aria-label="Default select example">
-                      <option selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>     
-                  </div>
-                  <hr>
+                  </div>    
                   <div class="col-sm-6">
                     <label class="form-label" for="kondisi_bangunan_scr_visual">Kondisi Bangunan Secara Visual</label>
                     <input type="text" id="kondisi_bangunan_scr_visual" name="kondisi_bangunan_scr_visual" class="form-control" placeholder="Baik" />
@@ -267,7 +242,7 @@ $configData = Helper::appClasses();
                     <input type="number" id="lpj_luas" name="lpj_luas" class="form-control" placeholder="44" />
                   </div>
                 <div class="col-12 d-flex justify-content-between">
-                  <button class="btn btn-label-secondary btn-prev" disabled> <i class="ti ti-arrow-left me-sm-1"></i>
+                  <button class="btn btn-label-secondary btn-prev" disabled type="button"> <i class="ti ti-arrow-left me-sm-1"></i>
                     <span class="align-middle d-sm-inline-block d-none">Previous</span>
                   </button>
                   <button class="btn btn-primary btn-next" type="button"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
@@ -365,58 +340,16 @@ $configData = Helper::appClasses();
                     <label class="form-label" for="ttse_bobot">Bobot(%)</label>
                     <input type="number" id="ttse_bobot" name="ttse_bobot" class="form-control" placeholder="73" />
                 </div>
-                <hr>    
-                <div>
-                    <h5>Tipe Rangka Atap Eksisting</h5>
-                </div>
                 <div class="col-sm-6">
                     <div>
-                        <label class="form-label" for="trae_dak_beton">Dak Beton (Jika Pakai Balok)</label>
+                        <label class="form-label" for="tipe_rangka_atap_eksisting">Tipe Rangka Atap Eksisting</label>
                     </div>
-                    <select class="form-select" name="trae_dak_beton" id="trae_dak_beton" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="trae_atap_genteng">Kayu (Atap Genteng)</label>
-                    </div>
-                    <select class="form-select" name="trae_atap_genteng" id="trae_atap_genteng" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="trae_atap_asbes">Kayu (Atap Asbes, Seng dll, Tanpa Reng)</label>
-                    </div>
-                    <select class="form-select" name="trae_atap_asbes" id="trae_atap_asbes" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="trae_br_atap_genteng">Baja Ringan (Atap Genteng)</label>
-                    </div>
-                    <select class="form-select" name="trae_br_atap_genteng" id="trae_br_atap_genteng" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="trae_br_atap_asbes">Baja Ringan (Atap Asbes, Seng dll)</label>
-                    </div>
-                    <select class="form-select" name="trae_br_atap_asbes" id="trae_br_atap_asbes" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
+                    <select class="select2 form-select" name="tipe_rangka_atap_eksisting" id="tipe_rangka_atap_eksisting" multiple>
+                      <option value="Dak Beton (Jika Pakai Balok)">Dak Beton (Jika Pakai Balok)</option>
+                      <option value="Kayu (Atap Genteng)">Kayu (Atap Genteng)</option>
+                      <option value="Kayu (Atap Asbes, Seng dll, Tanpa Reng)">Kayu (Atap Asbes, Seng dll, Tanpa Reng)</option>
+                      <option value="Baja Ringan (Atap Genteng)">Baja Ringan (Atap Genteng)</option>
+                      <option value="Baja Ringan (Atap Asbes, Seng dll)">Baja Ringan (Atap Asbes, Seng dll)</option>
                     </select>
                 </div>
                 <hr>    
@@ -437,103 +370,25 @@ $configData = Helper::appClasses();
                     <label class="form-label" for="ttrae_bobot">Bobot(%)</label>
                     <input type="number" id="ttrae_bobot" name="ttrae_bobot" class="form-control" placeholder="73" />
                 </div>
-                <hr>    
-                <div>
-                    <h5>Tipe Penutup Atap Eksisting</h5>
-                </div>
                 <div class="col-sm-6">
                     <div>
-                        <label class="form-label" for="tpae_asbes">Asbes</label>
+                        <label class="form-label" for="tipe_penutup_atap_eksisting">Tipe Penutup Atap Eksisting</label>
                     </div>
-                    <select class="form-select" name="tpae_asbes" id="tpae_asbes" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
+                    <select class="form-select" name="tipe_penutup_atap_eksisting" id="tipe_penutup_atap_eksisting">
+                      <option value="Asbes">Asbes</option>
+                      <option value="Kayu (Atap Genteng)">Kayu (Atap Genteng)</option>
+                      <option value="Dak Beton">Dak Beton</option>
+                      <option value="Fibreglass">Fibreglass</option>
+                      <option value="Genteng Tanah Liat">Genteng Tanah Liat</option>
+                      <option value="Genteng Beton">Genteng Beton</option>
+                      <option value="Genteng Metal">Genteng Metal</option>
+                      <option value="Seng Gelombang">Seng Gelombang</option>
+                      <option value="Spandek">Spandek</option>
+                      <option value="PVC">PVC</option>
                     </select>
                 </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpae_dak_beton">Dak Beton</label>
-                    </div>
-                    <select class="form-select" name="tpae_dak_beton" id="tpae_dak_beton" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpae_fibreglass">Fibreglass</label>
-                    </div>
-                    <select class="form-select" name="tpae_fibreglass" id="tpae_fibreglass" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpae_genteng_tanah_liat">Genteng Tanah Liat</label>
-                    </div>
-                    <select class="form-select" name="tpae_genteng_tanah_liat" id="tpae_genteng_tanah_liat" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpae_genteng_beton">Genteng Beton</label>
-                    </div>
-                    <select class="form-select" name="tpae_genteng_beton" id="tpae_genteng_beton" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpae_genteng_metal">Genteng Metal</label>
-                    </div>
-                    <select class="form-select" name="tpae_genteng_metal" id="tpae_genteng_metal" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpae_seng_gelombang">Seng Gelombang</label>
-                    </div>
-                    <select class="form-select" name="tpae_seng_gelombang" id="tpae_seng_gelombang" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpae_spandek">Spandek</label>
-                    </div>
-                    <select class="form-select" name="tpae_spandek" id="tpae_spandek" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpae_pvc">PVC</label>
-                    </div>
-                    <select class="form-select" name="tpae_pvc" id="tpae_pvc" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-
                 <div class="col-12 d-flex justify-content-between">
-                  <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left me-sm-1"></i>
+                  <button class="btn btn-label-secondary btn-prev" type="button"> <i class="ti ti-arrow-left me-sm-1"></i>
                     <span class="align-middle d-sm-inline-block d-none">Previous</span>
                   </button>
                   <button class="btn btn-primary btn-next" type="button"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
@@ -551,58 +406,17 @@ $configData = Helper::appClasses();
                   <label class="form-label" for="bobot_penutup_atap">Bobot Penutup Atap(%)</label>
                   <input type="number" class="form-control" id="bobot_penutup_atap" name="bobot_penutup_atap" placeholder="73">
                 </div>
-                <hr>    
-                <div>
-                    <h5>Tipe Plafon Eksisting</h5>
-                </div>
                 <div class="col-sm-6">
                     <div>
-                        <label class="form-label" for="tpe_asbes">Asbes</label>
+                        <label class="form-label" for="tipe_plafon_eksisting">Tipe Plafon Eksisting</label>
                     </div>
-                    <select class="form-select" name="tpe_asbes" id="tpe_asbes" aria-label="Default select example">
+                    <select class="form-select" name="tipe_plafon_eksisting" id="tipe_plafon_eksisting" aria-label="Default select example">
                       <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpe_beton_ekspose">Beton Ekspose</label>
-                    </div>
-                    <select class="form-select" name="tpe_beton_ekspose" id="tpe_beton_ekspose" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpe_grc">GRC</label>
-                    </div>
-                    <select class="form-select" name="tpe_grc" id="tpe_grc" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpe_gypsum">Gypsum</label>
-                    </div>
-                    <select class="form-select" name="tpe_gypsum" id="tpe_gypsum" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpe_triplek">Triplek</label>
-                    </div>
-                    <select class="form-select" name="tpe_triplek" id="tpe_triplek" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
+                      <option value="Asbes">Asbes</option>
+                      <option value="Beton Ekspose">Beton Ekspose</option>
+                      <option value="GRC">GRC</option>
+                      <option value="Gypsum">Gypsum</option>
+                      <option value="Triplek">Triplek</option>
                     </select>
                 </div>   
                 <hr>    
@@ -622,59 +436,18 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6">
                     <label class="form-label" for="tampe_bobot">Bobot(%)</label>
                     <input type="number" id="tampe_bobot" name="tampe_bobot" class="form-control" placeholder="73" />
-                </div>   
-                <hr>    
-                <div>
-                    <h5>Tipe Dinding Existing</h5>
-                </div> 
+                </div>     
                 <div class="col-sm-6">
                     <div>
-                        <label class="form-label" for="tde_batako">Batako</label>
+                        <label class="form-label" for="tipe_dinding_eksisting">Tipe Dinding Existing</label>
                     </div>
-                    <select class="form-select" name="tde_batako" id="tde_batako" aria-label="Default select example">
+                    <select class="form-select" name="tipe_dinding_eksisting" id="tipe_dinding_eksisting" aria-label="Default select example">
                       <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>   
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tde_bata_merah">Bata Merah</label>
-                    </div>
-                    <select class="form-select" name="tde_bata_merah" id="tde_bata_merah" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>   
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tde_bata_ringan">Bata Ringan</label>
-                    </div>
-                    <select class="form-select" name="tde_bata_ringan" id="tde_bata_ringan" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>   
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tde_gypsumboard">Partisi Gypsumboard 2 Muka</label>
-                    </div>
-                    <select class="form-select" name="tde_gypsumboard" id="tde_gypsumboard" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>   
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tde_roaster_bata">Rooster Bata</label>
-                    </div>
-                    <select class="form-select" name="tde_roaster_bata" id="tde_roaster_bata" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
+                      <option value="Batako">Batako</option>
+                      <option value="Bata Merah">Bata Merah</option>
+                      <option value="Bata Ringan">Bata Ringan</option>
+                      <option value="Partisi Gypsumboard 2 Muka">Partisi Gypsumboard 2 Muka</option>
+                      <option value="Rooster Bata">Rooster Bata</option>
                     </select>
                 </div>   
                 <div class="col-sm-6">
@@ -698,59 +471,18 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6">
                     <label class="form-label" for="ttde_bobot">Bobot(%)</label>
                     <input type="number" id="ttde_bobot" name="ttde_bobot" class="form-control" placeholder="73" />
-                </div> 
-                <hr>    
-                <div>
-                    <h5>Tipe Pelapis Dinding Eksisting</h5>
-                </div>  
+                </div>          
                 <div class="col-sm-6">
                     <div>
-                        <label class="form-label" for="tpde_dilapisi_cat">Dilapis Cat (Diplester dan Diaci)</label>
+                        <label class="form-label" for="tipe_pelapis_dinding_eksisting">Tipe Pelapis Dinding Eksisting</label>
                     </div>
-                    <select class="form-select" name="tpde_dilapisi_cat" id="tpde_dilapisi_cat" aria-label="Default select example">
+                    <select class="form-select" name="tipe_pelapis_dinding_eksisting" id="tipe_pelapis_dinding_eksisting" aria-label="Default select example">
                       <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpde_dilapisi_keramik">Dilapis Keramik</label>
-                    </div>
-                    <select class="form-select" name="tpde_dilapisi_keramik" id="tpde_dilapisi_keramik" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpde_dilapisi_walpaper">Dilapis Wallpaper</label>
-                    </div>
-                    <select class="form-select" name="tpde_dilapisi_walpaper" id="tpde_dilapisi_walpaper" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpde_dilapisi_mozaik">Dilapis Mozaik</label>
-                    </div>
-                    <select class="form-select" name="tpde_dilapisi_mozaik" id="tpde_dilapisi_mozaik" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpde_dilapisi_batu_alam">Dilapis Batu Alam</label>
-                    </div>
-                    <select class="form-select" name="tpde_dilapisi_batu_alam" id="tpde_dilapisi_batu_alam" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
+                      <option value="Dilapis Cat (Diplester dan Diaci)">Dilapis Cat (Diplester dan Diaci)</option>
+                      <option value="Dilapis Keramik">Dilapis Keramik</option>
+                      <option value="Dilapis Wallpaper">Dilapis Wallpaper</option>
+                      <option value="Dilapis Mozaik">Dilapis Mozaik</option>
+                      <option value="Dilapis Batu Alam">Dilapis Batu Alam</option>
                     </select>
                 </div> 
                 <div class="col-sm-6">
@@ -781,57 +513,21 @@ $configData = Helper::appClasses();
                 </div>  
                 <div class="col-sm-6">
                     <div>
-                        <label class="form-label" for="tpdje_pintu_kayu_panil">Pintu Kayu Panil</label>
+                        <label class="form-label" for="tipe_pintu_n_jendela_eksisting">Tipe Pintu & Jendela Eksisting</label>
                     </div>
-                    <select class="form-select" name="tpdje_pintu_kayu_panil" id="tpdje_pintu_kayu_panil" aria-label="Default select example">
+                    <select class="form-select" name="tipe_pintu_n_jendela_eksisting" id="tipe_pintu_n_jendela_eksisting" aria-label="Default select example">
                       <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
+                      <option value="Pintu Kayu Panil">Pintu Kayu Panil</option>
+                      <option value="Pintu Kayu Dobel Triplek/ HPL">Pintu Kayu Dobel Triplek/ HPL</option>
+                      <option value="Pintu Kaca Rk Aluminium">Pintu Kaca Rk Aluminium</option>
+                      <option value="Jendela Kaca Rk Kayu">Jendela Kaca Rk Kayu</option>
+                      <option value="Jendela Kaca Rk Aluminium">Jendela Kaca Rk Aluminium</option>
+                      <option value="Pintu KM UPVC/PVC">Pintu KM UPVC/PVC</option>
                     </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpdje_pintu_kayu_dobel_triplek">Pintu Kayu Dobel Triplek/ HPL</label>
-                    </div>
-                    <select class="form-select" name="tpdje_pintu_kayu_dobel_triplek" id="tpdje_pintu_kayu_dobel_triplek" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpdje_pintu_kaca_rk">Pintu Kaca Rk Aluminium</label>
-                    </div>
-                    <select class="form-select" name="tpdje_pintu_kaca_rk" id="tpdje_pintu_kaca_rk" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpdje_jendela_kaca_kayu">Jendela Kaca Rk Kayu</label>
-                    </div>
-                    <select class="form-select" name="tpdje_jendela_kaca_kayu" id="tpdje_jendela_kaca_kayu" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tpdje_pintu_km">Pintu KM UPVC/PVC</label>
-                    </div>
-                    <select class="form-select" name="tpdje_pintu_km" id="tpdje_pintu_km" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div>               
+                </div>              
                                
                 <div class="col-12 d-flex justify-content-between">
-                  <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left me-sm-1"></i>
+                  <button class="btn btn-label-secondary btn-prev" type="button"> <i class="ti ti-arrow-left me-sm-1"></i>
                     <span class="align-middle d-sm-inline-block d-none">Previous</span>
                   </button>
                   <button class="btn btn-primary btn-next" type="button"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
@@ -862,79 +558,20 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6">
                     <label class="form-label" for="ttpdje_bobot">Bobot(%)</label>
                     <input type="number" id="ttpdje_bobot" name="ttpdje_bobot" class="form-control" placeholder="73" />
-                </div> 
-                <hr>    
-                <div>
-                    <h5>Tipe Lantai Eksisting </h5>
-                </div>  
+                </div>   
                 <div class="col-sm-6">
                     <div>
-                        <label class="form-label" for="tle_granit">Granit/Homogenous Tile</label>
+                        <label class="form-label" for="tipe_lantai_eksisting">Tipe Lantai Eksisting</label>
                     </div>
-                    <select class="form-select" name="tle_granit" id="tle_granit" aria-label="Default select example">
+                    <select class="form-select" name="tipe_lantai_eksisting" id="tipe_lantai_eksisting" aria-label="Default select example">
                       <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tle_karpet">Karpet</label>
-                    </div>
-                    <select class="form-select" name="tle_karpet" id="tle_karpet" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tle_keramik">Keramik</label>
-                    </div>
-                    <select class="form-select" name="tle_keramik" id="tle_keramik" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tle_rabat_beton">Rabat Beton (Semen Ekspose)</label>
-                    </div>
-                    <select class="form-select" name="tle_rabat_beton" id="tle_rabat_beton" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tle_teraso">Teraso</label>
-                    </div>
-                    <select class="form-select" name="tle_teraso" id="tle_teraso" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tle_vynil">Vynil</label>
-                    </div>
-                    <select class="form-select" name="tle_vynil" id="tle_vynil" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
-                </div> 
-                <div class="col-sm-6">
-                    <div>
-                        <label class="form-label" for="tle_papan_kayu">Papan Kayu</label>
-                    </div>
-                    <select class="form-select" name="tle_papan_kayu" id="tle_papan_kayu" aria-label="Default select example">
-                      <option value="" selected disabled>Pilih...</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
+                      <option value="Granit/Homogenous Tile">Granit/Homogenous Tile</option>
+                      <option value="Karpet">Karpet</option>
+                      <option value="Keramik">Keramik</option>
+                      <option value="Rabat Beton (Semen Ekspose)">Rabat Beton (Semen Ekspose)</option>
+                      <option value="Teraso">Teraso</option>
+                      <option value="Vynil">Vynil</option>
+                      <option value="Papan Kayu">Papan Kayu</option>
                     </select>
                 </div> 
                 <div class="col-sm-6">
@@ -965,65 +602,19 @@ $configData = Helper::appClasses();
                 </div> 
                 <div>
                   <h5>Perlengkapan Bangunan</h5>
-              </div>  
+              </div>               
               <div class="col-sm-6">
                   <div>
-                      <label class="form-label" for="pb_listrik">Listrik</label>
+                      <label class="form-label" for="perlengkapan_bangunan">Perlengkapan Bangunan</label>
                   </div>
-                  <select class="form-select" name="pb_listrik" id="pb_listrik" aria-label="Default select example">
+                  <select class="form-select" name="perlengkapan_bangunan" id="perlengkapan_bangunan" aria-label="Default select example">
                     <option value="" selected disabled>Pilih...</option>
-                    <option value="True">True</option>
-                    <option value="False">False</option>
-                  </select>
-              </div> 
-              <div class="col-sm-6">
-                  <div>
-                      <label class="form-label" for="pb_telepon">Telepon</label>
-                  </div>
-                  <select class="form-select" name="pb_telepon" id="pb_telepon" aria-label="Default select example">
-                    <option value="" selected disabled>Pilih...</option>
-                    <option value="True">True</option>
-                    <option value="False">False</option>
-                  </select>
-              </div> 
-              <div class="col-sm-6">
-                  <div>
-                      <label class="form-label" for="pb_pdam">PDAM</label>
-                  </div>
-                  <select class="form-select" name="pb_pdam" id="pb_pdam" aria-label="Default select example">
-                    <option value="" selected disabled>Pilih...</option>
-                    <option value="True">True</option>
-                    <option value="False">False</option>
-                  </select>
-              </div> 
-              <div class="col-sm-6">
-                  <div>
-                      <label class="form-label" for="pb_gas">Gas</label>
-                  </div>
-                  <select class="form-select" name="pb_gas" id="pb_gas" aria-label="Default select example">
-                    <option value="" selected disabled>Pilih...</option>
-                    <option value="True">True</option>
-                    <option value="False">False</option>
-                  </select>
-              </div> 
-              <div class="col-sm-6">
-                  <div>
-                      <label class="form-label" for="pb_ac">AC</label>
-                  </div>
-                  <select class="form-select" name="pb_ac" id="pb_ac" aria-label="Default select example">
-                    <option value="" selected disabled>Pilih...</option>
-                    <option value="True">True</option>
-                    <option value="False">False</option>
-                  </select>
-              </div> 
-              <div class="col-sm-6">
-                  <div>
-                      <label class="form-label" for="pb_sumur_gali">Sumur Gali/Pompa</label>
-                  </div>
-                  <select class="form-select" name="pb_sumur_gali" id="pb_sumur_gali" aria-label="Default select example">
-                    <option value="" selected disabled>Pilih...</option>
-                    <option value="True">True</option>
-                    <option value="False">False</option>
+                    <option value="Listrik">Listrik</option>
+                    <option value="Telepon">Telepon</option>
+                    <option value="PDAM">PDAM</option>
+                    <option value="Gas">Gas</option>
+                    <option value="AC">AC</option>
+                    <option value="Sumur Gali/Pompa">Sumur Gali/Pompa</option>
                   </select>
               </div> 
               <div class="col-sm-6">
@@ -1043,7 +634,7 @@ $configData = Helper::appClasses();
                   </select>
               </div>             
                 <div class="col-12 d-flex justify-content-between">
-                  <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left me-sm-1"></i>
+                  <button class="btn btn-label-secondary btn-prev" type="button"> <i class="ti ti-arrow-left me-sm-1"></i>
                     <span class="align-middle d-sm-inline-block d-none">Previous</span>
                   </button>
                   <button type="button" class="btn btn-primary btn-next" id="btn-review"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
@@ -1055,6 +646,16 @@ $configData = Helper::appClasses();
   
               <p class="fw-medium mb-2">Step 1</p>
               <table class="table table-borderless">
+                  <tr>
+                    <td style="font-weight: 800">Nomor Induk Asset</td>
+                    <td>:</td>
+                    <td><span id="review-nia"></span></td>
+                    <td></td>
+                    <td></td>
+                    <td style="font-weight: 800">Nomor Induk Bangunan</td>
+                    <td>:</td>
+                    <td><span id="review-nib"></span></td>
+                  </tr>
                   <tr>
                     <td style="font-weight: 800">Nama Bangunan</td>
                     <td>:</td>
@@ -1149,24 +750,9 @@ $configData = Helper::appClasses();
                     <td colspan="8" class="text-danger">Sumber Informasi Tahun Dibangun</td>
                   </tr>
                   <tr>
-                    <td style="font-weight: 800">Keterangan pendamping lokasi / pemilik</td>
+                    <td style="font-weight: 800">Sumber Informasi Tahun Dibangun</td>
                     <td>:</td>
-                    <td><span id="review-kpl_pemilik"></span></td>                    
-                    <td></td>
-                    <td></td>
-                    <td style="font-weight: 800">IMB</td>
-                    <td>:</td>
-                    <td><span id="review-kpl_imb"></span></td>                    
-                  </tr>
-                  <tr>
-                    <td style="font-weight: 800">Pengamatan visual</td>
-                    <td>:</td>
-                    <td><span id="review-kpl_pengamatan_visual"></span></td>                    
-                    <td></td>
-                    <td></td>
-                    <td style="font-weight: 800">Keterangan lingkungan</td>
-                    <td>:</td>
-                    <td><span id="review-kpl_keterangan_lingkungan"></span></td>                    
+                    <td><span id="review-sumber_info_thn_dibangun"></span></td>                                  
                   </tr>
                   <tr>
                     <td style="font-weight: 800">Kondisi Bangunan Secara Visual</td>
@@ -1310,32 +896,9 @@ $configData = Helper::appClasses();
                   <td><span id="review-ttse_bobot"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tipe Rangka Atap Eksisting</td>
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Dak Beton (Jika Pakai Balok)</td>
+                  <td style="font-weight: 800">Tipe Rangka Atap Eksisting</td>
                   <td>:</td>
-                  <td><span id="review-trae_dak_beton"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Kayu (Atap Genteng)</td>
-                  <td>:</td>
-                  <td><span id="review-trae_atap_genteng"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Kayu (Atap Asbes, Seng dll, Tanpa Reng)</td>
-                  <td>:</td>
-                  <td><span id="review-trae_atap_asbes"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Baja Ringan (Atap Genteng)</td>
-                  <td>:</td>
-                  <td><span id="review-trae_br_atap_genteng"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Baja Ringan (Atap Asbes, Seng dll)</td>
-                  <td>:</td>
-                  <td><span id="review-trae_br_atap_asbes"></span></td>                    
+                  <td><span id="review-tipe_rangka_atap_eksisting"></span></td>                    
                 </tr>
                 <tr>
                   <td colspan="8" class="text-danger">Tambah Tipe Rangka Atap Existing</td>
@@ -1351,52 +914,9 @@ $configData = Helper::appClasses();
                   <td><span id="review-ttrae_bobot"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tipe Penutup Atap Eksisting</td>
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Asbes</td>
+                  <td style="font-weight: 800">Tipe Penutup Atap Eksisting</td>
                   <td>:</td>
-                  <td><span id="review-tpae_asbes"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Dak Beton</td>
-                  <td>:</td>
-                  <td><span id="review-tpae_dak_beton"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Fibreglass</td>
-                  <td>:</td>
-                  <td><span id="review-tpae_fibreglass"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Genteng Tanah Liat</td>
-                  <td>:</td>
-                  <td><span id="review-tpae_genteng_tanah_liat"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Genteng Beton</td>
-                  <td>:</td>
-                  <td><span id="review-tpae_genteng_beton"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Genteng Metal</td>
-                  <td>:</td>
-                  <td><span id="review-tpae_genteng_metal"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Seng Gelombang</td>
-                  <td>:</td>
-                  <td><span id="review-tpae_seng_gelombang"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Spandek</td>
-                  <td>:</td>
-                  <td><span id="review-tpae_spandek"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">PVC</td>
-                  <td>:</td>
-                  <td><span id="review-tpae_pvc"></span></td>                                
+                  <td><span id="review-tipe_penutup_atap_eksisting"></span></td>                                
                 </tr>                
               </table>
               <hr>
@@ -1408,30 +928,10 @@ $configData = Helper::appClasses();
                   <td><span id="review-bobot_penutup_atap"></span></td>                    
                   <td></td>
                   <td></td>
-                  <td style="font-weight: 800">Asbes</td>
+                  <td style="font-weight: 800">Tipe Plafon Eksisting</td>
                   <td>:</td>
-                  <td><span id="review-tpe_asbes"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Beton Ekspose</td>
-                  <td>:</td>
-                  <td><span id="review-tpe_beton_ekspose"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">GRC</td>
-                  <td>:</td>
-                  <td><span id="review-tpe_grc"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Gypsum</td>
-                  <td>:</td>
-                  <td><span id="review-tpe_gypsum"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Triplek</td>
-                  <td>:</td>
-                  <td><span id="review-tpe_triplek"></span></td>                    
-                </tr>
+                  <td><span id="review-tipe_plafon_eksisting"></span></td>                    
+                </tr>               
                 <tr>
                   <td colspan="8" class="text-danger">Tambah Plafon Eksisting</td>
                 </tr>
@@ -1446,32 +946,9 @@ $configData = Helper::appClasses();
                   <td><span id="review-tampe_bobot"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tipe Dinding Existing</td>
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Batako</td>
+                  <td style="font-weight: 800">Tipe Dinding Existing</td>
                   <td>:</td>
-                  <td><span id="review-tde_batako"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Bata Merah</td>
-                  <td>:</td>
-                  <td><span id="review-tde_bata_merah"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Bata Ringan</td>
-                  <td>:</td>
-                  <td><span id="review-tde_bata_ringan"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Partisi Gypsumboard 2 Muka</td>
-                  <td>:</td>
-                  <td><span id="review-tde_gypsumboard"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Rooster Bata</td>
-                  <td>:</td>
-                  <td><span id="review-tde_roaster_bata"></span></td>                    
+                  <td><span id="review-tipe_dinding_eksisting"></span></td>                    
                   <td></td>
                   <td></td>
                   <td style="font-weight: 800">Bobot Dinding(%)</td>
@@ -1492,32 +969,9 @@ $configData = Helper::appClasses();
                   <td><span id="review-ttde_bobot"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tipe Pelapis Dinding Eksisting</td>
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Dilapis Cat (Diplester dan Diaci)</td>
+                  <td style="font-weight: 800">Tipe Pelapis Dinding Eksisting</td>
                   <td>:</td>
-                  <td><span id="review-tpde_dilapisi_cat"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Dilapis Keramik</td>
-                  <td>:</td>
-                  <td><span id="review-tpde_dilapisi_keramik"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Dilapis Wallpaper</td>
-                  <td>:</td>
-                  <td><span id="review-tpde_dilapisi_walpaper"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Dilapis Mozaik</td>
-                  <td>:</td>
-                  <td><span id="review-tpde_dilapisi_mozaik"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Dilapis Batu Alam</td>
-                  <td>:</td>
-                  <td><span id="review-tpde_dilapisi_batu_alam"></span></td>                    
+                  <td><span id="review-tipe_pelapis_dinding_eksisting"></span></td>                    
                   <td></td>
                   <td></td>
                   <td style="font-weight: 800">Bobot Pelapis Dinding Cat (Diplester dan Diaci)</td>
@@ -1541,29 +995,9 @@ $configData = Helper::appClasses();
                   <td colspan="8" class="text-danger">Tipe Pintu & Jendela Eksisting</td>
                 </tr>
                 <tr>
-                  <td style="font-weight: 800">Pintu Kayu Panil</td>
+                  <td style="font-weight: 800">Tipe Pintu & Jendela Eksisting</td>
                   <td>:</td>
-                  <td><span id="review-tpdje_pintu_kayu_panil"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Pintu Kayu Dobel Triplek/ HPL</td>
-                  <td>:</td>
-                  <td><span id="review-tpdje_pintu_kayu_dobel_triplek"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Pintu Kaca Rk Aluminium</td>
-                  <td>:</td>
-                  <td><span id="review-tpdje_pintu_kaca_rk"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Jendela Kaca Rk Kayu</td>
-                  <td>:</td>
-                  <td><span id="review-tpdje_jendela_kaca_kayu"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Pintu KM UPVC/PVC</td>
-                  <td>:</td>
-                  <td><span id="review-tpdje_pintu_km"></span></td>                   
+                  <td><span id="review-tipe_pintu_n_jendela_eksisting"></span></td>                   
                 </tr>
               </table>
               <hr>
@@ -1586,39 +1020,9 @@ $configData = Helper::appClasses();
                   <td colspan="8" class="text-danger">Tipe Lantai Eksisting</td>
                 </tr>
                 <tr>
-                  <td style="font-weight: 800">Granit/Homogenous Tile</td>
+                  <td style="font-weight: 800">Tipe Lantai Eksisting</td>
                   <td>:</td>
-                  <td><span id="review-tle_granit"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Karpet</td>
-                  <td>:</td>
-                  <td><span id="review-tle_karpet"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Keramik</td>
-                  <td>:</td>
-                  <td><span id="review-tle_keramik"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Rabat Beton (Semen Ekspose)</td>
-                  <td>:</td>
-                  <td><span id="review-tle_rabat_beton"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Teraso</td>
-                  <td>:</td>
-                  <td><span id="review-tle_teraso"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Vynil</td>
-                  <td>:</td>
-                  <td><span id="review-tle_vynil"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">Papan Kayu</td>
-                  <td>:</td>
-                  <td><span id="review-tle_papan_kayu"></span></td>                    
+                  <td><span id="review-tipe_lantai_eksisting"></span></td>                    
                   <td></td>
                   <td></td>
                   <td style="font-weight: 800">Bobot Lantai(%)</td>
@@ -1647,54 +1051,28 @@ $configData = Helper::appClasses();
                   <td colspan="8" class="text-danger">Perlengkapan Bangunan</td>
                 </tr>
                 <tr>
-                  <td style="font-weight: 800">Listrik</td>
+                  <td style="font-weight: 800">Perlengkapan Bangunan</td>
                   <td>:</td>
-                  <td><span id="review-pb_listrik"></span></td>                    
+                  <td><span id="review-perlengkapan_bangunan"></span></td>    
                   <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Telepon</td>
-                  <td>:</td>
-                  <td><span id="review-pb_telepon"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">PDAM</td>
-                  <td>:</td>
-                  <td><span id="review-pb_pdam"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Gas</td>
-                  <td>:</td>
-                  <td><span id="review-pb_gas"></span></td>                    
-                </tr>
-                <tr>
-                  <td style="font-weight: 800">AC</td>
-                  <td>:</td>
-                  <td><span id="review-pb_ac"></span></td>                    
-                  <td></td>
-                  <td></td>
-                  <td style="font-weight: 800">Sumur Gali/Pompa</td>
-                  <td>:</td>
-                  <td><span id="review-pb_sumur_gali"></span></td>                    
-                </tr>
-                <tr>
+                  <td></td>  
                   <td style="font-weight: 800">Penggunaan Bangunan</td>
                   <td>:</td>
-                  <td><span id="review-penggunaan_bangunan"></span></td>                    
-                  <td></td>
-                  <td></td>
+                  <td><span id="review-penggunaan_bangunan"></span></td>               
+                </tr>
+                <tr>                                   
                   <td style="font-weight: 800">Progres Pembangunan jika aset dalam proses (dalam persen)</td>
                   <td>:</td>
-                  <td><span id="review-progress_pembangunan"></span></td>                    
-                </tr>
-                <tr>
+                  <td><span id="review-progress_pembangunan"></span></td>      
+                  <td></td>
+                  <td></td> 
                   <td style="font-weight: 800">Status Data Obyek</td>
                   <td>:</td>
-                  <td><span id="review-status_data_obyek"></span></td>                   
+                  <td><span id="review-status_data_obyek"></span></td>             
                 </tr>
-
               </table>
               <div class="col-12 d-flex justify-content-between">
-                <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left me-sm-1"></i>
+                <button class="btn btn-label-secondary btn-prev" type="button"> <i class="ti ti-arrow-left me-sm-1"></i>
                   <span class="align-middle d-sm-inline-block d-none">Previous</span>
                 </button>
                 <button class="btn btn-success btn-submit" type="submit">Submit</button>
@@ -1710,6 +1088,8 @@ $configData = Helper::appClasses();
 <script>
   document.querySelector('#btn-review').addEventListener('click', function() {
     // Step 1
+    document.getElementById('review-nia').innerHTML = document.getElementById('nia').value    
+    document.getElementById('review-nib').innerHTML = document.getElementById('nib').value    
     document.getElementById('review-nama-bangunan').innerHTML = document.getElementById('nama_bangunan').value    
     const foto_tampak_depan = document.getElementById('foto_tampak_depan');
         if (foto_tampak_depan.files && foto_tampak_depan.files[0]) {
@@ -1765,10 +1145,7 @@ $configData = Helper::appClasses();
     document.getElementById('review-jenis_bangunan_il').innerHTML = document.getElementById('jenis_bangunan_il').value
     document.getElementById('review-tahun_dibangun').innerHTML = document.getElementById('tahun_dibangun').value
     document.getElementById('review-tahun_renovasi').innerHTML = document.getElementById('tahun_renovasi').value
-    document.getElementById('review-kpl_pemilik').innerHTML = document.getElementById('kpl_pemilik').value
-    document.getElementById('review-kpl_imb').innerHTML = document.getElementById('kpl_imb').value
-    document.getElementById('review-kpl_pengamatan_visual').innerHTML = document.getElementById('kpl_pengamatan_visual').value
-    document.getElementById('review-kpl_keterangan_lingkungan').innerHTML = document.getElementById('kpl_keterangan_lingkungan').value
+    document.getElementById('review-sumber_info_thn_dibangun').innerHTML = document.getElementById('sumber_info_thn_dibangun').value
     document.getElementById('review-kondisi_bangunan_scr_visual').innerHTML = document.getElementById('kondisi_bangunan_scr_visual').value
     document.getElementById('review-catatan_khusus_bangunan').innerHTML = document.getElementById('catatan_khusus_bangunan').value
     document.getElementById('review-lbf_no_or_nama_lantai').innerHTML = document.getElementById('lbf_no_or_nama_lantai').value
@@ -1792,75 +1169,40 @@ $configData = Helper::appClasses();
     document.getElementById('review-tse_bobot_struktur_beton_bertulng').innerHTML = document.getElementById('tse_bobot_struktur_beton_bertulng').value
     document.getElementById('review-ttse_tipe_material').innerHTML = document.getElementById('ttse_tipe_material').value
     document.getElementById('review-ttse_bobot').innerHTML = document.getElementById('ttse_bobot').value
-    document.getElementById('review-trae_dak_beton').innerHTML = document.getElementById('trae_dak_beton').value
-    document.getElementById('review-trae_atap_genteng').innerHTML = document.getElementById('trae_atap_genteng').value
-    document.getElementById('review-trae_atap_asbes').innerHTML = document.getElementById('trae_atap_asbes').value
-    document.getElementById('review-trae_br_atap_genteng').innerHTML = document.getElementById('trae_br_atap_genteng').value
-    document.getElementById('review-trae_br_atap_asbes').innerHTML = document.getElementById('trae_br_atap_asbes').value
+    document.getElementById('review-tipe_rangka_atap_eksisting').innerHTML = document.getElementById('tipe_rangka_atap_eksisting').value
     document.getElementById('review-ttrae_tipe_material').innerHTML = document.getElementById('ttrae_tipe_material').value
     document.getElementById('review-ttrae_bobot').innerHTML = document.getElementById('ttrae_bobot').value
-    document.getElementById('review-tpae_asbes').innerHTML = document.getElementById('tpae_asbes').value
-    document.getElementById('review-tpae_dak_beton').innerHTML = document.getElementById('tpae_dak_beton').value
-    document.getElementById('review-tpae_fibreglass').innerHTML = document.getElementById('tpae_fibreglass').value
-    document.getElementById('review-tpae_genteng_tanah_liat').innerHTML = document.getElementById('tpae_genteng_tanah_liat').value
-    document.getElementById('review-tpae_genteng_beton').innerHTML = document.getElementById('tpae_genteng_beton').value
-    document.getElementById('review-tpae_genteng_metal').innerHTML = document.getElementById('tpae_genteng_metal').value
-    document.getElementById('review-tpae_seng_gelombang').innerHTML = document.getElementById('tpae_seng_gelombang').value
-    document.getElementById('review-tpae_spandek').innerHTML = document.getElementById('tpae_spandek').value
-    document.getElementById('review-tpae_pvc').innerHTML = document.getElementById('tpae_pvc').value
+    document.getElementById('review-tipe_penutup_atap_eksisting').innerHTML = document.getElementById('tipe_penutup_atap_eksisting').value
     // Step 3
     document.getElementById('review-bobot_penutup_atap').innerHTML = document.getElementById('bobot_penutup_atap').value
-    document.getElementById('review-tpe_asbes').innerHTML = document.getElementById('tpe_asbes').value
-    document.getElementById('review-tpe_beton_ekspose').innerHTML = document.getElementById('tpe_beton_ekspose').value
-    document.getElementById('review-tpe_grc').innerHTML = document.getElementById('tpe_grc').value
-    document.getElementById('review-tpe_gypsum').innerHTML = document.getElementById('tpe_gypsum').value
-    document.getElementById('review-tpe_triplek').innerHTML = document.getElementById('tpe_triplek').value
+    document.getElementById('review-tipe_plafon_eksisting').innerHTML = document.getElementById('tipe_plafon_eksisting').value
     document.getElementById('review-tampe_tipe_material').innerHTML = document.getElementById('tampe_tipe_material').value
     document.getElementById('review-tampe_bobot').innerHTML = document.getElementById('tampe_bobot').value
-    document.getElementById('review-tde_batako').innerHTML = document.getElementById('tde_batako').value
-    document.getElementById('review-tde_bata_merah').innerHTML = document.getElementById('tde_bata_merah').value
-    document.getElementById('review-tde_bata_ringan').innerHTML = document.getElementById('tde_bata_ringan').value
-    document.getElementById('review-tde_gypsumboard').innerHTML = document.getElementById('tde_gypsumboard').value
-    document.getElementById('review-tde_roaster_bata').innerHTML = document.getElementById('tde_roaster_bata').value
+    document.getElementById('review-tipe_dinding_eksisting').innerHTML = document.getElementById('tipe_dinding_eksisting').value
     document.getElementById('review-tde_bobot').innerHTML = document.getElementById('tde_bobot').value
     document.getElementById('review-ttde_tipe_material').innerHTML = document.getElementById('ttde_tipe_material').value
     document.getElementById('review-ttde_bobot').innerHTML = document.getElementById('ttde_bobot').value
-    document.getElementById('review-tpde_dilapisi_cat').innerHTML = document.getElementById('tpde_dilapisi_cat').value
-    document.getElementById('review-tpde_dilapisi_keramik').innerHTML = document.getElementById('tpde_dilapisi_keramik').value
-    document.getElementById('review-tpde_dilapisi_walpaper').innerHTML = document.getElementById('tpde_dilapisi_walpaper').value
-    document.getElementById('review-tpde_dilapisi_mozaik').innerHTML = document.getElementById('tpde_dilapisi_mozaik').value
-    document.getElementById('review-tpde_dilapisi_batu_alam').innerHTML = document.getElementById('tpde_dilapisi_batu_alam').value
+    document.getElementById('review-tipe_pelapis_dinding_eksisting').innerHTML = document.getElementById('tipe_pelapis_dinding_eksisting').value
     document.getElementById('review-ttde_bobot_pdc').innerHTML = document.getElementById('ttde_bobot_pdc').value
     document.getElementById('review-ttpde_tipe_material').innerHTML = document.getElementById('ttpde_tipe_material').value
     document.getElementById('review-ttpde_bobot').innerHTML = document.getElementById('ttpde_bobot').value
-    document.getElementById('review-tpdje_pintu_kayu_panil').innerHTML = document.getElementById('tpdje_pintu_kayu_panil').value
-    document.getElementById('review-tpdje_pintu_kayu_dobel_triplek').innerHTML = document.getElementById('tpdje_pintu_kayu_dobel_triplek').value
-    document.getElementById('review-tpdje_pintu_kaca_rk').innerHTML = document.getElementById('tpdje_pintu_kaca_rk').value
-    document.getElementById('review-tpdje_jendela_kaca_kayu').innerHTML = document.getElementById('tpdje_jendela_kaca_kayu').value
-    document.getElementById('review-tpdje_pintu_km').innerHTML = document.getElementById('tpdje_pintu_km').value
+    document.getElementById('review-tipe_pintu_n_jendela_eksisting').innerHTML = document.getElementById('tipe_pintu_n_jendela_eksisting').value
     // Step 4
     document.getElementById('review-ttpdje_tipe_material').innerHTML = document.getElementById('ttpdje_tipe_material').value
     document.getElementById('review-ttpdje_bobot').innerHTML = document.getElementById('ttpdje_bobot').value
-    document.getElementById('review-tle_granit').innerHTML = document.getElementById('tle_granit').value
-    document.getElementById('review-tle_karpet').innerHTML = document.getElementById('tle_karpet').value
-    document.getElementById('review-tle_keramik').innerHTML = document.getElementById('tle_keramik').value
-    document.getElementById('review-tle_rabat_beton').innerHTML = document.getElementById('tle_rabat_beton').value
-    document.getElementById('review-tle_teraso').innerHTML = document.getElementById('tle_teraso').value
-    document.getElementById('review-tle_vynil').innerHTML = document.getElementById('tle_vynil').value
-    document.getElementById('review-tle_papan_kayu').innerHTML = document.getElementById('tle_papan_kayu').value
+    document.getElementById('review-tipe_lantai_eksisting').innerHTML = document.getElementById('tipe_lantai_eksisting').value
     document.getElementById('review-tle_bobot_lantai').innerHTML = document.getElementById('tle_bobot_lantai').value
     document.getElementById('review-ttle_tipe_material').innerHTML = document.getElementById('ttle_tipe_material').value
     document.getElementById('review-ttle_bobot').innerHTML = document.getElementById('ttle_bobot').value
     document.getElementById('review-penggunaan_bangunan_saat_ini').innerHTML = document.getElementById('penggunaan_bangunan_saat_ini').value
-    document.getElementById('review-pb_listrik').innerHTML = document.getElementById('pb_listrik').value
-    document.getElementById('review-pb_telepon').innerHTML = document.getElementById('pb_telepon').value
-    document.getElementById('review-pb_pdam').innerHTML = document.getElementById('pb_pdam').value
-    document.getElementById('review-pb_gas').innerHTML = document.getElementById('pb_gas').value
-    document.getElementById('review-pb_ac').innerHTML = document.getElementById('pb_ac').value
-    document.getElementById('review-pb_sumur_gali').innerHTML = document.getElementById('pb_sumur_gali').value
+    document.getElementById('review-perlengkapan_bangunan').innerHTML = document.getElementById('perlengkapan_bangunan').value
     document.getElementById('review-penggunaan_bangunan').innerHTML = document.getElementById('penggunaan_bangunan').value
     document.getElementById('review-progress_pembangunan').innerHTML = document.getElementById('progress_pembangunan').value
     document.getElementById('review-status_data_obyek').innerHTML = document.getElementById('status_data_obyek').value
+
+
+
+
       
   });
 </script>
