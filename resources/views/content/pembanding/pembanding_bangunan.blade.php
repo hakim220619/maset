@@ -31,7 +31,7 @@ $configData = Helper::appClasses();
 @section('content')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.css" />
-<h4>Bangunan</h4>
+<h4>Data Pembanding – Tanah dan Bangunan</h4>
   <!-- Default -->
   <div class="row">  
     <!-- Default Icons Wizard -->
@@ -112,16 +112,16 @@ $configData = Helper::appClasses();
               </div>
               <div class="row g-3">
                 <div class="col-sm-6">
-                  <label class="form-label" for="nia">Nomor Induk Asset</label>
-                  <input type="text" id="nia" name="nia" class="form-control" placeholder="A-2022-001" />
+                  <label class="form-label" for="nip">Nomor Induk Pembanding</label>
+                  <input type="text" id="nip" name="nip" class="form-control" placeholder="A-2022-001" />
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="nama_tanah_n_bangunan">Nama Tanah dan Bangunan</label>
+                  <input type="text" id="nama_tanah_n_bangunan" name="nama_tanah_n_bangunan" class="form-control" placeholder="A-2022-001" />
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="nib">Nomor Induk Bangunan</label>
                   <input type="text" id="nib" name="nib" class="form-control" placeholder="B-2022-001" />
-                </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="nama_bangunan">Nama Bangunan</label>
-                  <input type="text" id="nama_bangunan" name="nama_bangunan" class="form-control" placeholder="Bangunan Rumah Tinggal –  PT LPP Agro Nusantara i – Jalan Cendrawasih" />
                 </div>
                 <div>
                   <label class="form-label" for="alamat">Titik Point</label>
@@ -150,109 +150,13 @@ $configData = Helper::appClasses();
                   <input type="file" id="foto_lainnya" name="foto_lainnya" class="form-control" />
                 </div>
                 <div class="col-sm-6">
-                  <label class="form-label" for="jumlah_lantai">Jumlah Lantai</label>
-                  <input type="text" id="jumlah_lantai" name="jumlah_lantai" class="form-control" placeholder="2 lantai" />
+                  <label class="form-label" for="nama_narsum">Nama Narasumber</label>
+                  <input type="text" id="nama_narsum" name="nama_narsum" class="form-control" placeholder="Bapak Ahmad Sudani" />
                 </div>
                 <div class="col-sm-6">
-                  <label class="form-label" for="kontruksi_bangunan">Konstruksi Bangunan</label>
-                  <input type="text" id="kontruksi_bangunan" name="kontruksi_bangunan" class="form-control" placeholder="Permanen" />
+                  <label class="form-label" for="telepon">Telepon</label>
+                  <input type="number" id="telepon" name="telepon" class="form-control" placeholder="087654354243" />
                 </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="kontruksi_lantai">Konstruksi Lantai</label>
-                  <input type="text" id="kontruksi_lantai" name="kontruksi_lantai" class="form-control" placeholder="Rabat Beton" />
-                </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="kontruksi_dinding">Konstruksi Dinding</label>
-                  <input type="text" id="kontruksi_dinding" name="kontruksi_dinding" class="form-control" placeholder="Bata" />
-                </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="kontruksi_atap">Kontruksi Atap</label>
-                  <input type="text" id="kontruksi_atap" name="kontruksi_atap" class="form-control" placeholder="Galvium" />
-                </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="kontruksi_pondasi">Kontruksi Pondasi</label>
-                  <input type="text" id="kontruksi_pondasi" name="kontruksi_pondasi" class="form-control" placeholder="Beton Bertulang" />
-                </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="versi_btb">Versi BTB</label>
-                  <input type="number" id="versi_btb" name="versi_btb" class="form-control" placeholder="2023" />
-                </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="tbssb_mappi">Tipikal Bangunan Sesuai Spek BTB MAPPI</label>
-                  <input type="text" id="tbssb_mappi" name="tbssb_mappi" class="form-control" placeholder="Rumah Tinggal Sederhana" />
-                </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="jenis_bangunan_uk">Jenis Bangunan (Umur Ekonomis)</label>
-                  <input type="text" id="jenis_bangunan_uk" name="jenis_bangunan_uk" class="form-control" placeholder="Bangunan Rumah Tinggal" />
-                </div>
-                <div class="col-sm-6">
-                    <label class="form-label" for="tipe_rumah_tinggal">Tipe Rumah Tinggal (Umur Ekonomis)</label>
-                    <input type="text" id="tipe_rumah_tinggal" name="tipe_rumah_tinggal" class="form-control" placeholder="Bangunan Kelas Menengah" />
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label" for="jenis_bangunan_il">Jenis Bangunan (Indeks lantai)</label>
-                    <input type="text" id="jenis_bangunan_il" name="jenis_bangunan_il" class="form-control" placeholder="Rumah Tinggal Sederhana" />
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label" for="tahun_dibangun">Tahun Dibangun</label>
-                    <input type="number" id="tahun_dibangun" name="tahun_dibangun" class="form-control" placeholder="2022" />
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label" for="tahun_renovasi">Tahun Renovasi</label>
-                    <input type="number" id="tahun_renovasi" name="tahun_renovasi" class="form-control" placeholder="2023" />
-                  </div>
-                  <div class="col-sm-6">
-                    <div>
-                      <label class="form-label" for="sumber_info_thn_dibangun">Sumber Informasi Tahun Dibangun</label>
-                    </div>
-                      <select class="form-select" name="sumber_info_thn_dibangun" id="sumber_info_thn_dibangun" aria-label="Default select example">
-                        <option value="" selected disabled>Pilih...</option>
-                        <option value="Keterangan pendamping lokasi / pemilik">Keterangan pendamping lokasi / pemilik</option>
-                        <option value="IMB">IMB</option>
-                        <option value="Pengamatan visual">Pengamatan visual</option>
-                        <option value="Keterangan lingkungan">Keterangan lingkungan</option>
-                      </select>
-                  </div>    
-                  <div class="col-sm-6">
-                    <label class="form-label" for="kondisi_bangunan_scr_visual">Kondisi Bangunan Secara Visual</label>
-                    <input type="text" id="kondisi_bangunan_scr_visual" name="kondisi_bangunan_scr_visual" class="form-control" placeholder="Baik" />
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label" for="catatan_khusus_bangunan">Catatan Khusus Bangunan</label>
-                    <input type="text" id="catatan_khusus_bangunan" name="catatan_khusus_bangunan" class="form-control" placeholder="Plafon rusak" />
-                  </div>
-                  <hr>
-                  <div>
-                      <h5>Luas Bangunan Fisik</h5>
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label" for="lbf_no_or_nama_lantai">Nomor/Nama Lantai (Area)</label>
-                    <input type="text" id="lbf_no_or_nama_lantai" name="lbf_no_or_nama_lantai" class="form-control" placeholder="Bangunan Rumah Tinggal 1" />
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label" for="lbf_faktor_pengali_luas">Faktor Pengali Luas</label>
-                    <input type="number" id="lbf_faktor_pengali_luas" name="lbf_faktor_pengali_luas" class="form-control" placeholder="1" />
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label" for="lbf_luas_lantai">Luas Lantai (m2)</label>
-                    <input type="number" id="lbf_luas_lantai" name="lbf_luas_lantai" class="form-control" placeholder="323" />
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label" for="luas_bangunan_menurut_imb">Luas Bangunan Menurut IMB</label>
-                    <input type="number" id="luas_bangunan_menurut_imb" name="luas_bangunan_menurut_imb" class="form-control" placeholder="333" />
-                  </div>
-                  <hr>
-                  <div>
-                    <h5>Luas Pintu dan Jendela</h5>
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label" for="lpj_nama_area">Nama Area</label>
-                    <input type="text" id="lpj_nama_area" name="lpj_nama_area" class="form-control" placeholder="Pintu Kayu" />
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="form-label" for="lpj_luas">Luas (m2)</label>
-                    <input type="number" id="lpj_luas" name="lpj_luas" class="form-control" placeholder="44" />
-                  </div>
                 <div class="col-12 d-flex justify-content-between">
                   <button class="btn btn-label-secondary btn-prev" disabled type="button"> <i class="ti ti-arrow-left me-sm-1"></i>
                     <span class="align-middle d-sm-inline-block d-none">Previous</span>
@@ -269,40 +173,82 @@ $configData = Helper::appClasses();
               </div>
               <div class="row g-3">
                 <hr>
+                <div class="col-sm-6">
+                  <label class="form-label" for="jenis_dok_hak_tanah">Jenis Dokumen Hak Tanah</label>
+                  <input type="text" id="jenis_dok_hak_tanah" name="jenis_dok_hak_tanah" class="form-control" placeholder="Hak Guna Bangunan" />
+                </div>
+                <div class="col-sm-6">
+                    <div>
+                        <label class="form-label" for="perutuntukan_kawasan">Peruntukan Kawasan</label>
+                    </div>
+                    <select class="form-select" name="perutuntukan_kawasan" id="perutuntukan_kawasan" aria-label="Default select example">
+                      <option value="" selected disabled>Pilih...</option>
+                      <option value="Zona Lindung">Zona Lindung</option>
+                      <option value="Zona Budi Daya">Zona Budi Daya</option>
+                    </select>
+                </div>
+                
+                <div class="col-sm-6">
+                  <label class="form-label" for="jenis_data">Jenis Data</label>
+                  <input type="datetime-local" id="jenis_data" name="jenis_data" class="form-control" placeholder="Penawaran" />
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="tgl_penawaran">Tanggal Penawaran / Waktu Transaksi</label>
+                  <input type="datetime-local" id="tgl_penawaran" name="tgl_penawaran" class="form-control" />
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="sumber_data">Sumber Data</label>
+                  <input type="text" id="sumber_data" name="sumber_data" class="form-control" placeholder="Penawaran" />
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="luas_tanah">Luas Tanah (m2)</label>
+                  <input type="number" id="luas_tanah" name="luas_tanah" class="form-control" placeholder="44" />
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="harga_penawaran">Harga Penawaran/Transaksi (Rp)</label>
+                  <input type="text" id="harga_penawaran" name="harga_penawaran" class="form-control" placeholder="4257000000" />
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="diskon">Diskon (%)</label>
+                  <input type="number" id="diskon" name="diskon" class="form-control" placeholder="44" />
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="harga_sewa_per_tahun">Harga Sewa per Tahun (Rp/tahun)</label>
+                  <input type="number" id="harga_sewa_per_tahun" name="harga_sewa_per_tahun" class="form-control" placeholder="4257000000" />
+                </div>
+                <hr>    
                 <div>
-                  <h5>Luas Dinding</h5>
+                    <h5>Penyesuaian Elemen Perbandingan</h5>
                 </div>
                 <div class="col-sm-6">
-                  <label class="form-label" for="ld_nama_area">Nama Area</label>
-                  <input type="text" id="ld_nama_area" name="ld_nama_area" class="form-control" placeholder="Luas Dinding Pasang Bata" />
+                    <div>
+                        <label class="form-label" for="pep_pembiayaan">Syarat Pembiayaan Batasan dilakukan pelunasan pembayaran (Kelunakan)</label>
+                    </div>
+                    <select class="form-select" name="pep_pembiayaan" id="pep_pembiayaan" aria-label="Default select example">
+                      <option value="" selected disabled>Pilih...</option>
+                      <option value="Tunai">Tunai</option>
+                      <option value="Non Tunai">Non Tunai</option>
+                    </select>
                 </div>
                 <div class="col-sm-6">
-                  <label class="form-label" for="ld_luas">Luas (m2)</label>
-                  <input type="number" id="ld_luas" name="ld_luas" class="form-control" placeholder="44" />
-                </div>
-                <hr>
-                <div>
-                  <h5>Luas Rangka Atap Datar</h5>
-                </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="lrad_nama_area">Nama Area</label>
-                  <input type="text" id="lrad_nama_area" name="lrad_nama_area" class="form-control" placeholder="Luas Rangka Atap Datar" />
+                    <div>
+                        <label class="form-label" for="pep_penjualan">Kondisi Penjualan Bebas Ikatan, Waktu Pemasaran yang Wajar atau Ketiadaan Kondisi Pemaksa</label>
+                    </div>
+                    <select class="form-select" name="pep_penjualan" id="pep_penjualan" aria-label="Default select example">
+                      <option value="" selected disabled>Pilih...</option>
+                      <option value="Normal">Normal</option>
+                      <option value="Tidak Normal">Tidak Normal</option>
+                    </select>
                 </div>
                 <div class="col-sm-6">
-                  <label class="form-label" for="lrad_luas">Luas (m2)</label>
-                  <input type="number" id="lrad_luas" name="lrad_luas" class="form-control" placeholder="44" />
-                </div>
-                <hr>
-                <div>
-                  <h5>Luas Atap Datar</h5>
-                </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="lad_nama_area">Nama Area</label>
-                  <input type="text" id="lad_nama_area" name="lad_nama_area" class="form-control" placeholder="Luas Atap Datar" />
-                </div>
-                <div class="col-sm-6">
-                  <label class="form-label" for="lad_luas">Luas (m2)</label>
-                  <input type="number" id="lad_luas" name="lad_luas" class="form-control" placeholder="44" />
+                    <div>
+                        <label class="form-label" for="pep_pasar">Kondisi Pasar Kondisi Ekonomi Saat Terjadi Transaksi atau terbentuknya harga penawaran (Menggunakan Indikator Waktu Penawaran / Transaksi)</label>
+                    </div>
+                    <select class="form-select" name="pep_pasar" id="pep_pasar" aria-label="Default select example">
+                      <option value="" selected disabled>Pilih...</option>
+                      <option value="Ada">Ada</option>
+                      <option value="Tidak Ada">Tidak Ada</option>
+                    </select>
                 </div>
                 <hr>    
                 <div>

@@ -14,6 +14,9 @@ class ObjectController extends Controller
         $tanah_kosong = DB::table('tanah_kosong')->count();
         $retail = DB::table('retail')->count();
 
+        //query tabel object
+        
+
         return view('content.object.lihat_object', compact('bangunan','tanah_kosong','retail'));
     }
 }

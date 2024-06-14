@@ -101,6 +101,7 @@
         }
       ]
     },
+
     {
       "url": "object",
       "icon": "menu-icon tf-icons ti ti-package",
@@ -130,6 +131,42 @@
             },
             {
               "url": "object/retail",
+              "name": "Office/Retai/Aset",
+              "slug": "retail"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "pembanding",
+      "icon": "menu-icon tf-icons ti ti-package",
+      "name": "Pembanding",
+      "slug": "pembanding",
+      "role": "User",
+      "submenu": [
+        {
+          "url": "pembanding/lihat_pembanding",
+          "name": "Lihat Pembanding",
+          "slug": "lihat_pembanding"
+        },
+        {
+          "url": "pembanding/tambah_pembanding",
+          "name": "Tambah Pembanding",
+          "slug": "tambah_pembanding",
+          "submenu": [
+            {
+              "url": "pembanding/bangunan",
+              "name": "Tanah dan Bangunan",
+              "slug": "bangunan"
+            },
+            {
+              "url": "pembanding/tanah_kosong",
+              "name": "Tanah Kosong",
+              "slug": "tanah_kosong"
+            },
+            {
+              "url": "pembanding/retail",
               "name": "Office/Retai/Aset",
               "slug": "retail"
             }
