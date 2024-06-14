@@ -122,8 +122,8 @@
                                         <button type="submit" class="btn btn-primary" id="signup">
                                             </span><i class="fa-regular fa-paper-plane me-1"></i>
                                             Sign up</button>
-                                        <button type="button" class="btn btn-danger" onclick="refreshAll()"><span
-                                                class="fa-solid fa-arrows-rotate me-1"></span>Refresh</button>
+                                        <a href="/" type="button" class="btn btn-info"><span
+                                                class="fa-solid fa-arrows-rotate me-1"></span>Kembali</a>
                                     </div>
 
                                     <div class="showButtonSend" hidden><button class="btn btn-primary" type="button"
@@ -174,18 +174,6 @@
         </div>
     </div>
     <script>
-        function refreshAll() {
-            $('#nik').val('');
-            $('#name').val('');
-            $('#email').val('');
-            $('#kontak').val('');
-            $('#password').val('');
-            $('#role_structure').val('');
-            $('#image').val('');
-            $('#alamat').val('');
-            $('#signup').attr('disabled', true)
-        }
-
         function chekNikAktif(nik) {
             // console.log(nik);
             $.ajax({
