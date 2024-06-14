@@ -173,7 +173,6 @@ Tim Dukungan Contoh";
         if ($cekEmail->status == 'INACTIVE' && $cekEmail->nik != null && $cekEmail->name != null && $cekEmail->email != null && $cekEmail->role_structure != null && $cekEmail->kontak != null && $cekEmail->alamat != null) {
           return redirect('/')->withInput()->withErrors([
             'status' => 'Email sedang tidak aktif!!',
-            // 'password' => 'Wrong password',
           ]);
         } else {
           return redirect('/auth/loginVerif/' . $user->id . '');
