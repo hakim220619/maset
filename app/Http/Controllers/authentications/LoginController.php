@@ -166,18 +166,18 @@ Tim Dukungan Contoh";
       ]);
       return redirect('/auth/loginVerif/' . $user->id . '');
     } else {
-      if ($cekEmail->nik != null && $cekEmail->name != null && $cekEmail->email != null && $cekEmail->remember_token != null && $cekEmail->role_structure != null && $cekEmail->kontak != null && $cekEmail->alamat != null) {
+      if ($cekEmail->nik != null && $cekEmail->name != null && $cekEmail->email != null && $cekEmail->remember_token != null && $cekEmail->role_structure != null && $cekEmail->role_access != null && $cekEmail->role != null && $cekEmail->kontak != null && $cekEmail->alamat != null) {
         Auth::login($cekEmail);
         return redirect('/dashboard/admin');
       } else {
         if ($cekEmail->status == 'INACTIVE') {
-          // return redirect('/')->withInput()->withErrors([
-        //   'status' => 'Email sedang tidak aktif!!',
-        //   // 'password' => 'Wrong password',
-        // ]);
+          return redirect('/')->withInput()->withErrors([
+            'status' => 'Email sedang tidak aktif!!',
+            // 'password' => 'Wrong password',
+          ]);
+        } else {
+          return redirect('/auth/loginVerif/' . $user->id . '');
         }
-        return redirect('/auth/loginVerif/' . $user->id . '');
-        
       }
     }
   }
