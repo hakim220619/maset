@@ -15,10 +15,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
             validators: {
               notEmpty: {
                 message: 'Please enter nik'
-              },
-              stringLength: {
-                min: 16,
-                message: 'nik must be more than 16 characters'
               }
             }
           },
@@ -26,10 +22,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
             validators: {
               notEmpty: {
                 message: 'Please enter name'
-              },
-              stringLength: {
-                min: 3,
-                message: 'name must be more than 6 characters'
               }
             }
           },

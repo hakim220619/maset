@@ -25,20 +25,30 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label" for="kontak">Users</label>
-                                <select id="selectpickerSelectDeselect" class="selectpicker w-100" data-style="btn-default"
-                                    multiple data-actions-box="true" data-live-search="true" name="kontak"
-                                    onchange="disabledButton()">
-                                    @foreach ($users as $s)
-                                        <option value="{{ $s->kontak }}">{{ $s->name }} - {{ $s->kontak }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="kontak">Role Access</label>
+                                        <select id="role_access" class="form-control w-100" name="role_access"
+                                            onchange="changeuserByRoleAccess()">
+                                            <option value="" selected>-- pilih --</option>
+                                            @foreach (Helper::getRoleaccess() as $r)
+                                                <option value="{{ $r->ra_id }}">
+                                                    {{ $r->ra_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3" id="usersAll">
+
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
-                        <label class="form-label" for="message">Message</label>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <label class="form-label" for="message">Message</label>
                             <textarea name="message" id="message" cols="60" rows="10" onkeyup="disabledButton()"></textarea>
                         </div>
                         <div class="col-md-3">
@@ -71,8 +81,46 @@
     </div>
 
     <script>
-        // $("#loading").hide();
-        // document.getElementById('loading').style.display = 'block';
+        function changeuserByRoleAccess() {
+            let role_access = $('#role_access').val();
+            // $(".selectpicker").selectpicker('destroy').trigger('change');
+            // $('.selectpicker').selectpicker('render').trigger('change');
+            // $(".selectpicker option").remove();
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '{{ route('role.getUserByRoleAccess') }}',
+                async: true,
+                data: {
+                    role_access: role_access
+                },
+                dataType: 'json',
+                success: function(data) {
+                    // $(".selectpicker").selectpicker('refresh');
+                    // console.log(data);
+                    var html = '';
+                    var i;
+                    var no = 1;
+                    html += '<label class="form-label" for="kontak">Users</label>';
+                    html +=
+                        '<select id="users" name="kontak" class="selectpicker form-control w-100" data-actions-box="true" data-virtual-scroll="false" data-live-search="true" multiple data-style="btn-default">';
+                    for (i = 0; i < data.data.length; i++) {
+                        // console.log(data.data[i].name);
+
+                        html += '<option value="' + data.data[i].kontak + '">' + data.data[i]
+                            .name +
+                            ' (' + data.data[i].kontak + ')</option>';
+                    }
+                    html += '</select>';
+                    // console.log(html);
+                    // $('.selectpicker').html(html);
+                    $("#usersAll").html(html);
+                    $('select').selectpicker();
+                }
+            });
+        }
 
         function disabledButton() {
             var selectpicker = $('.selectpicker').val();

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 
 class LoginController extends Controller
@@ -138,6 +139,21 @@ Tim Dukungan Contoh";
       'email_kontak' => 'Masukan email atau kontak dengan benar!!',
       // 'password' => 'Wrong password',
     ]);
+  }
+
+
+  public function redirectToGoogle()
+  {
+    return Socialite::driver('google')->redirect();
+  }
+
+  public function handleGoogleCallback()
+  {
+    $user = Socialite::driver('google')->user();
+    dd($user);
+    // Use $user to authenticate or register the user in your application
+
+    Auth::login($user);
   }
   public function logout(Request $request)
   {

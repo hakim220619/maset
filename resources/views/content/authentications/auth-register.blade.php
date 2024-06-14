@@ -46,7 +46,7 @@
                                 @csrf
                                 <div class="mb-3 col-12 col-md-6">
                                     <label for="nik" class="form-label">Nik</label>
-                                    <input type="text" class="form-control" id="nik" name="nik" maxlength="16"
+                                    <input type="text" class="form-control" id="nik" name="nik"
                                         onchange="chekNikAktif(this.value)" placeholder="Enter your Nik" autofocus
                                         value="{{ old('nik') }}">
                                     <span class="invalid-feedback" id="notifNik"></span>

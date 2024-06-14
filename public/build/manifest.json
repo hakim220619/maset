@@ -339,6 +339,11 @@
     "isEntry": true,
     "src": "resources/assets/js/app-access-roles.js"
   },
+  "resources/assets/js/app-aplikasi-view.js": {
+    "file": "assets/app-aplikasi-view-D6JXaLO5.js",
+    "isEntry": true,
+    "src": "resources/assets/js/app-aplikasi-view.js"
+  },
   "resources/assets/js/app-calendar-events.js": {
     "file": "assets/app-calendar-events-DAKERPbh.js",
     "isEntry": true,
@@ -470,7 +475,7 @@
     "src": "resources/assets/js/app-role.js"
   },
   "resources/assets/js/app-user-list.js": {
-    "file": "assets/app-user-list-BG_iurDy.js",
+    "file": "assets/app-user-list-OM3iUtoe.js",
     "isEntry": true,
     "src": "resources/assets/js/app-user-list.js"
   },
@@ -810,7 +815,7 @@
     "src": "resources/assets/js/pages-auth-two-steps.js"
   },
   "resources/assets/js/pages-auth.js": {
-    "file": "assets/pages-auth-CCuI3E6p.js",
+    "file": "assets/pages-auth-Be4pvOGv.js",
     "isEntry": true,
     "src": "resources/assets/js/pages-auth.js"
   },
@@ -3222,7 +3227,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/core/index.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/ar_MA.js": {
-    "file": "assets/ar_MA-GiEjcxBq.js",
+    "file": "assets/ar_MA-DFDTEF_9.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/ar_MA.js"
   },
@@ -3232,7 +3237,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/ar_MA.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/bg_BG.js": {
-    "file": "assets/bg_BG-BnVRxBU9.js",
+    "file": "assets/bg_BG-D_hcBk0S.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/bg_BG.js"
   },
@@ -3242,7 +3247,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/bg_BG.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/ca_ES.js": {
-    "file": "assets/ca_ES-KQFkmVrA.js",
+    "file": "assets/ca_ES-DMjO48N0.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/ca_ES.js"
   },
@@ -3282,7 +3287,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/de_DE.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/el_GR.js": {
-    "file": "assets/el_GR-cPSs6Kqg.js",
+    "file": "assets/el_GR-BMpdFuuq.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/el_GR.js"
   },
@@ -3292,7 +3297,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/el_GR.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/en_US.js": {
-    "file": "assets/en_US-BKpTbhi6.js",
+    "file": "assets/en_US-CVwNtJi7.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/en_US.js"
   },
@@ -3302,7 +3307,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/en_US.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/es_CL.js": {
-    "file": "assets/es_CL-CmfAhmOu.js",
+    "file": "assets/es_CL-DyFM3C78.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/es_CL.js"
   },
@@ -3342,7 +3347,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/fa_IR.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/fi_FI.js": {
-    "file": "assets/fi_FI-BKdN7Oyy.js",
+    "file": "assets/fi_FI-BLyBstdZ.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/fi_FI.js"
   },
@@ -3352,7 +3357,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/fi_FI.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/fr_BE.js": {
-    "file": "assets/fr_BE-CsDXVA4P.js",
+    "file": "assets/fr_BE-D78_6okq.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/fr_BE.js"
   },
@@ -3432,7 +3437,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/ja_JP.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/nl_BE.js": {
-    "file": "assets/nl_BE-Php9P7Kj.js",
+    "file": "assets/nl_BE-D0sA6gUS.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/nl_BE.js"
   },
@@ -3442,7 +3447,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/nl_BE.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/nl_NL.js": {
-    "file": "assets/nl_NL-5J42Rn_a.js",
+    "file": "assets/nl_NL-qAOWn6hv.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/nl_NL.js"
   },
@@ -3472,7 +3477,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/pl_PL.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/pt_BR.js": {
-    "file": "assets/pt_BR-Cdbvu5CQ.js",
+    "file": "assets/pt_BR-BdTqEQAy.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/pt_BR.js"
   },
@@ -3512,7 +3517,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/ru_RU.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/sk_SK.js": {
-    "file": "assets/sk_SK-DossA7rO.js",
+    "file": "assets/sk_SK-DmAzv8F_.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/sk_SK.js"
   },
@@ -3522,7 +3527,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/sk_SK.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/sq_AL.js": {
-    "file": "assets/sq_AL-DOIbOYBg.js",
+    "file": "assets/sq_AL-LkKwmdWC.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/sq_AL.js"
   },
@@ -3572,7 +3577,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/tr_TR.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/ua_UA.js": {
-    "file": "assets/ua_UA-ooWj3mdJ.js",
+    "file": "assets/ua_UA-C2iXgCkB.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/ua_UA.js"
   },
@@ -3592,7 +3597,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/vi_VN.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/zh_CN.js": {
-    "file": "assets/zh_CN-Cn0Nmg0r.js",
+    "file": "assets/zh_CN-DgpHRxPw.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/zh_CN.js"
   },
@@ -3602,7 +3607,7 @@
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/zh_CN.min.js"
   },
   "resources/assets/vendor/libs/@form-validation/umd/locales/zh_TW.js": {
-    "file": "assets/zh_TW-BCsTpIE3.js",
+    "file": "assets/zh_TW-CJJ4Q6BG.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/@form-validation/umd/locales/zh_TW.js"
   },
@@ -4833,7 +4838,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/ar_MA.js": {
-    "file": "assets/ar_MA-DFDTEF_9.js",
+    "file": "assets/ar_MA-GiEjcxBq.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/ar_MA.js"
   },
@@ -4843,7 +4848,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/ar_MA.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/bg_BG.js": {
-    "file": "assets/bg_BG-D_hcBk0S.js",
+    "file": "assets/bg_BG-BnVRxBU9.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/bg_BG.js"
   },
@@ -4853,7 +4858,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/bg_BG.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/ca_ES.js": {
-    "file": "assets/ca_ES-DMjO48N0.js",
+    "file": "assets/ca_ES-KQFkmVrA.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/ca_ES.js"
   },
@@ -4893,7 +4898,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/de_DE.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/el_GR.js": {
-    "file": "assets/el_GR-BMpdFuuq.js",
+    "file": "assets/el_GR-cPSs6Kqg.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/el_GR.js"
   },
@@ -4903,7 +4908,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/el_GR.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/en_US.js": {
-    "file": "assets/en_US-CVwNtJi7.js",
+    "file": "assets/en_US-BKpTbhi6.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/en_US.js"
   },
@@ -4913,7 +4918,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/en_US.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/es_CL.js": {
-    "file": "assets/es_CL-DyFM3C78.js",
+    "file": "assets/es_CL-CmfAhmOu.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/es_CL.js"
   },
@@ -4953,7 +4958,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/fa_IR.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/fi_FI.js": {
-    "file": "assets/fi_FI-BLyBstdZ.js",
+    "file": "assets/fi_FI-BKdN7Oyy.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/fi_FI.js"
   },
@@ -4963,7 +4968,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/fi_FI.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/fr_BE.js": {
-    "file": "assets/fr_BE-D78_6okq.js",
+    "file": "assets/fr_BE-CsDXVA4P.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/fr_BE.js"
   },
@@ -5043,7 +5048,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/ja_JP.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/nl_BE.js": {
-    "file": "assets/nl_BE-D0sA6gUS.js",
+    "file": "assets/nl_BE-Php9P7Kj.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/nl_BE.js"
   },
@@ -5053,7 +5058,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/nl_BE.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/nl_NL.js": {
-    "file": "assets/nl_NL-qAOWn6hv.js",
+    "file": "assets/nl_NL-5J42Rn_a.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/nl_NL.js"
   },
@@ -5083,7 +5088,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/pl_PL.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/pt_BR.js": {
-    "file": "assets/pt_BR-BdTqEQAy.js",
+    "file": "assets/pt_BR-Cdbvu5CQ.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/pt_BR.js"
   },
@@ -5123,7 +5128,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/ru_RU.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/sk_SK.js": {
-    "file": "assets/sk_SK-DmAzv8F_.js",
+    "file": "assets/sk_SK-DossA7rO.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/sk_SK.js"
   },
@@ -5133,7 +5138,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/sk_SK.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/sq_AL.js": {
-    "file": "assets/sq_AL-LkKwmdWC.js",
+    "file": "assets/sq_AL-DOIbOYBg.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/sq_AL.js"
   },
@@ -5183,7 +5188,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/tr_TR.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/ua_UA.js": {
-    "file": "assets/ua_UA-C2iXgCkB.js",
+    "file": "assets/ua_UA-ooWj3mdJ.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/ua_UA.js"
   },
@@ -5203,7 +5208,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/vi_VN.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/zh_CN.js": {
-    "file": "assets/zh_CN-DgpHRxPw.js",
+    "file": "assets/zh_CN-Cn0Nmg0r.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/zh_CN.js"
   },
@@ -5213,7 +5218,7 @@
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/zh_CN.min.js"
   },
   "resources/assets/vendor/libs/formvalidation/dist/js/locales/zh_TW.js": {
-    "file": "assets/zh_TW-CJJ4Q6BG.js",
+    "file": "assets/zh_TW-BCsTpIE3.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/formvalidation/dist/js/locales/zh_TW.js"
   },
@@ -5722,7 +5727,7 @@
     "src": "resources/assets/vendor/libs/nouislider/nouislider.scss"
   },
   "resources/assets/vendor/libs/numeral/numeral.js": {
-    "file": "assets/numeral-BCnviesb.js",
+    "file": "assets/numeral-CDEz25Q-.js",
     "imports": [
       "__commonjsHelpers-BosuxZz1.js"
     ],
@@ -6161,12 +6166,12 @@
     "src": "resources/assets/vendor/scss/theme-semi-dark.scss"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DP2rzg_V.js",
+    "file": "assets/app-l0sNRNKZ.js",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-l0sNRNKZ.js",
+    "file": "assets/app-DP2rzg_V.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
