@@ -170,7 +170,7 @@ Tim Dukungan Contoh";
         Auth::login($cekEmail);
         return redirect('/dashboard/admin');
       } else {
-        if ($cekEmail->status == 'INACTIVE' && $cekEmail->role_structure != null && $cekEmail->role_access != null && $cekEmail->role != null) {
+        if ($cekEmail->status == 'INACTIVE' && $cekEmail->role_structure != null) {
           return redirect('/')->withInput()->withErrors([
             'status' => 'Email sedang tidak aktif!!',
             // 'password' => 'Wrong password',
