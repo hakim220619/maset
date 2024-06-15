@@ -29,6 +29,8 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('content')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.css" />
 <h4>Bangunan</h4>
   <!-- Default -->
   <div class="row">  
@@ -121,6 +123,16 @@ $configData = Helper::appClasses();
                   <label class="form-label" for="nama_bangunan">Nama Bangunan</label>
                   <input type="text" id="nama_bangunan" name="nama_bangunan" class="form-control" placeholder="Bangunan Rumah Tinggal –  PT LPP Agro Nusantara i – Jalan Cendrawasih" />
                 </div>
+                <div>
+                  <label class="form-label" for="alamat">Titik Point</label>
+                  <div id="map" style="height: 400px; width: 100%;"></div>
+                  <label class="form-label" for="alamat">Alamat</label>
+                  <input type="text" id="alamat" name="alamat" class="form-control" placeholder="jl sukasari kecamatan baleendah bandung" />
+                  <label class="form-label" for="lat">Latitude</label>
+                  <input type="text" id="lat" name="lat" class="form-control" placeholder="-8.9897878" />
+                  <label class="form-label" for="long">Longitude</label>
+                  <input type="text" id="long" name="long" class="form-control" placeholder="89.8477748" />
+                </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="foto_tampak_depan">Upload Foto Tampak Depan</label>
                   <input type="file" id="foto_tampak_depan" name="foto_tampak_depan" class="form-control" />
@@ -194,7 +206,7 @@ $configData = Helper::appClasses();
                       <label class="form-label" for="sumber_info_thn_dibangun">Sumber Informasi Tahun Dibangun</label>
                     </div>
                       <select class="form-select" name="sumber_info_thn_dibangun" id="sumber_info_thn_dibangun" aria-label="Default select example">
-                        <option selected disabled>Pilih...</option>
+                        <option value="" selected disabled>Pilih...</option>
                         <option value="Keterangan pendamping lokasi / pemilik">Keterangan pendamping lokasi / pemilik</option>
                         <option value="IMB">IMB</option>
                         <option value="Pengamatan visual">Pengamatan visual</option>
@@ -637,7 +649,7 @@ $configData = Helper::appClasses();
                   <button class="btn btn-label-secondary btn-prev" type="button"> <i class="ti ti-arrow-left me-sm-1"></i>
                     <span class="align-middle d-sm-inline-block d-none">Previous</span>
                   </button>
-                  <button type="button" class="btn btn-primary btn-next" id="btn-review"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
+                  <button type="button" onclick="getSelectedValues()" class="btn btn-primary btn-next" id="btn-review"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
                 </div>
               </div>
             </div>
@@ -666,6 +678,17 @@ $configData = Helper::appClasses();
                     <td>:</td>
                     <td><img id="review-foto_tampak_depan" src="" height="150" width="150" alt="Foto Tampak Depan" style="max-width: 100%; height: auto;"/></td>
                   </tr>
+                  <tr>
+                    <td style="font-weight: 800">Alamat</td>
+                    <td>:</td>
+                    <td><span id="review-alamat"></span></td>
+                    <td></td>
+                    <td></td>
+                    <td style="font-weight: 800">Koordinat</td>
+                    <td>:</td>
+                    <td><span id="review-lat"></span>,<span id="review-long"></span></td>
+                  </tr>
+                  
                   <tr>
                     <td style="font-weight: 800">Foto Tampak Sisi Kiri</td>
                     <td>:</td>
@@ -747,9 +770,6 @@ $configData = Helper::appClasses();
                     <td><span id="review-tahun_renovasi"></span></td>                    
                   </tr>
                   <tr>
-                    <td colspan="8" class="text-danger">Sumber Informasi Tahun Dibangun</td>
-                  </tr>
-                  <tr>
                     <td style="font-weight: 800">Sumber Informasi Tahun Dibangun</td>
                     <td>:</td>
                     <td><span id="review-sumber_info_thn_dibangun"></span></td>                                  
@@ -765,7 +785,7 @@ $configData = Helper::appClasses();
                     <td><span id="review-catatan_khusus_bangunan"></span></td>                    
                   </tr>
                   <tr>
-                    <td colspan="8" class="text-danger">Luas Bangunan Fisik</td>
+                    <td colspan="8" class="fs-5 fw-bold">Luas Bangunan Fisik</td>
                   </tr>
                   <tr>
                     <td style="font-weight: 800">Nomor/Nama Lantai (Area)</td>
@@ -788,7 +808,7 @@ $configData = Helper::appClasses();
                     <td><span id="review-luas_bangunan_menurut_imb"></span></td>                    
                   </tr>
                   <tr>
-                    <td colspan="8" class="text-danger">Luas Pintu dan Jendela</td>
+                    <td colspan="8" class="fs-5 fw-bold">Luas Pintu dan Jendela</td>
                   </tr>
                   <tr>
                     <td style="font-weight: 800">Nama Area</td>
@@ -805,7 +825,7 @@ $configData = Helper::appClasses();
               <p class="fw-medium mb-2">Step 2</p>
               <table class="table table-borderless">
                 <tr>
-                  <td colspan="8" class="text-danger">Luas Dinding</td>
+                  <td colspan="8" class="fs-5 fw-bold">Luas Dinding</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Nama Area</td>
@@ -818,7 +838,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-ld_luas"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Luas Rangka Atap Datar</td>
+                  <td colspan="8" class="fs-5 fw-bold">Luas Rangka Atap Datar</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Nama Area</td>
@@ -831,7 +851,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-lrad_luas"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Luas Atap Datar</td>
+                  <td colspan="8" class="fs-5 fw-bold">Luas Atap Datar</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Nama Area</td>
@@ -844,7 +864,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-lad_luas"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tipe Pondasi Eksisting</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tipe Pondasi Eksisting</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Batu Kali</td>
@@ -857,7 +877,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-tpe_bobot_pondasi"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tambah Tipe Pondasi Eksisting</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tambah Tipe Pondasi Eksisting</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Tipe Material</td>
@@ -870,7 +890,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-ttpe_bobot"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tipe Struktur Eksisting</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tipe Struktur Eksisting</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Beton Bertulang</td>
@@ -883,7 +903,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-tse_bobot_struktur_beton_bertulng"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tambah Tipe Struktur Eksisting</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tambah Tipe Struktur Eksisting</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Tipe Material</td>
@@ -901,7 +921,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-tipe_rangka_atap_eksisting"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tambah Tipe Rangka Atap Existing</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tambah Tipe Rangka Atap Existing</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Tipe Material</td>
@@ -933,7 +953,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-tipe_plafon_eksisting"></span></td>                    
                 </tr>               
                 <tr>
-                  <td colspan="8" class="text-danger">Tambah Plafon Eksisting</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tambah Plafon Eksisting</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Tipe Material</td>
@@ -956,7 +976,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-tde_bobot"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tambah Tipe Dinding Existing</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tambah Tipe Dinding Existing</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Tipe Material</td>
@@ -979,7 +999,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-ttde_bobot_pdc"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tambah Tipe Pelapis Dinding Existing</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tambah Tipe Pelapis Dinding Existing</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Tipe Material</td>
@@ -992,9 +1012,6 @@ $configData = Helper::appClasses();
                   <td><span id="review-ttpde_bobot"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tipe Pintu & Jendela Eksisting</td>
-                </tr>
-                <tr>
                   <td style="font-weight: 800">Tipe Pintu & Jendela Eksisting</td>
                   <td>:</td>
                   <td><span id="review-tipe_pintu_n_jendela_eksisting"></span></td>                   
@@ -1004,7 +1021,7 @@ $configData = Helper::appClasses();
               <p class="fw-medium mb-2">Step 4</p>
               <table class="table table-borderless">
                 <tr>
-                  <td colspan="8" class="text-danger">Tambah Tipe Pintu & Jendela Existing</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tambah Tipe Pintu & Jendela Existing</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Tipe Material</td>
@@ -1017,7 +1034,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-ttpdje_bobot"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tipe Lantai Eksisting</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tipe Lantai Eksisting</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Tipe Lantai Eksisting</td>
@@ -1030,7 +1047,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-tle_bobot_lantai"></span></td>                    
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Tambah Tipe Lantai Existing</td>
+                  <td colspan="8" class="fs-5 fw-bold">Tambah Tipe Lantai Existing</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Tipe Material</td>
@@ -1048,7 +1065,7 @@ $configData = Helper::appClasses();
                   <td><span id="review-penggunaan_bangunan_saat_ini"></span></td>                              
                 </tr>
                 <tr>
-                  <td colspan="8" class="text-danger">Perlengkapan Bangunan</td>
+                  <td colspan="8" class="fs-5 fw-bold">Perlengkapan Bangunan</td>
                 </tr>
                 <tr>
                   <td style="font-weight: 800">Perlengkapan Bangunan</td>
@@ -1091,6 +1108,9 @@ $configData = Helper::appClasses();
     document.getElementById('review-nia').innerHTML = document.getElementById('nia').value    
     document.getElementById('review-nib').innerHTML = document.getElementById('nib').value    
     document.getElementById('review-nama-bangunan').innerHTML = document.getElementById('nama_bangunan').value    
+    document.getElementById('review-alamat').innerHTML = document.getElementById('alamat').value    
+    document.getElementById('review-lat').innerHTML = document.getElementById('lat').value    
+    document.getElementById('review-long').innerHTML = document.getElementById('long').value    
     const foto_tampak_depan = document.getElementById('foto_tampak_depan');
         if (foto_tampak_depan.files && foto_tampak_depan.files[0]) {
           const reader = new FileReader();
@@ -1169,7 +1189,8 @@ $configData = Helper::appClasses();
     document.getElementById('review-tse_bobot_struktur_beton_bertulng').innerHTML = document.getElementById('tse_bobot_struktur_beton_bertulng').value
     document.getElementById('review-ttse_tipe_material').innerHTML = document.getElementById('ttse_tipe_material').value
     document.getElementById('review-ttse_bobot').innerHTML = document.getElementById('ttse_bobot').value
-    document.getElementById('review-tipe_rangka_atap_eksisting').innerHTML = document.getElementById('tipe_rangka_atap_eksisting').value
+    // document.getElementById('review-tipe_rangka_atap_eksisting').innerHTML = document.getElementById('tipe_rangka_atap_eksisting').value
+
     document.getElementById('review-ttrae_tipe_material').innerHTML = document.getElementById('ttrae_tipe_material').value
     document.getElementById('review-ttrae_bobot').innerHTML = document.getElementById('ttrae_bobot').value
     document.getElementById('review-tipe_penutup_atap_eksisting').innerHTML = document.getElementById('tipe_penutup_atap_eksisting').value
@@ -1199,8 +1220,62 @@ $configData = Helper::appClasses();
     document.getElementById('review-penggunaan_bangunan').innerHTML = document.getElementById('penggunaan_bangunan').value
     document.getElementById('review-progress_pembangunan').innerHTML = document.getElementById('progress_pembangunan').value
     document.getElementById('review-status_data_obyek').innerHTML = document.getElementById('status_data_obyek').value
-  
+      
   });
+</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
+<script>
+  var map = L.map('map').setView([1.966576931124596, 100.049384575934738], 13)
+          
+          var accessToken = 'pk.eyJ1IjoicmVkb2syNSIsImEiOiJjbG1zdzZ1Y2MwZHA2MmxxYzdvYm12cTlwIn0.2GTgMV076x87YJQJzM34jg';
+  
+          var satelliteLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + accessToken, {
+              attribution: '&copy; <a href="https://www.mapbox.com/">Mapbox</a>',
+              maxZoom: 30,
+              id: 'mapbox/streets-v11', // Ganti dengan jenis peta satelit yang diinginkan
+              tileSize: 512,
+              zoomOffset: -1
+  }).addTo(map);
+
+  var geocoder = L.Control.geocoder({
+  defaultMarkGeocode: false
+  }).on('markgeocode', function(e) {
+      map.setView(e.geocode.center, 13);
+  }).addTo(map);
+
+  var marker
+  map.on('click', function(e) {
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+
+            document.getElementById('lat').value = lat;
+            document.getElementById('long').value = lng;
+
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+                .then(response => response.json())
+                .then(data => {
+                    var address = data.display_name;
+                    document.getElementById('alamat').value = address;
+                });
+
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            marker = L.marker([lat, lng]).addTo(map);
+  });
+
+
+</script>
+<script>
+  function getSelectedValues() {
+            const selectedOptions = document.getElementById('tipe_rangka_atap_eksisting').selectedOptions;
+            let values = Array.from(selectedOptions).map(option => option.value);
+            document.getElementById('review-tipe_rangka_atap_eksisting').innerHTML = values.join(', ');
+        }
+
+        document.getElementById('btn-review').addEventListener('click', getSelectedValues);
 </script>
 
 @endsection

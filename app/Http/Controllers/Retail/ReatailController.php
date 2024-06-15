@@ -45,7 +45,7 @@ class ReatailController extends Controller
     }
     public function generateUniqueIdAsset()
     {
-        $latestAsset = DB::table('bangunan')
+        $latestAsset = DB::table('retail')
                           ->whereYear('created_at', Carbon::now()->year)
                           ->orderBy('id', 'desc')
                           ->first();

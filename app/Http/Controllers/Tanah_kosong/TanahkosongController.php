@@ -46,7 +46,7 @@ class TanahkosongController extends Controller
     }
     public function generateUniqueIdAsset()
     {
-        $latestAsset = DB::table('bangunan')
+        $latestAsset = DB::table('tanah_kosong')
                           ->whereYear('created_at', Carbon::now()->year)
                           ->orderBy('id', 'desc')
                           ->first();

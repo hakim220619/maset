@@ -649,7 +649,7 @@ $configData = Helper::appClasses();
                   <button class="btn btn-label-secondary btn-prev" type="button"> <i class="ti ti-arrow-left me-sm-1"></i>
                     <span class="align-middle d-sm-inline-block d-none">Previous</span>
                   </button>
-                  <button type="button" class="btn btn-primary btn-next" id="btn-review"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
+                  <button type="button" onclick="getSelectedValues()" class="btn btn-primary btn-next" id="btn-review"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
                 </div>
               </div>
             </div>
@@ -1189,7 +1189,8 @@ $configData = Helper::appClasses();
     document.getElementById('review-tse_bobot_struktur_beton_bertulng').innerHTML = document.getElementById('tse_bobot_struktur_beton_bertulng').value
     document.getElementById('review-ttse_tipe_material').innerHTML = document.getElementById('ttse_tipe_material').value
     document.getElementById('review-ttse_bobot').innerHTML = document.getElementById('ttse_bobot').value
-    document.getElementById('review-tipe_rangka_atap_eksisting').innerHTML = document.getElementById('tipe_rangka_atap_eksisting').value
+    // document.getElementById('review-tipe_rangka_atap_eksisting').innerHTML = document.getElementById('tipe_rangka_atap_eksisting').value
+
     document.getElementById('review-ttrae_tipe_material').innerHTML = document.getElementById('ttrae_tipe_material').value
     document.getElementById('review-ttrae_bobot').innerHTML = document.getElementById('ttrae_bobot').value
     document.getElementById('review-tipe_penutup_atap_eksisting').innerHTML = document.getElementById('tipe_penutup_atap_eksisting').value
@@ -1266,6 +1267,15 @@ $configData = Helper::appClasses();
   });
 
 
+</script>
+<script>
+  function getSelectedValues() {
+            const selectedOptions = document.getElementById('tipe_rangka_atap_eksisting').selectedOptions;
+            let values = Array.from(selectedOptions).map(option => option.value);
+            document.getElementById('review-tipe_rangka_atap_eksisting').innerHTML = values.join(', ');
+        }
+
+        document.getElementById('btn-review').addEventListener('click', getSelectedValues);
 </script>
 
 @endsection
