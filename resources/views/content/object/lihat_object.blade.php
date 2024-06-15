@@ -1,119 +1,148 @@
 @php
-$configData = Helper::appClasses();
+    $configData = Helper::appClasses();
 @endphp
 
 @extends('layouts/layoutMaster')
 
 @section('title', 'Bangunan')
-
 @section('vendor-style')
-@vite([
-  'resources/assets/vendor/libs/bs-stepper/bs-stepper.scss',
-  'resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss',
-  'resources/assets/vendor/libs/select2/select2.scss'
-])
+    @vite(['resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.scss', 'resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.scss', 'resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.scss', 'resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss', 'resources/assets/vendor/libs/select2/select2.scss', 'resources/assets/vendor/libs/@form-validation/form-validation.scss'])
 @endsection
 
-<!-- Vendor Scripts -->
+@section('page-style')
+    @vite(['resources/assets/vendor/scss/pages/page-user-view.scss'])
+@endsection
+
 @section('vendor-script')
-@vite([
-  'resources/assets/vendor/libs/bs-stepper/bs-stepper.js',
-  'resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js',
-  'resources/assets/vendor/libs/select2/select2.js'
-])
+    @vite(['resources/assets/vendor/libs/moment/moment.js', 'resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.js', 'resources/assets/vendor/libs/cleavejs/cleave.js', 'resources/assets/vendor/libs/cleavejs/cleave-phone.js', 'resources/assets/vendor/libs/select2/select2.js', 'resources/assets/vendor/libs/@form-validation/popular.js', 'resources/assets/vendor/libs/@form-validation/bootstrap5.js', 'resources/assets/vendor/libs/@form-validation/auto-focus.js'])
 @endsection
 
 <!-- Page Scripts -->
 @section('page-script')
-@vite(['resources/assets/js/form-wizard-icons.js'])
+    @vite(['resources/assets/js/form-wizard-icons.js', 'resources/assets/js/app-bangunan-list.js'])
 @endsection
 
+
 @section('content')
-<h4>Lihat Object</h4>
-  <div class="row">  
-        <!-- Basic Bootstrap Table -->
-        <div class="card">
-            <h5 class="card-header">Ringkasan Object</h5>
-            <div class="table-responsive text-nowrap">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nama Object</th>
-                        <th>Jumlah</th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    <tr>
-                        <td>Tanah dan Bangunan</td>
-                        <td>{{ $bangunan }}</td>
-                    </tr>
-                    <tr>
-                        <td>Tanah Kosong</td>
-                        <td>{{ $tanah_kosong }}</td>
-                    </tr>
-                    <tr>
-                        <td>Office/Retai/Aset</td>
-                        <td>{{ $retail }}</td>
-                    </tr>
-                </tbody>
-            </table>
+
+    <div class="row g-4 mb-4">
+        <div class="col-sm-6 col-xl-4" onclick="nextToPage(1)">
+            <div class="card" id="tdb">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span>Tanah dan Bangunan</span>
+                            <div class="d-flex align-items-center my-2">
+                                <span class="mb-0 me-2" style="font-size: 20px;">{{ $bangunan }}</span>
+                                {{-- <p class="text-success mb-0">(+29%)</p> --}}
+                            </div>
+                            <p class="mb-0">Total</p>
+                        </div>
+                        <div class="avatar">
+                            <span class="avatar-initial rounded bg-label-primary">
+                                <i class="ti ti-home ti-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!--/ Basic Bootstrap Table -->
-
-        <!-- Responsive Datatable -->
-        <div class="card mt-5">
-            <h5 class="card-header">Tabel Object</h5>
-                <div class="card-datatable table-responsive">
-                    <table class="dt-responsive table">
-                        <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Post</th>
-                            <th>City</th>
-                            <th>Date</th>
-                            <th>Salary</th>
-                            <th>Age</th>
-                            <th>Experience</th>
-                            <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>halo</td>
-                                <td>halo</td>
-                                <td>halo</td>
-                                <td>halo</td>
-                                <td>halo</td>
-                                <td>halo</td>
-                                <td>halo</td>
-                                <td>halo</td>
-                                <td>halo</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Post</th>
-                            <th>City</th>
-                            <th>Date</th>
-                            <th>Salary</th>
-                            <th>Age</th>
-                            <th>Experience</th>
-                            <th>Status</th>
-                        </tr>
-                        </tfoot>
-                    </table>
+        <div class="col-sm-6 col-xl-4" onclick="nextToPage(2)">
+            <div class="card" id="tk">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span>Tanah Kosong</span>
+                            <div class="d-flex align-items-center my-2">
+                                <span class="mb-0 me-2" style="font-size: 20px;">{{ $tanah_kosong }}</span>
+                                {{-- <p class="text-success mb-0">(+42%)</p> --}}
+                            </div>
+                            <p class="mb-0">Total</p>
+                        </div>
+                        <div class="avatar">
+                            <span class="avatar-initial rounded bg-label-warning">
+                                <i class="ti ti-home-exclamation ti-sm"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
+            </div>
         </div>
-        <!--/ Responsive Datatable -->
-
-                   
+        <div class="col-sm-6 col-xl-4" onclick="nextToPage(3)">
+            <div class="card" id="re">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span>Office/Retai/Aset</span>
+                            <div class="d-flex align-items-center my-2">
+                                <span class="mb-0 me-2" style="font-size: 20px;">{{ $retail }}</span>
+                                {{-- <p class="text-success mb-0">(+18%)</p> --}}
+                            </div>
+                            <p class="mb-0">Total</p>
+                        </div>
+                        <div class="avatar">
+                            <span class="avatar-initial rounded bg-label-danger">
+                                <i class="ti ti-home-check ti-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
- 
+    <div class="row">
+        <div id="showObjectView"></div>
+    </div>
+    <script>
+        function nextToPage(param) {
+            console.log(param);
+            if (param == 1) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/object/bangunanView',
+                    success: function(data) {
+                        $('#showObjectView').html(data);
+                        $('#tdb').addClass('text-white bg-primary');
+                        $('.tdb1').addClass('text-white');
+                        $('#tk').removeClass('text-white bg-primary');
+                        $('#re').removeClass('text-white bg-primary');
+                        // $('.tk1').addClass('text-dark');
+                    }
+                });
+            }
+
+
+            if (param == 2) {
+                // $('#tdb1').addClass('text-dark');
+                $.ajax({
+                    type: 'GET',
+                    url: '/object/tanahKosongView',
+                    success: function(data) {
+                        $('#showObjectView').html(data);
+
+                        $('#tk').addClass('text-white bg-primary');
+                        $('#tdb').removeClass('text-white bg-primary');
+                        $('#re').removeClass('text-white bg-primary');
+                        $('#tk1').addClass('text-white');
+
+
+                    }
+                });
+            }
+            if (param == 3) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/object/retailView',
+                    success: function(data) {
+                        $('#showObjectView').html(data);
+                        $('#re').addClass('text-white bg-primary');
+                        $('#tdb').removeClass('text-white bg-primary');
+                        $('#tk').removeClass('text-white bg-primary');
+
+                    }
+                });
+            }
+
+        }
+    </script>
 @endsection

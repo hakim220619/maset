@@ -112,6 +112,12 @@ Route::middleware(['auth'])->group(function () {
 
     //Bangunan
     Route::get('/object/bangunan', [BangunanController::class, 'bangunan'])->name('bangunan');
+    Route::get('/object/bangunanView', [BangunanController::class, 'bangunanView'])->name('bangunan.bangunanView');
+    Route::get('/object/retailView', [BangunanController::class, 'retailView'])->name('bangunan.retailView');
+    Route::get('/object/tanahKosongView', [BangunanController::class, 'tanahKosongView'])->name('bangunan.tanahKosongView');
+    Route::get('/object/bangunanLoadData', [BangunanController::class, 'bangunanLoadData'])->name('bangunan.bangunanLoadData');
+    Route::get('/object/tanahKosongLoadData', [BangunanController::class, 'tanahKosongLoadData'])->name('bangunan.tanahKosongLoadData');
+    Route::get('/object/retailLoadData', [BangunanController::class, 'retailLoadData'])->name('bangunan.retailLoadData');
     Route::post('/object/add_bangunan', [BangunanController::class, 'add_bangunan'])->name('add_bangunan');
     //Tanah Kosong
     Route::get('/object/tanah_kosong', [TanahkosongController::class, 'tanah_kosong'])->name('tanah_kosong');

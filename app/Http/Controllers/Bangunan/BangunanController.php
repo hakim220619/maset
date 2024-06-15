@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Bangunan;
 
 use App\Http\Controllers\Controller;
+use App\Models\BangunanModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,7 +15,53 @@ class BangunanController extends Controller
     {
         return view('content.object.bangunan.bangunan');
     }
-    public function add_bangunan(Request $request) {
+    public function bangunanView()
+    {
+        $pageConfigs = ['myLayout' => 'blank'];
+        return view('content.object.view.bangunan', ['pageConfigs' => $pageConfigs]);
+    }
+    public function retailView()
+    {
+        $pageConfigs = ['myLayout' => 'blank'];
+        return view('content.object.view.retail', ['pageConfigs' => $pageConfigs]);
+    }
+    public function tanahKosongView()
+    {
+        $pageConfigs = ['myLayout' => 'blank'];
+        return view('content.object.view.tanahKosong', ['pageConfigs' => $pageConfigs]);
+    }
+    public function bangunanLoadData()
+    {
+        $data = BangunanModel::bangunanLoadData();
+        // dd($data);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data',
+            'data' => $data,
+        ]);
+    }
+    public function tanahKosongLoadData()
+    {
+        $data = BangunanModel::tanahKosongLoadData();
+        // dd($data);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data',
+            'data' => $data,
+        ]);
+    }
+    public function retailLoadData()
+    {
+        $data = BangunanModel::retailLoadData();
+        // dd($data);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data',
+            'data' => $data,
+        ]);
+    }
+    public function add_bangunan(Request $request)
+    {
         $foto_tampak_depan = $request->file('foto_tampak_depan');
         $filename1 = $foto_tampak_depan->getClientOriginalName();
         $foto_tampak_depan->move(public_path('storage/images/bangunan'), $filename1);
@@ -47,12 +94,12 @@ class BangunanController extends Controller
     public function generateUniqueIdAsset()
     {
         $latestAsset = DB::table('bangunan')
-                          ->whereYear('created_at', Carbon::now()->year)
-                          ->orderBy('id', 'desc')
-                          ->first();
+            ->whereYear('created_at', Carbon::now()->year)
+            ->orderBy('id', 'desc')
+            ->first();
 
         $nextNumber = $latestAsset ? ((int) substr($latestAsset->id_asset, -4)) + 1 : 1;
 
         return '1' . Carbon::now()->year . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
-    }    
+    }
 }
