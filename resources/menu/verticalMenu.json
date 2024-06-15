@@ -56,7 +56,7 @@
           "slug": "broadcast"
         },
         {
-          "url": "/broadcast/aplikasi",
+          "url": "/broadcast/aplikasiView",
           "name": "Aplikasi",
           "icon": "menu-icon tf-icons fab fa-whatsapp",
           "slug": "ByAplikasi"
@@ -101,7 +101,6 @@
         }
       ]
     },
-
     {
       "url": "object",
       "icon": "menu-icon tf-icons ti ti-package",
