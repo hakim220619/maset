@@ -17,7 +17,7 @@
 
 
 @section('page-script')
-    @vite('resources/assets/js/app-users-logs.js')
+    @vite('resources/assets/js/app-users-logs-activity.js')
 @endsection
 @section('content')
 

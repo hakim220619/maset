@@ -17,9 +17,6 @@ $(function () {
         // columns according to JSON
         { data: 'no' },
         { data: 'name' },
-        { data: 'rs_name' },
-        { data: 'ra_name' },
-        { data: 'role_name' },
         { data: 'activity' },
         { data: 'action' },
         { data: 'ip' },
@@ -41,74 +38,6 @@ $(function () {
         sLengthMenu: 'Show _MENU_',
         // search: '',
         searchPlaceholder: 'Search Project'
-      },
-      initComplete: function () {
-        // Adding role filter once table initialized
-        this.api()
-          .columns(1)
-          .every(function () {
-            var column = this;
-            var select = $(
-              '<select id="mmName" class="form-select text-capitalize"><option value=""> Select Name </option></select>'
-            )
-              .appendTo('.mmName')
-              .on('change', function () {
-                var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                column.search(val ? '^' + val + '$' : '', true, false).draw();
-              });
-
-            column
-              .data()
-              .unique()
-              .sort()
-              .each(function (d, j) {
-                select.append('<option value="' + d + '">' + d + '</option>');
-              });
-          });
-        // Adding plan filter once table initialized
-        this.api()
-          .columns(2)
-          .every(function () {
-            var column = this;
-            var select = $(
-              '<select id="mmRole" class="form-select text-capitalize"><option value=""> Select Role Structure </option></select>'
-            )
-              .appendTo('.mmRole')
-              .on('change', function () {
-                var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                column.search(val ? '^' + val + '$' : '', true, false).draw();
-              });
-
-            column
-              .data()
-              .unique()
-              .sort()
-              .each(function (d, j) {
-                select.append('<option value="' + d + '">' + d + '</option>');
-              });
-          });
-        // Adding plan filter once table initialized
-        this.api()
-          .columns(3)
-          .every(function () {
-            var column = this;
-            var select = $(
-              '<select id="mmRoleAccess" class="form-select text-capitalize"><option value=""> Select Role Access </option></select>'
-            )
-              .appendTo('.mmRoleAccess')
-              .on('change', function () {
-                var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                column.search(val ? '^' + val + '$' : '', true, false).draw();
-              });
-
-            column
-              .data()
-              .unique()
-              .sort()
-              .each(function (d, j) {
-                select.append('<option value="' + d + '">' + d + '</option>');
-              });
-          });
       }
     });
   }
