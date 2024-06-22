@@ -211,9 +211,7 @@ class GeneralModel extends Model
     }
     public static function broadcastByAplikasiRead($id)
     {
-
         $data = DB::select('select ROW_NUMBER() OVER () AS no, ba.* from broadcast_aplikasi ba where ba.id = "' . $id . '" ORDER BY ROW_NUMBER() OVER () asc');
-
         return $data[0];
     }
     public static function getUserByRoleAccess($request)
@@ -233,7 +231,6 @@ class GeneralModel extends Model
                 and u.role_access = ' . $request->role_access . '
                 ORDER BY ROW_NUMBER() OVER () asc');
             } else {
-
                 $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name,
                 IF(u.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=u.role_access) ) as ra_name, 
                 IF(u.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=u.role) ) as role_name 
