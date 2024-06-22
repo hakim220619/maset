@@ -25,12 +25,43 @@ class GeneralModel extends Model
     }
     public static function listUsersLogs()
     {
-        if (Auth::user()->role_structure == Helpers::getRoleStructureJson()[3]) {
-            $data = DB::select('select ROW_NUMBER() OVER () AS no, ml.*, u.name from mm_logs ml, users u where ml.user_id=u.id
-            ORDER BY ml.created_at desc');
+        if (Auth::user()->role_structure != Helpers::getRoleStructureJson()[3]) {
+            if (Auth::user()->role_structure == 33 || Auth::user()->role_structure == 34 || Auth::user()->role_structure == 35) {
+                $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.*, rs.rs_name,
+                	IF(ml.user_id = null, "", (SELECT u.name FROM users u WHERE u.id=ml.user_id) ) as name, 
+            IF(ml.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=ml.role_access) ) as ra_name, 
+            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name 
+            from mm_logs ml, role_structure rs
+            where ml.role_structure=rs.rs_id 
+           and rs.rs_name like  "%' . User::getProfileById()->rs_name . '%"
+            ORDER BY ROW_NUMBER() OVER () asc');
+            } elseif (Auth::user()->role_access == 2) {
+                $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.*, rs.rs_name,
+                    IF(ml.user_id = null, "", (SELECT u.name FROM users u WHERE u.id=ml.user_id) ) as name, 
+            IF(ml.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=ml.role_access) ) as ra_name, 
+            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name 
+            from mm_logs ml, role_structure rs
+            where ml.role_structure=rs.rs_id 
+           and rs.rs_name like  "%' . User::getProfileById()->rs_name . '%"
+            ORDER BY ROW_NUMBER() OVER () asc');
+            } elseif (Auth::user()->role_access == 1) {
+                $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.*, rs.rs_name,
+                    IF(ml.user_id = null, "", (SELECT u.name FROM users u WHERE u.id=ml.user_id) ) as name, 
+            IF(ml.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=ml.role_access) ) as ra_name, 
+            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name 
+            from mm_logs ml, role_structure rs
+            where ml.role_structure=rs.rs_id 
+            and ml.user_id =  ' . User::getProfileById()->id . '
+            ORDER BY ROW_NUMBER() OVER () asc');
+            }
         } else {
-            $data = DB::select('select ROW_NUMBER() OVER () AS no, ml.*, u.name from mm_logs ml, users u where ml.user_id=u.id and ml.user_id = ' . request()->user()->id . '
-        ORDER BY ml.created_at desc');
+            $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.*, rs.rs_name,
+                    IF(ml.user_id = null, "", (SELECT u.name FROM users u WHERE u.id=ml.user_id) ) as name, 
+            IF(ml.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=ml.role_access) ) as ra_name, 
+            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name 
+            from mm_logs ml, role_structure rs
+            where ml.role_structure=rs.rs_id
+            ORDER BY ROW_NUMBER() OVER () asc');
         }
         return $data;
     }
@@ -187,9 +218,12 @@ class GeneralModel extends Model
     }
     public static function getUserByRoleAccess($request)
     {
-        // dd($request->role_access);
+        $roleAccess = '';
+        if ($request->role_access != 'all') {
+            $roleAccess .= ' and u.role_access = ' . $request->role_access . '';
+        }
         if (Auth::user()->role_structure != Helpers::getRoleStructureJson()[3]) {
-            if (Auth::user()->role_structure == 32 || Auth::user()->role_structure == 33 || Auth::user()->role_structure == 34) {
+            if (Auth::user()->role_structure == 33 || Auth::user()->role_structure == 34 || Auth::user()->role_structure == 35) {
                 $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name,
                 IF(u.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=u.role_access) ) as ra_name, 
                 IF(u.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=u.role) ) as role_name 
@@ -199,21 +233,23 @@ class GeneralModel extends Model
                 and u.role_access = ' . $request->role_access . '
                 ORDER BY ROW_NUMBER() OVER () asc');
             } else {
+
                 $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name,
                 IF(u.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=u.role_access) ) as ra_name, 
                 IF(u.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=u.role) ) as role_name 
                 from users u, role_structure rs
                 where u.role_structure=rs.rs_id 
                 and rs.rs_id =  "' . Helpers::getProfileById()->role_structure . '"
-                and u.role_access = ' . $request->role_access . '
+               ' . $roleAccess . '
                 ORDER BY ROW_NUMBER() OVER () asc');
             }
         } else {
+
             $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name , ra.ra_name ,r.role_name  from users u, role_structure rs, role_access ra, role r 
                 where u.role_structure=rs.rs_id 
                 and u.role_access=ra.ra_id 
                 and u.role=r.role_id 
-                and u.role_access = ' . $request->role_access . '
+                ' . $roleAccess . '
                 ORDER BY ROW_NUMBER() OVER () asc');
         }
         return $data;

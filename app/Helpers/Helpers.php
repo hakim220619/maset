@@ -235,6 +235,11 @@ class Helpers
     $data = ['1', '2', '3', '4'];
     return $data;
   }
+  public static function getRoleAccessJson()
+  {
+    $data = ['1', '2', '3', '4'];
+    return $data;
+  }
 
   public static function getRoleaccess()
   {
@@ -326,6 +331,9 @@ class Helpers
   {
     $data = [
       'user_id' => isset(request()->user()->id) == null ? 0 : request()->user()->id,
+      'role_structure' => isset(request()->user()->role_structure) == null ? 0 : request()->user()->role_structure,
+      'role_access' => isset(request()->user()->role_access) == null ? 0 : request()->user()->role_access,
+      'role' => isset(request()->user()->role) == null ? 0 : request()->user()->role,
       'activity' => $request['activity'],
       'detail' => base64_encode(serialize($request['detail'])),
       'action' => $request['action'],

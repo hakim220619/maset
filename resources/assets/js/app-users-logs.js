@@ -17,115 +17,13 @@ $(function () {
         // columns according to JSON
         { data: 'no' },
         { data: 'name' },
+        { data: 'rs_name' },
+        { data: 'ra_name' },
+        { data: 'role_name' },
         { data: 'activity' },
         { data: 'action' },
         { data: 'ip' },
         { data: 'created_at' }
-      ],
-      columnDefs: [
-        // {
-        //   // For Responsive
-        //   className: 'control',
-        //   searchable: false,
-        //   orderable: false,
-        //   responsivePriority: 2,
-        //   targets: 0,
-        //   render: function (data, type, full, meta) {
-        //     return '';
-        //   }
-        // }
-        // {
-        //   // User full name and email
-        //   targets: 1,
-        //   responsivePriority: 1,
-        //   render: function (data, type, full, meta) {
-        //     var $name = full['project_name'],
-        //       $framework = full['framework'],
-        //       $image = full['project_image'];
-        //     if ($image) {
-        //       // For Avatar image
-        //       var $output =
-        //         '<img src="' +
-        //         assetsPath +
-        //         'img/icons/brands/' +
-        //         $image +
-        //         '" alt="Project Image" class="rounded-circle">';
-        //     } else {
-        //       // For Avatar badge
-        //       var stateNum = Math.floor(Math.random() * 6) + 1;
-        //       var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-        //       var $state = states[stateNum],
-        //         $name = full['full_name'],
-        //         $initials = $name.match(/\b\w/g) || [];
-        //       $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-        //       $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
-        //     }
-        //     // Creates full output for row
-        //     var $row_output =
-        //       '<div class="d-flex justify-content-left align-items-center">' +
-        //       '<div class="avatar-wrapper">' +
-        //       '<div class="avatar avatar-sm me-3">' +
-        //       $output +
-        //       '</div>' +
-        //       '</div>' +
-        //       '<div class="d-flex flex-column">' +
-        //       '<span class="text-truncate fw-medium">' +
-        //       $name +
-        //       '</span>' +
-        //       '<small class="text-muted">' +
-        //       $framework +
-        //       '</small>' +
-        //       '</div>' +
-        //       '</div>';
-        //     return $row_output;
-        //   }
-        // },
-        // {
-        //   targets: 2,
-        //   orderable: false
-        // },
-        // {
-        //   // Label
-        //   targets: 3,
-        //   responsivePriority: 3,
-        //   render: function (data, type, full, meta) {
-        //     var $progress = full['progress'] + '%',
-        //       $color;
-        //     switch (true) {
-        //       case full['progress'] < 25:
-        //         $color = 'bg-danger';
-        //         break;
-        //       case full['progress'] < 50:
-        //         $color = 'bg-warning';
-        //         break;
-        //       case full['progress'] < 75:
-        //         $color = 'bg-info';
-        //         break;
-        //       case full['progress'] <= 100:
-        //         $color = 'bg-success';
-        //         break;
-        //     }
-        //     return (
-        //       '<div class="d-flex flex-column"><small class="mb-1">' +
-        //       $progress +
-        //       '</small>' +
-        //       '<div class="progress w-100 me-3" style="height: 6px;">' +
-        //       '<div class="progress-bar ' +
-        //       $color +
-        //       '" style="width: ' +
-        //       $progress +
-        //       '" aria-valuenow="' +
-        //       $progress +
-        //       '" aria-valuemin="0" aria-valuemax="100"></div>' +
-        //       '</div>' +
-        //       '</div>'
-        //     );
-        //   }
-        // },
-        // {
-        //   targets: 4,
-        //   orderable: false
-        // }
       ],
       //   order: [[1, 'desc']],
       dom:
@@ -137,46 +35,81 @@ $(function () {
         '<"col-sm-12 col-md-6"i>' +
         '<"col-sm-12 col-md-6"p>' +
         '>',
-      displayLength: 8,
+      displayLength: 25,
       lengthMenu: [8, 10, 25, 50, 75, 100],
       language: {
         sLengthMenu: 'Show _MENU_',
         // search: '',
         searchPlaceholder: 'Search Project'
-      }
-      // For responsive popup
-      //   responsive: {
-      //     details: {
-      //       display: $.fn.dataTable.Responsive.display.modal({
-      //         header: function (row) {
-      //           var data = row.data();
-      //           return 'Details of ' + data['full_name'];
-      //         }
-      //       }),
-      //       type: 'column',
-      //       renderer: function (api, rowIdx, columns) {
-      //         var data = $.map(columns, function (col, i) {
-      //           return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-      //             ? '<tr data-dt-row="' +
-      //                 col.rowIndex +
-      //                 '" data-dt-column="' +
-      //                 col.columnIndex +
-      //                 '">' +
-      //                 '<td>' +
-      //                 col.title +
-      //                 ':' +
-      //                 '</td> ' +
-      //                 '<td>' +
-      //                 col.data +
-      //                 '</td>' +
-      //                 '</tr>'
-      //             : '';
-      //         }).join('');
+      },
+      initComplete: function () {
+        // Adding role filter once table initialized
+        this.api()
+          .columns(1)
+          .every(function () {
+            var column = this;
+            var select = $(
+              '<select id="mmName" class="form-select text-capitalize"><option value=""> Select Name </option></select>'
+            )
+              .appendTo('.mmName')
+              .on('change', function () {
+                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                column.search(val ? '^' + val + '$' : '', true, false).draw();
+              });
 
-      //         return data ? $('<table class="table"/><tbody />').append(data) : false;
-      //       }
-      //     }
-      //   }
+            column
+              .data()
+              .unique()
+              .sort()
+              .each(function (d, j) {
+                select.append('<option value="' + d + '">' + d + '</option>');
+              });
+          });
+        // Adding plan filter once table initialized
+        this.api()
+          .columns(2)
+          .every(function () {
+            var column = this;
+            var select = $(
+              '<select id="mmRole" class="form-select text-capitalize"><option value=""> Select Role Structure </option></select>'
+            )
+              .appendTo('.mmRole')
+              .on('change', function () {
+                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                column.search(val ? '^' + val + '$' : '', true, false).draw();
+              });
+
+            column
+              .data()
+              .unique()
+              .sort()
+              .each(function (d, j) {
+                select.append('<option value="' + d + '">' + d + '</option>');
+              });
+          });
+        // Adding plan filter once table initialized
+        this.api()
+          .columns(3)
+          .every(function () {
+            var column = this;
+            var select = $(
+              '<select id="mmRoleAccess" class="form-select text-capitalize"><option value=""> Select Role Access </option></select>'
+            )
+              .appendTo('.mmRoleAccess')
+              .on('change', function () {
+                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                column.search(val ? '^' + val + '$' : '', true, false).draw();
+              });
+
+            column
+              .data()
+              .unique()
+              .sort()
+              .each(function (d, j) {
+                select.append('<option value="' + d + '">' + d + '</option>');
+              });
+          });
+      }
     });
   }
 });

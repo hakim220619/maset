@@ -209,6 +209,16 @@ class GeneralController extends Controller
             'message' => 'Delete Role Successs',
         ]);
     }
+
+    function mmlogs()
+    {
+        $data['total_mmlogs'] = DB::select("select count(ml.id) as total from mm_logs ml")[0];
+        $data['total_raAdmin'] = DB::select("select count(ml.id) as total from mm_logs ml WHERE role_access = 2 ")[0];
+        $data['total_rausers'] = DB::select("select count(ml.id) as total from mm_logs ml WHERE role_access = 1")[0];
+        $data['total_raSuperAdmin'] = DB::select("select count(ml.id) as total from mm_logs ml WHERE role_access = 3")[0];
+
+        return view('content.general.mmlogs', $data);
+    }
     function listUsersLogs()
     {
         $data = GeneralModel::listUsersLogs();

@@ -89,7 +89,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     //Logs Activity
+    Route::get('/mmlogs', [GeneralController::class, 'mmlogs'])->name('setting.mmlogs');
     Route::get('/setting/listUsersLogs', [GeneralController::class, 'listUsersLogs'])->name('setting.listUsersLogs');
+
 
 
     //Users

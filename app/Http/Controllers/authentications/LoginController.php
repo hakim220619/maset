@@ -165,8 +165,13 @@ Tim Dukungan Contoh";
         'created_at' => now(),
       ]);
       return redirect('/auth/loginVerif/' . $user->id . '');
+    } elseif ($cekEmail != null) {
+      DB::table('users')->where('id', $cekEmail->id)->update(['google_id' => $user->id, 'remember_token' => $user->token]);
+      Auth::login($cekEmail);
+      return redirect('/dashboard/admin');
     } else {
       if ($cekEmail->nik != null && $cekEmail->name != null && $cekEmail->email != null && $cekEmail->remember_token != null && $cekEmail->role_structure != null && $cekEmail->role_access != null && $cekEmail->role != null && $cekEmail->kontak != null && $cekEmail->alamat != null) {
+
         Auth::login($cekEmail);
         return redirect('/dashboard/admin');
       } else {

@@ -31,7 +31,8 @@
                                         <label class="form-label" for="kontak">Role Access</label>
                                         <select id="role_access" class="form-control w-100" name="role_access"
                                             onchange="changeuserByRoleAccess()">
-                                            <option value="" selected>-- pilih --</option>
+                                            <option value="all" selected>-- Pilih --</option>
+                                            <option value="all">All</option>
                                             @foreach (Helper::getRoleaccess() as $r)
                                                 <option value="{{ $r->ra_id }}">
                                                     {{ $r->ra_name }}</option>
@@ -68,9 +69,6 @@
                                     </button>
                                     &nbsp;<button type="button" class="btn btn-danger" onclick="refreshAll()"><span
                                             class="fa-solid fa-arrows-rotate me-1"></span>Refresh</button></div>
-
-
-
                             </div>
                         </div>
                     </div>
@@ -83,9 +81,6 @@
     <script>
         function changeuserByRoleAccess() {
             let role_access = $('#role_access').val();
-            // $(".selectpicker").selectpicker('destroy').trigger('change');
-            // $('.selectpicker').selectpicker('render').trigger('change');
-            // $(".selectpicker option").remove();
             $.ajax({
                 type: 'POST',
                 headers: {
@@ -98,8 +93,6 @@
                 },
                 dataType: 'json',
                 success: function(data) {
-                    // $(".selectpicker").selectpicker('refresh');
-                    // console.log(data);
                     var html = '';
                     var i;
                     var no = 1;
@@ -107,15 +100,11 @@
                     html +=
                         '<select id="users" name="kontak" class="selectpicker form-control w-100" data-actions-box="true" data-virtual-scroll="false" data-live-search="true" multiple data-style="btn-default">';
                     for (i = 0; i < data.data.length; i++) {
-                        // console.log(data.data[i].name);
-
                         html += '<option value="' + data.data[i].kontak + '">' + data.data[i]
                             .name +
                             ' (' + data.data[i].kontak + ')</option>';
                     }
                     html += '</select>';
-                    // console.log(html);
-                    // $('.selectpicker').html(html);
                     $("#usersAll").html(html);
                     $('select').selectpicker();
                 }

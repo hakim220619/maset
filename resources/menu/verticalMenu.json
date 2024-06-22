@@ -74,6 +74,11 @@
           "url": "/users",
           "name": "Users",
           "slug": "users"
+        },
+        {
+          "url": "/mmlogs",
+          "name": "MmLogs",
+          "slug": "mmlogs"
         }
       ]
     },
