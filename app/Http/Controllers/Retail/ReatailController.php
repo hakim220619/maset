@@ -54,4 +54,14 @@ class ReatailController extends Controller
 
         return '1' . Carbon::now()->year . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
     } 
+    public function detail_retail($id) {
+        $detail_retail = DB::select("SELECT ROW_NUMBER() OVER () AS no, b.* 
+                            FROM retail b, object_category oc 
+                            WHERE b.id_category=oc.id 
+                            AND b.id_category = 3
+                            AND b.id = $id
+                            ORDER BY no ASC");
+        $detail_retail = $detail_retail[0];
+        return view('content.object.retail.detail_retail', compact('detail_retail'));
+    }
 }

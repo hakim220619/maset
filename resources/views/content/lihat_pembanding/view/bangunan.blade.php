@@ -46,7 +46,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route("bangunan.bangunanLoadData") }}',
+                    url: '{{ route("pembanding.bangunanLoadData") }}',
                     type: 'GET',
                     dataSrc: 'data'
                 },
@@ -56,7 +56,7 @@
                         data: null, 
                         name: 'asset',
                         render: function(data, type, row) {
-                            return row.id_asset + ' - ' + row.nama_bangunan + '-' + row.alamat;
+                            return row.nip + ' - ' + row.nama_tanah_n_bangunan + '-' + row.alamat;
                         }
                     },
                     {
@@ -65,7 +65,7 @@
                         orderable: false,
                         searchable: false,
                         render: function(data, type, row) {
-                            return '<a href="/object/detail_bangunan/' + row.id + '" class="btn btn-sm btn-primary">Detail</a>';
+                            return '<a href="/pembanding/detail_pembanding_bangunan/' + row.id + '" class="btn btn-sm btn-primary">Detail</a>';
                         }
                     }
                 ]
