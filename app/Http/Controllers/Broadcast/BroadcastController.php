@@ -22,10 +22,10 @@ class BroadcastController extends Controller
         $data['title'] = "Broadcast";
         return view('content.broadcast.aplikasi-view', $data);
     }
-    function broadcastByAplikasiRead($id)
+    function broadcastByAplikasiRead($uid)
     {
         $data['title'] = "Broadcast By Aplikasi Read";
-        $data['data'] = GeneralModel::broadcastByAplikasiRead($id);
+        $data['data'] = GeneralModel::broadcastByAplikasiRead($uid);
         return view('content.broadcast.aplikasi-read', $data);
     }
     function broadcastByAplikasiAdd()
@@ -33,16 +33,16 @@ class BroadcastController extends Controller
         $data['title'] = "Broadcast By Aplikasi Add";
         return view('content.broadcast.aplikasi-add', $data);
     }
-    function broadcastByAplikasiUpdate($id)
+    function broadcastByAplikasiUpdate($uid)
     {
-        $data['data'] = GeneralModel::getBroadcastByAplikasi($id);
+        $data['data'] = GeneralModel::getBroadcastByAplikasi($uid);
         $data['status'] = ['ON', 'OFF'];
         $data['title'] = "Broadcast By Aplikasi Update";
         return view('content.broadcast.aplikasi-update', $data);
     }
-    function broadcastByAplikasiDelete($id)
+    function broadcastByAplikasiDelete($uid)
     {
-        GeneralModel::broadcastByAplikasiDelete($id);
+        GeneralModel::broadcastByAplikasiDelete($uid);
         return response()->json([
             'success' => true,
             'message' => 'Delete Success'
@@ -101,7 +101,6 @@ class BroadcastController extends Controller
     }
     function aplikasiProsess(Request $request)
     {
-        // dd($request->all());
         GeneralModel::aplikasiProsess($request);
         toast('', 'success');
         return redirect('/broadcast/aplikasiView')->with('success', 'Broadcast By Aplikasi Successs Addedd!');

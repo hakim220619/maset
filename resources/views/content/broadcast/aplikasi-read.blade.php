@@ -20,9 +20,15 @@
     @vite('resources/assets/js/app-aplikasi-view.js')
 @endsection
 @section('content')
-    <h4 style="text-align: center;">{{ $data->title }}</h4>
-    <h6 style="text-align: center;">{{ $data->keterangan }}</h6>
-    <hr>
-    <p>{!! $data->body !!}</p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">
+                <h4 style="text-align: center;">{{ $data->title }}</h4>
+            </h5>
 
+            <h6 style="text-align: center;">{{ $data->keterangan }}</h6>
+            <hr>
+            <p>{!! $data->body !!}</p>
+        </div>
+    </div>
 @endsection

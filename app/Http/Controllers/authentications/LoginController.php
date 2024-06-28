@@ -155,6 +155,7 @@ Tim Dukungan Contoh";
     $cekEmail = User::where('email', $user->email)->first();
     if ($cekEmail == null) {
       User::insert([
+        'uid' => Helpers::uid(),
         'google_id' => $user->id,
         'name' => $user->name,
         'email' => $user->email,
@@ -201,7 +202,7 @@ Tim Dukungan Contoh";
     $mmLogsData['detail'] = now();
     $mmLogsData['action'] = 'Login';
     Helpers::mmLogs($mmLogsData);
-    DB::table('users')->where('id', request()->user()->id)->update(['active' => 'OFF']);
+    DB::table('users')->where('uid', request()->user()->uid)->update(['active' => 'OFF']);
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();

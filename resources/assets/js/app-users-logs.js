@@ -32,7 +32,7 @@ $(function () {
         '<"col-sm-12 col-md-6"i>' +
         '<"col-sm-12 col-md-6"p>' +
         '>',
-      displayLength: 25,
+      displayLength: 8,
       lengthMenu: [8, 10, 25, 50, 75, 100],
       language: {
         sLengthMenu: 'Show _MENU_',

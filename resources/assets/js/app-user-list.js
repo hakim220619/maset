@@ -124,7 +124,7 @@ $(function () {
             return (
               '<div class="d-flex align-items-center">' +
               '<a href="javascript:;" class="text-body" onclick="OpenModalEditUsers(\'' +
-              full.id +
+              full.uid +
               "', '" +
               full.nik +
               "', '" +
@@ -144,16 +144,16 @@ $(function () {
               "', '" +
               full.alamat +
               '\')"><i class="ti ti-edit ti-sm me-2"></i></a>' +
-              '<a href="javascript:;" class="text-body delete-record" data-id="' +
-              full.id +
+              '<a href="javascript:;" class="text-body delete-record" data-uid="' +
+              full.uid +
               '"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
               '<a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical ti-sm mx-1"></i></a>' +
               '<div class="dropdown-menu dropdown-menu-end m-0">' +
               '<a href="' +
               userView +
               '" class="dropdown-item">View</a>' +
-              '<a href="javascript:;" class="dropdown-item resetPassword" data-id="' +
-              full.id +
+              '<a href="javascript:;" class="dropdown-item resetPassword" data-uid="' +
+              full.uid +
               '">Reset Password</a>' +
               '</div>' +
               '</div>'
@@ -180,7 +180,7 @@ $(function () {
       buttons: [
         {
           extend: 'collection',
-          className: 'btn btn-label-secondary dropdown-toggle mx-3 waves-effect waves-light',
+          className: 'btn btn-label-secondary dropdown-toggle mx-1 waves-effect waves-light',
           text: '<i class="ti ti-screen-share me-1 ti-xs"></i>Export',
           buttons: [
             {
@@ -317,6 +317,10 @@ $(function () {
               }
             }
           ]
+        },
+        {
+          className: 'btn btn-label-success mx-2 waves-effect waves-light uploadData',
+          text: '<i class="ti ti-upload me-1 ti-xs"></i>Import'
         },
         {
           text: '<i class="ti ti-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Add New User</span>',
@@ -458,7 +462,7 @@ $(function () {
 
   // Delete Record
   $('.datatables-users tbody').on('click', '.delete-record', function () {
-    var id = $(this).data('id');
+    var uid = $(this).data('uid');
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert user!",
@@ -475,7 +479,7 @@ $(function () {
         $.ajax({
           type: 'GET',
           dataType: 'json',
-          url: '/users/deleteProses/' + id,
+          url: '/users/deleteProses/' + uid,
           success: function (response) {
             if (response.success == true) {
               dt_user.row($(this).parents('tr')).remove().draw();
@@ -511,7 +515,7 @@ $(function () {
     });
   });
   $('.datatables-users tbody').on('click', '.resetPassword', function () {
-    var id = $(this).data('id');
+    var uid = $(this).data('uid');
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to reset password! Default Password 12345678",
@@ -528,7 +532,7 @@ $(function () {
         $.ajax({
           type: 'GET',
           dataType: 'json',
-          url: '/users/resetPassword/' + id,
+          url: '/users/resetPassword/' + uid,
           success: function (response) {
             if (response.success == true) {
               dt_user.row($(this).parents('tr')).remove().draw();

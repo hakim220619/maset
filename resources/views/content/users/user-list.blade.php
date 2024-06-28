@@ -371,6 +371,34 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="uploadUsers" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+                    <div class="modal-content p-3 p-md-5">
+                        <div class="modal-body">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            <div class="text-center mb-4">
+                                <h3 class="mb-2">Uploads Users</h3>
+                                <p class="text-muted">Uploads user details will receive a privacy audit.</p>
+                            </div>
+                            <form class="row g-3">
+                                <input type="hidden" name="id" id="idEdit">
+                                <div class="col-12 col-md-12">
+                                    <input type="file" id="usersUploadss" name="usersUploadss" class="form-control"
+                                        placeholder="330206****" />
+                                    <span class="invalid-feedback" id="usersUploadss"></span>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="button" onclick="uploadsUsers()"
+                                        class="btn btn-primary me-sm-3 me-1">Upload</button>
+                                    <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
+                                        aria-label="Close">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--/ Edit User Modal -->
 
         </div>
@@ -389,10 +417,11 @@
                     $('#FilterTransaction').val('').trigger('change');
                     $('#FilterActive').val('').trigger('change');
                 });
+                $('.uploadData').click(function() {
+                    console.log('asd');
+                    $('#uploadUsers').modal('show');
+                });
             })
-
-
-
 
             function changeRole() {
                 let role_structure = $('#role_structure').val();
@@ -452,9 +481,9 @@
                 });
             }
 
-            function OpenModalEditUsers(id, nik, name, email, kontak, role_structure, role_access, role, status, alamat) {
+            function OpenModalEditUsers(uid, nik, name, email, kontak, role_structure, role_access, role, status, alamat) {
                 $('#editUser').modal('show');
-                $('#idEdit').val(id);
+                $('#idEdit').val(uid);
                 $('#nikEdit').val(nik);
                 $('#nameEdit').val(name);
                 $('#emailEdit').val(email);
@@ -536,7 +565,7 @@
             }
 
             function EditUsers() {
-                let id = $('#idEdit').val();
+                let uid = $('#idEdit').val();
                 let nik = $('#nikEdit').val();
                 let name = $('#nameEdit').val();
                 let email = $('#emailEdit').val();
@@ -550,7 +579,7 @@
 
                 // var file_data = object.get(0).files[i];
                 var other_data = $('form').serialize();
-                fd.append('id', id);
+                fd.append('uid', uid);
                 fd.append('nik', nik);
                 fd.append('name', name);
                 fd.append('email', email);
@@ -599,6 +628,47 @@
                         }
                     });
                 }
+            }
+
+            function uploadsUsers() {
+                $('#submitUsers').attr('disabled', true);
+                var file = $('#usersUploadss')[0].files[0];
+                var fd = new FormData();
+                fd.append('excel', $('#usersUploadss')[0].files[0]);
+                // console.log(file);
+                $.ajax({
+                    url: '/users/uploadsUsers',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    type: 'POST',
+                    success: function(data) {
+                        // console.log(data);
+                        if (data.success == true) {
+                            $('#openModalAddUsers').modal('hide');
+                            refreshAll();
+                            Swal.fire({
+                                width: 400,
+                                padding: 7,
+                                position: 'bottom-right',
+                                toast: true,
+                                icon: 'success',
+                                title: 'Success',
+                                text: `${data.message}`,
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                backgroundColor: '#28a745',
+                                titleColor: '#fff',
+                            });
+                            $('.datatables-users').DataTable().ajax.reload();
+                        }
+                    }
+                });
             }
 
             function refreshAll() {

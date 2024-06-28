@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Users;
 
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
+use App\Imports\UsersImport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
 {
@@ -71,6 +73,15 @@ class UsersController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Update Users Successs',
+        ]);
+    }
+    function uploadsUsers(Request $request)
+    {
+        // dd($request->all());
+        User::uploadsUsers($request);
+        return response()->json([
+            'success' => true,
+            'message' => 'Uploads Users Successs',
         ]);
     }
     function deleteProses($id)
