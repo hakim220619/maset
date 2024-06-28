@@ -320,7 +320,11 @@ $(function () {
         },
         {
           className: 'btn btn-label-success mx-2 waves-effect waves-light uploadData',
-          text: '<i class="ti ti-upload me-1 ti-xs"></i>Import'
+          text: '<i class="ti ti-upload me-1 ti-xs"></i>Import',
+          attr: {
+            'data-bs-toggle': 'modal',
+            'data-bs-target': '#uploadUsers'
+          }
         },
         {
           text: '<i class="ti ti-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Add New User</span>',

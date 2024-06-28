@@ -417,11 +417,11 @@
                     $('#FilterTransaction').val('').trigger('change');
                     $('#FilterActive').val('').trigger('change');
                 });
-                $('.uploadData').click(function() {
-                    console.log('asd');
-                    $('#uploadUsers').modal('show');
-                });
             })
+
+            function openModalUpload() {
+                $('#uploadUsers').modal('show');
+            }
 
             function changeRole() {
                 let role_structure = $('#role_structure').val();

@@ -49,8 +49,12 @@
 
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label" for="message">Message</label>
-                            <textarea name="message" id="message" cols="60" rows="10" onkeyup="disabledButton()"></textarea>
+                            <div class="mb-3">
+
+                                <label class="form-label" for="message">Message</label>
+                                <textarea class="col-md-12 mb-3" name="message" id="message" cols="34" rows="10" onkeyup="disabledButton()"></textarea>
+
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="demo-inline-spacing">
