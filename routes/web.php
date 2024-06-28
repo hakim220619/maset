@@ -155,7 +155,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/broadcast/aplikasiProsessUpdate', [BroadcastController::class, 'aplikasiProsessUpdate'])->name('broadcast.aplikasiProsessUpdate');
 
     // pembanding
-    Route::get('/pembanding/bangunan', [PembandingBangunanController::class, 'bangunan'])->name('bangunan');
+    Route::get('/pembanding/bangunan', [PembandingBangunanController::class, 'bangunan'])->name('pembanding_bangunan');
     Route::post('/pembanding/add_pembanding_bangunan', [PembandingBangunanController::class, 'add_pembanding_bangunan'])->name('add_pembanding_bangunan');
     Route::get('/pembanding/detail_pembanding_bangunan/{id}', [PembandingBangunanController::class, 'detail_pembanding_bangunan'])->name('detail_pembanding_bangunan');
 
