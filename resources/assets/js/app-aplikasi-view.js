@@ -31,7 +31,7 @@ $(function () {
         {
           data: 'title',
           render: function (data, type, row, meta) {
-            return '<a href="/broadcast/aplikasiRead/' + row.id + '">' + data + '</a>';
+            return '<a href="/broadcast/aplikasiRead/' + row.uid + '">' + data + '</a>';
           }
         },
         { data: 'status' },
@@ -65,10 +65,10 @@ $(function () {
             return (
               '<div class="d-flex align-items-center">' +
               '<a href="/broadcast/aplikasiUpdate/' +
-              full.id +
+              full.uid +
               '" class="text-body" ><i class="ti ti-edit ti-sm me-2"></i></a>' +
-              '<a href="javascript:;" class="text-body delete-record" data-id="' +
-              full.id +
+              '<a href="javascript:;" class="text-body delete-record" data-uid="' +
+              full.uid +
               '"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
               '</div>'
             );
@@ -278,7 +278,7 @@ $(function () {
 
   // Delete Record
   $('.datatables-aplikasi tbody').on('click', '.delete-record', function () {
-    var id = $(this).data('id');
+    var uid = $(this).data('uid');
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert Role!",
@@ -295,7 +295,7 @@ $(function () {
         $.ajax({
           type: 'GET',
           dataType: 'json',
-          url: '/broadcast/aplikasiDelete/' + id,
+          url: '/broadcast/aplikasiDelete/' + uid,
           success: function (response) {
             if (response.success == true) {
               dt_user.row($(this).parents('tr')).remove().draw();

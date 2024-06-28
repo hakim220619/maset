@@ -1,6 +1,32 @@
 @php
     $containerNav = $configData['contentLayout'] === 'compact' ? 'container-xxl' : 'container-fluid';
     $navbarDetached = $navbarDetached ?? '';
+    function hitungJam($date)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $waktustart = date($date);
+        $waktuend = date('Y-m-d h:i:sa');
+        //echo $waktustart;
+        //echo $waktuend;
+
+        $datetime1 = new DateTime($waktustart); //start time
+        $datetime2 = new DateTime($waktuend); //end time
+        $durasi = $datetime1->diff($datetime2);
+        if ($durasi->format('%Y') != 0) {
+            return $durasi->format('%Y Tahun');
+        } elseif ($durasi->format('%m') != 0) {
+            return $durasi->format('%m Bulan');
+        } elseif ($durasi->format('%d') != 0) {
+            return $durasi->format('%d Hari');
+        } elseif ($durasi->format('%H') != 0) {
+            return $durasi->format('%h Jam');
+        } elseif ($durasi->format('%i') != 0) {
+            return $durasi->format('%i Menit');
+        } else {
+            return $durasi->format('%s Detik');
+        }
+    }
+
 @endphp
 
 <!-- Navbar -->
@@ -72,7 +98,8 @@
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                 data-bs-auto-close="outside" aria-expanded="false">
                 <i class="ti ti-bell ti-md"></i>
-                <span class="badge bg-danger rounded-pill badge-notifications">{{ Helper::getCountNotifi() }}</span>
+                <span
+                    class="badge bg-danger rounded-pill badge-notifications">{{ Helper::getCountNotifi()->total }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end py-0">
                 <li class="dropdown-menu-header border-bottom">
@@ -83,41 +110,54 @@
                                 class="ti ti-mail-opened fs-4"></i></a>
                     </div>
                 </li>
-                @forelse (Helper::notifications() as $a)
-                    <li class="dropdown-notifications-list scrollable-container">
+
+                <li class="dropdown-notifications-list scrollable-container">
+                    @forelse (Helper::notifications() as $a)
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item list-group-item-action dropdown-notifications-item">
 
                                 <div class="d-flex">
-
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
                                             <img src="{{ asset('') }}storage/images/users/{{ $a->image }}" alt
                                                 class="h-auto rounded-circle">
                                         </div>
                                     </div>
-                                    <a href="/broadcast/aplikasiRead/{{ $a->id }}" style="color: #534444;">
+                                    <a href="/broadcast/aplikasiRead/{{ $a->uid }}" style="color: #534444;">
                                         <div class="flex-grow-1">
 
-                                            <h6 class="mb-1">{{ $a->title }}</h6>
-                                            <p class="mb-0">{{ $a->keterangan }}</p>
-                                            <small class="text-muted">1h ago</small>
+                                            <h6 class="mb-1"><b>{{ $a->title }}</b></h6>
+                                            <p class="mb-0 " style="color: #8d8e90;">
+                                                @if (substr($a->keterangan, 0, 60) < 60)
+                                                    {{ $a->keterangan }}
+                                                @else
+                                                    {{ substr($a->keterangan, 0, 60) }}...
+                                                @endif
+                                            </p>
 
+                                            <small class="text-muted">{{ hitungJam($a->created_at) }}</small>
                                         </div>
                                     </a>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="/broadcast/aplikasiRead/{{ $a->id }}"
-                                            class="dropdown-notifications-read"><span
-                                                class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
-                                                class="ti ti-x"></span></a>
+                                        @if ($a->status == 'Delivered')
+                                            <a href="/broadcast/aplikasiRead/{{ $a->uid }}"
+                                                class="dropdown-notifications-read"><span
+                                                    class="badge badge-dot"></span></a>
+                                        @else
+                                            <a href="/broadcast/aplikasiRead/{{ $a->uid }}"
+                                                class="dropdown-notifications-read"></a>
+                                        @endif
+                                        {{-- <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                class="ti ti-x"></span></a> --}}
                                     </div>
                                 </div>
                             </li>
                         </ul>
-                    </li>
-                @empty
-                @endforelse
+                    @empty
+                        <p>Data Kosong</p>
+                    @endforelse
+                </li>
+
                 <li class="dropdown-menu-footer border-top">
                     <a href="javascript:void(0);"
                         class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center">

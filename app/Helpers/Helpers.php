@@ -344,12 +344,17 @@ class Helpers
   }
   public static function notifications()
   {
-    $data = DB::select('select ba.*, u.name, u.image from broadcast_aplikasi ba, users u where ba.user_id=u.id and ba.status = "ON"');
+    $data = DB::select('SELECT bac.*, ba.uid, ba.title, ba.keterangan, ba.created_at as created_at_ba, u.image FROM broadcast_aplikasi_access bac, broadcast_aplikasi ba, users u WHERE bac.ba_id=ba.uid AND ba.user_id=u.id AND ba.status = "ON" AND bac.user_id = ' . Auth::user()->id . ' order by ba.created_at desc');
     return $data;
   }
   public static function getCountNotifi()
   {
-    $data = DB::table('broadcast_aplikasi')->where('status', 'ON')->count();
+    $data = DB::select('SELECT count(bac.id) as total FROM broadcast_aplikasi_access bac, broadcast_aplikasi ba, users u WHERE bac.ba_id=ba.uid AND ba.user_id=u.id AND ba.status = "ON" AND bac.user_id = ' . Auth::user()->id . ' and bac.status = "Delivered"');
+    return $data[0];
+  }
+  public static function uid()
+  {
+    $data = Str::random(40) . strtotime(now());
     return $data;
   }
 }

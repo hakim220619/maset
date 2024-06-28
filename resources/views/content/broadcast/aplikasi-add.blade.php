@@ -36,6 +36,23 @@
                                 <input type="text" class="form-control" id="keterangan" name="keterangan"
                                     placeholder="Enter your Keterangan" autofocus>
                             </div>
+                            <div class="mb-3 col-12 col-md-6">
+                                <label class="form-label" for="kontak">Role Access</label>
+                                <select id="role_access" class="form-control w-100" name="role_access"
+                                    onchange="changeuserByRoleAccess()">
+                                    <option value="all" selected>-- Pilih --</option>
+                                    <option value="all">All</option>
+                                    @foreach (Helper::getRoleaccess() as $r)
+                                        <option value="{{ $r->ra_id }}">
+                                            {{ $r->ra_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col-12 col-md-6">
+                                <div class="mb-3" id="usersAll">
+
+                                </div>
+                            </div>
                             <div class="mb-3 col-12 col-md-12">
                                 <div class="card">
                                     <textarea id="body" cols="30" rows="10" placeholder="Enter the Description" name="body"></textarea>
@@ -76,6 +93,38 @@
 
         function refreshAll() {
             window.location.href = '/broadcast/aplikasiView';
+        }
+
+        function changeuserByRoleAccess() {
+            let role_access = $('#role_access').val();
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '{{ route('role.getUserByRoleAccess') }}',
+                async: true,
+                data: {
+                    role_access: role_access
+                },
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+                    var i;
+                    var no = 1;
+                    html += '<label class="form-label" for="users">Users</label>';
+                    html +=
+                        '<select id="users" name="users[]" class="selectpicker form-control w-100" data-actions-box="true" data-virtual-scroll="false" data-live-search="true" multiple data-style="btn-default">';
+                    for (i = 0; i < data.data.length; i++) {
+                        html += '<option value="' + data.data[i].id + '">' + data.data[i]
+                            .name +
+                            '</option>';
+                    }
+                    html += '</select>';
+                    $("#usersAll").html(html);
+                    $('select').selectpicker();
+                }
+            });
         }
     </script>
 @endsection

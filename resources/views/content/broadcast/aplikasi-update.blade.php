@@ -32,6 +32,7 @@
                                 <input type="text" class="form-control" id="title" name="title"
                                     value="{{ $data->title }}" placeholder="Enter your Title" autofocus>
                             </div>
+
                             <div class="mb-3 col-12 col-md-6">
                                 <label class="form-label" for="status">Status</label>
                                 <select id="status" name="status" class="select3 form-select"
@@ -42,6 +43,11 @@
                                         </option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="mb-3 col-12 col-md-12">
+                                <label for="title" class="form-label">Keterangan</label>
+                                <input type="text" class="form-control" id="keterangan" name="keterangan"
+                                    value="{{ $data->keterangan }}" placeholder="Enter your Keterangan" autofocus>
                             </div>
                             <div class="mb-3 col-12 col-md-12">
                                 <div class="card">

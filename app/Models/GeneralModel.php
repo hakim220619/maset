@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class GeneralModel extends Model
 {
@@ -65,16 +66,15 @@ class GeneralModel extends Model
         }
         return $data;
     }
-    public static function getBroadcastByAplikasi($id)
+    public static function getBroadcastByAplikasi($uid)
     {
-
-        $data = DB::table('broadcast_aplikasi')->where('id', $id)->first();
+        $data = DB::table('broadcast_aplikasi')->where('uid', $uid)->first();
         return $data;
     }
-    public static function broadcastByAplikasiDelete($id)
+    public static function broadcastByAplikasiDelete($uid)
     {
-
-        $data = DB::table('broadcast_aplikasi')->where('id', $id)->delete();
+        $data = DB::table('broadcast_aplikasi')->where('uid', $uid)->delete();
+        $data = DB::table('broadcast_aplikasi_access')->where('ba_id', $uid)->delete();
         return $data;
     }
     public static function checkEmail($request)
@@ -209,9 +209,15 @@ class GeneralModel extends Model
 
         return $data;
     }
-    public static function broadcastByAplikasiRead($id)
+    public static function broadcastByAplikasiRead($uid)
     {
-        $data = DB::select('select ROW_NUMBER() OVER () AS no, ba.* from broadcast_aplikasi ba where ba.id = "' . $id . '" ORDER BY ROW_NUMBER() OVER () asc');
+        $data = ['status' => 'Read'];
+        DB::table('broadcast_aplikasi_access')->where('ba_id', $uid)->where('user_id', Auth::user()->id)->update($data);
+        $mmLogsData['activity'] = 'Read Broadcast By Aplikasi';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
+        Helpers::mmLogs($mmLogsData);
+        $data = DB::select('select ROW_NUMBER() OVER () AS no, ba.* from broadcast_aplikasi ba where ba.uid = "' . $uid . '" ORDER BY ROW_NUMBER() OVER () asc');
         return $data[0];
     }
     public static function getUserByRoleAccess($request)
@@ -228,7 +234,7 @@ class GeneralModel extends Model
                 from users u, role_structure rs
                 where u.role_structure=rs.rs_id 
                 and rs.rs_name like  "%' . Helpers::getProfileById()->rs_name . '%"
-                and u.role_access = ' . $request->role_access . '
+                ' .  $roleAccess . '
                 ORDER BY ROW_NUMBER() OVER () asc');
             } else {
                 $data = DB::select('select ROW_NUMBER() OVER () AS no,  u.*, rs.rs_name,
@@ -290,7 +296,16 @@ class GeneralModel extends Model
     }
     public static function aplikasiProsess($request)
     {
+        $uid = Str::random(40);
+        $uidData = '';
+        $dataUid = DB::table('broadcast_aplikasi')->where('uid', $uid)->first();
+        if ($dataUid == null) {
+            $uidData = $uid;
+        } else {
+            $uidData = $uid . strtotime(now());
+        }
         $data = [
+            'uid' => $uidData,
             'title' => $request->title,
             'keterangan' => $request->keterangan,
             'user_id' => Auth::user()->id,
@@ -299,7 +314,24 @@ class GeneralModel extends Model
             'created_at' => now()
         ];
         DB::table('broadcast_aplikasi')->insert($data);
-        $mmLogsData['activity'] = 'aplikasiProsess berhasil';
+        foreach ($request->users as $key => $user_id) {
+            $getDataUsers = User::where('id', $user_id)->first();
+            $data = [
+                'ba_id' => $uidData,
+                'user_id' => $user_id,
+                'role_structure' => $getDataUsers->role_structure,
+                'role_access' => $getDataUsers->role_access,
+                'role' => $getDataUsers->role,
+                'status' => 'Delivered',
+                'created_at' => now()
+            ];
+            DB::table('broadcast_aplikasi_access')->insert($data);
+            $mmLogsData['activity'] = 'Broadcast AplikasiProsess By Id berhasil';
+            $mmLogsData['detail'] = $data;
+            $mmLogsData['action'] = 'Insert';
+            Helpers::mmLogs($mmLogsData);
+        }
+        $mmLogsData['activity'] = 'Broadcast aplikasiProsess berhasil';
         $mmLogsData['detail'] = $data;
         $mmLogsData['action'] = 'Insert';
         Helpers::mmLogs($mmLogsData);
@@ -309,6 +341,7 @@ class GeneralModel extends Model
         $data = [
             'title' => $request->title,
             'body' => $request->body,
+            'keterangan' => $request->keterangan,
             'status' => $request->status,
             'updated_at' => now()
         ];

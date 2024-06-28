@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Helpers\Helpers;
+use App\Imports\UsersImport;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 use Mockery\Undefined;
 
 class User extends Authenticatable
@@ -25,8 +27,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'uid',
+        'nik',
         'name',
         'email',
+        'kontak',
+        'status',
         'role_access',
         'role_structure',
         'role',
@@ -92,13 +98,14 @@ class User extends Authenticatable
     }
     public static function ProsesAddUsers($request)
     {
-        // dd($request);
+
         if ($request['image'] != null) {
             $image = $request->file('image');
             // dd($getImage->image);
             $filename = $image->getClientOriginalName();
             $image->move(public_path('storage/images/users'), $filename);
             $data = [
+                'uid' => Helpers::uid(),
                 'nik' => $request->nik,
                 'name' => $request->name,
                 'email' => $request->email,
@@ -114,6 +121,7 @@ class User extends Authenticatable
             ];
         } else {
             $data = [
+                'uid' => Helpers::uid(),
                 'nik' => $request->nik,
                 'name' => $request->name,
                 'email' => $request->email,
@@ -142,6 +150,7 @@ class User extends Authenticatable
             $filename = $image->getClientOriginalName();
             $image->move(public_path('storage/images/users'), $filename);
             $data = [
+                'uid' => Helpers::uid(),
                 'nik' => $request->nik,
                 'name' => $request->name,
                 'email' => $request->email,
@@ -155,6 +164,7 @@ class User extends Authenticatable
             ];
         } else {
             $data = [
+                'uid' => Helpers::uid(),
                 'nik' => $request->nik,
                 'name' => $request->name,
                 'email' => $request->email,
@@ -176,7 +186,7 @@ class User extends Authenticatable
     {
         // dd($request);
         if ($request['image'] != null) {
-            $getImage = DB::table('users')->where('id', $request->id)->first();
+            $getImage = DB::table('users')->where('uid', $request->uid)->first();
             $file_path = public_path() . '/storage/images/users/' . $getImage->image;
             File::delete($file_path);
             $image = $request->file('image');
@@ -201,14 +211,13 @@ class User extends Authenticatable
                 'nik' => $request->nik,
                 'name' => $request->name,
                 'email' => $request->email,
-
                 'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'updated_at' => now()
             ];
         }
         // dd($data);
-        DB::table('users')->where('id', $request->id)->update($data);
+        DB::table('users')->where('uid', $request->uid)->update($data);
 
         $mmLogsData['activity'] = 'ProsesEditUsers berhasil dengan id ' . $request->id . '';
         $mmLogsData['detail'] = $data;
@@ -220,6 +229,7 @@ class User extends Authenticatable
     {
         // dd($request);
         $data = [
+            'uid' => Helpers::uid(),
             'nik' => $request->nik,
             'name' => $request->name,
             'email' => $request->email,
@@ -243,7 +253,7 @@ class User extends Authenticatable
     {
         // dd($request->all());
         if ($request->image != 'undefined') {
-            $getImage = DB::table('users')->where('id', $request->id)->first();
+            $getImage = DB::table('users')->where('uid', $request->uid)->first();
             $file_path = public_path() . '/storage/images/users/' . $getImage->image;
             File::delete($file_path);
             $image = $request->file('image');
@@ -276,7 +286,7 @@ class User extends Authenticatable
                 'updated_at' => now()
             ];
         }
-        DB::table('users')->where('id', $request->id)->update($data);
+        DB::table('users')->where('uid', $request->uid)->update($data);
         $mmLogsData['activity'] = 'ProsesUpdateUsers berhasil dengan id ' . $request->id . '';
         $mmLogsData['detail'] = $data;
         $mmLogsData['action'] = 'Update';
@@ -288,8 +298,8 @@ class User extends Authenticatable
             'password' => Hash::make($request->confirmPassword),
             'updated_at' => now()
         ];
-        DB::table('users')->where('id', $request->id)->update($data);
-        $mmLogsData['activity'] = 'changePassword berhasil dengan id ' . $request->id . '';
+        DB::table('users')->where('uid', $request->uid)->update($data);
+        $mmLogsData['activity'] = 'changePassword berhasil dengan uid ' . $request->uid . '';
         $mmLogsData['detail'] = $data;
         $mmLogsData['action'] = 'Update';
         Helpers::mmLogs($mmLogsData);
@@ -301,25 +311,38 @@ class User extends Authenticatable
             'updated_at' => now()
         ];
         DB::table('users')->where('id', Auth::user()->id)->update($data);
-        $mmLogsData['activity'] = 'suspended berhasil dengan id ' . $request->id . '';
+        $mmLogsData['activity'] = 'suspended berhasil dengan uid ' . $request->uid . '';
         $mmLogsData['detail'] = $data;
         $mmLogsData['action'] = 'Update';
         Helpers::mmLogs($mmLogsData);
     }
-    public static function ProsesDeletusers($id)
+    public static function ProsesDeletusers($uid)
     {
-        $data = DB::table('users')->where('id', $id)->delete();
-        $mmLogsData['activity'] = 'ProsesDeletusers berhasil dengan id ' . $id . '';
+        $data = DB::table('users')->where('uid', $uid)->delete();
+        $mmLogsData['activity'] = 'ProsesDeletusers berhasil dengan uid ' . $uid . '';
         $mmLogsData['detail'] = $data;
         $mmLogsData['action'] = 'Delete';
         Helpers::mmLogs($mmLogsData);
     }
-    public static function prosesResetPassword($id)
+    public static function prosesResetPassword($uid)
     {
-        $data = DB::table('users')->where('id', $id)->update(['password' => Hash::make(12345678)]);
-        $mmLogsData['activity'] = 'prosesResetPassword berhasil dengan id ' . $id . '';
+        $data = DB::table('users')->where('uid', $uid)->update(['password' => Hash::make(12345678)]);
+        $mmLogsData['activity'] = 'prosesResetPassword berhasil dengan uid ' . $uid . '';
         $mmLogsData['detail'] = $data;
         $mmLogsData['action'] = 'Delete';
         Helpers::mmLogs($mmLogsData);
+    }
+    public static function uploadsUsers($request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'excel' => 'required|mimes:xlsx, csv, xls'
+        ]);
+        // dd($request->all());
+        Excel::import(new UsersImport, $request->file('excel'));
+        // $mmLogsData['activity'] = 'prosesResetPassword berhasil dengan id ' . $id . '';
+        // $mmLogsData['detail'] = $data;
+        // $mmLogsData['action'] = 'Delete';
+        // Helpers::mmLogs($mmLogsData);
     }
 }
