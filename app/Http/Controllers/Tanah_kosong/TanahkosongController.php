@@ -55,4 +55,14 @@ class TanahkosongController extends Controller
 
         return '1' . Carbon::now()->year . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
     }  
+    public function detail_tanah_kosong($id) {
+        $detail_tanah_kosong = DB::select("SELECT ROW_NUMBER() OVER () AS no, t.* 
+                            FROM tanah_kosong t, object_category oc 
+                            WHERE t.id_category=oc.id 
+                            AND t.id_category = 2
+                            AND t.id = $id
+                            ORDER BY no ASC");
+        $detail_tanah_kosong = $detail_tanah_kosong[0];
+        return view('content.object.tanah_kosong.detail_tanah_kosong', compact('detail_tanah_kosong'));
+    }
 }

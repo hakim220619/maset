@@ -161,18 +161,18 @@
           "submenu": [
             {
               "url": "pembanding/bangunan",
-              "name": "Tanah dan Bangunan",
-              "slug": "bangunan"
+              "name": "Pembanding Tanah dan Bangunan",
+              "slug": "pembanding_bangunan"
             },
             {
               "url": "pembanding/tanah_kosong",
-              "name": "Tanah Kosong",
-              "slug": "tanah_kosong"
+              "name": "Pembanding Tanah Kosong",
+              "slug": "pembanding_tanah_kosong"
             },
             {
               "url": "pembanding/retail",
-              "name": "Office/Retai/Aset",
-              "slug": "retail"
+              "name": "Pembanding Office/Retai/Aset",
+              "slug": "pembanding_retail"
             }
           ]
         }

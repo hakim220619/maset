@@ -33,10 +33,10 @@ class BangunanController extends Controller
     public function bangunanLoadData()
     {
         $data = BangunanModel::bangunanLoadData();
-        // dd($data);
         return response()->json([
-            'success' => true,
-            'message' => 'Data',
+            'draw' => intval(request()->input('draw')),
+            'recordsTotal' => count($data),
+            'recordsFiltered' => count($data),
             'data' => $data,
         ]);
     }
@@ -45,8 +45,9 @@ class BangunanController extends Controller
         $data = BangunanModel::tanahKosongLoadData();
         // dd($data);
         return response()->json([
-            'success' => true,
-            'message' => 'Data',
+            'draw' => intval(request()->input('draw')),
+            'recordsTotal' => count($data),
+            'recordsFiltered' => count($data),
             'data' => $data,
         ]);
     }
@@ -55,8 +56,9 @@ class BangunanController extends Controller
         $data = BangunanModel::retailLoadData();
         // dd($data);
         return response()->json([
-            'success' => true,
-            'message' => 'Data',
+            'draw' => intval(request()->input('draw')),
+            'recordsTotal' => count($data),
+            'recordsFiltered' => count($data),
             'data' => $data,
         ]);
     }
@@ -102,4 +104,15 @@ class BangunanController extends Controller
 
         return '1' . Carbon::now()->year . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
     }
+    public function detail_bangunan($id) {
+        $detail_bangunan = DB::select("SELECT ROW_NUMBER() OVER () AS no, b.* 
+                            FROM bangunan b, object_category oc 
+                            WHERE b.id_category=oc.id 
+                            AND b.id_category = 1
+                            AND b.id = $id
+                            ORDER BY no ASC");
+        $detail_bangunan = $detail_bangunan[0];
+        return view('content.object.bangunan.detail_bangunan', compact('detail_bangunan'));
+    }
+  
 }

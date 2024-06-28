@@ -125,13 +125,11 @@ $configData = Helper::appClasses();
                 </div>
                 <div>
                   <label class="form-label" for="alamat">Titik Point</label>
-                  <div id="map" style="height: 400px; width: 100%;"></div>
                   <label class="form-label" for="alamat">Alamat</label>
                   <input type="text" id="alamat" name="alamat" class="form-control" placeholder="jl sukasari kecamatan baleendah bandung" />
-                  <label class="form-label" for="lat">Latitude</label>
-                  <input type="text" id="lat" name="lat" class="form-control" placeholder="-8.9897878" />
-                  <label class="form-label" for="long">Longitude</label>
-                  <input type="text" id="long" name="long" class="form-control" placeholder="89.8477748" />
+                  <div id="map" style="height: 400px; width: 100%;"></div>
+                  <input type="text" id="lat" name="lat" class="form-control" placeholder="-8.9897878" hidden />
+                  <input type="text" id="long" name="long" class="form-control" placeholder="89.8477748" hidden />
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label" for="foto_tampak_depan">Upload Foto Tampak Depan</label>
