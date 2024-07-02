@@ -23,7 +23,38 @@ $(function () {
         { data: 'activity' },
         { data: 'action' },
         { data: 'ip' },
-        { data: 'created_at' }
+        { data: 'created_at' },
+        {
+          data: '',
+          render: function (data, type, row, meta) {
+            return (
+              '<button class="btn btn-primary" onclick="OpenModalDetailUsers(\'' +
+              row.uid +
+              "', '" +
+              row.image +
+              "', '" +
+              row.nik +
+              "', '" +
+              row.name +
+              "', '" +
+              row.email +
+              "', '" +
+              row.kontak +
+              "', '" +
+              row.rs_name +
+              "', '" +
+              row.ra_name +
+              "', '" +
+              row.role_name +
+              "', '" +
+              row.status +
+              "', '" +
+              row.alamat +
+              '\')">Detail</button>' +
+              ''
+            );
+          }
+        }
       ],
       //   order: [[1, 'desc']],
       dom:

@@ -28,40 +28,48 @@ class GeneralModel extends Model
     {
         if (Auth::user()->role_structure != Helpers::getRoleStructureJson()[3]) {
             if (Auth::user()->role_structure == 33 || Auth::user()->role_structure == 34 || Auth::user()->role_structure == 35) {
-                $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.*, rs.rs_name,
-                	IF(ml.user_id = null, "", (SELECT u.name FROM users u WHERE u.id=ml.user_id) ) as name, 
+                $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.id as logs_id, ml.activity, ml.detail, ml.action, ml.ip, ml.created_at, rs.rs_name,
+                    IF(ml.user_id = null, "", (SELECT u.name FROM users u WHERE u.id=ml.user_id) ) as name, 
             IF(ml.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=ml.role_access) ) as ra_name, 
-            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name 
-            from mm_logs ml, role_structure rs
+            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name,
+            u.*
+            from mm_logs ml, role_structure rs, users u
             where ml.role_structure=rs.rs_id 
+            AND ml.user_id=u.id 
            and rs.rs_name like  "%' . User::getProfileById()->rs_name . '%"
             ORDER BY ROW_NUMBER() OVER () asc');
             } elseif (Auth::user()->role_access == 2) {
-                $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.*, rs.rs_name,
+                $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.id as logs_id, ml.activity, ml.detail, ml.action, ml.ip, ml.created_at, rs.rs_name,
                     IF(ml.user_id = null, "", (SELECT u.name FROM users u WHERE u.id=ml.user_id) ) as name, 
             IF(ml.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=ml.role_access) ) as ra_name, 
-            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name 
-            from mm_logs ml, role_structure rs
+            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name,
+            u.*
+            from mm_logs ml, role_structure rs, users u
             where ml.role_structure=rs.rs_id 
+            AND ml.user_id=u.id 
            and rs.rs_name like  "%' . User::getProfileById()->rs_name . '%"
             ORDER BY ROW_NUMBER() OVER () asc');
             } elseif (Auth::user()->role_access == 1) {
-                $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.*, rs.rs_name,
+                $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.id as logs_id, ml.activity, ml.detail, ml.action, ml.ip, ml.created_at, rs.rs_name,
                     IF(ml.user_id = null, "", (SELECT u.name FROM users u WHERE u.id=ml.user_id) ) as name, 
             IF(ml.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=ml.role_access) ) as ra_name, 
-            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name 
-            from mm_logs ml, role_structure rs
+            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name,
+            u.*
+            from mm_logs ml, role_structure rs, users u
             where ml.role_structure=rs.rs_id 
+            AND ml.user_id=u.id 
             and ml.user_id =  ' . User::getProfileById()->id . '
             ORDER BY ROW_NUMBER() OVER () asc');
             }
         } else {
-            $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.*, rs.rs_name,
+            $data = DB::select('select ROW_NUMBER() OVER () AS no,  ml.id as logs_id, ml.activity, ml.detail, ml.action, ml.ip, ml.created_at, rs.rs_name,
                     IF(ml.user_id = null, "", (SELECT u.name FROM users u WHERE u.id=ml.user_id) ) as name, 
             IF(ml.role_access = null, "", (SELECT ra.ra_name FROM role_access ra WHERE ra.ra_id=ml.role_access) ) as ra_name, 
-            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name 
-            from mm_logs ml, role_structure rs
-            where ml.role_structure=rs.rs_id
+            IF(ml.role = null, "", (SELECT r.role_name FROM role r WHERE r.role_id=ml.role) ) as role_name,
+            u.*
+            from mm_logs ml, role_structure rs, users u
+            where ml.role_structure=rs.rs_id 
+            AND ml.user_id=u.id
             ORDER BY ROW_NUMBER() OVER () asc');
         }
         return $data;
