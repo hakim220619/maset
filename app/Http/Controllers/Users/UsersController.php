@@ -104,4 +104,14 @@ class UsersController extends Controller
             'message' => 'Reset Password Successs',
         ]);
     }
+    function verificationProses($id)
+    {
+        // dd($id);
+        User::verificationProses($id);
+        // toast('', 'success');
+        return response()->json([
+            'success' => true,
+            'message' => 'Reset Password Successs',
+        ]);
+    }
 }

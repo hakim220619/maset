@@ -108,6 +108,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/users/uploadsUsers', [UsersController::class, 'uploadsUsers'])->name('users.uploadsUsers');
     Route::get('/users/deleteProses/{id}', [UsersController::class, 'deleteProses'])->name('users.deleteProses');
     Route::get('/users/resetPassword/{id}', [UsersController::class, 'resetPassword'])->name('users.resetPassword');
+    Route::get('/users/verificationProses/{id}', [UsersController::class, 'verificationProses'])->name('users.verificationProses');
 
 
     //Profile

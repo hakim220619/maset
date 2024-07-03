@@ -156,7 +156,7 @@ class User extends Authenticatable
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role_structure' => $request->role_structure,
-                'status' => 'INACTIVE',
+                'status' => 'VERIFICATION',
                 'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'image' => $request->file('image')->getClientOriginalName(),
@@ -170,7 +170,7 @@ class User extends Authenticatable
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role_structure' => $request->role_structure,
-                'status' => 'INACTIVE',
+                'status' => 'VERIFICATION',
                 'kontak' => $request->kontak,
                 'alamat' => $request->alamat,
                 'created_at' => now()
@@ -330,6 +330,14 @@ class User extends Authenticatable
         $mmLogsData['activity'] = 'prosesResetPassword berhasil dengan uid ' . $uid . '';
         $mmLogsData['detail'] = $data;
         $mmLogsData['action'] = 'Delete';
+        Helpers::mmLogs($mmLogsData);
+    }
+    public static function verificationProses($uid)
+    {
+        $data = DB::table('users')->where('uid', $uid)->update(['status' => 'ACTIVE']);
+        $mmLogsData['activity'] = 'verificationProses berhasil dengan uid ' . $uid . '';
+        $mmLogsData['detail'] = $data;
+        $mmLogsData['action'] = 'Update';
         Helpers::mmLogs($mmLogsData);
     }
     public static function uploadsUsers($request)

@@ -95,6 +95,9 @@ $(function () {
             if (status == 'SUSPENDED') {
               dataStatus = '<span class="badge bg-label-danger">' + status + '</span>';
             }
+            if (status == 'VERIFICATION') {
+              dataStatus = '<span class="badge bg-label-info">' + status + '</span>';
+            }
             return dataStatus;
           }
         },
@@ -121,43 +124,54 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             // console.log(full);
-            return (
-              '<div class="d-flex align-items-center">' +
-              '<a href="javascript:;" class="text-body" onclick="OpenModalEditUsers(\'' +
-              full.uid +
-              "', '" +
-              full.nik +
-              "', '" +
-              full.name +
-              "', '" +
-              full.email +
-              "', '" +
-              full.kontak +
-              "', '" +
-              full.role_structure +
-              "', '" +
-              full.role_access +
-              "', '" +
-              full.role +
-              "', '" +
-              full.status +
-              "', '" +
-              full.alamat +
-              '\')"><i class="ti ti-edit ti-sm me-2"></i></a>' +
-              '<a href="javascript:;" class="text-body delete-record" data-uid="' +
-              full.uid +
-              '"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
-              '<a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical ti-sm mx-1"></i></a>' +
-              '<div class="dropdown-menu dropdown-menu-end m-0">' +
-              '<a href="' +
-              userView +
-              '" class="dropdown-item">View</a>' +
-              '<a href="javascript:;" class="dropdown-item resetPassword" data-uid="' +
-              full.uid +
-              '">Reset Password</a>' +
-              '</div>' +
-              '</div>'
-            );
+            if (full.status == 'VERIFICATION') {
+              return (
+                '<div class="d-flex align-items-center">' +
+                '<a href="javascript:;" class="text-body verification" data-uid="' +
+                full.uid +
+                '"><i class="ti ti-checks ti-sm mx-2" style="color: black;"></i></a>' +
+                '</div>' +
+                '</div>'
+              );
+            } else {
+              return (
+                '<div class="d-flex align-items-center">' +
+                '<a href="javascript:;" class="text-body" onclick="OpenModalEditUsers(\'' +
+                full.uid +
+                "', '" +
+                full.nik +
+                "', '" +
+                full.name +
+                "', '" +
+                full.email +
+                "', '" +
+                full.kontak +
+                "', '" +
+                full.role_structure +
+                "', '" +
+                full.role_access +
+                "', '" +
+                full.role +
+                "', '" +
+                full.status +
+                "', '" +
+                full.alamat +
+                '\')"><i class="ti ti-edit ti-sm me-2" style="color: green;"></i></a>' +
+                '<a href="javascript:;" class="text-body delete-record" data-uid="' +
+                full.uid +
+                '"><i class="ti ti-trash ti-sm mx-2" style="color: red;"></i></a>' +
+                '<a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical ti-sm mx-1"></i></a>' +
+                '<div class="dropdown-menu dropdown-menu-end m-0">' +
+                '<a href="' +
+                userView +
+                '" class="dropdown-item">View</a>' +
+                '<a href="javascript:;" class="dropdown-item resetPassword" data-uid="' +
+                full.uid +
+                '">Reset Password</a>' +
+                '</div>' +
+                '</div>'
+              );
+            }
           }
         }
       ],
@@ -510,6 +524,60 @@ $(function () {
         Swal.fire({
           title: 'Cancelled',
           text: 'Cancelled Deleted :)',
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-success waves-effect waves-light'
+          }
+        });
+      }
+    });
+  });
+  $('.datatables-users tbody').on('click', '.verification', function () {
+    var uid = $(this).data('uid');
+    console.log(uid);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to Verification user!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Verification user!',
+      customClass: {
+        confirmButton: 'btn btn-primary me-2 waves-effect waves-light',
+        cancelButton: 'btn btn-label-secondary waves-effect waves-light'
+      },
+      buttonsStyling: false
+    }).then(function (result) {
+      if (result.value) {
+        $.ajax({
+          type: 'GET',
+          dataType: 'json',
+          url: '/users/verificationProses/' + uid,
+          success: function (response) {
+            if (response.success == true) {
+              dt_user.row($(this).parents('tr')).remove().draw();
+              Swal.fire({
+                width: 400,
+                padding: 7,
+                position: 'bottom-right',
+                toast: true,
+                icon: 'success',
+                title: 'Success',
+                text: `${response.message}`,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                backgroundColor: '#28a745',
+                titleColor: '#fff'
+              });
+              $('.datatables-users').DataTable().ajax.reload();
+              // location.reload();
+            }
+          }
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: 'Cancelled',
+          text: 'Cancelled Verification :)',
           icon: 'error',
           customClass: {
             confirmButton: 'btn btn-success waves-effect waves-light'
