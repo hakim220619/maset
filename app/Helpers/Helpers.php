@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\User;
 use Config;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -356,5 +357,31 @@ class Helpers
   {
     $data = Str::random(40) . strtotime(now());
     return $data;
+  }
+
+  public static function hitungJam($date)
+  {
+    date_default_timezone_set('Asia/Jakarta');
+    $waktustart = date($date);
+    $waktuend = date('Y-m-d h:i:sa');
+    //echo $waktustart;
+    //echo $waktuend;
+
+    $datetime1 = new DateTime($waktustart); //start time
+    $datetime2 = new DateTime($waktuend); //end time
+    $durasi = $datetime1->diff($datetime2);
+    if ($durasi->format('%Y') != 0) {
+      return $durasi->format('%Y Tahun');
+    } elseif ($durasi->format('%m') != 0) {
+      return $durasi->format('%m Bulan');
+    } elseif ($durasi->format('%d') != 0) {
+      return $durasi->format('%d Hari');
+    } elseif ($durasi->format('%H') != 0) {
+      return $durasi->format('%h Jam');
+    } elseif ($durasi->format('%i') != 0) {
+      return $durasi->format('%i Menit');
+    } else {
+      return $durasi->format('%s Detik');
+    }
   }
 }

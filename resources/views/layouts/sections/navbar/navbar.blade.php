@@ -1,31 +1,6 @@
 @php
     $containerNav = $configData['contentLayout'] === 'compact' ? 'container-xxl' : 'container-fluid';
     $navbarDetached = $navbarDetached ?? '';
-    function hitungJam($date)
-    {
-        date_default_timezone_set('Asia/Jakarta');
-        $waktustart = date($date);
-        $waktuend = date('Y-m-d h:i:sa');
-        //echo $waktustart;
-        //echo $waktuend;
-
-        $datetime1 = new DateTime($waktustart); //start time
-        $datetime2 = new DateTime($waktuend); //end time
-        $durasi = $datetime1->diff($datetime2);
-        if ($durasi->format('%Y') != 0) {
-            return $durasi->format('%Y Tahun');
-        } elseif ($durasi->format('%m') != 0) {
-            return $durasi->format('%m Bulan');
-        } elseif ($durasi->format('%d') != 0) {
-            return $durasi->format('%d Hari');
-        } elseif ($durasi->format('%H') != 0) {
-            return $durasi->format('%h Jam');
-        } elseif ($durasi->format('%i') != 0) {
-            return $durasi->format('%i Menit');
-        } else {
-            return $durasi->format('%s Detik');
-        }
-    }
 
 @endphp
 
@@ -135,7 +110,7 @@
                                                 @endif
                                             </p>
 
-                                            <small class="text-muted">{{ hitungJam($a->created_at) }}</small>
+                                            <small class="text-muted">{{ Helper::hitungJam($a->created_at) }}</small>
                                         </div>
                                     </a>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
