@@ -387,7 +387,7 @@ class Helpers
 
   public static function generateApproval($request)
   {
-    $getRole = DB::table('role')->where('id', '!=', 4)->get();
+    $getRole = DB::table('role')->where('role_id', '!=', 4)->get();
     foreach ($getRole as $key => $value) {
       if ($value == 1) {
         DB::table('approval')->insert([
