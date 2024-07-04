@@ -4,41 +4,41 @@
       "url": "/dashboard/admin",
       "name": "Home",
       "icon": "menu-icon tf-icons ti ti-smart-home",
-      "slug": "pages-home",
+      "slug": "pages-home-admin",
       "role": "Admin"
     },
     {
       "url": "/dashboard/user",
       "name": "Home",
       "icon": "menu-icon tf-icons ti ti-smart-home",
-      "slug": "pages-home",
+      "slug": "pages-home-user",
       "role": "User"
     },
     {
       "url": "/dashboard/user",
       "name": "Home",
       "icon": "menu-icon tf-icons ti ti-smart-home",
-      "slug": "pages-home",
+      "slug": "pages-home-su",
       "role": "Super Admin"
     },
     {
       "url": "broadcast",
       "icon": "menu-icon tf-icons ti fa-file",
       "name": "Broadcast",
-      "slug": "Broadcast",
+      "slug": "broadcast",
       "role": "Super Admin",
       "submenu": [
         {
           "url": "/broadcast",
           "name": "Whatsapp",
           "icon": "menu-icon tf-icons fab fa-whatsapp",
-          "slug": "broadcast"
+          "slug": "broadcast-byWhatsapp"
         },
         {
           "url": "/broadcast/aplikasiView",
           "name": "Announcement",
           "icon": "menu-icon tf-icons fab fa-whatsapp",
-          "slug": "ByAplikasi"
+          "slug": "broadcast-broadcastByAplikasiView"
         }
       ]
     },
@@ -46,39 +46,68 @@
       "url": "broadcast",
       "icon": "menu-icon tf-icons ti fa-file",
       "name": "Broadcast",
-      "slug": "Broadcast",
+      "slug": "broadcast",
       "role": "Admin",
       "submenu": [
         {
           "url": "/broadcast",
           "name": "Whatsapp",
           "icon": "menu-icon tf-icons fab fa-whatsapp",
-          "slug": "broadcast"
+          "slug": "broadcast-byWhatsapp"
         },
         {
           "url": "/broadcast/aplikasiView",
-          "name": "Aplikasi",
+          "name": "Announcement",
           "icon": "menu-icon tf-icons fab fa-whatsapp",
-          "slug": "ByAplikasi"
+          "slug": "broadcast-broadcastByAplikasiView"
         }
       ]
     },
     {
-      "url": "masterdata",
+      "url": "masterdataSu",
       "icon": "menu-icon tf-icons ti ti-folder",
       "name": "Master data",
-      "slug": "Master Data",
+      "slug": "MasterDataSu",
       "role": "Super Admin",
       "submenu": [
         {
           "url": "/users",
           "name": "Users",
-          "slug": "users"
+          "slug": "MasterDataSu-users-list"
         },
         {
           "url": "/mmlogs",
           "name": "MmLogs",
-          "slug": "mmlogs"
+          "slug": "MasterDataSu-setting-mmlogs"
+        }
+      ]
+    },
+    {
+      "url": "setting",
+      "icon": "menu-icon tf-icons ti ti-settings",
+      "name": "Setting",
+      "slug": "setting",
+      "role": "Super Admin",
+      "submenu": [
+        {
+          "url": "/setting/aplikasi",
+          "name": "Aplikasi",
+          "slug": "setting-aplikasi"
+        },
+        {
+          "url": "/setting/roleStructure",
+          "name": "Role Structure",
+          "slug": "setting-role-roleStructureView"
+        },
+        {
+          "url": "/setting/roleAccess",
+          "name": "Role Access",
+          "slug": "setting-role-roleAccessView"
+        },
+        {
+          "url": "/setting/role",
+          "name": "Role",
+          "slug": "setting-role-roleView"
         }
       ]
     },
@@ -189,42 +218,13 @@
       "url": "masterdata",
       "icon": "menu-icon tf-icons ti ti-folder",
       "name": "Master data",
-      "slug": "Master Data",
+      "slug": "MasterDataSu",
       "role": "Admin",
       "submenu": [
         {
           "url": "/users",
           "name": "Users",
-          "slug": "users"
-        }
-      ]
-    },
-    {
-      "url": "setting",
-      "icon": "menu-icon tf-icons ti ti-settings",
-      "name": "Setting",
-      "slug": "setting",
-      "role": "Super Admin",
-      "submenu": [
-        {
-          "url": "/setting/aplikasi",
-          "name": "Aplikasi",
-          "slug": "aplikasi"
-        },
-        {
-          "url": "/setting/roleStructure",
-          "name": "Role Structure",
-          "slug": "roleStructure"
-        },
-        {
-          "url": "/setting/roleAccess",
-          "name": "Role Access",
-          "slug": "roleAccess"
-        },
-        {
-          "url": "/setting/role",
-          "name": "Role",
-          "slug": "role"
+          "slug": "MasterDataSu-users-list"
         }
       ]
     }

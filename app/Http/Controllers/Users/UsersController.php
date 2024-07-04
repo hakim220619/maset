@@ -37,7 +37,7 @@ class UsersController extends Controller
             $data['status_suspended'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.status = 'SUSPENDED' and rs.rs_name != '" . User::getProfileById()->rs_name . "' ")[0];
             $data['active'] = DB::select("select count(u.id) as total from users u, role_structure rs where u.role_structure=rs.rs_id and u.active = 'ON' and rs.rs_name != '" . User::getProfileById()->rs_name . "' ")[0];
         }
-
+        $data['role_structure'] = Auth::user()->role_structure;
         return view('content.users.user-list', $data);
     }
     function userList()

@@ -66,25 +66,25 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/admin', [HomePage::class, 'index'])->name('admin.dashboard');
     Route::get('/dashboard/user', [HomePage::class, 'index'])->name('admin.user');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/setting/aplikasi', [AplikasiController::class, 'aplikasi'])->name('aplikasi');
+    Route::get('/setting/aplikasi', [AplikasiController::class, 'aplikasi'])->name('setting-aplikasi');
 
     Route::post('/setting/aplikasi/editProses', [AplikasiController::class, 'updateAplikasi'])->name('aplikasi.update');
 
     //Role Structure
-    Route::get('/setting/roleStructure', [GeneralController::class, 'roleStructureView'])->name('role.roleStructureView');
+    Route::get('/setting/roleStructure', [GeneralController::class, 'roleStructureView'])->name('setting-role-roleStructureView');
     Route::get('/setting/roleStructureList', [GeneralController::class, 'roleStructureList'])->name('role.roleStructureList');
     Route::post('/setting/addRoleStructureProses', [GeneralController::class, 'addRoleStructureProses'])->name('role.addRoleStructureProses');
     Route::post('/setting/updateRoleStructureProses', [GeneralController::class, 'updateRoleStructureProses'])->name('role.updateRoleStructureProses');
     Route::get('/setting/deleteRoleStructureProses/{id}', [GeneralController::class, 'deleteRoleStructureProses'])->name('role.deleteRoleStructureProses');
     //Role Access
-    Route::get('/setting/roleAccess', [GeneralController::class, 'roleAccessView'])->name('role.roleAccessView');
+    Route::get('/setting/roleAccess', [GeneralController::class, 'roleAccessView'])->name('setting-role-roleAccessView');
     Route::get('/setting/roleAccessList', [GeneralController::class, 'roleAccessList'])->name('role.roleAccessList');
     Route::post('/setting/addRoleAccessProses', [GeneralController::class, 'addRoleAccessProses'])->name('role.addRoleAccessProses');
     Route::post('/setting/updateRoleAceessProses', [GeneralController::class, 'updateRoleAceessProses'])->name('role.updateRoleAceessProses');
     Route::get('/setting/deleteRoleAccessProses/{id}', [GeneralController::class, 'deleteRoleAccessProses'])->name('role.deleteRoleAccessProses');
 
     //Role
-    Route::get('/setting/role', [GeneralController::class, 'roleView'])->name('role.roleView');
+    Route::get('/setting/role', [GeneralController::class, 'roleView'])->name('setting-role-roleView');
     Route::get('/setting/roleList', [GeneralController::class, 'roleList'])->name('role.roleList');
     Route::post('/setting/getUserByRoleAccess', [GeneralController::class, 'getUserByRoleAccess'])->name('role.getUserByRoleAccess');
     Route::post('/setting/addRoleProses', [GeneralController::class, 'addRoleProses'])->name('role.addRoleProses');
@@ -94,14 +94,14 @@ Route::middleware(['auth'])->group(function () {
 
 
     //Logs Activity
-    Route::get('/mmlogs', [GeneralController::class, 'mmlogs'])->name('setting.mmlogs');
+    Route::get('/mmlogs', [GeneralController::class, 'mmlogs'])->name('MasterDataSu-setting-mmlogs');
     Route::get('/setting/listUsersLogs', [GeneralController::class, 'listUsersLogs'])->name('setting.listUsersLogs');
 
 
 
     //Users
     //tanggal 5-21-2024
-    Route::get('/users', [UsersController::class, 'users'])->name('users');
+    Route::get('/users', [UsersController::class, 'users'])->name('MasterDataSu-users-list');
     Route::get('/users/list', [UsersController::class, 'userList'])->name('users.userList');
     Route::post('/users/addProses', [UsersController::class, 'addProses'])->name('users.addProses');
     Route::post('/users/editProses', [UsersController::class, 'editProses'])->name('users.editProses');
@@ -144,11 +144,11 @@ Route::middleware(['auth'])->group(function () {
 
 
     //Broadcast
-    Route::get('/broadcast', [BroadcastController::class, 'broadcast'])->name('broadcast');
+    Route::get('/broadcast', [BroadcastController::class, 'broadcast'])->name('broadcast-byWhatsapp');
     Route::get('/sendMessage', [BroadcastController::class, 'sendMessage'])->name('broadcast.sendMessage');
     //Broadcast by Aplikasi
     Route::get('/broadcast/aplikasiRead/{uid}', [BroadcastController::class, 'broadcastByAplikasiRead'])->name('broadcast.broadcastByAplikasiRead');
-    Route::get('/broadcast/aplikasiView', [BroadcastController::class, 'broadcastByAplikasiView'])->name('broadcast.broadcastByAplikasiView');
+    Route::get('/broadcast/aplikasiView', [BroadcastController::class, 'broadcastByAplikasiView'])->name('broadcast-broadcastByAplikasiView');
     Route::get('/broadcast/Listaplikasi', [BroadcastController::class, 'broadcastByListaplikasi'])->name('broadcast.broadcastByListaplikasi');
     Route::get('/broadcast/aplikasiAdd', [BroadcastController::class, 'broadcastByAplikasiAdd'])->name('broadcast.broadcastByAplikasiAdd');
     Route::get('/broadcast/aplikasiUpdate/{uid}', [BroadcastController::class, 'broadcastByAplikasiUpdate'])->name('broadcast.broadcastByAplikasiUpdate');

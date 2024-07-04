@@ -59,7 +59,7 @@ $(function () {
       dropdownParent: $this.parent()
     });
   }
-
+  var id_role_sa = $('#id_role_rs').val();
   // Users datatable
   if (dt_user_table.length) {
     var i = 1;
@@ -122,13 +122,13 @@ $(function () {
           title: 'Actions',
           searchable: false,
           orderable: false,
-          render: function (data, type, full, meta) {
+          render: function (data, type, row, meta) {
             // console.log(full);
-            if (full.status == 'VERIFICATION') {
+            if (row.status == 'VERIFICATION') {
               return (
                 '<div class="d-flex align-items-center">' +
                 '<a href="javascript:;" class="text-body verification" data-uid="' +
-                full.uid +
+                row.uid +
                 '"><i class="ti ti-checks ti-sm mx-2" style="color: black;"></i></a>' +
                 '</div>' +
                 '</div>'
@@ -137,36 +137,56 @@ $(function () {
               return (
                 '<div class="d-flex align-items-center">' +
                 '<a href="javascript:;" class="text-body" onclick="OpenModalEditUsers(\'' +
-                full.uid +
+                row.uid +
                 "', '" +
-                full.nik +
+                row.nik +
                 "', '" +
-                full.name +
+                row.name +
                 "', '" +
-                full.email +
+                row.email +
                 "', '" +
-                full.kontak +
+                row.kontak +
                 "', '" +
-                full.role_structure +
+                row.role_structure +
                 "', '" +
-                full.role_access +
+                row.role_access +
                 "', '" +
-                full.role +
+                row.role +
                 "', '" +
-                full.status +
+                row.status +
                 "', '" +
-                full.alamat +
+                row.alamat +
                 '\')"><i class="ti ti-edit ti-sm me-2" style="color: green;"></i></a>' +
                 '<a href="javascript:;" class="text-body delete-record" data-uid="' +
-                full.uid +
+                row.uid +
                 '"><i class="ti ti-trash ti-sm mx-2" style="color: red;"></i></a>' +
                 '<a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical ti-sm mx-1"></i></a>' +
                 '<div class="dropdown-menu dropdown-menu-end m-0">' +
-                '<a href="' +
-                userView +
-                '" class="dropdown-item">View</a>' +
+                '<a  href="javascript:;" class="dropdown-item" onclick="OpenModalDetailUsers(\'' +
+                row.uid +
+                "', '" +
+                row.image +
+                "', '" +
+                row.nik +
+                "', '" +
+                row.name +
+                "', '" +
+                row.email +
+                "', '" +
+                row.kontak +
+                "', '" +
+                row.rs_name +
+                "', '" +
+                row.ra_name +
+                "', '" +
+                row.role_name +
+                "', '" +
+                row.status +
+                "', '" +
+                row.alamat +
+                '\')">View</a>' +
                 '<a href="javascript:;" class="dropdown-item resetPassword" data-uid="' +
-                full.uid +
+                row.uid +
                 '">Reset Password</a>' +
                 '</div>' +
                 '</div>'
@@ -332,14 +352,16 @@ $(function () {
             }
           ]
         },
-        {
-          className: 'btn btn-label-success mx-2 waves-effect waves-light uploadData',
-          text: '<i class="ti ti-upload me-1 ti-xs"></i>Import',
-          attr: {
-            'data-bs-toggle': 'modal',
-            'data-bs-target': '#uploadUsers'
-          }
-        },
+        id_role_sa == '4'
+          ? {
+              className: 'btn btn-label-success mx-2 waves-effect waves-light uploadData',
+              text: '<i class="ti ti-upload me-1 ti-xs"></i>Import',
+              attr: {
+                'data-bs-toggle': 'modal',
+                'data-bs-target': '#uploadUsers'
+              }
+            }
+          : '',
         {
           text: '<i class="ti ti-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Add New User</span>',
           className: 'add-new btn btn-primary waves-effect waves-light',
