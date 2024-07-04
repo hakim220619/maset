@@ -384,4 +384,29 @@ class Helpers
       return $durasi->format('%s Detik');
     }
   }
+
+  public static function generateApproval($request)
+  {
+    $getRole = DB::table('role')->where('id', '!=', 4)->get();
+    foreach ($getRole as $key => $value) {
+      if ($value == 1) {
+        DB::table('approval')->insert([
+          'id_user' => Auth::user()->id,
+          'id_object' => $request->id_object,
+          'id_category_object' => $request->id_category,
+          'id_role' => $value->role_id,
+          'status' => false,
+          'created_at' => now()
+        ]);
+      } else {
+        DB::table('approval')->insert([
+          'id_object' => $request->id_object,
+          'id_category_object' => $request->id_category,
+          'id_role' => $value->role_id,
+          'status' => false,
+          'created_at' => now()
+        ]);
+      }
+    }
+  }
 }
