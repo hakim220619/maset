@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Home')
+@section('title', 'Aplikasi')
 
 @section('content')
 

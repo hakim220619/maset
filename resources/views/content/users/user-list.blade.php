@@ -127,6 +127,7 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" name="id_role_rs" id="id_role_rs" value="{{ $role_structure }}">
         <!-- Users List Table -->
         <div class="card">
             <div class="card-header border-bottom">
@@ -212,8 +213,8 @@
                                         aria-label="Default select example">
                                         <option value="" selected>-- Pilih --</option>
                                         @foreach (Helper::getStatus() as $r)
-                                            <option value="{{ $r->status_nama }}">
-                                                {{ $r->status_nama }}</option>
+                                            <option value="{{ $r->status_name }}">
+                                                {{ $r->status_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -312,8 +313,8 @@
                                         aria-label="Default select example">
                                         <option value="" disabled>-- Pilih --</option>
                                         @foreach (Helper::getStatus() as $r)
-                                            <option value="{{ $r->status_nama }}">
-                                                {{ $r->status_nama }}</option>
+                                            <option value="{{ $r->status_name }}">
+                                                {{ $r->status_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -379,7 +380,10 @@
                                 aria-label="Close"></button>
                             <div class="text-center mb-4">
                                 <h3 class="mb-2">Uploads Users</h3>
-                                <p class="text-muted">Uploads user details will receive a privacy audit.</p>
+                                <p class="text-muted">Please download the excel template <a
+                                        href="{{ asset('') }}storage/template/excel/template users.xlsx"
+                                        target="_blank">Download</a>
+                                </p>
                             </div>
                             <form class="row g-3">
                                 <input type="hidden" name="id" id="idEdit">
@@ -402,9 +406,7 @@
             <!--/ Edit User Modal -->
 
         </div>
-        {{-- <script>
-           
-        </script> --}}
+        @include('content.general.detail-users')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
             integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -479,6 +481,34 @@
                         $('#roleEdit').html(html);
                     }
                 });
+            }
+
+            function OpenModalDetailUsers(uid, image, nik, name, email, kontak, rs_name, ra_name, role_name, status, alamat) {
+                $('#DetailUSers').modal('show');
+                $('#nikDetail').text(nik);
+                $('#nameDetail').text(name);
+                $('#emailDetail').text(email);
+                $('#kontakDetail').text(kontak);
+                $('#rs_nameDetail').text(rs_name);
+                $('#ra_nameDetail').text(ra_name);
+                $('#role_nameDetail').text(role_name);
+                var html = '<span class="fw-medium me-1">Status:</span>';
+                if (status == 'ACTIVE') {
+                    $('#statusDetail').html('' + html + '<span class="badge bg-label-success">' + status + '</span>');
+                }
+                if (status == 'INACTIVE') {
+                    $('#statusDetail').html('' + html + '<span class="badge bg-label-warning">' + status + '</span>');
+                }
+                if (status == 'SUSPENDED') {
+                    $('#statusDetail').html('' + html + '<span class="badge bg-label-danger">' + status + '</span>');
+                }
+
+                $('#imageDetail').html(
+                    '<img class="img-fluid rounded mb-3 pt-1 mt-4" src="{{ asset('') }}storage/images/users/' + image +
+                    '" height="100" width="100" alt="User avatar" />'
+                );
+                $('#alamatDetail').text(alamat);
+
             }
 
             function OpenModalEditUsers(uid, nik, name, email, kontak, role_structure, role_access, role, status, alamat) {
@@ -647,9 +677,9 @@
                     dataType: 'json',
                     type: 'POST',
                     success: function(data) {
-                        // console.log(data);
+                        console.log(data);
                         if (data.success == true) {
-                            $('#openModalAddUsers').modal('hide');
+                            $('#uploadUsers').modal('hide');
                             refreshAll();
                             Swal.fire({
                                 width: 400,

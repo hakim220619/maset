@@ -37,9 +37,9 @@
                             aria-label="Default select example">
                             <option value="" disabled>-- Pilih --</option>
                             @foreach (Helper::getStatus() as $r)
-                                <option value="{{ $r->status_nama }}"
-                                    {{ $r->status_nama == $profile->status ? 'selected' : '' }}>
-                                    {{ $r->status_nama }}</option>
+                                <option value="{{ $r->status_name }}"
+                                    {{ $r->status_name == $profile->status ? 'selected' : '' }}>
+                                    {{ $r->status_name }}</option>
                             @endforeach
                         </select>
                     </div>

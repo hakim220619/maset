@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'User View - Pages')
+@section('title', 'roleStructure')
 
 @section('vendor-style')
     @vite(['resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.scss', 'resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.scss', 'resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.scss', 'resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss', 'resources/assets/vendor/libs/select2/select2.scss', 'resources/assets/vendor/libs/@form-validation/form-validation.scss'])
@@ -89,9 +89,9 @@
                                         aria-label="Default select example">
                                         <option value="" disabled>-- Pilih --</option>
                                         @foreach (Helper::getStatus() as $r)
-                                            @if ($r->status_nama != 'SUSPENDED')
-                                                <option value="{{ $r->status_nama }}">
-                                                    {{ $r->status_nama }}</option>
+                                            @if ($r->status_name != 'SUSPENDED')
+                                                <option value="{{ $r->status_name }}">
+                                                    {{ $r->status_name }}</option>
                                             @endif
                                         @endforeach
                                     </select>

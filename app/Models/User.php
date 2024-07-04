@@ -36,7 +36,9 @@ class User extends Authenticatable
         'role_access',
         'role_structure',
         'role',
+        'alamat',
         'password',
+        'created_at',
     ];
 
     /**
