@@ -123,14 +123,16 @@ $configData = Helper::appClasses();
                   <label class="form-label" for="nama_bangunan">Nama Bangunan</label>
                   <input type="text" id="nama_bangunan" name="nama_bangunan" class="form-control" placeholder="Bangunan Rumah Tinggal –  PT LPP Agro Nusantara i – Jalan Cendrawasih" />
                 </div>
-                <div>
+                <div>                  
                   <label class="form-label" for="alamat">Titik Point</label>
                   <label class="form-label" for="alamat">Alamat</label>
                   <input type="text" id="alamat" name="alamat" class="form-control" placeholder="jl sukasari kecamatan baleendah bandung" />
-                  <div id="map" style="height: 400px; width: 100%;"></div>
                   <input type="text" id="lat" name="lat" class="form-control" placeholder="-8.9897878" hidden />
-                  <input type="text" id="long" name="long" class="form-control" placeholder="89.8477748" hidden />
-                </div>
+                  <input type="text" id="long" name="long" class="form-control" placeholder="89.8477748" hidden />  
+                
+                  <div id="map" style="height: 400px; width: 100%; display: block;"></div>
+                              
+                </div>                
                 <div class="col-sm-6">
                   <label class="form-label" for="foto_tampak_depan">Upload Foto Tampak Depan</label>
                   <input type="file" id="foto_tampak_depan" name="foto_tampak_depan" class="form-control" />
@@ -1224,16 +1226,16 @@ $configData = Helper::appClasses();
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="crossorigin=""></script>
 <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
 <script>
-  var map = L.map('map').setView([1.966576931124596, 100.049384575934738], 13)
+  var map = L.map('map').setView([1.966576931124596, 100.049384575934738], 9)
           
           var accessToken = 'pk.eyJ1IjoicmVkb2syNSIsImEiOiJjbG1zdzZ1Y2MwZHA2MmxxYzdvYm12cTlwIn0.2GTgMV076x87YJQJzM34jg';
   
           var satelliteLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + accessToken, {
               attribution: '&copy; <a href="https://www.mapbox.com/">Mapbox</a>',
               maxZoom: 30,
-              id: 'mapbox/streets-v11', // Ganti dengan jenis peta satelit yang diinginkan
+              id: 'mapbox/satellite-streets-v12', // Ganti dengan jenis peta satelit yang diinginkan
               tileSize: 512,
-              zoomOffset: -1
+              zoomOffset: 1
   }).addTo(map);
 
   var geocoder = L.Control.geocoder({

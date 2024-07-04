@@ -28,12 +28,6 @@
 
 <div class="card mb-2">
     <div class="p-4">
-        <label for="objectType">Pilih Jenis Objek</label>
-        <select id="objectType" class="form-control mb-3">
-            <option value="bangunan">Bangunan</option>
-            <option value="tanah_kosong">Tanah Kosong</option>
-            <option value="retail">Retail</option>
-        </select>
         <label for="radius">Pilih Radius (km):</label>
         <select id="radius" class="form-select mb-3">
             <option value="5000">5 km</option>
