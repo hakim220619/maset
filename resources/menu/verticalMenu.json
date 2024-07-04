@@ -179,6 +179,13 @@
       ]
     },
     {
+      "url": "/laporan",
+      "name": "Laporan",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "laporan",
+      "role": "User"
+    },
+    {
       "url": "masterdata",
       "icon": "menu-icon tf-icons ti ti-folder",
       "name": "Master data",

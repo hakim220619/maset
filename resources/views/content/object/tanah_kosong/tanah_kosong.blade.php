@@ -102,7 +102,7 @@ $configData = Helper::appClasses();
           </div>
         </div>
         <div class="bs-stepper-content">
-          <form method="POST" action="{{ route('add_bangunan') }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ route('add_tanah_kosong') }}" enctype="multipart/form-data">
             <!-- Account Details -->
             @csrf
             <div id="account-details" class="content">

@@ -21,6 +21,7 @@ use App\Http\Controllers\Pembanding_tanah_kosong\Pembanding_tanah_kosongControll
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Retail\ReatailController;
 use App\Http\Controllers\Tanah_kosong\TanahkosongController;
+use App\Http\Controllers\Laporan\LaporanController;
 use App\Http\Controllers\Users\UsersController;
 
 /*
@@ -170,7 +171,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pembanding/add_pembanding_retail', [Pembanding_retailController::class, 'add_pembanding_retail'])->name('add_pembanding_retail');
     Route::get('/pembanding/detail_pembanding_retail/{id}', [Pembanding_retailController::class, 'detail_pembanding_retail'])->name('detail_pembanding_retail');
 
-    // Lihat Pembanding
+    //Lihat Pembanding
     Route::get('/pembanding/lihat_pembanding', [Lihat_pembandingController::class, 'lihat_pembanding'])->name('lihat_pembanding');
 
     Route::get('/pembanding/bangunanView', [Lihat_pembandingController::class, 'bangunanView'])->name('pembanding.bangunanView');
@@ -179,5 +180,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pembanding/bangunanLoadData', [Lihat_pembandingController::class, 'bangunanLoadData'])->name('pembanding.bangunanLoadData');
     Route::get('/pembanding/tanahKosongLoadData', [Lihat_pembandingController::class, 'tanahKosongLoadData'])->name('pembanding.tanahKosongLoadData');
     Route::get('/pembanding/retailLoadData', [Lihat_pembandingController::class, 'retailLoadData'])->name('pembanding.retailLoadData');
+    
+    // laporan
+    Route::get('/laporan', [LaporanCOntroller::class, 'laporan'])->name('laporan');
+    Route::get('/getCoordinates', [LaporanController::class, 'getCoordinates'])->name('getCoordinates');
+
+
 
 });
