@@ -208,6 +208,13 @@
       ]
     },
     {
+      "url": "/penilai",
+      "name": "Penilai",
+      "icon": "menu-icon tf-icons ti ti-pencil",
+      "slug": "penilai",
+      "role": "User"
+    },
+    {
       "url": "/laporan",
       "name": "Laporan",
       "icon": "menu-icon tf-icons ti ti-smart-home",
