@@ -389,7 +389,7 @@ class Helpers
   {
     $getRole = DB::table('role')->where('role_id', '!=', 4)->get();
     foreach ($getRole as $key => $value) {
-      if ($value == 1) {
+      if ($value == '1') {
         DB::table('approval')->insert([
           'id_user' => Auth::user()->id,
           'id_object' => $request->id_object,
