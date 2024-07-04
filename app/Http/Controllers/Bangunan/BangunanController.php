@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Bangunan;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\BangunanModel;
 use App\Models\User;
@@ -64,6 +65,7 @@ class BangunanController extends Controller
     }
     public function add_bangunan(Request $request)
     {
+        $id_bangunan = DB::table('bangunan')->max('id')+1;
         $foto_tampak_depan = $request->file('foto_tampak_depan');
         $filename1 = $foto_tampak_depan->getClientOriginalName();
         $foto_tampak_depan->move(public_path('storage/images/bangunan'), $filename1);
@@ -84,8 +86,12 @@ class BangunanController extends Controller
         $data['foto_tampak_depan'] = $request->file('foto_tampak_depan')->getClientOriginalName();
         $data['foto_tampak_sisi_kiri'] = $request->file('foto_tampak_sisi_kiri')->getClientOriginalName();
         $data['foto_tampak_sisi_kanan'] = $request->file('foto_tampak_sisi_kanan')->getClientOriginalName();
-        $data['foto_lainnya'] = $request->file('foto_lainnya')->getClientOriginalName();;
+        $data['foto_lainnya'] = $request->file('foto_lainnya')->getClientOriginalName();
         $data['id_category'] = 1;
+        $data['id'] = $id_bangunan;
+        $obj['id_object'] = $id_bangunan;
+        $obj['id_category'] = 1;
+        Helpers::generateApproval($obj);
         $data['id_asset'] = $this->generateUniqueIdAsset();
         $data['created_at'] = now();
 

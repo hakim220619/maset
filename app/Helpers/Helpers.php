@@ -388,22 +388,25 @@ class Helpers
   public static function generateApproval($request)
   {
     $getRole = DB::table('role')->where('role_id', '!=', 4)->get();
+    $uid = Helpers::uid();
     foreach ($getRole as $key => $value) {
-      if ($value == '1') {
+      if ($value->role_id == '1') {
         DB::table('approval')->insert([
+          'uid' => $uid,
           'id_user' => Auth::user()->id,
-          'id_object' => $request->id_object,
-          'id_category_object' => $request->id_category,
+          'id_object' => $request['id_object'],
+          'id_category_object' => $request['id_category'],
           'id_role' => $value->role_id,
-          'status' => true,
+          'status' => 'true',
           'created_at' => now()
         ]);
       } else {
         DB::table('approval')->insert([
-          'id_object' => $request->id_object,
-          'id_category_object' => $request->id_category,
+          'uid' => $uid,
+          'id_object' => $request['id_object'],
+          'id_category_object' => $request['id_category'],
           'id_role' => $value->role_id,
-          'status' => false,
+          'status' => 'false',
           'created_at' => now()
         ]);
       }
