@@ -395,7 +395,7 @@ class Helpers
           'id_object' => $request->id_object,
           'id_category_object' => $request->id_category,
           'id_role' => $value->role_id,
-          'status' => false,
+          'status' => true,
           'created_at' => now()
         ]);
       } else {
