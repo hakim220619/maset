@@ -120,7 +120,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 
     //Bangunan
-    Route::get('/object/bangunan', [BangunanController::class, 'bangunan'])->name('bangunan');
+    Route::get('/object/bangunan', [BangunanController::class, 'bangunan'])->name('object-bangunan');
     Route::get('/object/bangunanView', [BangunanController::class, 'bangunanView'])->name('bangunan.bangunanView');
     Route::get('/object/retailView', [BangunanController::class, 'retailView'])->name('bangunan.retailView');
     Route::get('/object/tanahKosongView', [BangunanController::class, 'tanahKosongView'])->name('bangunan.tanahKosongView');
@@ -131,16 +131,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/object/detail_bangunan/{id}', [BangunanController::class, 'detail_bangunan'])->name('detail_bangunan');
 
     //Tanah Kosong
-    Route::get('/object/tanah_kosong', [TanahkosongController::class, 'tanah_kosong'])->name('tanah_kosong');
+    Route::get('/object/tanah_kosong', [TanahkosongController::class, 'tanah_kosong'])->name('object-tanah_kosong');
     Route::post('/object/add_tanah_kosong', [TanahkosongController::class, 'add_tanah_kosong'])->name('add_tanah_kosong');
     Route::get('/object/detail_tanah_kosong/{id}', [TanahkosongController::class, 'detail_tanah_kosong'])->name('detail_tanah_kosong');
     //Retail
-    Route::get('/object/retail', [ReatailController::class, 'retail'])->name('retail');
+    Route::get('/object/retail', [ReatailController::class, 'retail'])->name('object-retail');
     Route::post('/object/add_retail', [ReatailController::class, 'add_retail'])->name('add_retail');
     Route::get('/object/detail_retail/{id}', [ReatailController::class, 'detail_retail'])->name('detail_retail');
 
     //Object
-    Route::get('/object/lihat_object', [ObjectController::class, 'lihat_object'])->name('lihat_object');
+    Route::get('/object/lihat_object', [ObjectController::class, 'lihat_object'])->name('object-lihat_object');
 
 
     //Broadcast
@@ -158,21 +158,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/broadcast/aplikasiProsessUpdate', [BroadcastController::class, 'aplikasiProsessUpdate'])->name('broadcast.aplikasiProsessUpdate');
 
     // pembanding
-    Route::get('/pembanding/bangunan', [PembandingBangunanController::class, 'bangunan'])->name('pembanding_bangunan');
+    Route::get('/pembanding/bangunan', [PembandingBangunanController::class, 'bangunan'])->name('pembanding-bangunan');
     Route::post('/pembanding/add_pembanding_bangunan', [PembandingBangunanController::class, 'add_pembanding_bangunan'])->name('add_pembanding_bangunan');
     Route::get('/pembanding/detail_pembanding_bangunan/{id}', [PembandingBangunanController::class, 'detail_pembanding_bangunan'])->name('detail_pembanding_bangunan');
 
-    Route::get('/pembanding/tanah_kosong', [Pembanding_tanah_kosongController::class, 'tanah_kosong'])->name('pembanding_tanah_kosong');
+    Route::get('/pembanding/tanah_kosong', [Pembanding_tanah_kosongController::class, 'tanah_kosong'])->name('pembanding-tanah-kosong');
     Route::post('/pembanding/add_pembanding_tanah_kosong', [Pembanding_tanah_kosongController::class, 'add_pembanding_tanah_kosong'])->name('add_pembanding_tanah_kosong');
     Route::get('/pembanding/detail_pembanding_tanah_kosong/{id}', [Pembanding_tanah_kosongController::class, 'detail_pembanding_tanah_kosong'])->name('detail_pembanding_tanah_kosong');
 
 
-    Route::get('/pembanding/retail', [Pembanding_retailController::class, 'retail'])->name('pembanding_retail');
+    Route::get('/pembanding/retail', [Pembanding_retailController::class, 'retail'])->name('pembanding-retail');
     Route::post('/pembanding/add_pembanding_retail', [Pembanding_retailController::class, 'add_pembanding_retail'])->name('add_pembanding_retail');
     Route::get('/pembanding/detail_pembanding_retail/{id}', [Pembanding_retailController::class, 'detail_pembanding_retail'])->name('detail_pembanding_retail');
 
     //Lihat Pembanding
-    Route::get('/pembanding/lihat_pembanding', [Lihat_pembandingController::class, 'lihat_pembanding'])->name('lihat_pembanding');
+    Route::get('/pembanding/lihat_pembanding', [Lihat_pembandingController::class, 'lihat_pembanding'])->name('pembanding-lihat-pembanding');
 
     Route::get('/pembanding/bangunanView', [Lihat_pembandingController::class, 'bangunanView'])->name('pembanding.bangunanView');
     Route::get('/pembanding/retailView', [Lihat_pembandingController::class, 'retailView'])->name('pembanding.retailView');
@@ -180,11 +180,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pembanding/bangunanLoadData', [Lihat_pembandingController::class, 'bangunanLoadData'])->name('pembanding.bangunanLoadData');
     Route::get('/pembanding/tanahKosongLoadData', [Lihat_pembandingController::class, 'tanahKosongLoadData'])->name('pembanding.tanahKosongLoadData');
     Route::get('/pembanding/retailLoadData', [Lihat_pembandingController::class, 'retailLoadData'])->name('pembanding.retailLoadData');
-    
+
     // laporan
     Route::get('/laporan', [LaporanCOntroller::class, 'laporan'])->name('laporan');
     Route::get('/getCoordinates', [LaporanController::class, 'getCoordinates'])->name('getCoordinates');
-
-
-
 });
