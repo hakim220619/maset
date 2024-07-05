@@ -130,7 +130,7 @@
 
         // Define custom icons for each category
         const blueIcon = new L.Icon({
-            iconUrl: '{{ asset('assets/img/icon/location.png') }}',
+            iconUrl: '{{ asset('storage/images/icon/location.png') }}',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
@@ -138,7 +138,7 @@
         });
 
         const greenIcon = new L.Icon({
-            iconUrl: '{{ asset('assets/img/icon/location1.png') }}',
+            iconUrl: '{{ asset('storage/images/icon/location1.png') }}',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
@@ -146,7 +146,7 @@
         });
 
         const yellowIcon = new L.Icon({
-            iconUrl: '{{ asset('assets/img/icon/marker.png') }}',
+            iconUrl: '{{ asset('storage/images/icon/marker.png') }}',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
