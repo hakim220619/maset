@@ -128,10 +128,8 @@ $configData = Helper::appClasses();
                   <label class="form-label" for="alamat">Alamat</label>
                   <input type="text" id="alamat" name="alamat" class="form-control" placeholder="jl sukasari kecamatan baleendah bandung" />
                   <input type="text" id="lat" name="lat" class="form-control" placeholder="-8.9897878" hidden />
-                  <input type="text" id="long" name="long" class="form-control" placeholder="89.8477748" hidden />  
-                
-                  <div id="map" style="height: 400px; width: 100%; display: block;"></div>
-                              
+                  <input type="text" id="long" name="long" class="form-control" placeholder="89.8477748" hidden />             
+                  <div id="map" style="height: 400px; width: 100%;"></div>                              
                 </div>                
                 <div class="col-sm-6">
                   <label class="form-label" for="foto_tampak_depan">Upload Foto Tampak Depan</label>
@@ -1226,6 +1224,7 @@ $configData = Helper::appClasses();
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="crossorigin=""></script>
 <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
   var map = L.map('map').setView([1.966576931124596, 100.049384575934738], 9)
           
           var accessToken = 'pk.eyJ1IjoicmVkb2syNSIsImEiOiJjbG1zdzZ1Y2MwZHA2MmxxYzdvYm12cTlwIn0.2GTgMV076x87YJQJzM34jg';
@@ -1235,7 +1234,7 @@ $configData = Helper::appClasses();
               maxZoom: 30,
               id: 'mapbox/satellite-streets-v12', // Ganti dengan jenis peta satelit yang diinginkan
               tileSize: 512,
-              zoomOffset: 1
+              zoomOffset: -1
   }).addTo(map);
 
   var geocoder = L.Control.geocoder({
@@ -1266,7 +1265,8 @@ $configData = Helper::appClasses();
             marker = L.marker([lat, lng]).addTo(map);
   });
 
-
+  map.invalidateSize();
+});
 </script>
 <script>
   function getSelectedValues() {

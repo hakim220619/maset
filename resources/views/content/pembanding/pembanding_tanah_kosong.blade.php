@@ -709,6 +709,7 @@ $configData = Helper::appClasses();
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="crossorigin=""></script>
 <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
   var map = L.map('map').setView([1.966576931124596, 100.049384575934738], 13)
           
           var accessToken = 'pk.eyJ1IjoicmVkb2syNSIsImEiOiJjbG1zdzZ1Y2MwZHA2MmxxYzdvYm12cTlwIn0.2GTgMV076x87YJQJzM34jg';
@@ -716,7 +717,7 @@ $configData = Helper::appClasses();
           var satelliteLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + accessToken, {
               attribution: '&copy; <a href="https://www.mapbox.com/">Mapbox</a>',
               maxZoom: 30,
-              id: 'mapbox/streets-v11', // Ganti dengan jenis peta satelit yang diinginkan
+              id: 'mapbox/satellite-streets-v12', // Ganti dengan jenis peta satelit yang diinginkan
               tileSize: 512,
               zoomOffset: -1
   }).addTo(map);
@@ -749,7 +750,8 @@ $configData = Helper::appClasses();
             marker = L.marker([lat, lng]).addTo(map);
   });
 
-
+  map.invalidateSize();
+});
 </script>
 
 @endsection
