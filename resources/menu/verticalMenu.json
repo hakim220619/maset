@@ -139,33 +139,33 @@
       "url": "object",
       "icon": "menu-icon tf-icons ti ti-package",
       "name": "Object",
-      "slug": "Object",
+      "slug": "object",
       "role": "User",
       "submenu": [
         {
           "url": "object/lihat_object",
           "name": "Lihat Object",
-          "slug": "lihat_object"
+          "slug": "object-lihat_object"
         },
         {
           "url": "object/tambah_object",
           "name": "Tambah Object",
-          "slug": "tambah_object",
+          "slug": "object-tambah_object",
           "submenu": [
             {
               "url": "object/bangunan",
               "name": "Tanah dan Bangunan",
-              "slug": "bangunan"
+              "slug": "object-bangunan"
             },
             {
               "url": "object/tanah_kosong",
               "name": "Tanah Kosong",
-              "slug": "tanah_kosong"
+              "slug": "object-tanah_kosong"
             },
             {
               "url": "object/retail",
               "name": "Office/Retai/Aset",
-              "slug": "retail"
+              "slug": "object-retail"
             }
           ]
         }
@@ -181,27 +181,27 @@
         {
           "url": "pembanding/lihat_pembanding",
           "name": "Lihat Pembanding",
-          "slug": "lihat_pembanding"
+          "slug": "pembanding-lihat-pembanding"
         },
         {
           "url": "pembanding/tambah_pembanding",
           "name": "Tambah Pembanding",
-          "slug": "tambah_pembanding",
+          "slug": "pembanding-tambah-pembanding",
           "submenu": [
             {
               "url": "pembanding/bangunan",
               "name": "Pembanding Tanah dan Bangunan",
-              "slug": "pembanding_bangunan"
+              "slug": "pembanding-bangunan"
             },
             {
               "url": "pembanding/tanah_kosong",
               "name": "Pembanding Tanah Kosong",
-              "slug": "pembanding_tanah_kosong"
+              "slug": "pembanding-tanah-kosong"
             },
             {
               "url": "pembanding/retail",
               "name": "Pembanding Office/Retai/Aset",
-              "slug": "pembanding_retail"
+              "slug": "pembanding-retail"
             }
           ]
         }
