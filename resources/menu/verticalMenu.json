@@ -140,6 +140,85 @@
       "icon": "menu-icon tf-icons ti ti-package",
       "name": "Object",
       "slug": "object",
+      "role": "Super Admin",
+      "submenu": [
+        {
+          "url": "object/lihat_object",
+          "name": "Lihat Object",
+          "slug": "object-lihat_object"
+        },
+        {
+          "url": "object/tambah_object",
+          "name": "Tambah Object",
+          "slug": "object-tambah_object",
+          "submenu": [
+            {
+              "url": "object/bangunan",
+              "name": "Tanah dan Bangunan",
+              "slug": "object-bangunan"
+            },
+            {
+              "url": "object/tanah_kosong",
+              "name": "Tanah Kosong",
+              "slug": "object-tanah_kosong"
+            },
+            {
+              "url": "object/retail",
+              "name": "Office/Retai/Aset",
+              "slug": "object-retail"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "pembanding",
+      "icon": "menu-icon tf-icons ti ti-package",
+      "name": "Pembanding",
+      "slug": "pembanding",
+      "role": "Super Admin",
+      "submenu": [
+        {
+          "url": "pembanding/lihat_pembanding",
+          "name": "Lihat Pembanding",
+          "slug": "pembanding-lihat-pembanding"
+        },
+        {
+          "url": "pembanding/tambah_pembanding",
+          "name": "Tambah Pembanding",
+          "slug": "pembanding-tambah-pembanding",
+          "submenu": [
+            {
+              "url": "pembanding/bangunan",
+              "name": "Pembanding Tanah dan Bangunan",
+              "slug": "pembanding-bangunan"
+            },
+            {
+              "url": "pembanding/tanah_kosong",
+              "name": "Pembanding Tanah Kosong",
+              "slug": "pembanding-tanah-kosong"
+            },
+            {
+              "url": "pembanding/retail",
+              "name": "Pembanding Office/Retai/Aset",
+              "slug": "pembanding-retail"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "/penilai",
+      "name": "Penilai",
+      "icon": "menu-icon tf-icons ti ti-pencil",
+      "slug": "penilai",
+      "role": "Super Admin"
+    },
+    {
+      "url": "object",
+      "icon": "menu-icon tf-icons ti ti-package",
+      "name": "Object",
+      "slug": "object",
       "role": "User",
       "submenu": [
         {
