@@ -276,7 +276,7 @@ $configData = Helper::appClasses();
             <!-- Tombol Aksi -->
             <div class="row mt-3">
                 <div class="col-md-12">
-                    <a href="{{ route('lihat_pembanding') }}" class="btn btn-secondary">Kembali</a>
+                    <a href="/pembanding/lihat_pembanding" class="btn btn-secondary">Kembali</a>
             </div>
         </div>
     </div>
