@@ -294,6 +294,13 @@
       "role": "User"
     },
     {
+      "url": "/penilai",
+      "name": "Penilai",
+      "icon": "menu-icon tf-icons ti ti-pencil",
+      "slug": "penilai",
+      "role": "Super Admin"
+    },
+    {
       "url": "/laporan",
       "name": "Laporan",
       "icon": "menu-icon tf-icons ti ti-smart-home",
