@@ -31,7 +31,7 @@ $configData = Helper::appClasses();
 @section('content')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.css" />
-<h4>Bangunan</h4>
+<h4>Object - Tanah dan Bangunan</h4>
   <!-- Default -->
   <div class="row">  
     <!-- Default Icons Wizard -->
