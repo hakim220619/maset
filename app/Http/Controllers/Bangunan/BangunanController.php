@@ -8,6 +8,7 @@ use App\Models\BangunanModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BangunanController extends Controller
@@ -65,7 +66,7 @@ class BangunanController extends Controller
     }
     public function add_bangunan(Request $request)
     {
-        $id_bangunan = DB::table('bangunan')->max('id')+1;
+        $id_bangunan = DB::table('bangunan')->max('id') + 1;
         $foto_tampak_depan = $request->file('foto_tampak_depan');
         $filename1 = $foto_tampak_depan->getClientOriginalName();
         $foto_tampak_depan->move(public_path('storage/images/bangunan'), $filename1);
@@ -110,7 +111,8 @@ class BangunanController extends Controller
 
         return '1' . Carbon::now()->year . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
     }
-    public function detail_bangunan($id) {
+    public function detail_bangunan($id)
+    {
         $detail_bangunan = DB::select("SELECT ROW_NUMBER() OVER () AS no, b.* 
                             FROM bangunan b, object_category oc 
                             WHERE b.id_category=oc.id 
@@ -120,5 +122,20 @@ class BangunanController extends Controller
         $detail_bangunan = $detail_bangunan[0];
         return view('content.object.bangunan.detail_bangunan', compact('detail_bangunan'));
     }
-  
+
+    function acceptSurveyor($id)
+    {
+        $checkApproval = DB::table('approval')->where('id_object', $id)->where('id_role', '1')->first();
+        if ($checkApproval->last_update == 'OFF' || $checkApproval->last_update == null) {
+            DB::table('approval')->where('id_object', $id)->where('id_role', '1')->update([
+                'status' => 'true',
+                'last_update' => 'ACCEPT',
+                'id_user' => Auth::user()->id
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Approve Berhasil',
+        ]);
+    }
 }

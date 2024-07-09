@@ -48,6 +48,7 @@
                     <th scope="col">Penilai</th>
                     <th scope="col">Reviewer</th>
                     <th scope="col">Penilai Public</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,7 +60,7 @@
                             </a>
                         </td>
                         <td>
-                            @if ($o->surveyor == 'ON')
+                            @if ($o->surveyor == 'ACCEPT')
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
                                     {...$$props}>
                                     <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z" />
@@ -72,7 +73,7 @@
                             @endif
                         </td>
                         <td>
-                            @if ($o->penilai == 'ON')
+                            @if ($o->penilai == 'ACCEPT')
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
                                     {...$$props}>
                                     <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z" />
@@ -85,7 +86,7 @@
                             @endif
                         </td>
                         <td>
-                            @if ($o->reviewer == 'ON')
+                            @if ($o->reviewer == 'ACCEPT')
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
                                     {...$$props}>
                                     <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z" />
@@ -98,7 +99,7 @@
                             @endif
                         </td>
                         <td>
-                            @if ($o->Penilai_public == 'ON')
+                            @if ($o->Penilai_public == 'ACCEPT')
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
                                     {...$$props}>
                                     <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z" />
@@ -109,6 +110,13 @@
                                         d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z" />
                                 </svg>
                             @endif
+                        </td>
+                        <td>
+                            @if ($o->report == 'REPORT')
+                                <a href="/object/detail_bangunan/{{ $o->id }}"
+                                    class="btn btn-sm btn-primary">Detail</a>
+                            @endif
+
                         </td>
                     </tr>
                 @endforeach

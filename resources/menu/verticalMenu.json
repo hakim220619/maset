@@ -291,7 +291,38 @@
       "name": "Penilai",
       "icon": "menu-icon tf-icons ti ti-pencil",
       "slug": "penilai",
-      "role": "User"
+      "role": "User",
+      "role_name": "Penilai"
+    },
+    {
+      "url": "/reviewers",
+      "name": "Reviewers",
+      "icon": "menu-icon tf-icons ti ti-pencil",
+      "slug": "reviewers",
+      "role": "Super Admin"
+    },
+    {
+      "url": "/reviewers",
+      "name": "Reviewers",
+      "icon": "menu-icon tf-icons ti ti-pencil",
+      "slug": "reviewers",
+      "role": "User",
+      "role_name": "Penilai"
+    },
+    {
+      "url": "/penilai_public",
+      "name": "Penilai Public",
+      "icon": "menu-icon tf-icons ti ti-pencil",
+      "slug": "penilai_public",
+      "role": "Super Admin"
+    },
+    {
+      "url": "/penilai_public",
+      "name": "Penilai Public",
+      "icon": "menu-icon tf-icons ti ti-pencil",
+      "slug": "penilai_public",
+      "role": "Super Admin",
+      "role_name": "Penilai Public"
     },
     {
       "url": "/laporan",
@@ -308,6 +339,13 @@
       "role": "Super Admin"
     },
     {
+      "url": "/laporan",
+      "name": "Laporan",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "laporan",
+      "role": "Admin"
+    },
+    {
       "url": "masterdata",
       "icon": "menu-icon tf-icons ti ti-folder",
       "name": "Master data",
@@ -320,6 +358,14 @@
           "slug": "MasterDataSu-users-list"
         }
       ]
+    },
+    {
+      "url": "/penilai",
+      "name": "Penilai",
+      "icon": "menu-icon tf-icons ti ti-pencil",
+      "slug": "penilai",
+      "role": "Admin",
+      "role_name": "Penilai"
     }
   ]
 }

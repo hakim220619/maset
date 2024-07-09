@@ -22,6 +22,9 @@ use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Retail\ReatailController;
 use App\Http\Controllers\Tanah_kosong\TanahkosongController;
 use App\Http\Controllers\Laporan\LaporanController;
+use App\Http\Controllers\Penilai\PenilaiController;
+use App\Http\Controllers\PenilaiPublic\PenilaiPublicController;
+use App\Http\Controllers\Reviewers\ReviewersController;
 use App\Http\Controllers\Users\UsersController;
 
 /*
@@ -130,6 +133,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/object/add_bangunan', [BangunanController::class, 'add_bangunan'])->name('add_bangunan');
     Route::get('/object/detail_bangunan/{id}', [BangunanController::class, 'detail_bangunan'])->name('detail_bangunan');
 
+
+    Route::get('/object/acceptSurveyor/{id}', [BangunanController::class, 'acceptSurveyor'])->name('acceptSurveyor');
+
+
     //Tanah Kosong
     Route::get('/object/tanah_kosong', [TanahkosongController::class, 'tanah_kosong'])->name('object-tanah_kosong');
     Route::post('/object/add_tanah_kosong', [TanahkosongController::class, 'add_tanah_kosong'])->name('add_tanah_kosong');
@@ -141,6 +148,41 @@ Route::middleware(['auth'])->group(function () {
 
     //Object
     Route::get('/object/lihat_object', [ObjectController::class, 'lihat_object'])->name('object-lihat_object');
+
+    //Penilai
+    Route::get('/penilai', [PenilaiController::class, 'penilai'])->name('penilai');
+    Route::get('/penilai/bangunanView', [PenilaiController::class, 'bangunanView'])->name('penilai.bangunanView');
+    Route::get('/penilai/retailView', [PenilaiController::class, 'retailView'])->name('penilai.retailView');
+    Route::get('/penilai/tanahKosongView', [PenilaiController::class, 'tanahKosongView'])->name('penilai.tanahKosongView');
+    Route::get('/penilai/bangunanLoadData', [PenilaiController::class, 'bangunanLoadData'])->name('penilai.bangunanLoadData');
+    Route::get('/penilai/tanahKosongLoadData', [PenilaiController::class, 'tanahKosongLoadData'])->name('penilai.tanahKosongLoadData');
+    Route::get('/penilai/retailLoadData', [PenilaiController::class, 'retailLoadData'])->name('penilai.retailLoadData');
+
+    Route::get('/penilai/acceptPenilai/{id}', [PenilaiController::class, 'acceptPenilai'])->name('penilai.acceptPenilai');
+
+    //Reviuwer
+    Route::get('/reviewers', [ReviewersController::class, 'reviewers'])->name('reviewers');
+    Route::get('/reviewers/bangunanView', [ReviewersController::class, 'bangunanView'])->name('reviewers.bangunanView');
+    Route::get('/reviewers/retailView', [ReviewersController::class, 'retailView'])->name('reviewers.retailView');
+    Route::get('/reviewers/tanahKosongView', [ReviewersController::class, 'tanahKosongView'])->name('reviewers.tanahKosongView');
+    Route::get('/reviewers/bangunanLoadData', [ReviewersController::class, 'bangunanLoadData'])->name('reviewers.bangunanLoadData');
+    Route::get('/reviewers/tanahKosongLoadData', [ReviewersController::class, 'tanahKosongLoadData'])->name('reviewers.tanahKosongLoadData');
+    Route::get('/reviewers/retailLoadData', [ReviewersController::class, 'retailLoadData'])->name('reviewers.retailLoadData');
+
+    Route::get('/reviewers/acceptReviewers/{id}', [ReviewersController::class, 'acceptReviewers'])->name('reviewers.acceptReviewers');
+    Route::get('/reviewers/reportReviewers/{id}', [ReviewersController::class, 'reportReviewers'])->name('reviewers.reportReviewers');
+
+    //Penilai Public
+    Route::get('/penilai_public', [PenilaiPublicController::class, 'penilai_public'])->name('penilai_public');
+    Route::get('/penilai_public/bangunanView', [PenilaiPublicController::class, 'bangunanView'])->name('penilai_public.bangunanView');
+    Route::get('/penilai_public/retailView', [PenilaiPublicController::class, 'retailView'])->name('penilai_public.retailView');
+    Route::get('/penilai_public/tanahKosongView', [PenilaiPublicController::class, 'tanahKosongView'])->name('penilai_public.tanahKosongView');
+    Route::get('/penilai_public/bangunanLoadData', [PenilaiPublicController::class, 'bangunanLoadData'])->name('penilai_public.bangunanLoadData');
+    Route::get('/penilai_public/tanahKosongLoadData', [PenilaiPublicController::class, 'tanahKosongLoadData'])->name('penilai_public.tanahKosongLoadData');
+    Route::get('/penilai_public/retailLoadData', [PenilaiPublicController::class, 'retailLoadData'])->name('penilai_public.retailLoadData');
+
+    Route::get('/penilai_public/acceptPenilaiPublic/{id}', [PenilaiPublicController::class, 'acceptPenilaiPublic'])->name('penilai_public.acceptPenilaiPublic');
+    Route::get('/penilai_public/reportPenilaiPublic/{id}', [PenilaiPublicController::class, 'reportPenilaiPublic'])->name('reviewers.reportPenilaiPublic');
 
 
     //Broadcast

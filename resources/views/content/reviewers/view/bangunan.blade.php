@@ -19,6 +19,10 @@
 @section('vendor-script')
     @vite(['resources/assets/vendor/libs/moment/moment.js', 'resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.js', 'resources/assets/vendor/libs/cleavejs/cleave.js', 'resources/assets/vendor/libs/cleavejs/cleave-phone.js', 'resources/assets/vendor/libs/select2/select2.js', 'resources/assets/vendor/libs/@form-validation/popular.js', 'resources/assets/vendor/libs/@form-validation/bootstrap5.js', 'resources/assets/vendor/libs/@form-validation/auto-focus.js'])
 @endsection
+
+@section('page-script')
+    @vite('resources/assets/js/app-bangunan-list.js')
+@endsection
 @section('content')
 
     <div class="card">
@@ -36,13 +40,14 @@
             </table>
         </div>
     </div>
+
     <script>
         $(document).ready(function() {
             $('.datatables-bangunan-view').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route('bangunan.tanahKosongLoadData') }}',
+                    url: '{{ route('reviewers.bangunanLoadData') }}',
                     type: 'GET',
                     dataSrc: 'data'
                 },
@@ -63,14 +68,19 @@
                         orderable: false,
                         searchable: false,
                         render: function(data, type, row) {
-                            if (row.last_update == 'OFF' || row.last_update == null) {
-                                return '<a href="/object/detail_tanah_kosong/' + row.id +
+                            if (row.last_update == 'OFF' ||
+                                row.last_update == null) {
+                                return '<a href="/object/detail_bangunan/' + row.id +
                                     '" class="btn btn-sm btn-primary">Detail</a>&nbsp<button onclick="accept(' +
-                                    row.id + ')" class="btn btn-sm btn-success">Acc</button>';
+                                    row.id +
+                                    ')" class="btn btn-sm btn-success">Acc</button>&nbsp<button onclick="report(' +
+                                    row.id + ')" class="btn btn-sm btn-danger">Laporkan</button>';
+
                             } else {
-                                return '<a href="/object/detail_tanah_kosong/' + row.id +
+                                return '<a href="/object/detail_bangunan/' + row.id +
                                     '" class="btn btn-sm btn-primary">Detail</a>';
                             }
+
                         }
                     }
                 ]
@@ -80,21 +90,36 @@
         function accept(id) {
             $.ajax({
                 type: 'GET',
-                url: '/object/acceptSurveyor/' + id,
+                url: '/reviewers/acceptReviewers/' + id,
                 success: function(data) {
                     $.ajax({
                         type: 'GET',
-                        url: '/object/tanahKosongView',
+                        url: '/reviewers/bangunanView',
                         success: function(data) {
-                            $('#showObjectView').html(data);
-                            $('#tk').addClass('text-white bg-primary');
-                            $('#tdb').removeClass('text-white bg-primary');
+                            $('#showReviewersView').html(data);
+                            $('#tdb').addClass('text-white bg-primary');
+                            $('.tdb1').addClass('text-white');
+                            $('#tk').removeClass('text-white bg-primary');
                             $('#re').removeClass('text-white bg-primary');
-                            $('#tk1').addClass('text-white');
+                            // $('.tk1').addClass('text-dark');
                         }
                     });
                 }
             });
         }
+
+        function report(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/reviewers/reportReviewers/' + id,
+                success: function(data) {
+                    // console.log(data.);
+                    if (data.success == true) {
+                        window.location.href = '/laporan';
+                    }
+                }
+            });
+        }
     </script>
+
 @endsection

@@ -42,7 +42,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route('bangunan.tanahKosongLoadData') }}',
+                    url: '{{ route('penilai.tanahKosongLoadData') }}',
                     type: 'GET',
                     dataSrc: 'data'
                 },
@@ -80,13 +80,13 @@
         function accept(id) {
             $.ajax({
                 type: 'GET',
-                url: '/object/acceptSurveyor/' + id,
+                url: '/penilai/acceptPenilai/' + id,
                 success: function(data) {
                     $.ajax({
                         type: 'GET',
-                        url: '/object/tanahKosongView',
+                        url: '/penilai/tanahKosongView',
                         success: function(data) {
-                            $('#showObjectView').html(data);
+                            $('#showPenilaiView').html(data);
                             $('#tk').addClass('text-white bg-primary');
                             $('#tdb').removeClass('text-white bg-primary');
                             $('#re').removeClass('text-white bg-primary');

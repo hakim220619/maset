@@ -21,51 +21,81 @@
 @endsection
 @section('content')
 
-<div class="card">
-    <div class="card-header border-bottom">
+    <div class="card">
+        <div class="card-header border-bottom">
+        </div>
+        <div class="card-datatable table-responsive">
+            <table class="datatables-bangunan-view table">
+                <thead class="border-top">
+                    <tr>
+                        <th>No</th>
+                        <th>Asset</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
-    <div class="card-datatable table-responsive">
-        <table class="datatables-bangunan-view table">
-            <thead class="border-top">
-                <tr>
-                    <th>No</th>
-                    <th>Asset</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-</div>
-<script>
-    $(document).ready(function() {
-        $('.datatables-bangunan-view').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: '{{ route("bangunan.retailLoadData") }}',
-                type: 'GET',
-                dataSrc: 'data'
-            },
-            columns: [
-                { data: 'no', name: 'no' },
-                { 
-                    data: null, 
-                    name: 'asset',
-                    render: function(data, type, row) {
-                        return row.id_asset + ' - ' + row.nama_bangunan + '-' + row.alamat;
-                    }
+    <script>
+        $(document).ready(function() {
+            $('.datatables-bangunan-view').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route('bangunan.retailLoadData') }}',
+                    type: 'GET',
+                    dataSrc: 'data'
                 },
-                {
-                    data: null,
-                    name: 'action',
-                    orderable: false,
-                    searchable: false,
-                    render: function(data, type, row) {
-                        return '<a href="/object/detail_retail/' + row.id + '" class="btn btn-sm btn-primary">Detail</a>';
+                columns: [{
+                        data: 'no',
+                        name: 'no'
+                    },
+                    {
+                        data: null,
+                        name: 'asset',
+                        render: function(data, type, row) {
+                            return row.id_asset + ' - ' + row.nama_bangunan + '-' + row.alamat;
+                        }
+                    },
+                    {
+                        data: null,
+                        name: 'action',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row) {
+                            if (row.last_update == 'OFF' || row.last_update == null) {
+                                return '<a href="/object/detail_retail/' + row.id +
+                                    '" class="btn btn-sm btn-primary">Detail</a>&nbsp<button onclick="accept(' +
+                                    row.id + ')" class="btn btn-sm btn-success">Acc</button>';
+
+                            } else {
+                                return '<a href="/object/detail_retail/' + row.id +
+                                    '" class="btn btn-sm btn-primary">Detail</a>';
+                            }
+                        }
                     }
-                }
-            ]
+                ]
+            });
         });
-    });
-</script>
+
+        function accept(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/object/acceptSurveyor/' + id,
+                success: function(data) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/object/retailView',
+                        success: function(data) {
+                            $('#showObjectView').html(data);
+                            $('#re').addClass('text-white bg-primary');
+                            $('#tdb').removeClass('text-white bg-primary');
+                            $('#tk').removeClass('text-white bg-primary');
+
+                        }
+                    });
+                }
+            });
+        }
+    </script>
 @endsection
