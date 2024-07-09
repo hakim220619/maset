@@ -53,7 +53,11 @@
             <tbody>
                 @foreach ($object as $o)
                     <tr>
-                        <td>{{ $o->nia . '-' . $o->nama_bangunan . '-' . $o->alamat }}</td>
+                        <td>
+                            <a href="#" class="report-title" data-lat="{{ $o->lat }}" data-lng="{{ $o->long }}">
+                                {{ $o->nia . '-' . $o->nama_bangunan . '-' . $o->alamat }}
+                            </a>
+                        </td>
                         <td>
                             @if ($o->surveyor == 'ON')
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
@@ -269,14 +273,44 @@
             });
         }
 
-        $('#objectType').change(function() {
-            let objectType = $(this).val();
-            updateMapAndTable(objectType);
-        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+           
+            var currentMarker = null;
+            var currentCircle = null;
 
-        $('#radius').change(function() {
-            let objectType = $('#objectType').val();
-            updateMapAndTable(objectType);
+            document.querySelectorAll('.report-title').forEach(function(element) {
+                element.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    var lat = this.getAttribute('data-lat');
+                    var lng = this.getAttribute('data-lng');
+                    var radius = document.getElementById('radius').value;
+
+                    if (lat && lng) {
+                        // Remove existing marker and circle if they exist
+                        if (currentMarker) {
+                            map.removeLayer(currentMarker);
+                        }
+                        if (currentCircle) {
+                            map.removeLayer(currentCircle);
+                        }
+
+                        // Add new marker and circle
+                        map.setView([lat, lng], 15);
+                        currentMarker = L.marker([lat, lng]).addTo(map)
+                            .bindPopup(this.textContent)
+                            .openPopup();
+                        
+                        currentCircle = L.circle([lat, lng], {
+                            color: 'red',
+                            fillColor: '#f03',
+                            fillOpacity: 0.5,
+                            radius: parseInt(radius)
+                        }).addTo(map);
+                    }
+                });
+            });
         });
     </script>
 @endsection
