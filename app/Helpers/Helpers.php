@@ -398,8 +398,11 @@ class Helpers
           'id_category_object' => $request['id_category'],
           'id_role' => $value->role_id,
           'status' => 'true',
+          'last_update' => 'ON',
           'created_at' => now()
+         
         ]);
+        
       } else {
         DB::table('approval')->insert([
           'uid' => $uid,
@@ -407,7 +410,7 @@ class Helpers
           'id_category_object' => $request['id_category'],
           'id_role' => $value->role_id,
           'status' => 'false',
-          'created_at' => now()
+          'last_update' => 'ON'
         ]);
       }
     }

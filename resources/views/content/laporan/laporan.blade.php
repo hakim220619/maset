@@ -154,7 +154,7 @@
         });
 
         const defaultIcon = new L.Icon({
-            iconUrl: 'path/to/default-icon.png',
+            iconUrl: '{{ asset('storage/images/icon/location.png') }}',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
