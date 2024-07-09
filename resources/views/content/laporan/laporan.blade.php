@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
+    
 
     <div class="card mb-2">
         <div class="p-4">
@@ -39,8 +41,8 @@
         </div>
     </div>
 
-    <div class="card">
-        <table class="table">
+    <div class="card p-3">
+        <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th scope="col">Judul Laporan</th>
@@ -55,7 +57,7 @@
                 @foreach ($object as $o)
                     <tr>
                         <td>
-                            <a href="#" class="report-title" data-lat="{{ $o->lat }}" data-lng="{{ $o->long }}">
+                            <a href="#" class="report-title" data-lat="{{ $o->lat }}" data-lng="{{ $o->long }}" data-id="{{ $o->id_category }}" data-nama_bangunan="{{ $o->nama_bangunan }}" data-alamat="{{ $o->alamat }}">
                                 {{ $o->nia . '-' . $o->nama_bangunan . '-' . $o->alamat }}
                             </a>
                         </td>
@@ -127,6 +129,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 
     <script>
         let map = L.map('map').setView([1.966576931124596, 100.049384575934738], 13);
@@ -159,6 +163,14 @@
 
         const yellowIcon = new L.Icon({
             iconUrl: '{{ asset('storage/images/icon/marker.png') }}',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        const redIcon = new L.Icon({
+            iconUrl: '{{ asset('storage/images/icon/marker2.png') }}',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
@@ -214,7 +226,7 @@
                         let marker = L.marker([location.lat, location.long], {
                                 icon: icon
                             }).addTo(map)
-                            .bindPopup('<b>' + location.nama_bangunan + '</b><br>' + location.alamat);
+                            .bindPopup('<b>' + location.nama_bangunan +'</b><br>' + location.alamat);
                         markers.push(marker);
                     }
                 }
@@ -282,43 +294,151 @@
         }
 
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-           
-            var currentMarker = null;
-            var currentCircle = null;
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
 
-            document.querySelectorAll('.report-title').forEach(function(element) {
-                element.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    var lat = this.getAttribute('data-lat');
-                    var lng = this.getAttribute('data-lng');
-                    var radius = document.getElementById('radius').value;
+        var currentMarker = null;
+        var currentCircle = null;
+        var markers = []; // Array untuk menyimpan marker yang ditambahkan
 
-                    if (lat && lng) {
-                        // Remove existing marker and circle if they exist
-                        if (currentMarker) {
-                            map.removeLayer(currentMarker);
-                        }
-                        if (currentCircle) {
-                            map.removeLayer(currentCircle);
-                        }
-
-                        // Add new marker and circle
-                        map.setView([lat, lng], 15);
-                        currentMarker = L.marker([lat, lng]).addTo(map)
-                            .bindPopup(this.textContent)
-                            .openPopup();
-                        
-                        currentCircle = L.circle([lat, lng], {
-                            color: 'red',
-                            fillColor: '#f03',
-                            fillOpacity: 0.5,
-                            radius: parseInt(radius)
-                        }).addTo(map);
+        document.querySelectorAll('.report-title').forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                event.preventDefault();
+                var lat = parseFloat(this.getAttribute('data-lat'));
+                var lng = parseFloat(this.getAttribute('data-lng'));
+                var id_category = parseFloat(this.getAttribute('data-id'));
+                var build_name = this.getAttribute('data-nama_bangunan');
+                var address = this.getAttribute('data-alamat');
+                var radius = parseInt(document.getElementById('radius').value);
+                console.log(build_name);
+                if (lat && lng) {
+                    // Remove existing marker and circle if they exist
+                    if (currentMarker) {
+                        map.removeLayer(currentMarker);
                     }
-                });
+                    if (currentCircle) {
+                        map.removeLayer(currentCircle);
+                    }
+
+                    // Remove existing markers within the radius
+                    markers.forEach(function(marker) {
+                        map.removeLayer(marker);
+                    });
+                    markers = [];
+                    let harga = [];
+                    
+                    if (id_category == 1) {
+                        let latlng1 = [lat, lng];
+                        let pembanding = @json($pembanding_bangunan);
+                        console.log(pembanding);
+                        pembanding.forEach(function(location1) {
+                            if (location1.lat && location1.long) {
+                                let distance1 = map.distance(latlng1, [location1.lat, location1.long]);
+                                if (distance1 <= radius) {
+                                    let icon;
+                                    
+                                    icon = yellowIcon;
+                                  
+
+                                    // perhitungan
+                                    let tnh_per_meter = location1.harga_penawaran / location1.luas_tanah
+                                    harga.push(tnh_per_meter)
+
+                                    let marker = L.marker([location1.lat, location1.long], {
+                                        icon: icon
+                                    }).addTo(map)
+                                    .bindPopup('<b>Jenis Pembanding : Tanah dan Bangunan</b>'+'<b><br>'+ location1.nama_tanah_n_bangunan + '</b><br>' + location1.alamat + '</b><br>' + 'Harga Penawaran : '+ location1.harga_penawaran + '</b><br>'+ 'Luas Tanah (m2) : '+ location1.luas_tanah);
+                                    markers.push(marker);
+                                }
+                            }
+                        });
+                    }else if(id_category == 2){
+                        let latlng1 = [lat, lng];
+                        let pembanding = @json($pembanding_tanah_kosong);
+                        console.log(pembanding);
+                        pembanding.forEach(function(location1) {
+                            if (location1.lat && location1.long) {
+                                let distance1 = map.distance(latlng1, [location1.lat, location1.long]);
+                                if (distance1 <= radius) {
+                                    let icon;
+                                   
+                                    icon = greenIcon;
+
+                                    // perhitungan
+                                    let tnh_per_meter = location1.harga_penawaran / location1.luas_tanah
+                                    harga.push(tnh_per_meter)
+
+                                    let marker = L.marker([location1.lat, location1.long], {
+                                        icon: icon
+                                    }).addTo(map)
+                                    .bindPopup('<b>Jenis Pembanding : Tanah Kosong</b>'+'<b><br>'+ location1.nama_tanah_kosong + '</b><br>' + location1.alamat + '</b><br>' + 'Harga Penawaran : '+ location1.harga_penawaran + '</b><br>'+ 'Luas Tanah (m2) : '+ location1.luas_tanah);
+                                    markers.push(marker);
+                                }
+                            }
+                        });
+                    }else{
+                        let latlng1 = [lat, lng];
+                        let pembanding = @json($pembanding_retail);
+                        console.log(pembanding);
+                        pembanding.forEach(function(location1) {
+                            if (location1.lat && location1.long) {
+                                let distance1 = map.distance(latlng1, [location1.lat, location1.long]);
+                                if (distance1 <= radius) {
+                                    let icon;
+                                 
+                                    icon = redIcon;                                    
+
+                                    // perhitungan
+                                    let tnh_per_meter = location1.harga_penawaran / location1.luas_net
+                                    harga.push(tnh_per_meter)
+
+                                    let marker = L.marker([location1.lat, location1.long], {
+                                        icon: icon
+                                    }).addTo(map)
+                                    .bindPopup('<b>Jenis Pembanding : Retail</b>'+'<b><br>'+ location1.nama_retail + '</b><br>' + location1.alamat + '</b><br>' + 'Harga Penawaran : '+ location1.harga_penawaran + '</b><br>'+ 'Luas Tanah (m2) : '+ location1.luas_net);
+                                    markers.push(marker);
+                                }
+                            }
+                        });
+                    }
+                    let jum_data = harga.length;
+                    let sum = 0;
+
+                    harga.forEach(item => {
+                        sum += item;
+                    });
+                    
+                    let category;
+  
+                    let rata2_harga = (sum / jum_data).toFixed(3);                     
+                    if (id_category == 1) {
+                        category = 'Tanah dan Bangunan';
+                    }else if (id_category == 2) {
+                        category = 'Tanah Kosong';
+                    }else{
+                        category = 'Retail';
+                    }
+
+                    // Menampilkan poup object
+                    map.setView([lat, lng], 10);
+                    currentMarker = L.marker([lat, lng]).addTo(map)
+                        .bindPopup('<b>Jenis Object : '+ category +'</b>'+'<b><br>'+ 'Nama Object : ' + build_name + '</b><br>' + 'Alamat : ' + address + '</b><br>' + 'Harga Rata - Rata : '+ 'Rp.'+rata2_harga + '</b>')
+                        .openPopup();
+                    
+                    currentCircle = L.circle([lat, lng], {
+                        color: 'red',
+                        fillColor: '#d0880b',
+                        fillOpacity: 0.5,
+                        radius: radius
+                    }).addTo(map);
+                    
+                }
             });
         });
-    </script>
+    });
+</script>
+<script>
+    new DataTable('#example');
+</script>
+
 @endsection

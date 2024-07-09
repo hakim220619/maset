@@ -56,8 +56,11 @@ class LaporanController extends Controller
                 (SELECT IF(a.status = 'true', 'ACCEPT', 'OFF') from approval a where a.id_object=retail.id AND a.id_category_object=retail.id_category AND a.id_role = '5') as Penilai_public,
                 (SELECT a.last_update from approval a where a.id_object=retail.id AND a.id_category_object=retail.id_category AND a.id_role = '3') as report 
                 FROM retail ");
-                // dd($object);
-                return view('content.laporan.laporan', compact('object', 'coordinates'));
+                $pembanding_bangunan = DB::select("SELECT pembanding_bangunan.nama_tanah_n_bangunan, pembanding_bangunan.alamat, pembanding_bangunan.harga_penawaran, pembanding_bangunan.luas_tanah, pembanding_bangunan.lat, pembanding_bangunan.long FROM `pembanding_bangunan`");
+                $pembanding_tanah_kosong = DB::select("SELECT pembanding_tanah_kosong.nama_tanah_kosong, pembanding_tanah_kosong.alamat, pembanding_tanah_kosong.harga_penawaran, pembanding_tanah_kosong.luas_tanah, pembanding_tanah_kosong.lat, pembanding_tanah_kosong.long FROM `pembanding_tanah_kosong`");
+                $pembanding_retail = DB::select("SELECT pembanding_retail.nama_retail, pembanding_retail.alamat, pembanding_retail.harga_penawaran, pembanding_retail.luas_net, pembanding_retail.lat, pembanding_retail.long FROM `pembanding_retail`");
+                
+                return view('content.laporan.laporan', compact('object', 'coordinates','pembanding_bangunan','pembanding_tanah_kosong','pembanding_retail'));
         }
         public function getCoordinates(Request $request)
         {
@@ -107,8 +110,10 @@ class LaporanController extends Controller
                 (SELECT IF(a.status = 'true', 'ACCEPT', 'OFF') from approval a where a.id_object=retail.id AND a.id_category_object=retail.id_category AND a.id_role = '5') as Penilai_public,
                 (SELECT a.last_update from approval a where a.id_object=retail.id AND a.id_category_object=retail.id_category AND a.id_role = '3') as report 
                 FROM retail ");
+                $pembanding_bangunan = DB::select("SELECT pembanding_bangunan.nama_tanah_n_bangunan, pembanding_bangunan.alamat, pembanding_bangunan.harga_penawaran, pembanding_bangunan.luas_tanah, pembanding_bangunan.lat, pembanding_bangunan.long FROM `pembanding_bangunan`");
+                $pembanding_tanah_kosong = DB::select("SELECT pembanding_tanah_kosong.nama_tanah_kosong, pembanding_tanah_kosong.alamat, pembanding_tanah_kosong.harga_penawaran, pembanding_tanah_kosong.luas_tanah, pembanding_tanah_kosong.lat, pembanding_tanah_kosong.long FROM `pembanding_tanah_kosong`");
+                $pembanding_retail = DB::select("SELECT pembanding_retail.nama_retail, pembanding_retail.alamat, pembanding_retail.harga_penawaran, pembanding_retail.luas_net, pembanding_retail.lat, pembanding_retail.long FROM `pembanding_retail`");
 
-
-                return response()->json(['object' => $object, 'coordinates' => $coordinates]);
+                return response()->json(['object' => $object, 'coordinates' => $coordinates, 'pembanding_bangunan'=>$pembanding_bangunan,'pembanding_tanah_kosong'=>$pembanding_tanah_kosong,'pembanding_retail' => $pembanding_retail]);
         }
 }
