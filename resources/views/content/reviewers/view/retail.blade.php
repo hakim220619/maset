@@ -66,7 +66,8 @@
                             if (row.last_update == 'OFF' || row.last_update == null) {
                                 return '<a href="/object/detail_retail/' + row.id +
                                     '" class="btn btn-sm btn-primary">Detail</a>&nbsp<button onclick="accept(' +
-                                    row.id + ')" class="btn btn-sm btn-success">Acc</button>&nbsp<button onclick="accept(' +
+                                    row.id +
+                                    ')" class="btn btn-sm btn-success">Acc</button>&nbsp<button onclick="report(' +
                                     row.id + ')" class="btn btn-sm btn-danger">Laporkan</button>';
 
                             } else {
@@ -95,6 +96,19 @@
 
                         }
                     });
+                }
+            });
+        }
+
+        function report(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/reviewers/reportReviewers/' + id,
+                success: function(data) {
+                    // console.log(data.);
+                    if (data.success == true) {
+                        window.location.href = '/laporan';
+                    }
                 }
             });
         }

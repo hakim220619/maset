@@ -72,7 +72,8 @@
                                 row.last_update == null) {
                                 return '<a href="/object/detail_bangunan/' + row.id +
                                     '" class="btn btn-sm btn-primary">Detail</a>&nbsp<button onclick="accept(' +
-                                    row.id + ')" class="btn btn-sm btn-success">Acc</button>&nbsp<button onclick="accept(' +
+                                    row.id +
+                                    ')" class="btn btn-sm btn-success">Acc</button>&nbsp<button onclick="report(' +
                                     row.id + ')" class="btn btn-sm btn-danger">Laporkan</button>';
 
                             } else {
@@ -104,6 +105,19 @@
                             // $('.tk1').addClass('text-dark');
                         }
                     });
+                }
+            });
+        }
+
+        function report(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/penilai_public/reportPenilaiPublic/' + id,
+                success: function(data) {
+                    // console.log(data.);
+                    if (data.success == true) {
+                        window.location.href = '/laporan';
+                    }
                 }
             });
         }

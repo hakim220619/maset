@@ -200,7 +200,7 @@ class Helpers
   }
   public static function getProfileById()
   {
-    $data = DB::select('select u.*, rs.rs_name , ra.ra_name ,r.role_name  from users u, role_structure rs, role_access ra, role r 
+    $data = DB::select('select u.*, rs.rs_name , ra.ra_name , r.role_name  from users u, role_structure rs, role_access ra, role r 
         where u.role_structure=rs.rs_id 
         and u.role_access=ra.ra_id 
         and u.role=r.role_id 

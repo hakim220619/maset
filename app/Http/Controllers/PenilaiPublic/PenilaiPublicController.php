@@ -83,4 +83,26 @@ class PenilaiPublicController extends Controller
             'message' => 'Approve Berhasil',
         ]);
     }
+    function reportPenilaiPublic($id)
+    {
+        $checkApproval = DB::table('approval')->where('id_object', $id)->where('id_role', '5')->first();
+        if ($checkApproval->last_update == 'OFF' || $checkApproval->last_update == null) {
+            DB::table('approval')->where('id_object', $id)->where('id_role', '3')->update([
+                'status' => 'true',
+                'last_update' => 'REPORT',
+                'id_user' => Auth::user()->id,
+                'updated_at' => now()
+            ]);
+            DB::table('approval')->where('id_object', $id)->where('id_role', '5')->update([
+                'status' => 'true',
+                'last_update' => 'REPORT',
+                'id_user' => Auth::user()->id,
+                'updated_at' => now()
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Approve Berhasil',
+        ]);
+    }
 }
