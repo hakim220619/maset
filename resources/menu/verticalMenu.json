@@ -294,18 +294,18 @@
       "role": "User"
     },
     {
-      "url": "/penilai",
-      "name": "Penilai",
-      "icon": "menu-icon tf-icons ti ti-pencil",
-      "slug": "penilai",
-      "role": "Super Admin"
+      "url": "/laporan",
+      "name": "Laporan",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "laporan",
+      "role": "User"
     },
     {
       "url": "/laporan",
       "name": "Laporan",
       "icon": "menu-icon tf-icons ti ti-smart-home",
       "slug": "laporan",
-      "role": "User"
+      "role": "Super Admin"
     },
     {
       "url": "masterdata",
