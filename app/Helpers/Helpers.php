@@ -409,7 +409,8 @@ class Helpers
           'id_category_object' => $request['id_category'],
           'id_role' => $value->role_id,
           'status' => 'false',
-          'last_update' => 'OFF'
+          'last_update' => 'OFF',
+          'created_at' => now()
         ]);
       }
     }
