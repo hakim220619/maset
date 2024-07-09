@@ -294,6 +294,20 @@
       "role": "User"
     },
     {
+      "url": "/reviewers",
+      "name": "Reviewers",
+      "icon": "menu-icon tf-icons ti ti-pencil",
+      "slug": "reviewers",
+      "role": "Super Admin"
+    },
+    {
+      "url": "/penilai_public",
+      "name": "Penilai Public",
+      "icon": "menu-icon tf-icons ti ti-pencil",
+      "slug": "penilai_public",
+      "role": "Super Admin"
+    },
+    {
       "url": "/laporan",
       "name": "Laporan",
       "icon": "menu-icon tf-icons ti ti-smart-home",

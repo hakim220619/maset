@@ -40,20 +40,23 @@
             </table>
         </div>
     </div>
+
     <script>
         $(document).ready(function() {
             $('.datatables-bangunan-view').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route("bangunan.bangunanLoadData") }}',
+                    url: '{{ route('bangunan.bangunanLoadData') }}',
                     type: 'GET',
                     dataSrc: 'data'
                 },
-                columns: [
-                    { data: 'no', name: 'no' },
-                    { 
-                        data: null, 
+                columns: [{
+                        data: 'no',
+                        name: 'no'
+                    },
+                    {
+                        data: null,
                         name: 'asset',
                         render: function(data, type, row) {
                             return row.id_asset + ' - ' + row.nama_bangunan + '-' + row.alamat;
@@ -65,12 +68,44 @@
                         orderable: false,
                         searchable: false,
                         render: function(data, type, row) {
-                            return '<a href="/object/detail_bangunan/' + row.id + '" class="btn btn-sm btn-primary">Detail</a>';
+                            if (row.last_update == 'OFF' ||
+                                row.last_update == null) {
+                                return '<a href="/object/detail_bangunan/' + row.id +
+                                    '" class="btn btn-sm btn-primary">Detail</a>&nbsp<button onclick="accept(' +
+                                    row.id + ')" class="btn btn-sm btn-success">Acc</button>';
+
+                            } else {
+                                return '<a href="/object/detail_bangunan/' + row.id +
+                                    '" class="btn btn-sm btn-primary">Detail</a>';
+                            }
+
                         }
                     }
                 ]
             });
         });
+
+        function accept(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/object/acceptSurveyor/' + id,
+                success: function(data) {
+                    console.log(data);
+                    $.ajax({
+                        type: 'GET',
+                        url: '/object/bangunanView',
+                        success: function(data) {
+                            $('#showObjectView').html(data);
+                            $('#tdb').addClass('text-white bg-primary');
+                            $('.tdb1').addClass('text-white');
+                            $('#tk').removeClass('text-white bg-primary');
+                            $('#re').removeClass('text-white bg-primary');
+                            // $('.tk1').addClass('text-dark');
+                        }
+                    });
+                }
+            });
+        }
     </script>
-    
+
 @endsection

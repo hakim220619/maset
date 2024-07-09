@@ -42,7 +42,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route('bangunan.tanahKosongLoadData') }}',
+                    url: '{{ route('penilai.retailLoadData') }}',
                     type: 'GET',
                     dataSrc: 'data'
                 },
@@ -64,11 +64,12 @@
                         searchable: false,
                         render: function(data, type, row) {
                             if (row.last_update == 'OFF' || row.last_update == null) {
-                                return '<a href="/object/detail_tanah_kosong/' + row.id +
+                                return '<a href="/object/detail_retail/' + row.id +
                                     '" class="btn btn-sm btn-primary">Detail</a>&nbsp<button onclick="accept(' +
                                     row.id + ')" class="btn btn-sm btn-success">Acc</button>';
+
                             } else {
-                                return '<a href="/object/detail_tanah_kosong/' + row.id +
+                                return '<a href="/object/detail_retail/' + row.id +
                                     '" class="btn btn-sm btn-primary">Detail</a>';
                             }
                         }
@@ -80,17 +81,17 @@
         function accept(id) {
             $.ajax({
                 type: 'GET',
-                url: '/object/acceptSurveyor/' + id,
+                url: '/penilai/acceptPenilai/' + id,
                 success: function(data) {
                     $.ajax({
                         type: 'GET',
-                        url: '/object/tanahKosongView',
+                        url: '/penilai/retailView',
                         success: function(data) {
-                            $('#showObjectView').html(data);
-                            $('#tk').addClass('text-white bg-primary');
+                            $('#showPenilaiView').html(data);
+                            $('#re').addClass('text-white bg-primary');
                             $('#tdb').removeClass('text-white bg-primary');
-                            $('#re').removeClass('text-white bg-primary');
-                            $('#tk1').addClass('text-white');
+                            $('#tk').removeClass('text-white bg-primary');
+
                         }
                     });
                 }

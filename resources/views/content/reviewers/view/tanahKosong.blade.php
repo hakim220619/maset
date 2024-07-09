@@ -42,7 +42,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route('bangunan.tanahKosongLoadData') }}',
+                    url: '{{ route('reviewers.tanahKosongLoadData') }}',
                     type: 'GET',
                     dataSrc: 'data'
                 },
@@ -66,7 +66,9 @@
                             if (row.last_update == 'OFF' || row.last_update == null) {
                                 return '<a href="/object/detail_tanah_kosong/' + row.id +
                                     '" class="btn btn-sm btn-primary">Detail</a>&nbsp<button onclick="accept(' +
-                                    row.id + ')" class="btn btn-sm btn-success">Acc</button>';
+                                    row.id +
+                                    ')" class="btn btn-sm btn-success">Acc</button>&nbsp<button onclick="accept(' +
+                                    row.id + ')" class="btn btn-sm btn-danger">Laporkan</button>';
                             } else {
                                 return '<a href="/object/detail_tanah_kosong/' + row.id +
                                     '" class="btn btn-sm btn-primary">Detail</a>';
@@ -80,13 +82,14 @@
         function accept(id) {
             $.ajax({
                 type: 'GET',
-                url: '/object/acceptSurveyor/' + id,
+                url: '/reviewers/acceptReviewers/' + id,
                 success: function(data) {
                     $.ajax({
                         type: 'GET',
-                        url: '/object/tanahKosongView',
+                        url: '/reviewers/tanahKosongView',
                         success: function(data) {
-                            $('#showObjectView').html(data);
+                            $('#showReviewersView').html(data);
+
                             $('#tk').addClass('text-white bg-primary');
                             $('#tdb').removeClass('text-white bg-primary');
                             $('#re').removeClass('text-white bg-primary');
