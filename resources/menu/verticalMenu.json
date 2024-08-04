@@ -79,6 +79,11 @@
           "url": "/mmlogs",
           "name": "MmLogs",
           "slug": "MasterDataSu-setting-mmlogs"
+        },
+        {
+          "url": "/options",
+          "name": "Options",
+          "slug": "MasterDataSu-setting-options"
         }
       ]
     },
