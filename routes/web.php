@@ -101,6 +101,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mmlogs', [GeneralController::class, 'mmlogs'])->name('MasterDataSu-setting-mmlogs');
     Route::get('/setting/listUsersLogs', [GeneralController::class, 'listUsersLogs'])->name('setting.listUsersLogs');
 
+    //Logs Activity
+    Route::get('/options', [GeneralController::class, 'options'])->name('MasterDataSu-setting-options');
+
 
 
     //Users

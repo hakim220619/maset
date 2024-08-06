@@ -56,7 +56,7 @@ class AplikasiController extends Controller
             Helpers::mmLogs($mmLogsData);
             DB::table('aplikasi')->where('id', $request->id)->update($data);
             toast('', 'success');
-            return redirect()->route('aplikasi')->with('success', 'Aplikasi Successs Updateed!');
+            return redirect()->route('setting-aplikasi')->with('success', 'Aplikasi Successs Updateed!');
         } catch (Exception $e) {
             return response([
                 'success' => false,

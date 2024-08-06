@@ -84,6 +84,11 @@
           "url": "/jenis-dokumen-tanah",
           "name": "Jenis Dokumen Hak Tanah",
           "slug": "jenis-dokumen-tanah"
+        },
+        {
+          "url": "/options",
+          "name": "Options",
+          "slug": "MasterDataSu-setting-options"
         }
       ]
     },

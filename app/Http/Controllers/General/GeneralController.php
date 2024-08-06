@@ -219,6 +219,10 @@ class GeneralController extends Controller
 
         return view('content.general.mmlogs', $data);
     }
+    function options()
+    {
+        return view('content.general.options');
+    }
     function listUsersLogs()
     {
         $data = GeneralModel::listUsersLogs();

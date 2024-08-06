@@ -391,17 +391,19 @@ class Helpers
     $uid = Helpers::uid();
     foreach ($getRole as $key => $value) {
       if ($value->role_id == '1') {
-        DB::table('approval')->insert([
-          'uid' => $uid,
-          'id_user' => Auth::user()->id,
-          'id_object' => $request['id_object'],
-          'id_category_object' => $request['id_category'],
-          'id_role' => $value->role_id,
-          'status' => 'true',
-          'last_update' => 'ON',
-          'created_at' => now()
+        if ($key < 1) {
+          DB::table('approval')->insert([
+            'uid' => $uid,
+            'id_user' => Auth::user()->id,
+            'id_object' => $request['id_object'],
+            'id_category_object' => $request['id_category'],
+            'id_role' => $value->role_id,
+            'status' => 'true',
+            'last_update' => 'ON',
+            'created_at' => now()
 
-        ]);
+          ]);
+        }
       } else {
         DB::table('approval')->insert([
           'uid' => $uid,

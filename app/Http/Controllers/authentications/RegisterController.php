@@ -56,7 +56,35 @@ Salam,
     if ($validator->fails()) {
       return redirect('/auth/register-view')->withErrors($validator)->withInput();
     } else {
+      // $getKontakAdmin = DB::table()
+      // dd($request->all());
       User::ProsesAddUsersRegister($request);
+      $getAdmin = DB::select('SELECT u.kontak, rs.rs_id, rs.rs_name, ra.ra_id, ra.ra_name FROM users u, role_structure rs, role_access ra
+WHERE u.role_structure=rs.rs_id
+AND u.role_access=ra.ra_id
+AND rs.rs_id = "' . $request->role_structure . '"
+AND ra.ra_id = "2"');
+      foreach ($getAdmin as $key => $value) {
+        $dataSend['message'] = "*Aktivasi Akun Pengguna*
+Halo " . $request->name . ",
+
+Kami senang memberitahu Anda bahwa akun Anda telah berhasil dibuat di platform kami. Untuk melanjutkan, Anda perlu mengaktifkan akun Anda dengan langkah-langkah berikut:
+
+1. Klik Tautan Aktivasi: [Tambahkan tautan aktivasi di sini]
+
+2. Verifikasi Informasi Anda: Setelah mengklik tautan di atas, Anda akan diarahkan untuk memverifikasi informasi pribadi Anda.
+
+3. Mulai Menggunakan Akun Anda: Setelah verifikasi selesai, Anda dapat masuk dan mulai menikmati layanan kami.
+
+Jika Anda mengalami kesulitan atau memiliki pertanyaan lebih lanjut, jangan ragu untuk menghubungi tim dukungan kami melalui email di [alamat email dukungan] atau melalui [nomor telepon dukungan].
+
+Terima kasih telah bergabung dengan kami!
+
+Salam,
+[Tim Dukungan]";
+        $dataSend['kontak'] = $value->kontak;
+        Helpers::sendMessageAll($dataSend);
+      }
       $request['message'] = "*Aktivasi Akun Pengguna*
 Halo " . $request->name . ",
 
