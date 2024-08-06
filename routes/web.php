@@ -103,6 +103,10 @@ Route::middleware(['auth'])->group(function () {
 
     //Logs Activity
     Route::get('/options', [GeneralController::class, 'options'])->name('MasterDataSu-setting-options');
+    Route::get('/options/listDataOptions', [GeneralController::class, 'listDataOptions'])->name('setting.listDataOptions');
+    Route::post('/options/saveHeaderOptions', [GeneralController::class, 'saveHeaderOptions'])->name('setting.saveHeaderOptions');
+    Route::post('/options/saveOptions', [GeneralController::class, 'saveOptions'])->name('setting.saveOptions');
+
 
 
 

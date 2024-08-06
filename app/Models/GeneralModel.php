@@ -74,6 +74,35 @@ class GeneralModel extends Model
         }
         return $data;
     }
+    public static function listDataOptions()
+    {
+        $data = DB::table('master_data')->where('state', 'ON')->get();
+        return $data;
+    }
+    public static function saveHeaderOptions($request)
+    {
+        DB::table('master_data')->insert([
+            'uid' => 'Hdr' . date('Ymdhms'),
+            'label_header' => $request['header'],
+            'type' => 'Header',
+            'state' => $request['state'],
+            'created_at' => now(),
+        ]);
+    }
+    public static function saveOptions($request)
+    {
+        $getUid = DB::table('master_data')->where('label_header', $request['id'])->first();
+        if ($getUid) {
+            DB::table('master_data')->insert([
+                'uid' => $getUid->uid,
+                'label_header' => $getUid->label_header,
+                'label_option' => $request['option'],
+                'type' => 'Options',
+                'state' => $request['state'],
+                'created_at' => now(),
+            ]);
+        }
+    }
     public static function getBroadcastByAplikasi($uid)
     {
         $data = DB::table('broadcast_aplikasi')->where('uid', $uid)->first();

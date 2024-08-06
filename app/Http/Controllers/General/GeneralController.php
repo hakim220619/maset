@@ -221,7 +221,35 @@ class GeneralController extends Controller
     }
     function options()
     {
-        return view('content.general.options');
+        $data['dataOptions'] = GeneralModel::listDataOptions();
+        return view('content.general.options', $data);
+    }
+    function listDataOptions()
+    {
+        $data = GeneralModel::listDataOptions();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data',
+            'data' => $data,
+        ]);
+    }
+    function saveHeaderOptions(Request $request)
+    {
+        $data = GeneralModel::saveHeaderOptions($request);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data',
+            'data' => $data,
+        ]);
+    }
+    function saveOptions(Request $request)
+    {
+        $data = GeneralModel::saveOptions($request);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data',
+            'data' => $data,
+        ]);
     }
     function listUsersLogs()
     {
