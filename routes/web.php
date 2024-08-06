@@ -13,6 +13,7 @@ use App\Http\Controllers\Bangunan\BangunanController;
 use App\Http\Controllers\Broadcast\BroadcastController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\General\GeneralController;
+use App\Http\Controllers\Jenis_dokumen_tanah\Jenis_dokumen_tanah;
 use App\Http\Controllers\Lihat_pembanding\Lihat_pembandingController;
 use App\Http\Controllers\Object\ObjectController;
 use App\Http\Controllers\Pembanding_bangunan\PembandingBangunanController;
@@ -224,6 +225,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pembanding/retailLoadData', [Lihat_pembandingController::class, 'retailLoadData'])->name('pembanding.retailLoadData');
 
     // laporan
-    Route::get('/laporan', [LaporanCOntroller::class, 'laporan'])->name('laporan');
+    Route::get('/laporan', [LaporanController::class, 'laporan'])->name('laporan');
     Route::get('/getCoordinates', [LaporanController::class, 'getCoordinates'])->name('getCoordinates');
+
+    // masterdata
+    // Jenis Dokumen Hak Tanah
+    Route::get('/jenis-dokumen-tanah', [Jenis_dokumen_tanah::class, 'index'])->name('index');
 });

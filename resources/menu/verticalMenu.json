@@ -79,6 +79,11 @@
           "url": "/mmlogs",
           "name": "MmLogs",
           "slug": "MasterDataSu-setting-mmlogs"
+        },
+        {
+          "url": "/jenis-dokumen-tanah",
+          "name": "Jenis Dokumen Hak Tanah",
+          "slug": "jenis-dokumen-tanah"
         }
       ]
     },
