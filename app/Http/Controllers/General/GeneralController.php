@@ -245,11 +245,7 @@ class GeneralController extends Controller
     function saveOptions(Request $request)
     {
         $data = GeneralModel::saveOptions($request);
-        return response()->json([
-            'success' => true,
-            'message' => 'Data',
-            'data' => $data,
-        ]);
+        return redirect()->back();
     }
     function listUsersLogs()
     {

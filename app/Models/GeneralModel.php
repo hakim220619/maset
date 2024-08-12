@@ -76,7 +76,7 @@ class GeneralModel extends Model
     }
     public static function listDataOptions()
     {
-        $data = DB::table('master_data')->where('state', 'ON')->get();
+        $data = DB::select("SELECT * FROM master_data WHERE state = 'ON' ORDER BY label_header, label_option ASC");
         return $data;
     }
     public static function saveHeaderOptions($request)
