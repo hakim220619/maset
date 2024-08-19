@@ -101,11 +101,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mmlogs', [GeneralController::class, 'mmlogs'])->name('MasterDataSu-setting-mmlogs');
     Route::get('/setting/listUsersLogs', [GeneralController::class, 'listUsersLogs'])->name('setting.listUsersLogs');
 
-    //Logs Activity
+    //Master Data
     Route::get('/options', [GeneralController::class, 'options'])->name('MasterDataSu-setting-options');
     Route::get('/options/listDataOptions', [GeneralController::class, 'listDataOptions'])->name('setting.listDataOptions');
     Route::post('/options/saveHeaderOptions', [GeneralController::class, 'saveHeaderOptions'])->name('setting.saveHeaderOptions');
     Route::post('/options/saveOptions', [GeneralController::class, 'saveOptions'])->name('setting.saveOptions');
+
+    Route::post('/options/editHeader/{labelHeader}', [GeneralController::class, 'editHeader'])->name('options.editHeader');
+    Route::post('/options/editOptions/{id}', [GeneralController::class, 'updateOption'])->name('options.updateOption');
+    Route::get('/options/deleteHeader/{labelHeader}', [GeneralController::class, 'destroyOptionHeader'])->name('options.destroyOptionHeader');
+    Route::get('/options/delete/{id}', [GeneralController::class, 'destroyOption'])->name('options.destroyOption');
+
+
+
 
 
 

@@ -244,8 +244,40 @@ class GeneralController extends Controller
     }
     function saveOptions(Request $request)
     {
-        $data = GeneralModel::saveOptions($request);
+        GeneralModel::saveOptions($request);
         return redirect()->back();
+    }
+    function editHeader(Request $request, $labelHeader)
+    {
+        GeneralModel::editHeader($request, $labelHeader);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data'
+        ]);
+    }
+    function updateOption(Request $request, $id)
+    {
+        GeneralModel::updateOption($request, $id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data'
+        ]);
+    }
+    function destroyOptionHeader($label)
+    {
+        GeneralModel::destroyOptionHeader($label);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data'
+        ]);
+    }
+    function destroyOption(Request $request)
+    {
+        GeneralModel::destroyOption($request);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data'
+        ]);
     }
     function listUsersLogs()
     {

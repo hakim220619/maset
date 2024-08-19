@@ -76,7 +76,7 @@ class GeneralModel extends Model
     }
     public static function listDataOptions()
     {
-        $data = DB::select("SELECT * FROM master_data WHERE state = 'ON' ORDER BY label_header, label_option ASC");
+        $data = DB::select("SELECT * FROM master_data WHERE 1=1 ORDER BY label_header, label_option ASC");
         return $data;
     }
     public static function saveHeaderOptions($request)
@@ -102,6 +102,28 @@ class GeneralModel extends Model
                 'created_at' => now(),
             ]);
         }
+    }
+    public static function editHeader($request, $label)
+    {
+        DB::table('master_data')->where('label_header', $label)->update([
+            'label_header' => $request['header'],
+            'state' => $request['state']
+        ]);
+    }
+    public static function updateOption($request, $id)
+    {
+        DB::table('master_data')->where('id', $id)->update([
+            'label_option' => $request['option'],
+            'state' => $request['state']
+        ]);
+    }
+    public static function destroyOptionHeader($label)
+    {
+        DB::table('master_data')->where('label_header', $label)->delete();
+    }
+    public static function destroyOption($request)
+    {
+        DB::table('master_data')->where('id', $request['id'])->delete();
     }
     public static function getBroadcastByAplikasi($uid)
     {
